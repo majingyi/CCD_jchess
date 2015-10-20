@@ -22,74 +22,84 @@ package jchess;
 
 import java.io.Serializable;
 import java.util.Locale;
-import java.util.Locale;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-/** Class representings game settings available for the current player
+/**
+ * Class representings game settings available for the current player
  */
-public class Settings implements Serializable
-{
+public class Settings implements Serializable {
 
-    private static ResourceBundle loc = null;
-    public int timeForGame;
-    public boolean runningChat;
-    public boolean runningGameClock;
-    public boolean timeLimitSet;//tel us if player choose time 4 game or it's infinity
-    public boolean upsideDown;
+	private static Locale locale = Locale.US;
+	public int timeForGame;
+	public boolean runningChat;
+	public boolean runningGameClock;
+	public boolean timeLimitSet;// tel us if player choose time 4 game or it's
+								// infinity
+	public boolean upsideDown;
 
-    public enum gameModes
-    {
+	public enum gameModes {
 
-        newGame, loadGame
-    }
-    public gameModes gameMode;
-    public Player playerWhite;
-    public Player playerBlack;
+		newGame, loadGame
+	}
 
-    public enum gameTypes
-    {
+	public gameModes gameMode;
+	public Player playerWhite;
+	public Player playerBlack;
 
-        local, network
-    }
-    public gameTypes gameType;
-    public boolean renderLabels = true;
+	public enum gameTypes {
 
-    public Settings()
-    {
-        //temporally
-        this.playerWhite = new Player("", "white");
-        this.playerBlack = new Player("", "black");
-        this.timeLimitSet = false;
+		local, network
+	}
 
-        gameMode = gameModes.newGame;
-    }
+	public gameTypes gameType;
+	public boolean renderLabels = true;
 
-    /** Method to get game time set by player
-     *  @return timeFofGame int with how long the game will leasts
-     */
-    public int getTimeForGame()
-    {
-        return this.timeForGame;
-    }
+	public Settings() {
+		// temporally
+		this.playerWhite = new Player("", "white");
+		this.playerBlack = new Player("", "black");
+		this.timeLimitSet = false;
 
-    public static String lang(String key)
-    {
-        if (Settings.loc == null)
-        {
-            Settings.loc = PropertyResourceBundle.getBundle("jchess.resources.i18n.main");
-            Locale.setDefault(Locale.ENGLISH);
-        }
-        String result = "";
-        try
-        {
-            result = Settings.loc.getString(key);
-        }
-        catch (java.util.MissingResourceException exc)
-        {
-            result = key;
-        }
-        System.out.println(Settings.loc.getLocale().toString());
-        return result;
-    }
+		gameMode = gameModes.newGame;
+	}
+
+	/**
+	 * Method to get game time set by player
+	 * 
+	 * @return timeFofGame int with how long the game will leasts
+	 */
+	public int getTimeForGame() {
+		return this.timeForGame;
+	}
+
+	public static void setLocale(Locale localization) {
+		locale = localization;
+	}
+
+	public static String lang(String key) {
+		String result = "";
+
+		Locale.setDefault(locale);
+		ResourceBundle.clearCache();
+		ResourceBundle bundle = ResourceBundle
+				.getBundle("jchess.resources.i18n.main");
+
+		try {
+			result = bundle.getString(key);
+		} catch (java.util.MissingResourceException exc) {
+			// ignore
+		}
+
+		if (result.equals("")) {
+			bundle = ResourceBundle.getBundle("jchess.resources.JChessView");
+		}
+
+		try {
+			result = bundle.getString(key);
+		} catch (java.util.MissingResourceException exc) {
+			result = key;
+		}
+
+		return result;
+	}
 }

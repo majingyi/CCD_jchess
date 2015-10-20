@@ -113,10 +113,44 @@ public class JChessView extends FrameView implements ActionListener,
 				System.out
 						.println("Something wrong creating window - perhaps themeList is null");
 			}
+		} else if (target == this.languageSettingsMenu) {
+			try {
+				LanguageChooseWindow choose = new LanguageChooseWindow(
+						this.getFrame());
+				JChessApp.getApplication().show(choose);
+				renameAllVisibleItems();
+			} catch (Exception exc) {
+				JOptionPane.showMessageDialog(JChessApp.getApplication()
+						.getMainFrame(), exc.getMessage());
+				System.out
+						.println("Something wrong creating window - perhaps languageList is null");
+			}
 		}
 	}
 
 	// /--endOf- don't delete, becouse they're interfaces for MouseEvent
+
+	private void renameAllVisibleItems() {
+		fileMenu.setText(Settings.lang("fileMenu.text")); // NOI18N
+		newGameItem.setText(Settings.lang("newGameItem.text")); // NOI18N
+		loadGameItem.setText(Settings.lang("loadGameItem.text")); // NOI18N
+		saveGameItem.setText(Settings.lang("saveGameItem.text")); // NOI18N
+		gameMenu.setText(Settings.lang("gameMenu.text")); // NOI18N
+
+		moveBackItem.setText(Settings.lang("moveBackItem.text")); // NOI18N
+		moveForwardItem.setText(Settings.lang("moveForwardItem.text")); // NOI18N
+
+		rewindToBegin.setText(Settings.lang("rewindToBegin.text")); // NOI18N
+		rewindToEnd.setText(Settings.lang("rewindToEnd.text")); // NOI18N
+
+		optionsMenu.setText(Settings.lang("optionsMenu.text")); // NOI18N
+		themeSettingsMenu.setText(Settings.lang("themeSettingsMenu.text")); // NOI18N
+
+		languageSettingsMenu.setText(Settings.lang("languageSettingMenu.text"));// NOI18N
+
+		helpMenu.setText(Settings.lang("helpMenu.text")); // NOI18N
+
+	}
 
 	public JChessView(SingleFrameApplication app) {
 		super(app);
@@ -226,11 +260,11 @@ public class JChessView extends FrameView implements ActionListener,
 		mainPanel = new javax.swing.JPanel();
 		gamesPane = new jchess.JChessTabbedPane();
 		menuBar = new javax.swing.JMenuBar();
-		javax.swing.JMenu fileMenu = new javax.swing.JMenu();
+		fileMenu = new javax.swing.JMenu();
 		newGameItem = new javax.swing.JMenuItem();
 		loadGameItem = new javax.swing.JMenuItem();
 		saveGameItem = new javax.swing.JMenuItem();
-		javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+		exitMenuItem = new javax.swing.JMenuItem();
 		gameMenu = new javax.swing.JMenu();
 		moveBackItem = new javax.swing.JMenuItem();
 		moveForwardItem = new javax.swing.JMenuItem();
@@ -238,8 +272,9 @@ public class JChessView extends FrameView implements ActionListener,
 		rewindToEnd = new javax.swing.JMenuItem();
 		optionsMenu = new javax.swing.JMenu();
 		themeSettingsMenu = new javax.swing.JMenuItem();
-		javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-		javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+		languageSettingsMenu = new javax.swing.JMenuItem();
+		helpMenu = new javax.swing.JMenu();
+		aboutMenuItem = new javax.swing.JMenuItem();
 		statusPanel = new javax.swing.JPanel();
 		javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
 		statusMessageLabel = new javax.swing.JLabel();
@@ -387,6 +422,12 @@ public class JChessView extends FrameView implements ActionListener,
 		themeSettingsMenu.setName("themeSettingsMenu"); // NOI18N
 		optionsMenu.add(themeSettingsMenu);
 		themeSettingsMenu.addActionListener(this);
+
+		languageSettingsMenu.setText(resourceMap
+				.getString("languageSettingMenu.text"));// NOI18N
+		languageSettingsMenu.setName("languageSettingsMenu");// NOI18N
+		optionsMenu.add(languageSettingsMenu);
+		languageSettingsMenu.addActionListener(this);
 
 		menuBar.add(optionsMenu);
 
@@ -565,6 +606,10 @@ public class JChessView extends FrameView implements ActionListener,
 	private javax.swing.JMenuItem moveForwardItem;
 	private javax.swing.JMenuItem newGameItem;
 	private javax.swing.JMenu optionsMenu;
+	private javax.swing.JMenuItem aboutMenuItem;
+	private javax.swing.JMenuItem exitMenuItem;
+	private javax.swing.JMenu fileMenu;
+	private javax.swing.JMenu helpMenu;
 	private javax.swing.JProgressBar progressBar;
 	private javax.swing.JMenuItem rewindToBegin;
 	private javax.swing.JMenuItem rewindToEnd;
@@ -573,6 +618,7 @@ public class JChessView extends FrameView implements ActionListener,
 	private javax.swing.JLabel statusMessageLabel;
 	private javax.swing.JPanel statusPanel;
 	private javax.swing.JMenuItem themeSettingsMenu;
+	private javax.swing.JMenuItem languageSettingsMenu;
 	// End of variables declaration//GEN-END:variables
 	// private JTabbedPaneWithIcon gamesPane;
 	private final Timer messageTimer;
