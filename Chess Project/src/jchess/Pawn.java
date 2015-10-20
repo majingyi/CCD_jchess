@@ -124,8 +124,7 @@ public class Pawn extends Piece {
 				}
 			}
 
-			if ((player.goDown && this.square.pozY == 1)
-					|| (!player.goDown && this.square.pozY == 6)) {
+			if (isDoubleMoveAllowed()) {
 				sq1 = chessboard.squares[this.square.pozX][second];
 				if (sq1.piece == null) {
 					// list.add(sq1);//only in first move
@@ -275,6 +274,19 @@ public class Pawn extends Piece {
 		}
 
 		return list;
+	}
+
+	/**
+	 * 
+	 * Check if pawn is allowed to move to squares at once. 
+	 * 
+	 * Normally this is allowed for the first time of the current pawn only.
+	 * 
+	 * @return true, if pawn is allowed to move two squares at once.
+	 */
+	protected boolean isDoubleMoveAllowed() {
+		return (player.goDown && this.square.pozY == 1)
+				|| (!player.goDown && this.square.pozY == 6);
 	}
 
 	void promote(Piece newPiece) {
