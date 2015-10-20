@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
+import java.util.Locale;
 
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -256,6 +257,8 @@ public class JChessView extends FrameView implements ActionListener,
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
+
+		Locale.setDefault(Locale.US);
 
 		mainPanel = new javax.swing.JPanel();
 		gamesPane = new jchess.JChessTabbedPane();
