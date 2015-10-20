@@ -102,4 +102,8 @@ public class Settings implements Serializable {
 
 		return result;
 	}
+
+	public static Locale getLocale() {
+		return locale;
+	}
 }
