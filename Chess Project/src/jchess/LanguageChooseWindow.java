@@ -27,8 +27,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JRadioButton;
 
 public class LanguageChooseWindow extends JDialog implements ActionListener {
 
@@ -36,11 +38,14 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 
 	private JButton okButton = null;
 
+	private JRadioButton englishButton = null;
+	private JRadioButton germanButton = null;
+
 	LanguageChooseWindow(Frame parent) throws Exception {
 		super(parent);
 
 		this.setTitle(Settings.lang("choose_language_window_title"));
-		Dimension winDim = new Dimension(550, 230);
+		Dimension winDim = new Dimension(250, 150);
 		this.setMinimumSize(winDim);
 		this.setMaximumSize(winDim);
 		this.setSize(winDim);
@@ -48,9 +53,25 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 		this.setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
+		this.englishButton = new JRadioButton("English",
+				Settings.getLocale() == Locale.US);
+		this.englishButton.setLocation(new Point(25, 20));
+		this.englishButton.setSize(75, 30);
+		this.add(this.englishButton);
+
+		this.germanButton = new JRadioButton("German",
+				Settings.getLocale() == Locale.GERMANY);
+		this.germanButton.setLocation(new Point(155, 20));
+		this.germanButton.setSize(75, 30);
+		this.add(this.germanButton);
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(englishButton);
+		group.add(germanButton);
+
 		this.okButton = new JButton("OK");
-		this.okButton.setLocation(new Point(175, 140));
-		this.okButton.setSize(new Dimension(200, 50));
+		this.okButton.setLocation(new Point(80, 70));
+		this.okButton.setSize(new Dimension(75, 30));
 		this.add(this.okButton);
 		this.okButton.addActionListener(this);
 		this.setModal(true);
@@ -58,8 +79,12 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == this.okButton) {
-			// TODO find selected Button and change Locale
-			Settings.setLocale(Locale.US);
+			if (this.englishButton.isSelected()) {
+				Settings.setLocale(Locale.US);
+			} else if (this.germanButton.isSelected()) {
+				Settings.setLocale(Locale.GERMANY);
+			}
+
 			this.setVisible(false);
 		}
 	}
