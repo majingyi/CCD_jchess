@@ -312,6 +312,7 @@ public class JChessView extends FrameView implements ActionListener,
 								Short.MAX_VALUE)));
 
 		menuBar.setName("menuBar"); // NOI18N
+		// comment
 
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
 				.getInstance(jchess.JChessApp.class).getContext()
