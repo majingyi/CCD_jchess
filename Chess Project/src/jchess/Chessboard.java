@@ -42,6 +42,8 @@ import jchess.Moves.castling;
  */
 public class Chessboard extends JPanel {
 
+	private static final long serialVersionUID = -1717218347823342830L;
+
 	public static final int top = 0;
 	public static final int bottom = 7;
 	public Square squares[][];// squares of chessboard
