@@ -24,35 +24,38 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.Icon;
+
 /**
  * Class representings game settings available for the current player
  */
 public class Settings implements Serializable {
 
-	private static Locale locale = Locale.US;
-	public int timeForGame;
-	public boolean runningChat;
-	public boolean runningGameClock;
-	public boolean timeLimitSet;// tel us if player choose time 4 game or it's
-								// infinity
-	public boolean upsideDown;
+	private static Locale	locale	= Locale.US;
+	public int						timeForGame;
+	public boolean				runningChat;
+	public boolean				runningGameClock;
+	public boolean				timeLimitSet;				// tel us if player choose time 4
+																							// game or it's
+	// infinity
+	public boolean				upsideDown;
 
 	public enum gameModes {
 
 		newGame, loadGame
 	}
 
-	public gameModes gameMode;
-	public Player playerWhite;
-	public Player playerBlack;
+	public gameModes	gameMode;
+	public Player			playerWhite;
+	public Player			playerBlack;
 
 	public enum gameTypes {
 
 		local, network
 	}
 
-	public gameTypes gameType;
-	public boolean renderLabels = true;
+	public gameTypes	gameType;
+	public boolean		renderLabels	= true;
 
 	public Settings() {
 		// temporally
@@ -81,8 +84,7 @@ public class Settings implements Serializable {
 
 		Locale.setDefault(locale);
 		ResourceBundle.clearCache();
-		ResourceBundle bundle = ResourceBundle
-				.getBundle("jchess.resources.i18n.main");
+		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main");
 
 		try {
 			result = bundle.getString(key);
@@ -105,5 +107,11 @@ public class Settings implements Serializable {
 
 	public static Locale getLocale() {
 		return locale;
+	}
+
+	public static Icon getIcon(String key) {
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
+				.getResourceMap(JChessAboutBox.class);
+		return resourceMap.getIcon(key);
 	}
 }
