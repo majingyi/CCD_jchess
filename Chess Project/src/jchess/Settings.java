@@ -102,6 +102,16 @@ public class Settings implements Serializable {
 			result = key;
 		}
 
+		if (result.equals("")) {
+			bundle = ResourceBundle.getBundle("jchess.resources.JChessAboutBox");
+		}
+
+		try {
+			result = bundle.getString(key);
+		} catch (java.util.MissingResourceException exc) {
+			result = key;
+		}
+
 		return result;
 	}
 
