@@ -25,7 +25,6 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		super(parent);
 		initComponents();
 		getRootPane().setDefaultButton(closeButton);
-
 	}
 
 	@Action
@@ -58,9 +57,7 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		javax.swing.JLabel appHomepageLabel3 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
-				.getResourceMap(JChessAboutBox.class);
-		setTitle(resourceMap.getString("title")); // NOI18N
+		setTitle(Settings.lang("title")); // NOI18N
 		setModal(true);
 		setName("aboutBox"); // NOI18N
 		setResizable(false);
@@ -71,46 +68,46 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		closeButton.setName("closeButton"); // NOI18N
 
 		appTitleLabel.setFont(appTitleLabel.getFont().deriveFont(appTitleLabel.getFont().getStyle() | java.awt.Font.BOLD, appTitleLabel.getFont().getSize() + 4));
-		appTitleLabel.setText(resourceMap.getString("Application.title")); // NOI18N
+		appTitleLabel.setText(Settings.lang("Application.title")); // NOI18N
 		appTitleLabel.setName("appTitleLabel"); // NOI18N
 
 		versionLabel.setFont(versionLabel.getFont().deriveFont(versionLabel.getFont().getStyle() | java.awt.Font.BOLD));
-		versionLabel.setText(resourceMap.getString("versionLabel.text")); // NOI18N
+		versionLabel.setText(Settings.lang("versionLabel.text")); // NOI18N
 		versionLabel.setName("versionLabel"); // NOI18N
 
-		appVersionLabel.setText(resourceMap.getString("Application.version")); // NOI18N
+		appVersionLabel.setText(Settings.lang("Application.version")); // NOI18N
 		appVersionLabel.setName("appVersionLabel"); // NOI18N
 
 		homepageLabel.setFont(homepageLabel.getFont().deriveFont(homepageLabel.getFont().getStyle() | java.awt.Font.BOLD));
-		homepageLabel.setText(resourceMap.getString("homepageLabel.text")); // NOI18N
+		homepageLabel.setText(Settings.lang("homepageLabel.text")); // NOI18N
 		homepageLabel.setName("homepageLabel"); // NOI18N
 
-		appHomepageLabel.setText(resourceMap.getString("Application.homepage")); // NOI18N
+		appHomepageLabel.setText(Settings.lang("Application.homepage")); // NOI18N
 		appHomepageLabel.setName("appHomepageLabel"); // NOI18N
 
-		appDescLabel.setText(resourceMap.getString("appDescLabel.text")); // NOI18N
+		appDescLabel.setText(Settings.lang("appDescLabel.text")); // NOI18N
 		appDescLabel.setName("appDescLabel"); // NOI18N
 
-		imageLabel.setIcon(resourceMap.getIcon("imageLabel.icon")); // NOI18N
+		imageLabel.setIcon(Settings.getIcon("imageLabel.icon")); // NOI18N
 		imageLabel.setName("imageLabel"); // NOI18N
 
 		vendorLabel1.setFont(vendorLabel1.getFont().deriveFont(vendorLabel1.getFont().getStyle() | java.awt.Font.BOLD));
-		vendorLabel1.setText(resourceMap.getString("vendorLabel1.text")); // NOI18N
+		vendorLabel1.setText(Settings.lang("vendorLabel1.text")); // NOI18N
 		vendorLabel1.setName("vendorLabel1"); // NOI18N
 
 		appVendorLabel1.setName("appVendorLabel1"); // NOI18N
 
-		appHomepageLabel1.setText(resourceMap.getString("appHomepageLabel1.text")); // NOI18N
+		appHomepageLabel1.setText(Settings.lang("appHomepageLabel1.text")); // NOI18N
 		appHomepageLabel1.setName("appHomepageLabel1"); // NOI18N
 
-		appHomepageLabel2.setText(resourceMap.getString("appHomepageLabel2.text")); // NOI18N
+		appHomepageLabel2.setText(Settings.lang("appHomepageLabel2.text")); // NOI18N
 		appHomepageLabel2.setName("appHomepageLabel2"); // NOI18N
 
 		vendorLabel2.setFont(vendorLabel2.getFont().deriveFont(vendorLabel2.getFont().getStyle() | java.awt.Font.BOLD));
-		vendorLabel2.setText(resourceMap.getString("vendorLabel2.text")); // NOI18N
+		vendorLabel2.setText(Settings.lang("vendorLabel2.text")); // NOI18N
 		vendorLabel2.setName("vendorLabel2"); // NOI18N
 
-		appHomepageLabel3.setText(resourceMap.getString("appHomepageLabel3.text")); // NOI18N
+		appHomepageLabel3.setText(Settings.lang("appHomepageLabel3.text")); // NOI18N
 		appHomepageLabel3.setName("appHomepageLabel3"); // NOI18N
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
