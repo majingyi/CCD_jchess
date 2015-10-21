@@ -43,7 +43,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 
 	private static final long	serialVersionUID	= 4833195962704657449L;
 
-	JList											themesList;
+	JList<String>							themesList;
 	ImageIcon									themePreview;
 	GridBagLayout							gbl;
 	public String							result;
@@ -72,13 +72,12 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 			for (int i = 0; i < files.length; i++) {
 				dirNames[i] = files[i].getName();
 			}
-			this.themesList = new JList(dirNames);
+			this.themesList = new JList<String>(dirNames);
 			this.themesList.setLocation(new Point(10, 10));
 			this.themesList.setSize(new Dimension(100, 120));
 			this.add(this.themesList);
 			this.themesList.setSelectionMode(0);
 			this.themesList.addListSelectionListener(this);
-			Properties prp = GUI.getConfigFile();
 
 			this.gbl = new GridBagLayout();
 			this.gbc = new GridBagConstraints();
