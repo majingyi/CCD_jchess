@@ -31,14 +31,16 @@ import javax.swing.Icon;
  */
 public class Settings implements Serializable {
 
-	private static Locale	locale	= Locale.US;
-	public int						timeForGame;
-	public boolean				runningChat;
-	public boolean				runningGameClock;
-	public boolean				timeLimitSet;				// tel us if player choose time 4
-																							// game or it's
-	// infinity
-	public boolean				upsideDown;
+	private static final long	serialVersionUID	= -9058658425673782782L;
+
+	private static Locale			locale						= Locale.US;
+	public int								timeForGame;
+	public boolean						runningChat;
+	public boolean						runningGameClock;
+
+	// tell us if player choose time 4 game or it's infinity
+	public boolean						timeLimitSet;
+	public boolean						upsideDown;
 
 	public enum gameModes {
 
