@@ -240,8 +240,12 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	private void initComponents() {
 
 		String language = (String) GUI.configFile.get("Language");
+		String[] localeSplit = null;
 		if (language != null) {
-			String[] localeSplit = language.split("_");
+			localeSplit = language.split("_");
+		}
+
+		if (localeSplit != null && localeSplit.length == 2) {
 			Locale newLocale = new Locale(localeSplit[0], localeSplit[1]);
 			Locale.setDefault(newLocale);
 			Settings.setLocale(newLocale);
