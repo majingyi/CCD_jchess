@@ -239,7 +239,15 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		Locale.setDefault(Locale.US);
+		String language = (String) GUI.configFile.get("Language");
+		if (language != null) {
+			String[] localeSplit = language.split("_");
+			Locale newLocale = new Locale(localeSplit[0], localeSplit[1]);
+			Locale.setDefault(newLocale);
+			Settings.setLocale(newLocale);
+		} else {
+			Locale.setDefault(Locale.US);
+		}
 
 		mainPanel = new javax.swing.JPanel();
 		gamesPane = new jchess.JChessTabbedPane();
