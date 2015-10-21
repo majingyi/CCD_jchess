@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 import javax.swing.Icon;
 
 /**
- * Class representings game settings available for the current player
+ * Class representing game settings available for the current player
  */
 public class Settings implements Serializable {
 
