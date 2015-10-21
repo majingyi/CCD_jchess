@@ -24,7 +24,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
@@ -88,29 +90,31 @@ public class GUI {
 	}
 
 	static Properties getConfigFile() {
-		Properties defConfFile = new Properties();
 		Properties confFile = new Properties();
-		File outFile = new File(GUI.getJarPath() + File.separator + "config.txt");
-		try {
-			defConfFile.load(new FileInputStream("config.txt"));
-		} catch (java.io.IOException exc) {
-			System.out.println("some error loading properties file. Cause: " + exc);
-			exc.printStackTrace();
-		}
+		File configFile = new File(GUI.getJarPath() + File.separator + "config.txt");
 
-		if (outFile.exists() == false) {
+		if (configFile.exists()) {
 			try {
-				defConfFile.store(new FileOutputStream(outFile), null);
+				confFile.load(new FileInputStream(configFile));
 			} catch (java.io.IOException exc) {
-				System.out.println("some error storing properties file. Cause: " + exc);
+				System.out.println("some error loading properties file. Cause: " + exc);
+				exc.printStackTrace();
 			}
 		}
 
-		try {
-			confFile.load(new FileInputStream("config.txt"));
-		} catch (java.io.IOException exc) {
-			System.out.println("some error loading properties file. Cause: " + exc);
-		}
 		return confFile;
+	}
+
+	public static void storeConfigFile() {
+		try {
+			File outFile = new File(GUI.getJarPath() + File.separator + "config.txt");
+			configFile.store(new FileOutputStream(outFile), null);
+		} catch (FileNotFoundException e) {
+			System.out.println("some error storing properties file. Cause: " + e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("some error storing properties file. Cause: " + e);
+			e.printStackTrace();
+		}
 	}
 }
