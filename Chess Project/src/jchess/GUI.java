@@ -35,8 +35,8 @@ import java.util.Properties;
  */
 public class GUI {
 
-	public Game game;
-	static final public Properties configFile = GUI.getConfigFile();
+	public Game											game;
+	static final public Properties	configFile	= GUI.getConfigFile();
 
 	public GUI() {
 		this.game = new Game();
@@ -60,9 +60,7 @@ public class GUI {
 		URL url = null;
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		try {
-			String imageLink = "theme/"
-					+ configFile.getProperty("THEME", "default") + "/images/"
-					+ name;
+			String imageLink = "theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
 			System.out.println(configFile.getProperty("THEME"));
 			url = JChessApp.class.getResource(imageLink);
 			img = tk.getImage(url);
@@ -79,10 +77,8 @@ public class GUI {
 	}
 
 	static String getJarPath() {
-		String path = GUI.class.getProtectionDomain().getCodeSource()
-				.getLocation().getFile();
-		path = path.replaceAll(
-				"[a-zA-Z0-9%!@#$%^&*\\(\\)\\[\\]\\{\\}\\.\\,\\s]+\\.jar", "");
+		String path = GUI.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+		path = path.replaceAll("[a-zA-Z0-9%!@#$%^&*\\(\\)\\[\\]\\{\\}\\.\\,\\s]+\\.jar", "");
 		int lastSlash = path.lastIndexOf(File.separator);
 		if (path.length() - 1 == lastSlash) {
 			path = path.substring(0, lastSlash);
@@ -94,23 +90,26 @@ public class GUI {
 	static Properties getConfigFile() {
 		Properties defConfFile = new Properties();
 		Properties confFile = new Properties();
-		File outFile = new File(GUI.getJarPath() + File.separator
-				+ "config.txt");
+		File outFile = new File(GUI.getJarPath() + File.separator + "config.txt");
 		try {
-			defConfFile.load(GUI.class.getResourceAsStream("config.txt"));
+			defConfFile.load(new FileInputStream("config.txt"));
 		} catch (java.io.IOException exc) {
-			System.out.println("some error loading image! what goes: " + exc);
+			System.out.println("some error loading properties file. Cause: " + exc);
 			exc.printStackTrace();
 		}
-		if (!outFile.exists()) {
+
+		if (outFile.exists() == false) {
 			try {
 				defConfFile.store(new FileOutputStream(outFile), null);
 			} catch (java.io.IOException exc) {
+				System.out.println("some error storing properties file. Cause: " + exc);
 			}
 		}
+
 		try {
 			confFile.load(new FileInputStream("config.txt"));
 		} catch (java.io.IOException exc) {
+			System.out.println("some error loading properties file. Cause: " + exc);
 		}
 		return confFile;
 	}
