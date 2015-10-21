@@ -101,7 +101,7 @@ public class Settings implements Serializable {
 		try {
 			result = bundle.getString(key);
 		} catch (java.util.MissingResourceException exc) {
-			result = key;
+			// ignore
 		}
 
 		if (result.equals("")) {
