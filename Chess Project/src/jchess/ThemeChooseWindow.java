@@ -39,22 +39,22 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class ThemeChooseWindow extends JDialog implements ActionListener,
-		ListSelectionListener {
+public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 
-	JList themesList;
-	ImageIcon themePreview;
-	GridBagLayout gbl;
-	public String result;
-	GridBagConstraints gbc;
-	JButton themePreviewButton;
-	JButton okButton;
+	private static final long	serialVersionUID	= 4833195962704657449L;
+
+	JList											themesList;
+	ImageIcon									themePreview;
+	GridBagLayout							gbl;
+	public String							result;
+	GridBagConstraints				gbc;
+	JButton										themePreviewButton;
+	JButton										okButton;
 
 	ThemeChooseWindow(Frame parent) throws Exception {
 		super(parent);
 
-		File dir = new File(GUI.getJarPath() + File.separator + "jchess"
-				+ File.separator + "theme" + File.separator);
+		File dir = new File(GUI.getJarPath() + File.separator + "jchess" + File.separator + "theme" + File.separator);
 
 		System.out.println("Theme path: " + dir.getPath());
 
@@ -86,8 +86,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener,
 				this.themePreview = new ImageIcon(GUI.loadImage("Preview.png"));// JChessApp.class.getResource("theme/"+GUI.configFile.getProperty("THEME")+"/images/Preview.png"));
 			} catch (java.lang.NullPointerException exc) {
 				System.out.println("Cannot find preview image: " + exc);
-				this.themePreview = new ImageIcon(
-						JChessApp.class.getResource("theme/noPreview.png"));
+				this.themePreview = new ImageIcon(JChessApp.class.getResource("theme/noPreview.png"));
 				return;
 			}
 			this.result = "";
@@ -102,23 +101,19 @@ public class ThemeChooseWindow extends JDialog implements ActionListener,
 			this.okButton.addActionListener(this);
 			this.setModal(true);
 		} else {
-			throw new Exception(
-					Settings.lang("error_when_creating_theme_config_window"));
+			throw new Exception(Settings.lang("error_when_creating_theme_config_window"));
 		}
 
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent event) {
-		String element = this.themesList.getModel()
-				.getElementAt(this.themesList.getSelectedIndex()).toString();
-		String path = GUI.getJarPath() + File.separator + "jchess"
-				+ File.separator + "theme" + File.separator;
+		String element = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
+		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "theme" + File.separator;
 		// String path =
 		// JChessApp.class.getResource("theme/").getPath().toString();
 		System.out.println(path + element + "/images/Preview.png");
-		this.themePreview = new ImageIcon(path + element
-				+ "/images/Preview.png");
+		this.themePreview = new ImageIcon(path + element + "/images/Preview.png");
 		this.themePreviewButton.setIcon(this.themePreview);
 	}
 
@@ -132,22 +127,19 @@ public class ThemeChooseWindow extends JDialog implements ActionListener,
 		if (evt.getSource() == this.okButton) {
 			Properties prp = GUI.getConfigFile();
 			int element = this.themesList.getSelectedIndex();
-			String name = this.themesList.getModel().getElementAt(element)
-					.toString();
+			String name = this.themesList.getModel().getElementAt(element).toString();
 			if (GUI.themeIsValid(name)) {
 				prp.setProperty("THEME", name);
 				try {
 					// FileOutputStream fOutStr = new
 					// FileOutputStream(ThemeChooseWindow.class.getResource("config.txt").getFile());
-					FileOutputStream fOutStr = new FileOutputStream(
-							"config.txt");
+					FileOutputStream fOutStr = new FileOutputStream("config.txt");
 					prp.store(fOutStr, null);
 					fOutStr.flush();
 					fOutStr.close();
 				} catch (java.io.IOException exc) {
 				}
-				JOptionPane.showMessageDialog(this,
-						Settings.lang("changes_visible_after_restart"));
+				JOptionPane.showMessageDialog(this, Settings.lang("changes_visible_after_restart"));
 				this.setVisible(false);
 
 			}
