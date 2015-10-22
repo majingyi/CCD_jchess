@@ -238,7 +238,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-
+		// TODO Check if locale is invalid
 		String language = (String) GUI.configFile.get("Language");
 		String[] localeSplit = null;
 		if (language != null) {
