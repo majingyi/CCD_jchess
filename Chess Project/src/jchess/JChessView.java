@@ -239,6 +239,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		// TODO we should check, if Locale is valid here
 		String language = (String) GUI.configFile.get("Language");
 		String[] localeSplit = null;
 		if (language != null) {
