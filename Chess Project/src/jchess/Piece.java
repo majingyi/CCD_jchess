@@ -39,13 +39,14 @@ public abstract class Piece {
 	public Player						player;
 	protected String				name;
 	protected String				symbol;
-	protected static Image	imageBlack; // = null;
-	protected static Image	imageWhite; // = null;
+
+	protected static Image	imageBlack	= null;
+	protected static Image	imageWhite	= null;
+
 	public Image						orgImage;
 	public Image						image;
-	public static short			value	= 0;
 
-	Piece(Chessboard chessboard, Player player) {
+	public Piece(Chessboard chessboard, Player player) {
 		this.chessboard = chessboard;
 		this.player = player;
 		if (player.color == Player.colors.black) {
@@ -63,7 +64,7 @@ public abstract class Piece {
 	 * @graph : where to draw
 	 */
 
-	final void draw(Graphics g) {
+	protected final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -90,14 +91,14 @@ public abstract class Piece {
 		}
 	}
 
-	void clean() {
+	protected void clean() {
 	}
 
 	/** method check if Piece can move to given square
 	 * @param square square where piece want to move (Square object)
 	 * @param allmoves  all moves which can piece do
 	 * */
-	boolean canMove(Square square, ArrayList<Square> allmoves) {
+	protected boolean canMove(Square square, ArrayList<Square> allmoves) {
 		// throw new UnsupportedOperationException("Not supported yet.");
 		ArrayList<Square> moves = allmoves;
 		for (Iterator<Square> it = moves.iterator(); it.hasNext();) {
