@@ -72,8 +72,7 @@ public abstract class Piece {
 			int height = this.chessboard.get_square_height();
 			int x = (this.square.pozX * height) + topLeft.x;
 			int y = (this.square.pozY * height) + topLeft.y;
-			float addX = (height - image.getWidth(null)) / 2;
-			float addY = (height - image.getHeight(null)) / 2;
+
 			if (image != null && g != null) {
 				Image tempImage = orgImage;
 				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
@@ -99,10 +98,10 @@ public abstract class Piece {
 	 * @param square square where piece want to move (Square object)
 	 * @param allmoves  all moves which can piece do
 	 * */
-	boolean canMove(Square square, ArrayList allmoves) {
+	boolean canMove(Square square, ArrayList<Square> allmoves) {
 		// throw new UnsupportedOperationException("Not supported yet.");
-		ArrayList moves = allmoves;
-		for (Iterator it = moves.iterator(); it.hasNext();) {
+		ArrayList<Square> moves = allmoves;
+		for (Iterator<Square> it = moves.iterator(); it.hasNext();) {
 			Square sq = (Square) it.next();// get next from iterator
 			if (sq == square) {// if adress is the same
 				return true; // piece canMove
@@ -112,7 +111,7 @@ public abstract class Piece {
 	}
 
 	void setImage() {
-		if (this.player.color == this.player.color.black) {
+		if (this.player.color == Player.colors.black) {
 			image = imageBlack;
 		} else {
 			image = imageWhite;
@@ -136,7 +135,7 @@ public abstract class Piece {
 	// }
 	// }/*--endOf-setImages(String white, String black)--*/
 
-	abstract public ArrayList allMoves();
+	abstract public ArrayList<Square> allMoves();
 
 	/** Method is useful for out of bounds protection
 	 * @param x  x position on chessboard
