@@ -42,57 +42,88 @@ import jchess.Moves.castling;
  */
 public class Chessboard extends JPanel {
 
-	private static final long serialVersionUID = -1717218347823342830L;
+	private static final long		serialVersionUID		= -1717218347823342830L;
 
-	public static final int top = 0;
-	public static final int bottom = 7;
-	public Square squares[][];// squares of chessboard
-	private static final Image orgImage = GUI.loadImage("chessboard.png");// image
-																			// of
-																			// chessboard
-	private static Image image = Chessboard.orgImage;// image of chessboard
-	private static final Image org_sel_square = GUI.loadImage("sel_square.png");// image
-																				// of
-																				// highlited
-																				// square
-	private static Image sel_square = org_sel_square;// image of highlited
-														// square
-	private static final Image org_able_square = GUI
-			.loadImage("able_square.png");// image of square where piece can go
-	private static Image able_square = org_able_square;// image of square where
-														// piece can go
-	public Square activeSquare;
-	private Image upDownLabel = null;
-	private Image LeftRightLabel = null;
-	private Point topLeft = new Point(0, 0);
-	private int active_x_square;
-	private int active_y_square;
-	private float square_height;// height of square
+	public static final int			top									= 0;
+	public static final int			bottom							= 7;
+	public Square								squares[][];																						// squares
+																																											// of
+																																											// chessboard
+	private static final Image	orgImage						= GUI.loadImage("chessboard.png");	// image
+	// of
+	// chessboard
+	private static Image				image								= Chessboard.orgImage;							// image
+																																											// of
+																																											// chessboard
+	private static final Image	org_sel_square			= GUI.loadImage("sel_square.png");	// image
+	// of
+	// highlited
+	// square
+	private static Image				sel_square					= org_sel_square;										// image
+																																											// of
+																																											// highlited
+	// square
+	private static final Image	org_able_square			= GUI.loadImage("able_square.png");	// image
+																																											// of
+																																											// square
+																																											// where
+																																											// piece
+																																											// can
+																																											// go
+	private static Image				able_square					= org_able_square;									// image
+																																											// of
+																																											// square
+																																											// where
+	// piece can go
+	public Square								activeSquare;
+	private Image								upDownLabel					= null;
+	private Image								LeftRightLabel			= null;
+	private Point								topLeft							= new Point(0, 0);
+	private int									active_x_square;
+	private int									active_y_square;
+	private float								square_height;																					// height
+																																											// of
+																																											// square
 	// public Graphics graph;
-	public static final int img_x = 5;// image x position (used in JChessView
-										// class!)
-	public static final int img_y = img_x;// image y position (used in
-											// JChessView class!)
-	public static final int img_widht = 480;// image width
-	public static final int img_height = img_widht;// image height
-	private ArrayList moves;
-	private Settings settings;
-	public King kingWhite;
-	public King kingBlack;
+	public static final int			img_x								= 5;																// image
+																																											// x
+																																											// position
+																																											// (used
+																																											// in
+																																											// JChessView
+	// class!)
+	public static final int			img_y								= img_x;														// image
+																																											// y
+																																											// position
+																																											// (used
+																																											// in
+	// JChessView class!)
+	public static final int			img_widht						= 480;															// image
+																																											// width
+	public static final int			img_height					= img_widht;												// image
+																																											// height
+	private ArrayList						moves;
+	private Settings						settings;
+	public King									kingWhite;
+	public King									kingBlack;
 	// -------- for undo ----------
-	private Square undo1_sq_begin = null;
-	private Square undo1_sq_end = null;
-	private Piece undo1_piece_begin = null;
-	private Piece undo1_piece_end = null;
-	private Piece ifWasEnPassant = null;
-	private Piece ifWasCastling = null;
-	private boolean breakCastling = false; // if last move break castling
+	private Square							undo1_sq_begin			= null;
+	private Square							undo1_sq_end				= null;
+	private Piece								undo1_piece_begin		= null;
+	private Piece								undo1_piece_end			= null;
+	private Piece								ifWasEnPassant			= null;
+	private Piece								ifWasCastling				= null;
+	private boolean							breakCastling				= false;														// if
+																																											// last
+																																											// move
+																																											// break
+																																											// castling
 	// ----------------------------
 	// For En passant:
 	// |-> Pawn whose in last turn moved two square
-	public Pawn twoSquareMovedPawn = null;
-	public Pawn twoSquareMovedPawn2 = null;
-	private Moves moves_history;
+	public Pawn									twoSquareMovedPawn	= null;
+	public Pawn									twoSquareMovedPawn2	= null;
+	private Moves								moves_history;
 
 	/** Chessboard class constructor
 	 * @param settings reference to Settings class object for this chessboard
@@ -102,7 +133,7 @@ public class Chessboard extends JPanel {
 		this.settings = settings;
 		this.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
-											// of field
+		// of field
 		this.squares = new Square[8][8];// initalization of 8x8 chessboard
 		this.active_x_square = 0;
 		this.active_y_square = 0;
@@ -140,8 +171,7 @@ public class Chessboard extends JPanel {
 	/**
 	 *
 	 */
-	private void setPieces4NewGame(boolean upsideDown, Player plWhite,
-			Player plBlack) {
+	private void setPieces4NewGame(boolean upsideDown, Player plWhite, Player plBlack) {
 
 		/* WHITE PIECES */
 		Player player = plBlack;
@@ -177,6 +207,7 @@ public class Chessboard extends JPanel {
 		this.squares[6][i].setPiece(new Knight(this, player));
 		this.squares[2][i].setPiece(new Bishop(this, player));
 		this.squares[5][i].setPiece(new Bishop(this, player));
+
 		if (upsideDown) {
 			this.squares[4][i].setPiece(new Queen(this, player));
 			if (player.color == Player.colors.white) {
@@ -215,8 +246,8 @@ public class Chessboard extends JPanel {
 	 */
 	public Square getSquare(int x, int y) {
 		if ((x > this.get_height()) || (y > this.get_widht())) // test if click
-																// is out of
-																// chessboard
+		// is out of
+		// chessboard
 		{
 			System.out.println("click out of chessboard.");
 			return null;
@@ -226,9 +257,9 @@ public class Chessboard extends JPanel {
 			y -= this.upDownLabel.getHeight(null);
 		}
 		double square_x = x / square_height;// count which field in X was
-											// clicked
+		// clicked
 		double square_y = y / square_height;// count which field in Y was
-											// clicked
+		// clicked
 
 		if (square_x > (int) square_x) // if X is more than X parsed to Integer
 		{
@@ -240,15 +271,12 @@ public class Chessboard extends JPanel {
 		}
 		// Square newActiveSquare =
 		// this.squares[(int)square_x-1][(int)square_y-1];//4test
-		System.out.println("square_x: " + square_x + " square_y: " + square_y
-				+ " \n"); // 4tests
+		System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 		Square result;
 		try {
 			result = this.squares[(int) square_x - 1][(int) square_y - 1];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-			System.out
-					.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : "
-							+ exc);
+			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
 			return null;
 		}
 		return this.squares[(int) square_x - 1][(int) square_y - 1];
@@ -263,8 +291,7 @@ public class Chessboard extends JPanel {
 		this.active_y_square = sq.pozY + 1;
 
 		// this.draw();//redraw
-		System.out.println("active_x: " + this.active_x_square + " active_y: "
-				+ this.active_y_square);// 4tests
+		System.out.println("active_x: " + this.active_x_square + " active_y: " + this.active_y_square);// 4tests
 		repaint();
 
 	}/*--endOf-select--*/
@@ -294,8 +321,7 @@ public class Chessboard extends JPanel {
 
 	int get_height(boolean includeLabels) {
 		if (this.settings.renderLabels) {
-			return Chessboard.image.getHeight(null)
-					+ upDownLabel.getHeight(null);
+			return Chessboard.image.getHeight(null) + upDownLabel.getHeight(null);
 		}
 		return Chessboard.image.getHeight(null);
 	}/*--endOf-get_height--*/
@@ -337,8 +363,7 @@ public class Chessboard extends JPanel {
 	 * @param end square where we want to move piece         *
 	 * @param refresh chessboard, default: true
 	 * */
-	public void move(Square begin, Square end, boolean refresh,
-			boolean clearForwardHistory) {
+	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
 
 		castling wasCastling = Moves.castling.none;
 		Piece promotedPiece = null;
@@ -363,7 +388,7 @@ public class Chessboard extends JPanel {
 
 		begin.piece.square = end;// set square of piece to ending
 		end.piece = begin.piece;// for ending square set piece from beginin
-								// square
+		// square
 		begin.piece = null;// make null piece for begining square
 
 		if (end.piece.name.equals("King")) {
@@ -374,16 +399,14 @@ public class Chessboard extends JPanel {
 
 			// Castling
 			if (begin.pozX + 2 == end.pozX) {
-				move(squares[7][begin.pozY], squares[end.pozX - 1][begin.pozY],
-						false, false);
+				move(squares[7][begin.pozY], squares[end.pozX - 1][begin.pozY], false, false);
 				ifWasCastling = end.piece; // for undo
 				wasCastling = Moves.castling.shortCastling;
 				// this.moves_history.addMove(tempBegin, tempEnd,
 				// clearForwardHistory, wasCastling, wasEnPassant);
 				// return;
 			} else if (begin.pozX - 2 == end.pozX) {
-				move(squares[0][begin.pozY], squares[end.pozX + 1][begin.pozY],
-						false, false);
+				move(squares[0][begin.pozY], squares[end.pozX + 1][begin.pozY], false, false);
 				ifWasCastling = end.piece; // for undo
 				wasCastling = Moves.castling.longCastling;
 				// this.moves_history.addMove(tempBegin, tempEnd,
@@ -397,57 +420,56 @@ public class Chessboard extends JPanel {
 				((Rook) end.piece).wasMotion = true;
 			}
 		} else if (end.piece.name.equals("Pawn")) {
-			if (twoSquareMovedPawn != null
-					&& squares[end.pozX][begin.pozY] == twoSquareMovedPawn.square) // en
-																					// passant
+			if (twoSquareMovedPawn != null && squares[end.pozX][begin.pozY] == twoSquareMovedPawn.square) // en
+			// passant
 			{
 				ifWasEnPassant = squares[end.pozX][begin.pozY].piece; // for
-																		// undo
+				// undo
 
 				tempEnd.piece = squares[end.pozX][begin.pozY].piece; // ugly
-																		// hack
-																		// - put
-																		// taken
-																		// pawn
-																		// in en
-																		// passant
-																		// plasty
-																		// do
-																		// end
-																		// square
+				// hack
+				// - put
+				// taken
+				// pawn
+				// in en
+				// passant
+				// plasty
+				// do
+				// end
+				// square
 
 				squares[end.pozX][begin.pozY].piece = null;
 				wasEnPassant = true;
 			}
 
 			if (begin.pozY - end.pozY == 2 || end.pozY - begin.pozY == 2) // moved
-																			// two
-																			// square
+			// two
+			// square
 			{
 				breakCastling = true;
 				twoSquareMovedPawn = (Pawn) end.piece;
 			} else {
 				twoSquareMovedPawn = null; // erase last saved move (for En
-											// passant)
+				// passant)
 			}
 
 			if (end.piece.square.pozY == 0 || end.piece.square.pozY == 7) // promote
-																			// Pawn
+			// Pawn
 			{
 				if (clearForwardHistory) {
 					String color;
 					if (end.piece.player.color == Player.colors.white) {
 						color = "W"; // promotionWindow was show with pieces in
-										// this color
+						// this color
 					} else {
 						color = "B";
 					}
 
 					String newPiece = JChessApp.jcv.showPawnPromotionBox(color); // return
-																					// name
-																					// of
-																					// new
-																					// piece
+					// name
+					// of
+					// new
+					// piece
 
 					if (newPiece.equals("Queen")) // transform pawn to queen
 					{
@@ -457,7 +479,7 @@ public class Chessboard extends JPanel {
 						queen.square = end.piece.square;
 						end.piece = queen;
 					} else if (newPiece.equals("Rook")) // transform pawn to
-														// rook
+					// rook
 					{
 						Rook rook = new Rook(this, end.piece.player);
 						rook.chessboard = end.piece.chessboard;
@@ -465,7 +487,7 @@ public class Chessboard extends JPanel {
 						rook.square = end.piece.square;
 						end.piece = rook;
 					} else if (newPiece.equals("Bishop")) // transform pawn to
-															// bishop
+					// bishop
 					{
 						Bishop bishop = new Bishop(this, end.piece.player);
 						bishop.chessboard = end.piece.chessboard;
@@ -495,11 +517,9 @@ public class Chessboard extends JPanel {
 
 		if (clearForwardHistory) {
 			this.moves_history.clearMoveForwardStack();
-			this.moves_history.addMove(tempBegin, tempEnd, true, wasCastling,
-					wasEnPassant, promotedPiece);
+			this.moves_history.addMove(tempBegin, tempEnd, true, wasCastling, wasEnPassant, promotedPiece);
 		} else {
-			this.moves_history.addMove(tempBegin, tempEnd, false, wasCastling,
-					wasEnPassant, promotedPiece);
+			this.moves_history.addMove(tempBegin, tempEnd, false, wasCastling, wasEnPassant, promotedPiece);
 		}
 	}/* endOf-move()- */
 
@@ -509,7 +529,7 @@ public class Chessboard extends JPanel {
 
 	public boolean redo(boolean refresh) {
 		if (this.settings.gameType == Settings.gameTypes.local) // redo only for
-																// local game
+		// local game
 		{
 			Move first = this.moves_history.redo();
 
@@ -520,14 +540,12 @@ public class Chessboard extends JPanel {
 				from = first.getFrom();
 				to = first.getTo();
 
-				this.move(this.squares[from.pozX][from.pozY],
-						this.squares[to.pozX][to.pozY], true, false);
+				this.move(this.squares[from.pozX][from.pozY], this.squares[to.pozX][to.pozY], true, false);
 				if (first.getPromotedPiece() != null) {
 					Pawn pawn = (Pawn) this.squares[to.pozX][to.pozY].piece;
 					pawn.square = null;
 
-					this.squares[to.pozX][to.pozY].piece = first
-							.getPromotedPiece();
+					this.squares[to.pozX][to.pozY].piece = first.getPromotedPiece();
 					Piece promoted = this.squares[to.pozX][to.pozY].piece;
 					promoted.square = this.squares[to.pozX][to.pozY];
 				}
@@ -579,20 +597,16 @@ public class Chessboard extends JPanel {
 					this.squares[end.pozX][begin.pozY].piece = pawn;
 					pawn.square = this.squares[end.pozX][begin.pozY];
 
-				} else if (moved.name.equals("Pawn")
-						&& last.getPromotedPiece() != null) {
+				} else if (moved.name.equals("Pawn") && last.getPromotedPiece() != null) {
 					Piece promoted = this.squares[end.pozX][end.pozY].piece;
 					promoted.square = null;
 					this.squares[end.pozX][end.pozY].piece = null;
 				}
 
 				// check one more move back for en passant
-				Move oneMoveEarlier = this.moves_history
-						.getLastMoveFromHistory();
-				if (oneMoveEarlier != null
-						&& oneMoveEarlier.wasPawnTwoFieldsMove()) {
-					Piece canBeTakenEnPassant = this.squares[oneMoveEarlier
-							.getTo().pozX][oneMoveEarlier.getTo().pozY].piece;
+				Move oneMoveEarlier = this.moves_history.getLastMoveFromHistory();
+				if (oneMoveEarlier != null && oneMoveEarlier.wasPawnTwoFieldsMove()) {
+					Piece canBeTakenEnPassant = this.squares[oneMoveEarlier.getTo().pozX][oneMoveEarlier.getTo().pozY].piece;
 					if (canBeTakenEnPassant.name.equals("Pawn")) {
 						this.twoSquareMovedPawn = (Pawn) canBeTakenEnPassant;
 					}
@@ -627,8 +641,11 @@ public class Chessboard extends JPanel {
 	 * @deprecated 
 	 */
 	void draw() {
-		this.getGraphics().drawImage(image, this.getTopLeftPoint().x,
-				this.getTopLeftPoint().y, null);// draw an Image of chessboard
+		this.getGraphics().drawImage(image, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);// draw
+																																																	// an
+																																																	// Image
+																																																	// of
+																																																	// chessboard
 		this.drawLabels();
 		this.repaint();
 	}/*--endOf-draw--*/
@@ -643,8 +660,7 @@ public class Chessboard extends JPanel {
 
 	public Point getTopLeftPoint() {
 		if (this.settings.renderLabels) {
-			return new Point(this.topLeft.x + this.upDownLabel.getHeight(null),
-					this.topLeft.y + this.upDownLabel.getHeight(null));
+			return new Point(this.topLeft.x + this.upDownLabel.getHeight(null), this.topLeft.y + this.upDownLabel.getHeight(null));
 		}
 		return this.topLeft;
 	}
@@ -652,27 +668,24 @@ public class Chessboard extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Point topLeftPoint = this.getTopLeftPoint();
 		if (this.settings.renderLabels) {
 			if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) // if renderLabels
-															// and (0,0), than
-															// draw it! (for
-															// first run)
+			// and (0,0), than
+			// draw it! (for
+			// first run)
 			{
 				this.drawLabels();
 			}
 			g2d.drawImage(this.upDownLabel, 0, 0, null);
-			g2d.drawImage(this.upDownLabel, 0, Chessboard.image.getHeight(null)
-					+ topLeftPoint.y, null);
+			g2d.drawImage(this.upDownLabel, 0, Chessboard.image.getHeight(null) + topLeftPoint.y, null);
 			g2d.drawImage(this.LeftRightLabel, 0, 0, null);
-			g2d.drawImage(this.LeftRightLabel, Chessboard.image.getHeight(null)
-					+ topLeftPoint.x, 0, null);
+			g2d.drawImage(this.LeftRightLabel, Chessboard.image.getHeight(null) + topLeftPoint.x, 0, null);
 		}
 		g2d.drawImage(image, topLeftPoint.x, topLeftPoint.y, null);// draw an
-																	// Image of
-																	// chessboard
+		// Image of
+		// chessboard
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
 		{
 			for (int y = 0; y < 8; y++) {
@@ -682,35 +695,28 @@ public class Chessboard extends JPanel {
 			}
 		}// --endOf--drawPiecesOnSquares
 		if ((this.active_x_square != 0) && (this.active_y_square != 0)) // if
-																		// some
-																		// square
-																		// is
-																		// active
+		// some
+		// square
+		// is
+		// active
 		{
-			g2d.drawImage(sel_square,
-					((this.active_x_square - 1) * (int) square_height)
-							+ topLeftPoint.x,
-					((this.active_y_square - 1) * (int) square_height)
-							+ topLeftPoint.y, null);// draw image of selected
-													// square
+			g2d.drawImage(sel_square, ((this.active_x_square - 1) * (int) square_height) + topLeftPoint.x, ((this.active_y_square - 1) * (int) square_height)
+					+ topLeftPoint.y, null);// draw image of selected
+			// square
 			Square tmpSquare = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)];
 			if (tmpSquare.piece != null) {
-				this.moves = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece
-						.allMoves();
+				this.moves = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves();
 			}
 
 			for (Iterator it = moves.iterator(); moves != null && it.hasNext();) {
 				Square sq = (Square) it.next();
-				g2d.drawImage(able_square, (sq.pozX * (int) square_height)
-						+ topLeftPoint.x, (sq.pozY * (int) square_height)
-						+ topLeftPoint.y, null);
+				g2d.drawImage(able_square, (sq.pozX * (int) square_height) + topLeftPoint.x, (sq.pozY * (int) square_height) + topLeftPoint.y, null);
 			}
 		}
 	}/*--endOf-paint--*/
 
 	public void resizeChessboard(int height) {
-		BufferedImage resized = new BufferedImage(height, height,
-				BufferedImage.TYPE_INT_ARGB_PRE);
+		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
 		g.drawImage(Chessboard.orgImage, 0, 0, height, height, null);
 		g.dispose();
@@ -721,23 +727,17 @@ public class Chessboard extends JPanel {
 		}
 		this.setSize(height, height);
 
-		resized = new BufferedImage((int) square_height, (int) square_height,
-				BufferedImage.TYPE_INT_ARGB_PRE);
+		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(Chessboard.org_able_square, 0, 0, (int) square_height,
-				(int) square_height, null);
+		g.drawImage(Chessboard.org_able_square, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
-		Chessboard.able_square = resized.getScaledInstance((int) square_height,
-				(int) square_height, 0);
+		Chessboard.able_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 
-		resized = new BufferedImage((int) square_height, (int) square_height,
-				BufferedImage.TYPE_INT_ARGB_PRE);
+		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(Chessboard.org_sel_square, 0, 0, (int) square_height,
-				(int) square_height, null);
+		g.drawImage(Chessboard.org_sel_square, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
-		Chessboard.sel_square = resized.getScaledInstance((int) square_height,
-				(int) square_height, 0);
+		Chessboard.sel_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 		this.drawLabels();
 	}
 
@@ -750,14 +750,11 @@ public class Chessboard extends JPanel {
 		// BufferedImage.TYPE_3BYTE_BGR);
 		int min_label_height = 20;
 		int labelHeight = (int) Math.ceil(square_height / 4);
-		labelHeight = (labelHeight < min_label_height) ? min_label_height
-				: labelHeight;
+		labelHeight = (labelHeight < min_label_height) ? min_label_height : labelHeight;
 		int labelWidth = (int) Math.ceil(square_height * 8 + (2 * labelHeight));
-		BufferedImage uDL = new BufferedImage(labelWidth + min_label_height,
-				labelHeight, BufferedImage.TYPE_3BYTE_BGR);
+		BufferedImage uDL = new BufferedImage(labelWidth + min_label_height, labelHeight, BufferedImage.TYPE_3BYTE_BGR);
 		Graphics2D uDL2D = (Graphics2D) uDL.createGraphics();
-		uDL2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		uDL2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		uDL2D.setColor(Color.white);
 
 		uDL2D.fillRect(0, 0, labelWidth + min_label_height, labelHeight);
@@ -771,24 +768,20 @@ public class Chessboard extends JPanel {
 		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" };
 		if (!this.settings.upsideDown) {
 			for (int i = 1; i <= letters.length; i++) {
-				uDL2D.drawString(letters[i - 1], (square_height * (i - 1))
-						+ addX, 10 + (labelHeight / 3));
+				uDL2D.drawString(letters[i - 1], (square_height * (i - 1)) + addX, 10 + (labelHeight / 3));
 			}
 		} else {
 			int j = 1;
 			for (int i = letters.length; i > 0; i--, j++) {
-				uDL2D.drawString(letters[i - 1], (square_height * (j - 1))
-						+ addX, 10 + (labelHeight / 3));
+				uDL2D.drawString(letters[i - 1], (square_height * (j - 1)) + addX, 10 + (labelHeight / 3));
 			}
 		}
 		uDL2D.dispose();
 		this.upDownLabel = uDL;
 
-		uDL = new BufferedImage(labelHeight, labelWidth + min_label_height,
-				BufferedImage.TYPE_3BYTE_BGR);
+		uDL = new BufferedImage(labelHeight, labelWidth + min_label_height, BufferedImage.TYPE_3BYTE_BGR);
 		uDL2D = (Graphics2D) uDL.createGraphics();
-		uDL2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		uDL2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		uDL2D.setColor(Color.white);
 		// uDL2D.fillRect(0, 0, 800, 800);
 		uDL2D.fillRect(0, 0, labelHeight, labelWidth + min_label_height);
@@ -797,14 +790,12 @@ public class Chessboard extends JPanel {
 
 		if (this.settings.upsideDown) {
 			for (int i = 1; i <= 8; i++) {
-				uDL2D.drawString(new Integer(i).toString(),
-						3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
+				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
 			}
 		} else {
 			int j = 1;
 			for (int i = 8; i > 0; i--, j++) {
-				uDL2D.drawString(new Integer(i).toString(),
-						3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
+				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
 			}
 		}
 		uDL2D.dispose();
