@@ -118,23 +118,6 @@ public abstract class Piece {
 		}
 	}
 
-	// void setImages(String white, String black) {
-	/*
-	 * method set image to black or white (depends on player color)
-	 * 
-	 * @white: String with name of image with white piece
-	 * 
-	 * @black: String with name of image with black piece
-	 */
-	// this.imageBlack = black;
-	// this.imageWhite = white;
-	// if(player.color == player.color.black) {
-	// this.image = GUI.loadImage(imageBlack);
-	// } else {
-	// this.image = GUI.loadImage(imageWhite);
-	// }
-	// }/*--endOf-setImages(String white, String black)--*/
-
 	abstract public ArrayList<Square> allMoves();
 
 	/** Method is useful for out of bounds protection
