@@ -17,7 +17,7 @@ import java.awt.Image;
  */
 import java.util.ArrayList;
 
-public class NewKng extends King {
+public class NewKing extends King {
 
 	public boolean							wasMotion		= false;													// maybe
 																																						// change
@@ -28,7 +28,7 @@ public class NewKng extends King {
 	private static final Image	imageWhite	= GUI.loadImage("NewKing-W.png");
 	private static final Image	imageBlack	= GUI.loadImage("NewKing-B.png");
 
-	NewKng(Chessboard chessboard, Player player) {
+	NewKing(Chessboard chessboard, Player player) {
 		super(chessboard, player);
 		// this.setImages("NewKing-W.png", "NewKing-B.png");
 		this.symbol = "K";
