@@ -159,8 +159,7 @@ public class NewRook extends Rook {
 					break;// we've to break because we cannot go beside other piece!!
 				}
 			}
-
-			return list;
 		}
+		return list;
 	}
 }
