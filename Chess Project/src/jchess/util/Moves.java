@@ -32,19 +32,19 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import jchess.Settings;
-import jchess.Settings.gameTypes;
 import jchess.pieces.Piece;
 import jchess.ui.Chessboard;
 import jchess.ui.Game;
-import jchess.util.Player.colors;
 
 /** Class representing the players moves, it's also checking
- * that the moves taken by player are correct.
+ * that the moves taken by player are correct. 
  * All moves which was taken by current player are saving as List of Strings
  * The history of moves is printing in a table
  * @param game The current game
  */
 public class Moves extends AbstractTableModel {
+
+	private static final long		serialVersionUID	= -5573231695823099101L;
 
 	private ArrayList<String>		move							= new ArrayList<String>();
 	private int									columnsNum				= 3;
@@ -158,7 +158,6 @@ public class Moves extends AbstractTableModel {
 	}
 
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
-		boolean wasCastling = castlingMove != castling.none;
 		String locMove = new String(begin.piece.symbol);
 
 		if (game.settings.upsideDown) {
@@ -414,7 +413,7 @@ public class Moves extends AbstractTableModel {
 		int from = 0;
 		int to = 0;
 		int n = 1;
-		ArrayList<String> tempArray = new ArrayList();
+		ArrayList<String> tempArray = new ArrayList<String>();
 		int tempStrSize = moves.length() - 1;
 		while (true) {
 			from = moves.indexOf(" ", from);
@@ -505,7 +504,7 @@ public class Moves extends AbstractTableModel {
 						if (squares[i][j].piece == null || this.game.getActivePlayer().color != squares[i][j].piece.player.color) {
 							continue;
 						}
-						ArrayList pieceMoves = squares[i][j].piece.allMoves();
+						ArrayList<Square> pieceMoves = squares[i][j].piece.allMoves();
 						for (Object square : pieceMoves) {
 							Square currSquare = (Square) square;
 							if (currSquare.pozX == xTo && currSquare.pozY == yTo) {
@@ -540,6 +539,8 @@ public class Moves extends AbstractTableModel {
  */
 
 class MyDefaultTableModel extends DefaultTableModel {
+
+	private static final long	serialVersionUID	= 7349152369577914941L;
 
 	MyDefaultTableModel() {
 		super();

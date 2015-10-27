@@ -32,7 +32,6 @@ import javax.swing.Timer;
 import jchess.ui.GUI;
 import jchess.ui.Game;
 import jchess.ui.JChessAboutBox;
-import jchess.ui.JChessTabbedPane;
 import jchess.ui.LanguageChooseWindow;
 import jchess.ui.NewGameWindow;
 import jchess.ui.PawnPromotionWindow;
@@ -45,7 +44,7 @@ import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
 /**
- * The application's main frame.
+ * The application's main frame. 
  */
 public class JChessView extends FrameView implements ActionListener, ComponentListener {
 	static GUI	gui	= null;

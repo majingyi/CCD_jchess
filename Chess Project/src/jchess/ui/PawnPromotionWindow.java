@@ -40,13 +40,15 @@ import javax.swing.JDialog;
  */
 public class PawnPromotionWindow extends JDialog implements ActionListener {
 
-	JButton							knightButton;
-	JButton							bishopButton;
-	JButton							rookButton;
-	JButton							queenButton;
-	GridBagLayout				gbl;
-	public String				result;
-	GridBagConstraints	gbc;
+	private static final long	serialVersionUID	= -9128995891728983191L;
+
+	JButton										knightButton;
+	JButton										bishopButton;
+	JButton										rookButton;
+	JButton										queenButton;
+	GridBagLayout							gbl;
+	public String							result;
+	GridBagConstraints				gbc;
 
 	public PawnPromotionWindow(Frame parent, String color) {
 		super(parent);

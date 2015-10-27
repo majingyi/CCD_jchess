@@ -36,7 +36,6 @@ import javax.swing.JPanel;
 
 import jchess.JChessApp;
 import jchess.Settings;
-import jchess.Settings.gameTypes;
 import jchess.pieces.Bishop;
 import jchess.pieces.King;
 import jchess.pieces.Knight;
@@ -47,10 +46,9 @@ import jchess.pieces.Queen;
 import jchess.pieces.Rook;
 import jchess.util.Move;
 import jchess.util.Moves;
+import jchess.util.Moves.castling;
 import jchess.util.Player;
 import jchess.util.Square;
-import jchess.util.Moves.castling;
-import jchess.util.Player.colors;
 
 /** Class to represent chessboard. Chessboard is made from squares.
  * It is setting the squers of chessboard and sets the pieces(pawns)
@@ -118,25 +116,11 @@ public class Chessboard extends JPanel {
 																																											// width
 	public static final int			img_height					= img_widht;												// image
 																																											// height
-	private ArrayList						moves;
+	private ArrayList<Square>		moves;
 	private Settings						settings;
 	public King									kingWhite;
 	public King									kingBlack;
-	// -------- for undo ----------
-	private Square							undo1_sq_begin			= null;
-	private Square							undo1_sq_end				= null;
-	private Piece								undo1_piece_begin		= null;
-	private Piece								undo1_piece_end			= null;
-	private Piece								ifWasEnPassant			= null;
-	private Piece								ifWasCastling				= null;
-	private boolean							breakCastling				= false;														// if
-																																											// last
-																																											// move
-																																											// break
-																																											// castling
-	// ----------------------------
-	// For En passant:
-	// |-> Pawn whose in last turn moved two square
+
 	public Pawn									twoSquareMovedPawn	= null;
 	public Pawn									twoSquareMovedPawn2	= null;
 	private Moves								moves_history;
@@ -295,7 +279,7 @@ public class Chessboard extends JPanel {
 			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
 			return null;
 		}
-		return this.squares[(int) square_x - 1][(int) square_y - 1];
+		return result;
 	}
 
 	/** Method selecting piece in chessboard
@@ -367,7 +351,7 @@ public class Chessboard extends JPanel {
 			System.out.println("error moving piece: " + exc);
 			return;
 		}
-		this.move(this.squares[xFrom][yFrom], this.squares[xTo][yTo], true);
+		this.move(fromSQ, toSQ, true);
 	}
 
 	public void move(Square begin, Square end, boolean refresh) {
@@ -390,15 +374,6 @@ public class Chessboard extends JPanel {
 
 		Square tempBegin = new Square(begin);// 4 moves history
 		Square tempEnd = new Square(end); // 4 moves history
-		// for undo
-		undo1_piece_begin = begin.piece;
-		undo1_sq_begin = begin;
-		undo1_piece_end = end.piece;
-		undo1_sq_end = end;
-		ifWasEnPassant = null;
-		ifWasCastling = null;
-		breakCastling = false;
-		// ---
 
 		twoSquareMovedPawn2 = twoSquareMovedPawn;
 
@@ -408,22 +383,19 @@ public class Chessboard extends JPanel {
 		begin.piece = null;// make null piece for begining square
 
 		if (end.piece.name.equals("King")) {
-			if (!((King) end.piece).wasMotion) {
-				breakCastling = true;
+			if (((King) end.piece).wasMotion == false) {
 				((King) end.piece).wasMotion = true;
 			}
 
 			// Castling
 			if (begin.pozX + 2 == end.pozX) {
 				move(squares[7][begin.pozY], squares[end.pozX - 1][begin.pozY], false, false);
-				ifWasCastling = end.piece; // for undo
 				wasCastling = Moves.castling.shortCastling;
 				// this.moves_history.addMove(tempBegin, tempEnd,
 				// clearForwardHistory, wasCastling, wasEnPassant);
 				// return;
 			} else if (begin.pozX - 2 == end.pozX) {
 				move(squares[0][begin.pozY], squares[end.pozX + 1][begin.pozY], false, false);
-				ifWasCastling = end.piece; // for undo
 				wasCastling = Moves.castling.longCastling;
 				// this.moves_history.addMove(tempBegin, tempEnd,
 				// clearForwardHistory, wasCastling, wasEnPassant);
@@ -431,28 +403,16 @@ public class Chessboard extends JPanel {
 			}
 			// endOf Castling
 		} else if (end.piece.name.equals("Rook")) {
-			if (!((Rook) end.piece).wasMotion) {
-				breakCastling = true;
+			if (((Rook) end.piece).wasMotion == false) {
 				((Rook) end.piece).wasMotion = true;
 			}
 		} else if (end.piece.name.equals("Pawn")) {
 			if (twoSquareMovedPawn != null && squares[end.pozX][begin.pozY] == twoSquareMovedPawn.square) // en
 			// passant
 			{
-				ifWasEnPassant = squares[end.pozX][begin.pozY].piece; // for
-				// undo
 
 				tempEnd.piece = squares[end.pozX][begin.pozY].piece; // ugly
-				// hack
-				// - put
-				// taken
-				// pawn
-				// in en
-				// passant
-				// plasty
-				// do
-				// end
-				// square
+				// hack - put taken pawn in en passant plasty do end square
 
 				squares[end.pozX][begin.pozY].piece = null;
 				wasEnPassant = true;
@@ -462,7 +422,6 @@ public class Chessboard extends JPanel {
 			// two
 			// square
 			{
-				breakCastling = true;
 				twoSquareMovedPawn = (Pawn) end.piece;
 			} else {
 				twoSquareMovedPawn = null; // erase last saved move (for En
@@ -605,7 +564,6 @@ public class Chessboard extends JPanel {
 					}
 					((King) moved).wasMotion = false;
 					((Rook) rook).wasMotion = false;
-					this.breakCastling = false;
 				} else if (moved.name.equals("Rook")) {
 					((Rook) moved).wasMotion = false;
 				} else if (moved.name.equals("Pawn") && last.wasEnPassant()) {
@@ -723,7 +681,7 @@ public class Chessboard extends JPanel {
 				this.moves = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves();
 			}
 
-			for (Iterator it = moves.iterator(); moves != null && it.hasNext();) {
+			for (Iterator<Square> it = moves.iterator(); moves != null && it.hasNext();) {
 				Square sq = (Square) it.next();
 				g2d.drawImage(able_square, (sq.pozX * (int) square_height) + topLeftPoint.x, (sq.pozY * (int) square_height) + topLeftPoint.y, null);
 			}

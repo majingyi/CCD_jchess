@@ -40,14 +40,11 @@ import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
 import jchess.Settings;
-import jchess.Settings.gameModes;
-import jchess.Settings.gameTypes;
 import jchess.pieces.King;
 import jchess.util.Client;
 import jchess.util.Moves;
 import jchess.util.Player;
 import jchess.util.Square;
-import jchess.util.Player.playerTypes;
 
 /** Class responsible for the starts of new games, loading games,
  * saving it, and for ending it.
@@ -56,14 +53,16 @@ import jchess.util.Player.playerTypes;
  */
 public class Game extends JPanel implements MouseListener, ComponentListener {
 
-	public Settings		settings;
-	public boolean		blockedChessboard;
-	public Chessboard	chessboard;
-	private Player		activePlayer;
-	public GameClock	gameClock;
-	public Client			client;
-	public Moves			moves;
-	public Chat				chat;
+	private static final long	serialVersionUID	= -8817954027095178257L;
+
+	public Settings						settings;
+	public boolean						blockedChessboard;
+	public Chessboard					chessboard;
+	private Player						activePlayer;
+	public GameClock					gameClock;
+	public Client							client;
+	public Moves							moves;
+	public Chat								chat;
 
 	public Game() {
 		this.setLayout(null);
@@ -112,8 +111,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		}
 		Calendar cal = Calendar.getInstance();
 		String str = new String("");
-		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(cal.YEAR) + "." + (cal.get(cal.MONTH) + 1) + "." + cal.get(cal.DAY_OF_MONTH) + "\"]\n"
-				+ "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n");
+		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH)
+				+ "\"]\n" + "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n");
 		str += info;
 		str += this.moves.getMovesInString();
 		try {
@@ -402,7 +401,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					int y = event.getY();// get Y position of mouse
 
 					Square sq = chessboard.getSquare(x, y);
-					if ((sq == null && sq.piece == null && chessboard.activeSquare == null)
+					if ((sq == null || sq.piece == null && chessboard.activeSquare == null)
 							|| (this.chessboard.activeSquare == null && sq.piece != null && sq.piece.player != this.activePlayer)) {
 						return;
 					}
@@ -491,4 +490,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 }
 
 class ReadGameError extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -6815308611805061580L;
 }

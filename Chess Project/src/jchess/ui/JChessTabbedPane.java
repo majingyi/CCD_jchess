@@ -36,17 +36,17 @@ import jchess.JChessApp;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {
 
-	private TabbedPaneIcon	closeIcon;
-	private Image						addIcon						= null;
-	private Image						clickedAddIcon		= null;
-	private Image						unclickedAddIcon	= null;
-	private Rectangle				addIconRect				= null;
+	private static final long	serialVersionUID	= -3358955157754197669L;
+
+	private TabbedPaneIcon		closeIcon;
+	private Image							addIcon						= null;
+	private Image							unclickedAddIcon	= null;
+	private Rectangle					addIconRect				= null;
 
 	public JChessTabbedPane() {
 		super();
 		this.closeIcon = new TabbedPaneIcon(this.closeIcon);
 		this.unclickedAddIcon = GUI.loadImage("add-tab-icon.png");
-		this.clickedAddIcon = GUI.loadImage("clicked-add-tab-icon.png");
 		this.addIcon = this.unclickedAddIcon;
 		this.setDoubleBuffered(true);
 		super.addMouseListener(this);
