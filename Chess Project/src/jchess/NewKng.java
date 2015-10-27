@@ -17,7 +17,7 @@ import java.awt.Image;
  */
 import java.util.ArrayList;
 
-public class NewKng extends Piece {
+public class NewKng extends King {
 
 	public boolean							wasMotion		= false;													// maybe
 																																						// change
