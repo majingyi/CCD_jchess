@@ -204,9 +204,11 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	@Action
 	public void showAboutBox() {
-		JFrame mainFrame = JChessApp.getApplication().getMainFrame();
-		JDialog aboutBox = new JChessAboutBox(mainFrame);
-		aboutBox.setLocationRelativeTo(mainFrame);
+		if (aboutBox == null) {
+			JFrame mainFrame = JChessApp.getApplication().getMainFrame();
+			aboutBox = new JChessAboutBox(mainFrame);
+			aboutBox.setLocationRelativeTo(mainFrame);
+		}
 		JChessApp.getApplication().show(aboutBox);
 	}
 
@@ -239,20 +241,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		// TODO we should check, if Locale is valid here
-		String language = (String) GUI.configFile.get("Language");
-		String[] localeSplit = null;
-		if (language != null) {
-			localeSplit = language.split("_");
-		}
-
-		if (localeSplit != null && localeSplit.length == 2) {
-			Locale newLocale = new Locale(localeSplit[0], localeSplit[1]);
-			Locale.setDefault(newLocale);
-			Settings.setLocale(newLocale);
-		} else {
-			Locale.setDefault(Locale.US);
-		}
+		Locale.setDefault(Locale.US);
 
 		mainPanel = new javax.swing.JPanel();
 		gamesPane = new jchess.JChessTabbedPane();
@@ -560,6 +549,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	private final Icon[]							busyIcons			= new Icon[15];
 	private int												busyIconIndex	= 0;
 
+	private JDialog										aboutBox;
 	private PawnPromotionWindow				promotionBox;
 	public JDialog										newGameFrame;
 
