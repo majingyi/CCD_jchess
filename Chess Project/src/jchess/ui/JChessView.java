@@ -29,6 +29,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import jchess.JChessApp;
 import jchess.Settings;
 
 import org.jdesktop.application.Action;
@@ -286,7 +287,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 		menuBar.setName("menuBar"); // NOI18N
 
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.ui.JChessApp.class).getContext()
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
 				.getResourceMap(JChessView.class);
 		fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
 		fileMenu.setName("fileMenu"); // NOI18N
@@ -309,7 +310,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		fileMenu.add(saveGameItem);
 		saveGameItem.addActionListener(this);
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.ui.JChessApp.class).getContext()
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
 				.getActionMap(JChessView.class, this);
 		exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
 		exitMenuItem.setName("exitMenuItem"); // NOI18N

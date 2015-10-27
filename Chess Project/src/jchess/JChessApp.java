@@ -13,7 +13,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jchess.ui;
+package jchess;
+
+import jchess.ui.GUI;
+import jchess.ui.JChessView;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;

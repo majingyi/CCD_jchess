@@ -34,6 +34,7 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
+import jchess.JChessApp;
 import jchess.Move;
 import jchess.Moves;
 import jchess.Player;

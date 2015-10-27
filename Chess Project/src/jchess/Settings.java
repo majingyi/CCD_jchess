@@ -124,7 +124,7 @@ public class Settings implements Serializable {
 	}
 
 	public static Icon getIcon(String key) {
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.ui.JChessApp.class).getContext()
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
 				.getResourceMap(JChessAboutBox.class);
 		return resourceMap.getIcon(key);
 	}

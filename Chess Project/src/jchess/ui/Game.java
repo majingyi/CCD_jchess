@@ -39,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import jchess.Client;
+import jchess.JChessApp;
 import jchess.Moves;
 import jchess.Player;
 import jchess.Settings;

@@ -27,6 +27,7 @@ import java.awt.event.TextEvent;
 import java.awt.*;
 import javax.swing.text.BadLocationException;
 
+import jchess.JChessApp;
 import jchess.Player;
 import jchess.Settings;
 import jchess.Player.playerTypes;

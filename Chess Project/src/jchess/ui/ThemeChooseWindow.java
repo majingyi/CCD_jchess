@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import jchess.JChessApp;
 import jchess.Settings;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {

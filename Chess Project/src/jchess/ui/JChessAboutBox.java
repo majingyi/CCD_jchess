@@ -64,7 +64,7 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		setName("aboutBox"); // NOI18N
 		setResizable(false);
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.ui.JChessApp.class).getContext()
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
 				.getActionMap(JChessAboutBox.class, this);
 		closeButton.setAction(actionMap.get("closeAboutBox")); // NOI18N
 		closeButton.setName("closeButton"); // NOI18N
