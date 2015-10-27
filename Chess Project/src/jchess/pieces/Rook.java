@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import jchess.ui.Chessboard;
 import jchess.ui.GUI;
 import jchess.util.Player;
+import jchess.util.Square;
 
 /**
  * Class to represent a chess pawn rook
@@ -34,7 +35,7 @@ import jchess.util.Player;
  *       |_|_|_|X|_|_|_|_|7
 |_|_|_|X|_|_|_|_|6
 |_|_|_|X|_|_|_|_|5
-|_|_|_|X|_|_|_|_|4
+|_|_|_|X|_|_|_|_|4 
 |X|X|X|B|X|X|X|X|3
 |_|_|_|X|_|_|_|_|2
 |_|_|_|X|_|_|_|_|1
@@ -58,7 +59,7 @@ public class Rook extends Piece {
 
 	@Override
 	void setImage() {
-		if (this.player.color == this.player.color.black) {
+		if (this.player.color == Player.colors.black) {
 			image = imageBlack;
 		} else {
 			image = imageWhite;
@@ -68,15 +69,15 @@ public class Rook extends Piece {
 
 	/**
 	 *  Annotation to superclass Piece changing pawns location
-	 * @return  ArrayList with new possition of piece
+	 * @return  ArrayList with new position of piece
 	 */
 	@Override
-	public ArrayList allMoves() {
-		ArrayList list = new ArrayList();
+	public ArrayList<Square> allMoves() {
+		ArrayList<Square> list = new ArrayList<Square>();
 
 		for (int i = this.square.pozY + 1; i <= 7; ++i) {// up
 
-			if (this.checkPiece(this.square.pozX, i)) {// if on this sqhuare isn't
+			if (this.checkPiece(this.square.pozX, i)) {// if on this square isn't
 																									// piece
 
 				if (this.player.color == Player.colors.white) {// white

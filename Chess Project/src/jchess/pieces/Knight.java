@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import jchess.ui.Chessboard;
 import jchess.ui.GUI;
 import jchess.util.Player;
+import jchess.util.Square;
 
 /**
  * Class to represent a chess pawn knight
@@ -55,11 +56,11 @@ public class Knight extends Piece {
 
 	/**
 	 *  Annotation to superclass Piece changing pawns location
-	 * @return  ArrayList with new possition of pawn
+	 * @return  ArrayList with new position of pawn
 	 */
 	@Override
-	public ArrayList allMoves() {
-		ArrayList list = new ArrayList();
+	public ArrayList<Square> allMoves() {
+		ArrayList<Square> list = new ArrayList<Square>();
 
 		// knight all moves
 		// _______________ Y:

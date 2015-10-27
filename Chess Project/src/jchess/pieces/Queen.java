@@ -26,8 +26,9 @@ import java.util.ArrayList;
 import jchess.ui.Chessboard;
 import jchess.ui.GUI;
 import jchess.util.Player;
+import jchess.util.Square;
 
-/**
+/** 
  * Class to represent a queen piece
  * Queen can move almost in every way:
  * |_|_|_|X|_|_|_|X|7
@@ -55,7 +56,7 @@ public class Queen extends Piece {
 
 	@Override
 	void setImage() {
-		if (this.player.color == this.player.color.black) {
+		if (this.player.color == Player.colors.black) {
 			image = imageBlack;
 		} else {
 			image = imageWhite;
@@ -65,16 +66,16 @@ public class Queen extends Piece {
 
 	/**
 	 * Annotation to superclass Piece changing pawns location
-	 * @return  ArrayList with new possition of piece
+	 * @return  ArrayList with new position of piece
 	 */
 	@Override
-	public ArrayList allMoves() {
-		ArrayList list = new ArrayList();
+	public ArrayList<Square> allMoves() {
+		ArrayList<Square> list = new ArrayList<Square>();
 
 		// ------------- as Rook --------------
 		for (int i = this.square.pozY + 1; i <= 7; ++i) {// up
 
-			if (this.checkPiece(this.square.pozX, i)) {// if on this sqhuare isn't
+			if (this.checkPiece(this.square.pozX, i)) {// if on this square isn't
 																									// piece
 
 				if (this.player.color == Player.colors.white) {// white

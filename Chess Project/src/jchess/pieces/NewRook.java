@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import jchess.ui.Chessboard;
 import jchess.util.Player;
 import jchess.util.Square;
-import jchess.util.Player.colors;
 
 /**
  * Class to represent a chess pawn rook

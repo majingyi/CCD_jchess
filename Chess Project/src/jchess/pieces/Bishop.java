@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import jchess.ui.Chessboard;
 import jchess.ui.GUI;
 import jchess.util.Player;
+import jchess.util.Square;
 
 /**
  * Class to represent a chess pawn bishop
@@ -56,7 +57,7 @@ public class Bishop extends Piece {
 
 	@Override
 	void setImage() {
-		if (this.player.color == this.player.color.black) {
+		if (this.player.color == Player.colors.black) {
 			image = imageBlack;
 		} else {
 			image = imageWhite;
@@ -66,11 +67,11 @@ public class Bishop extends Piece {
 
 	/**
 	 * Annotation to superclass Piece changing pawns location
-	 * @return  ArrayList with new possition of piece
+	 * @return  ArrayList with new position of piece
 	 */
 	@Override
-	public ArrayList allMoves() {
-		ArrayList list = new ArrayList();
+	public ArrayList<Square> allMoves() {
+		ArrayList<Square> list = new ArrayList<Square>();
 
 		for (int h = this.square.pozX - 1, i = this.square.pozY + 1; !isout(h, i); --h, ++i) // left-up
 		{
