@@ -2,7 +2,7 @@
  * who is only allowed to travel up to 5 fields in a horizontal or 
  * vertical direction*/
 
-package jchess;
+package jchess;//////
 
 import java.awt.Image;
 //testtesttesttest
