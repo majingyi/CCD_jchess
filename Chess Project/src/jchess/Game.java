@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import jchess.pieces.King;
 import jchess.ui.JChessApp;
 
 /** Class responsible for the starts of new games, loading games,

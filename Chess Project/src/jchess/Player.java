@@ -31,12 +31,12 @@ public class Player implements Serializable {
 
 	public String							name							= null;
 
-	enum colors {
+	public enum colors {
 
 		white, black
 	}
 
-	colors	color;
+	public colors	color;
 
 	public enum playerTypes {
 
@@ -44,7 +44,7 @@ public class Player implements Serializable {
 	}
 
 	public playerTypes	playerType;
-	boolean							goDown;
+	public boolean			goDown;
 
 	public Player() {
 	}

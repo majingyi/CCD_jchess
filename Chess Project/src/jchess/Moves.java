@@ -30,6 +30,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 
+import jchess.pieces.Piece;
+
 /** Class representing the players moves, it's also checking
  * that the moves taken by player are correct.
  * All moves which was taken by current player are saving as List of Strings

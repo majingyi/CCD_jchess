@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.pieces;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,16 +29,20 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import jchess.Chessboard;
+import jchess.Player;
+import jchess.Square;
+
 /**
 Class to represent a piece (any kind) - this class should be extended to represent pawn, bishop etc.
  */
 public abstract class Piece {
 
-	protected Chessboard		chessboard;
+	public Chessboard				chessboard;
 	public Square						square;
 	public Player						player;
-	protected String				name;
-	protected String				symbol;
+	public String						name;
+	public String						symbol;
 
 	protected static Image	imageBlack	= null;
 	protected static Image	imageWhite	= null;
@@ -64,7 +68,7 @@ public abstract class Piece {
 	 * @graph : where to draw
 	 */
 
-	protected final void draw(Graphics g) {
+	public final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

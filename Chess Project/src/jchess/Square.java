@@ -20,39 +20,35 @@
  */
 package jchess;
 
+import jchess.pieces.Piece;
+
 /**
  * Class to represent a chessboard square
  */
-public class Square
-{
+public class Square {
 
-    int pozX; // 0-7, becouse 8 squares for row/column
-    int pozY; // 0-7, becouse 8 squares for row/column
-    public Piece piece = null;//object Piece on square (and extending Piecie)
+	public int		pozX;				// 0-7, becouse 8 squares for row/column
+	public int		pozY;				// 0-7, becouse 8 squares for row/column
+	public Piece	piece	= null; // object Piece on square (and extending Piecie)
 
-    Square(int pozX, int pozY, Piece piece)
-    {
-        this.pozX = pozX;
-        this.pozY = pozY;
-        this.piece = piece;
-    }/*--endOf-Square--*/
+	Square(int pozX, int pozY, Piece piece) {
+		this.pozX = pozX;
+		this.pozY = pozY;
+		this.piece = piece;
+	}/*--endOf-Square--*/
 
+	Square(Square square) {
+		this.pozX = square.pozX;
+		this.pozY = square.pozY;
+		this.piece = square.piece;
+	}
 
-    Square(Square square)
-    {
-        this.pozX = square.pozX;
-        this.pozY = square.pozY;
-        this.piece = square.piece;
-    }
+	public Square clone(Square square) {
+		return new Square(square);
+	}
 
-    public Square clone(Square square)
-    {
-        return new Square(square);
-    }
-
-    void setPiece(Piece piece)
-    {
-        this.piece = piece;
-        this.piece.square = this;
-    }
+	void setPiece(Piece piece) {
+		this.piece = piece;
+		this.piece.square = this;
+	}
 }

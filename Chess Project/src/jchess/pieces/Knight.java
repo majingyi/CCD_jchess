@@ -18,11 +18,13 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.pieces;
 
 import java.awt.Image;
 import java.util.ArrayList;
 
+import jchess.Chessboard;
+import jchess.Player;
 import jchess.ui.GUI;
 
 /**
@@ -34,7 +36,7 @@ public class Knight extends Piece {
 	protected static final Image	imageWhite	= GUI.loadImage("Knight-W.png");
 	protected static final Image	imageBlack	= GUI.loadImage("Knight-B.png");
 
-	Knight(Chessboard chessboard, Player player) {
+	public Knight(Chessboard chessboard, Player player) {
 		super(chessboard, player);// call initializer of super type: Piece
 		// this.setImages("Knight-W.png", "Knight-B.png");
 		this.symbol = "N";

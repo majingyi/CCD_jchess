@@ -35,6 +35,14 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 import jchess.Moves.castling;
+import jchess.pieces.Bishop;
+import jchess.pieces.King;
+import jchess.pieces.Knight;
+import jchess.pieces.Pawn;
+import jchess.pieces.PawnDoubleStep;
+import jchess.pieces.Piece;
+import jchess.pieces.Queen;
+import jchess.pieces.Rook;
 import jchess.ui.GUI;
 import jchess.ui.JChessApp;
 
@@ -328,7 +336,7 @@ public class Chessboard extends JPanel {
 		return Chessboard.image.getHeight(null);
 	}/*--endOf-get_height--*/
 
-	int get_square_height() {
+	public int get_square_height() {
 		int result = (int) this.square_height;
 		return result;
 	}

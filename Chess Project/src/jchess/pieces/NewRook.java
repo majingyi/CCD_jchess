@@ -2,9 +2,14 @@
  * who is only allowed to travel up to 5 fields in a horizontal or 
  * vertical direction*/
 
-package jchess;
+package jchess.pieces;
 
 import java.util.ArrayList;
+
+import jchess.Chessboard;
+import jchess.Player;
+import jchess.Square;
+import jchess.Player.colors;
 
 /**
  * Class to represent a chess pawn rook
