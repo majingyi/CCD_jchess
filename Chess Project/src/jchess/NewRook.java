@@ -4,9 +4,7 @@
 
 package jchess;
 
-import java.awt.Image;
 import java.util.ArrayList;
-//testtesttesttest
 
 /**
  * Class to represent a chess pawn rook
@@ -24,35 +22,13 @@ import java.util.ArrayList;
  */
 public class NewRook extends Rook {
 
-	boolean												wasMotion		= false;
-	protected static final Image	imageWhite	= GUI.loadImage("NewRook-W.png");
-	protected static final Image	imageBlack	= GUI.loadImage("NewRook-B.png");
-	public static short						value				= 5;
-
 	NewRook(Chessboard chessboard, Player player) {
 		super(chessboard, player);// call initializer of super type: Piece
-		// this.setImages("NewRook-W.png", "NewRook-B.png");
-		this.symbol = "R";
-		this.setImage();
 	}
 
 	@Override
-	void setImage() {
-		if (this.player.color == this.player.color.black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
-		}
-		orgImage = image;
-	}
-
-	/**
-	 *  Annotation to superclass Piece changing pawns location
-	 * @return  ArrayList with new position of piece
-	 */
-	@Override
-	public ArrayList allMoves() {
-		ArrayList list = new ArrayList();
+	public ArrayList<Square> allMoves() {
+		ArrayList<Square> list = new ArrayList<Square>();
 
 		for (int i = this.square.pozY + 1; i <= 7; ++i) {// up
 			for (int step = 5; step > 0; --step) {
