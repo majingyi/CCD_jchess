@@ -13,7 +13,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jchess.ui;
+package jchess;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +29,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import jchess.JChessApp;
-import jchess.Settings;
+import jchess.ui.GUI;
+import jchess.ui.Game;
+import jchess.ui.JChessAboutBox;
+import jchess.ui.JChessTabbedPane;
+import jchess.ui.LanguageChooseWindow;
+import jchess.ui.NewGameWindow;
+import jchess.ui.PawnPromotionWindow;
+import jchess.ui.ThemeChooseWindow;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;

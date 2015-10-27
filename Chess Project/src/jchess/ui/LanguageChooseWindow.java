@@ -43,7 +43,7 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 	private JRadioButton			englishButton			= null;
 	private JRadioButton			germanButton			= null;
 
-	LanguageChooseWindow(Frame parent) throws Exception {
+	public LanguageChooseWindow(Frame parent) throws Exception {
 		super(parent);
 
 		this.setTitle(Settings.lang("choose_language_window_title"));
