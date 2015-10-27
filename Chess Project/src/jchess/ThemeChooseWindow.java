@@ -54,7 +54,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 	ThemeChooseWindow(Frame parent) throws Exception {
 		super(parent);
 
-		File dir = new File(GUI.getJarPath() + File.separator + "jchess" + File.separator + "theme" + File.separator);
+		File dir = new File(GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator);
 
 		System.out.println("Theme path: " + dir.getPath());
 
@@ -85,7 +85,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 				this.themePreview = new ImageIcon(GUI.loadImage("Preview.png"));
 			} catch (java.lang.NullPointerException exc) {
 				System.out.println("Cannot find preview image: " + exc);
-				this.themePreview = new ImageIcon(JChessApp.class.getResource("theme/noPreview.png"));
+				this.themePreview = new ImageIcon(JChessApp.class.getResource("resources/theme/noPreview.png"));
 				return;
 			}
 			this.result = "";
@@ -108,7 +108,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 	@Override
 	public void valueChanged(ListSelectionEvent event) {
 		String element = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
-		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "theme" + File.separator;
+		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator;
 		// String path =
 		// JChessApp.class.getResource("theme/").getPath().toString();
 		System.out.println(path + element + "/images/Preview.png");
