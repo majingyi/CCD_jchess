@@ -18,12 +18,16 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import jchess.Clock;
+import jchess.Player;
+import jchess.Settings;
 
 /** Class to representing the full game time
  * @param game The current game

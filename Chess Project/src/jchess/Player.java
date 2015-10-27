@@ -65,7 +65,7 @@ public class Player implements Serializable {
 	/** Method getting the players name
 	 *  @return name of player
 	 */
-	String getName() {
+	public String getName() {
 		return this.name;
 	}
 

@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -34,7 +34,14 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
+import jchess.Move;
+import jchess.Moves;
+import jchess.Player;
+import jchess.Settings;
+import jchess.Square;
 import jchess.Moves.castling;
+import jchess.Player.colors;
+import jchess.Settings.gameTypes;
 import jchess.pieces.Bishop;
 import jchess.pieces.King;
 import jchess.pieces.Knight;
@@ -43,8 +50,6 @@ import jchess.pieces.PawnDoubleStep;
 import jchess.pieces.Piece;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
-import jchess.ui.GUI;
-import jchess.ui.JChessApp;
 
 /** Class to represent chessboard. Chessboard is made from squares.
  * It is setting the squers of chessboard and sets the pieces(pawns)

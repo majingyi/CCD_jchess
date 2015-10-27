@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
-import jchess.Game;
 
 /**
  * Class representing the game interface which is seen by a player and where are

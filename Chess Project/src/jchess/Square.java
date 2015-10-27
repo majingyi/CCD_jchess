@@ -31,13 +31,13 @@ public class Square {
 	public int		pozY;				// 0-7, becouse 8 squares for row/column
 	public Piece	piece	= null; // object Piece on square (and extending Piecie)
 
-	Square(int pozX, int pozY, Piece piece) {
+	public Square(int pozX, int pozY, Piece piece) {
 		this.pozX = pozX;
 		this.pozY = pozY;
 		this.piece = piece;
 	}/*--endOf-Square--*/
 
-	Square(Square square) {
+	public Square(Square square) {
 		this.pozX = square.pozX;
 		this.pozY = square.pozY;
 		this.piece = square.piece;
@@ -47,7 +47,7 @@ public class Square {
 		return new Square(square);
 	}
 
-	void setPiece(Piece piece) {
+	public void setPiece(Piece piece) {
 		this.piece = piece;
 		this.piece.square = this;
 	}

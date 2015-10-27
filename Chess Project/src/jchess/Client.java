@@ -32,6 +32,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import jchess.server.Connection_info;
+import jchess.ui.Game;
 
 /**
  * Class responsible for clients references:

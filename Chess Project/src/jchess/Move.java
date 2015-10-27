@@ -20,77 +20,65 @@ package jchess;
 
 import jchess.Moves.castling;
 import jchess.pieces.Piece;
+import jchess.ui.Chessboard;
 
-class Move
-{
+public class Move {
 
-    protected Square from = null;
-    protected Square to = null;
-    protected Piece movedPiece = null;
-    protected Piece takenPiece = null;
-    protected Piece promotedTo = null;
-    protected boolean wasEnPassant = false;
-    protected castling castlingMove = castling.none;
-    protected boolean wasPawnTwoFieldsMove = false;
+	protected Square		from									= null;
+	protected Square		to										= null;
+	protected Piece			movedPiece						= null;
+	protected Piece			takenPiece						= null;
+	protected Piece			promotedTo						= null;
+	protected boolean		wasEnPassant					= false;
+	protected castling	castlingMove					= castling.none;
+	protected boolean		wasPawnTwoFieldsMove	= false;
 
-    Move(Square from, Square to, Piece movedPiece, Piece takenPiece, castling castlingMove, boolean wasEnPassant, Piece promotedPiece)
-    {
-        this.from = from;
-        this.to = to;
+	public Move(Square from, Square to, Piece movedPiece, Piece takenPiece, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
+		this.from = from;
+		this.to = to;
 
-        this.movedPiece = movedPiece;
-        this.takenPiece = takenPiece;
+		this.movedPiece = movedPiece;
+		this.takenPiece = takenPiece;
 
-        this.castlingMove = castlingMove;
-        this.wasEnPassant = wasEnPassant;
+		this.castlingMove = castlingMove;
+		this.wasEnPassant = wasEnPassant;
 
-        if (movedPiece.name.equals("Pawn") && Math.abs(to.pozY - from.pozY) == 2)
-        {
-            this.wasPawnTwoFieldsMove = true;
-        }
-        else if (movedPiece.name.equals("Pawn") && to.pozY == Chessboard.bottom || to.pozY == Chessboard.top && promotedPiece != null)
-        {
-            this.promotedTo = promotedPiece;
-        }
-    }
+		if (movedPiece.name.equals("Pawn") && Math.abs(to.pozY - from.pozY) == 2) {
+			this.wasPawnTwoFieldsMove = true;
+		} else if (movedPiece.name.equals("Pawn") && to.pozY == Chessboard.bottom || to.pozY == Chessboard.top && promotedPiece != null) {
+			this.promotedTo = promotedPiece;
+		}
+	}
 
-    public Square getFrom()
-    {
-        return this.from;
-    }
+	public Square getFrom() {
+		return this.from;
+	}
 
-    public Square getTo()
-    {
-        return this.to;
-    }
+	public Square getTo() {
+		return this.to;
+	}
 
-    public Piece getMovedPiece()
-    {
-        return this.movedPiece;
-    }
+	public Piece getMovedPiece() {
+		return this.movedPiece;
+	}
 
-    public Piece getTakenPiece()
-    {
-        return this.takenPiece;
-    }
+	public Piece getTakenPiece() {
+		return this.takenPiece;
+	}
 
-    public boolean wasEnPassant()
-    {
-        return this.wasEnPassant;
-    }
+	public boolean wasEnPassant() {
+		return this.wasEnPassant;
+	}
 
-    public boolean wasPawnTwoFieldsMove()
-    {
-        return this.wasPawnTwoFieldsMove;
-    }
+	public boolean wasPawnTwoFieldsMove() {
+		return this.wasPawnTwoFieldsMove;
+	}
 
-    public castling getCastlingMove()
-    {
-        return this.castlingMove;
-    }
+	public castling getCastlingMove() {
+		return this.castlingMove;
+	}
 
-    public Piece getPromotedPiece()
-    {
-        return this.promotedTo;
-    }
+	public Piece getPromotedPiece() {
+		return this.promotedTo;
+	}
 }

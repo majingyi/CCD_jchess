@@ -1,7 +1,7 @@
 package jchess.pieces;
 
-import jchess.Chessboard;
 import jchess.Player;
+import jchess.ui.Chessboard;
 
 public class PawnDoubleStep extends Pawn {
 

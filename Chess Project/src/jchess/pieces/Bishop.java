@@ -23,8 +23,8 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.Chessboard;
 import jchess.Player;
+import jchess.ui.Chessboard;
 import jchess.ui.GUI;
 
 /**

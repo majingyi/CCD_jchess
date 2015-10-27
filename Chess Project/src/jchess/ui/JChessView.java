@@ -29,7 +29,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import jchess.Game;
 import jchess.Settings;
 
 import org.jdesktop.application.Action;

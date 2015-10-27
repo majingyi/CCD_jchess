@@ -29,9 +29,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jchess.Chessboard;
 import jchess.Player;
 import jchess.Square;
+import jchess.ui.Chessboard;
 
 /**
 Class to represent a piece (any kind) - this class should be extended to represent pawn, bishop etc.
