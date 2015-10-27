@@ -35,13 +35,7 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 import jchess.JChessApp;
-import jchess.Move;
-import jchess.Moves;
-import jchess.Player;
 import jchess.Settings;
-import jchess.Square;
-import jchess.Moves.castling;
-import jchess.Player.colors;
 import jchess.Settings.gameTypes;
 import jchess.pieces.Bishop;
 import jchess.pieces.King;
@@ -51,6 +45,12 @@ import jchess.pieces.PawnDoubleStep;
 import jchess.pieces.Piece;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
+import jchess.util.Move;
+import jchess.util.Moves;
+import jchess.util.Player;
+import jchess.util.Square;
+import jchess.util.Moves.castling;
+import jchess.util.Player.colors;
 
 /** Class to represent chessboard. Chessboard is made from squares.
  * It is setting the squers of chessboard and sets the pieces(pawns)

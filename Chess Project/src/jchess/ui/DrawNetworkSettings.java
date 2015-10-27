@@ -37,11 +37,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import jchess.Client;
 import jchess.JChessApp;
-import jchess.MD5;
 import jchess.Settings;
+import jchess.server.MD5;
 import jchess.server.Server;
+import jchess.util.Client;
 
 /**
  * Class responible for drawing Network Settings, when player want to start

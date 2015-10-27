@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
-import jchess.Client;
+import jchess.util.Client;
 
 /**
  * Class representing the game chat

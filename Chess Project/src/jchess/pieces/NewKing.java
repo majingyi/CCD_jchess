@@ -2,9 +2,9 @@ package jchess.pieces;
 
 import java.util.ArrayList;
 
-import jchess.Player;
-import jchess.Square;
 import jchess.ui.Chessboard;
+import jchess.util.Player;
+import jchess.util.Square;
 
 /**
  * Class to represent a chess pawn NewKing. NewKing is a chess

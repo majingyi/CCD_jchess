@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 import javax.swing.Icon;
 
 import jchess.ui.JChessAboutBox;
+import jchess.util.Player;
 
 /**
  * Class representing game settings available for the current player

@@ -38,16 +38,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import jchess.Client;
 import jchess.JChessApp;
-import jchess.Moves;
-import jchess.Player;
 import jchess.Settings;
-import jchess.Square;
-import jchess.Player.playerTypes;
 import jchess.Settings.gameModes;
 import jchess.Settings.gameTypes;
 import jchess.pieces.King;
+import jchess.util.Client;
+import jchess.util.Moves;
+import jchess.util.Player;
+import jchess.util.Square;
+import jchess.util.Player.playerTypes;
 
 /** Class responsible for the starts of new games, loading games,
  * saving it, and for ending it.

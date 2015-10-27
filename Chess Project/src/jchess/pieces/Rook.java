@@ -24,9 +24,9 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.Player;
 import jchess.ui.Chessboard;
 import jchess.ui.GUI;
+import jchess.util.Player;
 
 /**
  * Class to represent a chess pawn rook

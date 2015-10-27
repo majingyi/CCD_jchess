@@ -23,11 +23,11 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.Player;
-import jchess.Square;
-import jchess.Player.colors;
 import jchess.ui.Chessboard;
 import jchess.ui.GUI;
+import jchess.util.Player;
+import jchess.util.Square;
+import jchess.util.Player.colors;
 
 /**
  * Class to represent a pawn piece

@@ -25,9 +25,9 @@ import java.awt.image.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import jchess.Clock;
-import jchess.Player;
 import jchess.Settings;
+import jchess.util.Clock;
+import jchess.util.Player;
 
 /** Class to representing the full game time
  * @param game The current game

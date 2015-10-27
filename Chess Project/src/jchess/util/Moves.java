@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.util;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -31,9 +31,12 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
+import jchess.Settings;
+import jchess.Settings.gameTypes;
 import jchess.pieces.Piece;
 import jchess.ui.Chessboard;
 import jchess.ui.Game;
+import jchess.util.Player.colors;
 
 /** Class representing the players moves, it's also checking
  * that the moves taken by player are correct.
