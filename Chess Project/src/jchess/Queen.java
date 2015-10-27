@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import jchess.ui.GUI;
+
 /**
  * Class to represent a queen piece
  * Queen can move almost in every way:

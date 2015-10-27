@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import jchess.ui.GUI;
+
 /**
  * Class to represent a chess pawn bishop
  * Bishop can move across the chessboard

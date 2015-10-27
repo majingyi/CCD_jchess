@@ -27,24 +27,24 @@ import java.io.Serializable;
  */
 public class Player implements Serializable {
 
-	private static final long serialVersionUID = 8990270306651014243L;
+	private static final long	serialVersionUID	= 8990270306651014243L;
 
-	String name = null;
+	public String							name							= null;
 
 	enum colors {
 
 		white, black
 	}
 
-	colors color;
+	colors	color;
 
 	public enum playerTypes {
 
 		localUser, networkUser, computer
 	}
 
-	public playerTypes playerType;
-	boolean goDown;
+	public playerTypes	playerType;
+	boolean							goDown;
 
 	public Player() {
 	}

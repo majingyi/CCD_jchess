@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.Icon;
 
+import jchess.ui.JChessAboutBox;
+
 /**
  * Class representing game settings available for the current player
  */
@@ -122,7 +124,7 @@ public class Settings implements Serializable {
 	}
 
 	public static Icon getIcon(String key) {
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.ui.JChessApp.class).getContext()
 				.getResourceMap(JChessAboutBox.class);
 		return resourceMap.getIcon(key);
 	}

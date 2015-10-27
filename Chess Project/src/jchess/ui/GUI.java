@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -29,6 +29,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
+
+import jchess.Game;
 
 /**
  * Class representing the game interface which is seen by a player and where are
@@ -54,7 +56,7 @@ public class GUI {
 	 * @returns : image or null if cannot load
 	 */
 
-	static Image loadImage(String name) {
+	public static Image loadImage(String name) {
 		if (configFile == null) {
 			return null;
 		}
@@ -74,11 +76,11 @@ public class GUI {
 		return img;
 	}/*--endOf-loadImage--*/
 
-	static boolean themeIsValid(String name) {
+	public static boolean themeIsValid(String name) {
 		return true;
 	}
 
-	static String getJarPath() {
+	public static String getJarPath() {
 		String path = GUI.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 		path = path.replaceAll("[a-zA-Z0-9%!@#$%^&*\\(\\)\\[\\]\\{\\}\\.\\,\\s]+\\.jar", "");
 		int lastSlash = path.lastIndexOf(File.separator);
@@ -89,7 +91,7 @@ public class GUI {
 		return path;
 	}
 
-	static Properties getConfigFile() {
+	public static Properties getConfigFile() {
 		Properties confFile = new Properties();
 		File configFile = new File(GUI.getJarPath() + File.separator + "config.txt");
 

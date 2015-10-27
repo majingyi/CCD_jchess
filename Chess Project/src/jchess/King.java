@@ -40,6 +40,8 @@ package jchess;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import jchess.ui.GUI;
+
 public class King extends Piece {
 
 	public boolean							wasMotion		= false;												// maybe

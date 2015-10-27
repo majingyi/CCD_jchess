@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -38,6 +38,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import jchess.Settings;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 

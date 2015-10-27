@@ -35,6 +35,8 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 import jchess.Moves.castling;
+import jchess.ui.GUI;
+import jchess.ui.JChessApp;
 
 /** Class to represent chessboard. Chessboard is made from squares.
  * It is setting the squers of chessboard and sets the pieces(pawns)
@@ -59,11 +61,11 @@ public class Chessboard extends JPanel {
 	// of
 	// highlited
 	// square
-	private static Image				sel_square					= org_sel_square;										// image
+	private static Image				sel_square					= org_sel_square;									// image
 																																											// of
 																																											// highlited
 	// square
-	private static final Image	org_able_square			= GUI.loadImage("able_square.png");	// image
+	private static final Image	org_able_square			= GUI.loadImage("able_square.png"); // image
 																																											// of
 																																											// square
 																																											// where
@@ -638,9 +640,8 @@ public class Chessboard extends JPanel {
 
 	/**
 	 * Method to draw Chessboard and their elements (pieces etc.)
-	 * @deprecated 
 	 */
-	void draw() {
+	public void draw() {
 		this.getGraphics().drawImage(image, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);// draw
 																																																	// an
 																																																	// Image

@@ -24,6 +24,8 @@ package jchess;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import jchess.ui.GUI;
+
 /**
  * Class to represent a chess pawn rook
  * Rook can move:

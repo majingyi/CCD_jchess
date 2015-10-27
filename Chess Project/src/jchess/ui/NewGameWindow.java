@@ -18,10 +18,12 @@
  *
  * Created on 2009-10-20, 15:11:49
  */
-package jchess;
+package jchess.ui;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+
+import jchess.Settings;
 
 public class NewGameWindow extends JDialog {
 

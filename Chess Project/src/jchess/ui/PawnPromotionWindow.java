@@ -18,12 +18,13 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 
 /** Class responsible for promotion of a pawn.
  * When pawn reach the end of the chessboard it can be change to rook,

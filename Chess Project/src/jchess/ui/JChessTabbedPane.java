@@ -18,12 +18,13 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.ImageObserver;
+
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver
 {

@@ -17,7 +17,7 @@
  * Authors:
  * Mateusz Sławomir Lach ( matlak, msl )
  */
-package jchess;
+package jchess.ui;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -26,6 +26,13 @@ import java.awt.event.TextListener;
 import java.awt.event.TextEvent;
 import java.awt.*;
 import javax.swing.text.BadLocationException;
+
+import jchess.Game;
+import jchess.Player;
+import jchess.Settings;
+import jchess.Player.playerTypes;
+import jchess.Settings.gameModes;
+import jchess.Settings.gameTypes;
 
 /**
  * Class responsible for drawing the fold with local game settings

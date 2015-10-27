@@ -17,7 +17,7 @@
  * Authors:
  * Mateusz Sławomir Lach ( matlak, msl )
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -36,6 +36,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import jchess.Client;
+import jchess.Game;
+import jchess.MD5;
+import jchess.Settings;
 import jchess.server.Server;
 
 /**

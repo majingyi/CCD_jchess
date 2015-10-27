@@ -13,7 +13,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jchess;
+package jchess.ui;
+
+import jchess.Settings;
 
 import org.jdesktop.application.Action;
 
@@ -62,7 +64,7 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		setName("aboutBox"); // NOI18N
 		setResizable(false);
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.ui.JChessApp.class).getContext()
 				.getActionMap(JChessAboutBox.class, this);
 		closeButton.setAction(actionMap.get("closeAboutBox")); // NOI18N
 		closeButton.setName("closeButton"); // NOI18N

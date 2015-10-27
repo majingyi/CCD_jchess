@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package jchess.ui;
 
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -31,6 +31,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JRadioButton;
+
+import jchess.Settings;
 
 public class LanguageChooseWindow extends JDialog implements ActionListener {
 

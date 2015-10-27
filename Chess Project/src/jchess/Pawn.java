@@ -23,6 +23,8 @@ package jchess;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import jchess.ui.GUI;
+
 /**
  * Class to represent a pawn piece
  * Pawn can move only forvard and can beat only across
