@@ -31,7 +31,7 @@ public class NewRook extends Rook {
 		ArrayList<Square> list = new ArrayList<Square>();
 
 		for (int i = this.square.pozY + 1; i <= 7; ++i) {// up
-			for (int step = 5; step > 0; --step) {
+			if (i - this.square.pozY > 5) {
 
 				if (this.checkPiece(this.square.pozX, i)) {// if on this square isn't
 																										// piece
@@ -52,14 +52,14 @@ public class NewRook extends Rook {
 						break;
 					}
 				} else {
-					break;// we've to break becouse we cannot go beside other piece!!
+					break;// we've to break because we cannot go beside other piece!!
 				}
 
 			}
 		}
 
 		for (int i = this.square.pozY - 1; i >= 0; --i) {// down
-			for (int step = 5; step > 0; --step) {
+			if (this.square.pozY - i > 5) {
 				if (this.checkPiece(this.square.pozX, i)) {// if on this square isn't
 																										// piece
 
@@ -85,9 +85,9 @@ public class NewRook extends Rook {
 		}
 
 		for (int i = this.square.pozX - 1; i >= 0; --i) {// left
-			for (int step = 5; step > 0; --step) {
-				if (this.checkPiece(i, this.square.pozY)) {// if on this sqhuare isn't
-																										// piece
+			if (this.square.pozY - i > 5) {
+				if (this.checkPiece(i, this.square.pozY)) {// if on this square isn't
+					// piece
 
 					if (this.player.color == Player.colors.white) {// white
 
@@ -105,15 +105,15 @@ public class NewRook extends Rook {
 						break;
 					}
 				} else {
-					break;// we've to break becouse we cannot go beside other piece!!
+					break;// we've to break because we cannot go beside other piece!!
 				}
 			}
 		}
 
 		for (int i = this.square.pozX + 1; i <= 7; ++i) {// right
-			for (int step = 5; step > 0; --step) {
-				if (this.checkPiece(i, this.square.pozY)) {// if on this sqhuare isn't
-																										// piece
+			if (i - this.square.pozY > 5) {
+				if (this.checkPiece(i, this.square.pozY)) {// if on this square isn't
+					// piece
 
 					if (this.player.color == Player.colors.white) {// white
 
@@ -131,7 +131,7 @@ public class NewRook extends Rook {
 						break;
 					}
 				} else {
-					break;// we've to break becouse we cannot go beside other piece!!
+					break;// we've to break because we cannot go beside other piece!!
 				}
 			}
 		}
