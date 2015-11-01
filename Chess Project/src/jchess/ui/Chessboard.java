@@ -60,62 +60,34 @@ public class Chessboard extends JPanel {
 
 	public static final int			top									= 0;
 	public static final int			bottom							= 7;
-	public Square								squares[][];																						// squares
-																																											// of
-																																											// chessboard
-	private static final Image	orgImage						= GUI.loadImage("chessboard.png");	// image
-	// of
-	// chessboard
-	private static Image				image								= Chessboard.orgImage;							// image
-																																											// of
-																																											// chessboard
-	private static final Image	org_sel_square			= GUI.loadImage("sel_square.png");	// image
-	// of
-	// highlited
-	// square
-	private static Image				sel_square					= org_sel_square;									// image
-																																											// of
-																																											// highlited
-	// square
-	private static final Image	org_able_square			= GUI.loadImage("able_square.png"); // image
-																																											// of
-																																											// square
-																																											// where
-																																											// piece
-																																											// can
-																																											// go
-	private static Image				able_square					= org_able_square;									// image
-																																											// of
-																																											// square
-																																											// where
-	// piece can go
+
+	// squares of chessboard
+	public Square								squares[][];
+	// image of chessboard
+	private static final Image	orgImage						= GUI.loadImage("chessboard.png");
+	// image of chessboard
+	private static Image				image								= Chessboard.orgImage;
+	// image of highlighted square
+	private static final Image	org_sel_square			= GUI.loadImage("sel_square.png");
+	// image of highlighted square
+	private static Image				sel_square					= org_sel_square;
+	// image of square where piece can go
+	private static final Image	org_able_square			= GUI.loadImage("able_square.png");
+	// image of square where piece can go
+	private static Image				able_square					= org_able_square;
 	public Square								activeSquare;
 	private Image								upDownLabel					= null;
 	private Image								LeftRightLabel			= null;
 	private Point								topLeft							= new Point(0, 0);
 	private int									active_x_square;
 	private int									active_y_square;
-	private float								square_height;																					// height
-																																											// of
-																																											// square
-	// public Graphics graph;
-	public static final int			img_x								= 5;																// image
-																																											// x
-																																											// position
-																																											// (used
-																																											// in
-																																											// JChessView
-	// class!)
-	public static final int			img_y								= img_x;														// image
-																																											// y
-																																											// position
-																																											// (used
-																																											// in
-	// JChessView class!)
-	public static final int			img_widht						= 480;															// image
-																																											// width
-	public static final int			img_height					= img_widht;												// image
-																																											// height
+	private float								square_height;
+
+	public static final int			img_x								= 5;
+	public static final int			img_y								= img_x;
+	public static final int			img_widht						= 480;
+	public static final int			img_height					= img_widht;
+
 	private ArrayList<Square>		moves;
 	private Settings						settings;
 	public King									kingWhite;
