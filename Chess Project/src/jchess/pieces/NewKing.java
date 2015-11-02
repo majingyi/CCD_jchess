@@ -2,7 +2,7 @@ package jchess.pieces;
 
 import java.util.ArrayList;
 
-import jchess.ui.Chessboard;
+import jchess.ui.ChessboardUI;
 import jchess.util.Player;
 import jchess.util.Square;
 
@@ -23,7 +23,7 @@ import jchess.util.Square;
 
 public class NewKing extends King {
 
-	NewKing(Chessboard chessboard, Player player) {
+	NewKing(ChessboardUI chessboard, Player player) {
 		super(chessboard, player);
 	}
 

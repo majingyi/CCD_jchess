@@ -23,7 +23,7 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.ui.Chessboard;
+import jchess.ui.ChessboardUI;
 import jchess.ui.GUI;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -37,7 +37,7 @@ public class Knight extends Piece {
 	protected static final Image	imageWhite	= GUI.loadImage("Knight-W.png");
 	protected static final Image	imageBlack	= GUI.loadImage("Knight-B.png");
 
-	public Knight(Chessboard chessboard, Player player) {
+	public Knight(ChessboardUI chessboard, Player player) {
 		super(chessboard, player);// call initializer of super type: Piece
 		// this.setImages("Knight-W.png", "Knight-B.png");
 		this.symbol = "N";

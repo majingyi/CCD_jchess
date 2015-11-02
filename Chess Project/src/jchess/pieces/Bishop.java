@@ -23,7 +23,7 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.ui.Chessboard;
+import jchess.ui.ChessboardUI;
 import jchess.ui.GUI;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -48,7 +48,7 @@ public class Bishop extends Piece {
 	protected static final Image	imageWhite	= GUI.loadImage("Bishop-W.png");
 	protected static final Image	imageBlack	= GUI.loadImage("Bishop-B.png");
 
-	public Bishop(Chessboard chessboard, Player player) {
+	public Bishop(ChessboardUI chessboard, Player player) {
 		super(chessboard, player); // call initializer of super type: Piece
 		// this.setImages("Bishop-W.png", "Bishop-B.png");
 		this.symbol = "B";

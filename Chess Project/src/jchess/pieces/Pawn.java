@@ -23,7 +23,7 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.ui.Chessboard;
+import jchess.ui.ChessboardUI;
 import jchess.ui.GUI;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -73,7 +73,7 @@ public class Pawn extends Piece {
 	protected static final Image	imageBlack	= GUI.loadImage("Pawn-B.png");
 	public static short						value				= 1;
 
-	Pawn(Chessboard chessboard, Player player) {
+	Pawn(ChessboardUI chessboard, Player player) {
 		super(chessboard, player);
 		// this.setImages("Pawn-W.png", "Pawn-B.png");
 		this.symbol = "";

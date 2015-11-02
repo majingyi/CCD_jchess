@@ -54,7 +54,7 @@ import jchess.util.Square;
  * It is setting the squers of chessboard and sets the pieces(pawns)
  * witch the owner is current player on it.
  */
-public class Chessboard extends JPanel {
+public class ChessboardUI extends JPanel {
 
 	private static final long		serialVersionUID		= -1717218347823342830L;
 
@@ -66,7 +66,7 @@ public class Chessboard extends JPanel {
 	// image of chessboard
 	private static final Image	orgImage						= GUI.loadImage("chessboard.png");
 	// image of chessboard
-	private static Image				image								= Chessboard.orgImage;
+	private static Image				image								= ChessboardUI.orgImage;
 	// image of highlighted square
 	private static final Image	org_sel_square			= GUI.loadImage("sel_square.png");
 	// image of highlighted square
@@ -101,7 +101,7 @@ public class Chessboard extends JPanel {
 	 * @param settings reference to Settings class object for this chessboard
 	 * @param moves_history reference to Moves class object for this chessboard 
 	 */
-	public Chessboard(Settings settings, Moves moves_history) {
+	public ChessboardUI(Settings settings, Moves moves_history) {
 		this.settings = settings;
 		this.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
@@ -293,9 +293,9 @@ public class Chessboard extends JPanel {
 
 	int get_height(boolean includeLabels) {
 		if (this.settings.renderLabels) {
-			return Chessboard.image.getHeight(null) + upDownLabel.getHeight(null);
+			return ChessboardUI.image.getHeight(null) + upDownLabel.getHeight(null);
 		}
-		return Chessboard.image.getHeight(null);
+		return ChessboardUI.image.getHeight(null);
 	}/*--endOf-get_height--*/
 
 	public int get_square_height() {
@@ -624,9 +624,9 @@ public class Chessboard extends JPanel {
 				this.drawLabels();
 			}
 			g2d.drawImage(this.upDownLabel, 0, 0, null);
-			g2d.drawImage(this.upDownLabel, 0, Chessboard.image.getHeight(null) + topLeftPoint.y, null);
+			g2d.drawImage(this.upDownLabel, 0, ChessboardUI.image.getHeight(null) + topLeftPoint.y, null);
 			g2d.drawImage(this.LeftRightLabel, 0, 0, null);
-			g2d.drawImage(this.LeftRightLabel, Chessboard.image.getHeight(null) + topLeftPoint.x, 0, null);
+			g2d.drawImage(this.LeftRightLabel, ChessboardUI.image.getHeight(null) + topLeftPoint.x, 0, null);
 		}
 		g2d.drawImage(image, topLeftPoint.x, topLeftPoint.y, null);// draw an
 		// Image of
@@ -663,9 +663,9 @@ public class Chessboard extends JPanel {
 	public void resizeChessboard(int height) {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
-		g.drawImage(Chessboard.orgImage, 0, 0, height, height, null);
+		g.drawImage(ChessboardUI.orgImage, 0, 0, height, height, null);
 		g.dispose();
-		Chessboard.image = resized.getScaledInstance(height, height, 0);
+		ChessboardUI.image = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
 		if (this.settings.renderLabels) {
 			height += 2 * (this.upDownLabel.getHeight(null));
@@ -674,15 +674,15 @@ public class Chessboard extends JPanel {
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(Chessboard.org_able_square, 0, 0, (int) square_height, (int) square_height, null);
+		g.drawImage(ChessboardUI.org_able_square, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
-		Chessboard.able_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
+		ChessboardUI.able_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(Chessboard.org_sel_square, 0, 0, (int) square_height, (int) square_height, null);
+		g.drawImage(ChessboardUI.org_sel_square, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
-		Chessboard.sel_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
+		ChessboardUI.sel_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 		this.drawLabels();
 	}
 

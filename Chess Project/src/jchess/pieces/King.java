@@ -40,7 +40,7 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.ui.Chessboard;
+import jchess.ui.ChessboardUI;
 import jchess.ui.GUI;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -56,7 +56,7 @@ public class King extends Piece {
 	private static final Image	imageWhite	= GUI.loadImage("King-W.png");
 	private static final Image	imageBlack	= GUI.loadImage("King-B.png");
 
-	public King(Chessboard chessboard, Player player) {
+	public King(ChessboardUI chessboard, Player player) {
 		super(chessboard, player);
 		// this.setImages("King-W.png", "King-B.png");
 		this.symbol = "K";

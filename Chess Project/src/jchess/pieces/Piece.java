@@ -29,7 +29,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jchess.ui.Chessboard;
+import jchess.ui.ChessboardUI;
 import jchess.util.Player;
 import jchess.util.Square;
 
@@ -38,7 +38,7 @@ Class to represent a piece (any kind) - this class should be extended to represe
  */
 public abstract class Piece {
 
-	public Chessboard				chessboard;
+	public ChessboardUI				chessboard;
 	public Square						square;
 	public Player						player;
 	public String						name;
@@ -50,7 +50,7 @@ public abstract class Piece {
 	public Image						orgImage;
 	public Image						image;
 
-	public Piece(Chessboard chessboard, Player player) {
+	public Piece(ChessboardUI chessboard, Player player) {
 		this.chessboard = chessboard;
 		this.player = player;
 		if (player.color == Player.colors.black) {

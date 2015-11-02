@@ -57,7 +57,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	public Settings						settings;
 	public boolean						blockedChessboard;
-	public Chessboard					chessboard;
+	public ChessboardUI					chessboard;
 	private Player						activePlayer;
 	public GameClock					gameClock;
 	public Client							client;
@@ -68,9 +68,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.setLayout(null);
 		this.moves = new Moves(this);
 		settings = new Settings();
-		chessboard = new Chessboard(this.settings, this.moves);
+		chessboard = new ChessboardUI(this.settings, this.moves);
 		chessboard.setVisible(true);
-		chessboard.setSize(Chessboard.img_height, Chessboard.img_widht);
+		chessboard.setSize(ChessboardUI.img_height, ChessboardUI.img_widht);
 		chessboard.addMouseListener(this);
 		chessboard.setLocation(new Point(0, 0));
 		this.add(chessboard);
