@@ -299,10 +299,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * */
 	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
 		try {
-			chessboard.getChessboard().select(chessboard.squares[beginX][beginY]);
-			if (chessboard.activeSquare.piece.allMoves().indexOf(chessboard.squares[endX][endY]) != -1) // move
+			chessboard.getChessboard().select(chessboard.getChessboard().squares[beginX][beginY]);
+			if (chessboard.activeSquare.piece.allMoves().indexOf(chessboard.getChessboard().squares[endX][endY]) != -1) // move
 			{
-				chessboard.getChessboard().move(chessboard.squares[beginX][beginY], chessboard.squares[endX][endY]);
+				chessboard.getChessboard().move(chessboard.getChessboard().squares[beginX][beginY], chessboard.getChessboard().squares[endX][endY]);
 			} else {
 				System.out.println("Bad move");
 				return false;

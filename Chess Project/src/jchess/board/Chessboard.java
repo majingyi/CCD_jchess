@@ -50,8 +50,12 @@ public class Chessboard {
 	public Pawn							twoSquareMovedPawn2	= null;
 	private Moves						moves_history;
 
-	public Chessboard(ChessboardUI ui) {
+	public Chessboard(ChessboardUI ui, Settings settings) {
 		uiChessboard = ui;
+
+		this.squares = new Square[8][8];// initalization of 8x8 chessboard
+
+		this.settings = settings;
 	}
 
 	/** Method setPieces on begin of new game or loaded game
@@ -182,8 +186,8 @@ public class Chessboard {
 	}
 
 	/*--endOf-select--*//** Method set variables active_x_square & active_y_square
-																																																			* to 0 values.
-																																																			*/
+																																																											* to 0 values.
+																																																											*/
 	public void unselect() {
 		this.active_x_square = 0;
 		this.active_y_square = 0;

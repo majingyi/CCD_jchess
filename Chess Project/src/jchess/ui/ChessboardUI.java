@@ -54,8 +54,6 @@ public class ChessboardUI extends JPanel {
 
 	private Chessboard					board								= null;
 
-	// squares of chessboard
-	public Square								squares[][];
 	// image of chessboard
 	private static final Image	orgImage						= GUI.loadImage("chessboard.png");
 	// image of chessboard
@@ -95,23 +93,22 @@ public class ChessboardUI extends JPanel {
 	 * @param moves_history reference to Moves class object for this chessboard 
 	 */
 	public ChessboardUI(Settings settings, Moves moves_history) {
+		board = new Chessboard(this, settings);
 		this.settings = settings;
 		this.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
-		this.squares = new Square[8][8];// initalization of 8x8 chessboard
 		this.active_x_square = 0;
 		this.active_y_square = 0;
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
-				this.squares[i][y] = new Square(i, y, null);
+				board.squares[i][y] = new Square(i, y, null);
 			}
 		}// --endOf--create object for each square
 		this.moves_history = moves_history;
 		this.setDoubleBuffered(true);
 		this.drawLabels((int) this.square_height);
 
-		board = new Chessboard(this);
 	}/*--endOf-Chessboard--*/
 
 	/** method to get reference to square from given x and y integeres
@@ -149,7 +146,7 @@ public class ChessboardUI extends JPanel {
 		System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 		Square result;
 		try {
-			result = this.squares[(int) square_x - 1][(int) square_y - 1];
+			result = board.squares[(int) square_x - 1][(int) square_y - 1];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
 			return null;
@@ -233,8 +230,8 @@ public class ChessboardUI extends JPanel {
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
 		{
 			for (int y = 0; y < 8; y++) {
-				if (this.squares[i][y].piece != null) {
-					this.squares[i][y].piece.draw(g);// draw image of Piece
+				if (board.squares[i][y].piece != null) {
+					board.squares[i][y].piece.draw(g);// draw image of Piece
 				}
 			}
 		}// --endOf--drawPiecesOnSquares
@@ -247,9 +244,9 @@ public class ChessboardUI extends JPanel {
 			g2d.drawImage(sel_square, ((this.active_x_square - 1) * (int) square_height) + topLeftPoint.x, ((this.active_y_square - 1) * (int) square_height)
 					+ topLeftPoint.y, null);// draw image of selected
 			// square
-			Square tmpSquare = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)];
+			Square tmpSquare = board.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)];
 			if (tmpSquare.piece != null) {
-				this.moves = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves();
+				this.moves = board.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves();
 			}
 
 			for (Iterator<Square> it = moves.iterator(); moves != null && it.hasNext();) {

@@ -162,14 +162,14 @@ public class Moves extends AbstractTableModel {
 
 		if (game.settings.upsideDown) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - begin.pozX) + 97));// add
-																																										// letter
-																																										// of
-																																										// Square
-																																										// from
-																																										// which
-																																										// move
-																																										// was
-																																										// made
+			// letter
+			// of
+			// Square
+			// from
+			// which
+			// move
+			// was
+			// made
 			locMove += Integer.toString(begin.pozY + 1);// add number of Square from
 																									// which move was made
 		} else {
@@ -189,14 +189,14 @@ public class Moves extends AbstractTableModel {
 
 		if (game.settings.upsideDown) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - end.pozX) + 97));// add
-																																									// letter
-																																									// of
-																																									// Square
-																																									// to
-																																									// which
-																																									// move
-																																									// was
-																																									// made
+			// letter
+			// of
+			// Square
+			// to
+			// which
+			// move
+			// was
+			// made
 			locMove += Integer.toString(end.pozY + 1);// add number of Square to which
 																								// move was made
 		} else {
@@ -496,9 +496,10 @@ public class Moves extends AbstractTableModel {
 			int yTo = 9;
 			boolean pieceFound = false;
 			if (locMove.length() <= 3) {
-				Square[][] squares = this.game.chessboard.squares;
+				Square[][] squares = this.game.chessboard.getChessboard().squares;
 				xTo = locMove.charAt(from) - 97;// from ASCII
-				yTo = ChessboardUI.bottom - (locMove.charAt(from + 1) - 49);// from ASCII
+				yTo = ChessboardUI.bottom - (locMove.charAt(from + 1) - 49);// from
+																																		// ASCII
 				for (int i = 0; i < squares.length && !pieceFound; i++) {
 					for (int j = 0; j < squares[i].length && !pieceFound; j++) {
 						if (squares[i][j].piece == null || this.game.getActivePlayer().color != squares[i][j].piece.player.color) {
@@ -518,9 +519,10 @@ public class Moves extends AbstractTableModel {
 			} else {
 				xFrom = locMove.charAt(from) - 97;// from ASCII
 				yFrom = ChessboardUI.bottom - (locMove.charAt(from + 1) - 49);// from
-																																		// ASCII
+				// ASCII
 				xTo = locMove.charAt(from + 3) - 97;// from ASCII
-				yTo = ChessboardUI.bottom - (locMove.charAt(from + 4) - 49);// from ASCII
+				yTo = ChessboardUI.bottom - (locMove.charAt(from + 4) - 49);// from
+																																		// ASCII
 			}
 			canMove = this.game.simulateMove(xFrom, yFrom, xTo, yTo);
 			if (!canMove) // if move is illegal
