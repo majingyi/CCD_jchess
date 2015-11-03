@@ -24,7 +24,7 @@ package jchess.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.ui.ChessboardUI;
+import jchess.board.Chessboard;
 import jchess.ui.GUI;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -50,7 +50,7 @@ public class Rook extends Piece {
 	protected static final Image	imageBlack	= GUI.loadImage("Rook-B.png");
 	public static short						value				= 5;
 
-	public Rook(ChessboardUI chessboard, Player player) {
+	public Rook(Chessboard chessboard, Player player) {
 		super(chessboard, player);// call initializer of super type: Piece
 		// this.setImages("Rook-W.png", "Rook-B.png");
 		this.symbol = "R";

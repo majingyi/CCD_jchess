@@ -57,7 +57,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	public Settings						settings;
 	public boolean						blockedChessboard;
-	public ChessboardUI					chessboard;
+	public ChessboardUI				chessboard;
 	private Player						activePlayer;
 	public GameClock					gameClock;
 	public Client							client;
@@ -227,7 +227,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *
 	 */
 	public void newGame() {
-		chessboard.setPieces("", settings.playerWhite, settings.playerBlack);
+		chessboard.getChessboard().setPieces("", settings.playerWhite, settings.playerBlack);
 
 		// System.out.println("new game, game type: "+settings.gameType.name());
 
@@ -299,15 +299,15 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * */
 	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
 		try {
-			chessboard.select(chessboard.squares[beginX][beginY]);
+			chessboard.getChessboard().select(chessboard.squares[beginX][beginY]);
 			if (chessboard.activeSquare.piece.allMoves().indexOf(chessboard.squares[endX][endY]) != -1) // move
 			{
-				chessboard.move(chessboard.squares[beginX][beginY], chessboard.squares[endX][endY]);
+				chessboard.getChessboard().move(chessboard.squares[beginX][beginY], chessboard.squares[endX][endY]);
 			} else {
 				System.out.println("Bad move");
 				return false;
 			}
-			chessboard.unselect();
+			chessboard.getChessboard().unselect();
 			nextMove();
 
 			return true;
@@ -331,7 +331,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		boolean status = false;
 
 		if (this.settings.gameType == Settings.gameTypes.local) {
-			status = chessboard.undo();
+			status = chessboard.getChessboard().undo();
 			if (status) {
 				this.switchActive();
 			} else {
@@ -348,7 +348,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		boolean result = false;
 
 		if (this.settings.gameType == Settings.gameTypes.local) {
-			while (chessboard.undo()) {
+			while (chessboard.getChessboard().undo()) {
 				result = true;
 			}
 		} else {
@@ -362,7 +362,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		boolean result = false;
 
 		if (this.settings.gameType == Settings.gameTypes.local) {
-			while (chessboard.redo()) {
+			while (chessboard.getChessboard().redo()) {
 				result = true;
 			}
 		} else {
@@ -373,7 +373,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	public boolean redo() {
-		boolean status = chessboard.redo();
+		boolean status = chessboard.getChessboard().redo();
 		if (this.settings.gameType == Settings.gameTypes.local) {
 			if (status) {
 				this.nextMove();
@@ -407,21 +407,21 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					}
 
 					if (sq.piece != null && sq.piece.player == this.activePlayer && sq != chessboard.activeSquare) {
-						chessboard.unselect();
-						chessboard.select(sq);
+						chessboard.getChessboard().unselect();
+						chessboard.getChessboard().select(sq);
 					} else if (chessboard.activeSquare == sq) // unselect
 					{
-						chessboard.unselect();
+						chessboard.getChessboard().unselect();
 					} else if (chessboard.activeSquare != null && chessboard.activeSquare.piece != null && chessboard.activeSquare.piece.allMoves().indexOf(sq) != -1) // move
 					{
 						if (settings.gameType == Settings.gameTypes.local) {
-							chessboard.move(chessboard.activeSquare, sq);
+							chessboard.getChessboard().move(chessboard.activeSquare, sq);
 						} else if (settings.gameType == Settings.gameTypes.network) {
 							client.sendMove(chessboard.activeSquare.pozX, chessboard.activeSquare.pozY, sq.pozX, sq.pozY);
-							chessboard.move(chessboard.activeSquare, sq);
+							chessboard.getChessboard().move(chessboard.activeSquare, sq);
 						}
 
-						chessboard.unselect();
+						chessboard.getChessboard().unselect();
 
 						// switch player
 						this.nextMove();

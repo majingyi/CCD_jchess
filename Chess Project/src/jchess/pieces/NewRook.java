@@ -6,7 +6,7 @@ package jchess.pieces;
 
 import java.util.ArrayList;
 
-import jchess.ui.ChessboardUI;
+import jchess.board.Chessboard;
 import jchess.util.Player;
 import jchess.util.Square;
 
@@ -26,7 +26,7 @@ import jchess.util.Square;
  */
 public class NewRook extends Rook {
 
-	NewRook(ChessboardUI chessboard, Player player) {
+	NewRook(Chessboard chessboard, Player player) {
 		super(chessboard, player);// call initializer of super type: Piece
 	}
 

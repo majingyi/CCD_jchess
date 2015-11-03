@@ -158,7 +158,7 @@ public class Client implements Runnable {
 							JOptionPane.YES_NO_OPTION);
 
 					if (result == JOptionPane.YES_OPTION) {
-						game.chessboard.undo();
+						game.chessboard.getChessboard().undo();
 						game.switchActive();
 						this.sendUndoAnswerPositive();
 					} else {
@@ -168,7 +168,7 @@ public class Client implements Runnable {
 					this.wait4undoAnswer = false;
 					String lastMove = game.moves.getMoves().get(game.moves.getMoves().size() - 1);
 					game.chat.addMessage("** " + Settings.lang("permision_ok_4_undo_move") + ": " + lastMove + "**");
-					game.chessboard.undo();
+					game.chessboard.getChessboard().undo();
 				} else if (in.equals("#undoAnswerNegative") && this.wait4undoAnswer) {
 					game.chat.addMessage(Settings.lang("no_permision_4_undo_move"));
 				}
