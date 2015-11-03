@@ -300,7 +300,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
 		try {
 			chessboard.getChessboard().select(chessboard.getChessboard().squares[beginX][beginY]);
-			if (chessboard.activeSquare.piece.allMoves().indexOf(chessboard.getChessboard().squares[endX][endY]) != -1) // move
+			if (chessboard.getChessboard().activeSquare.piece.allMoves().indexOf(chessboard.getChessboard().squares[endX][endY]) != -1) // move
 			{
 				chessboard.getChessboard().move(chessboard.getChessboard().squares[beginX][beginY], chessboard.getChessboard().squares[endX][endY]);
 			} else {
@@ -401,24 +401,25 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					int y = event.getY();// get Y position of mouse
 
 					Square sq = chessboard.getSquare(x, y);
-					if ((sq == null || sq.piece == null && chessboard.activeSquare == null)
-							|| (this.chessboard.activeSquare == null && sq.piece != null && sq.piece.player != this.activePlayer)) {
+					if ((sq == null || sq.piece == null && chessboard.getChessboard().activeSquare == null)
+							|| (this.chessboard.getChessboard().activeSquare == null && sq.piece != null && sq.piece.player != this.activePlayer)) {
 						return;
 					}
 
-					if (sq.piece != null && sq.piece.player == this.activePlayer && sq != chessboard.activeSquare) {
+					if (sq.piece != null && sq.piece.player == this.activePlayer && sq != chessboard.getChessboard().activeSquare) {
 						chessboard.getChessboard().unselect();
 						chessboard.getChessboard().select(sq);
-					} else if (chessboard.activeSquare == sq) // unselect
+					} else if (chessboard.getChessboard().activeSquare == sq) // unselect
 					{
 						chessboard.getChessboard().unselect();
-					} else if (chessboard.activeSquare != null && chessboard.activeSquare.piece != null && chessboard.activeSquare.piece.allMoves().indexOf(sq) != -1) // move
+					} else if (chessboard.getChessboard().activeSquare != null && chessboard.getChessboard().activeSquare.piece != null
+							&& chessboard.getChessboard().activeSquare.piece.allMoves().indexOf(sq) != -1) // move
 					{
 						if (settings.gameType == Settings.gameTypes.local) {
-							chessboard.getChessboard().move(chessboard.activeSquare, sq);
+							chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
 						} else if (settings.gameType == Settings.gameTypes.network) {
-							client.sendMove(chessboard.activeSquare.pozX, chessboard.activeSquare.pozY, sq.pozX, sq.pozY);
-							chessboard.getChessboard().move(chessboard.activeSquare, sq);
+							client.sendMove(chessboard.getChessboard().activeSquare.pozX, chessboard.getChessboard().activeSquare.pozY, sq.pozX, sq.pozY);
+							chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
 						}
 
 						chessboard.getChessboard().unselect();

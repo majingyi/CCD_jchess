@@ -66,7 +66,7 @@ public class ChessboardUI extends JPanel {
 	private static final Image	org_able_square			= GUI.loadImage("able_square.png");
 	// image of square where piece can go
 	private static Image				able_square					= org_able_square;
-	public Square								activeSquare;
+
 	private Image								upDownLabel					= null;
 	private Image								LeftRightLabel			= null;
 	private Point								topLeft							= new Point(0, 0);
@@ -95,7 +95,7 @@ public class ChessboardUI extends JPanel {
 	public ChessboardUI(Settings settings, Moves moves_history) {
 		board = new Chessboard(this, settings);
 		this.settings = settings;
-		this.activeSquare = null;
+		board.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
 		this.active_x_square = 0;
