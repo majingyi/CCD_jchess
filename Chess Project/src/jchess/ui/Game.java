@@ -430,9 +430,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 						// checkmate or stalemate
 						King king;
 						if (this.activePlayer == settings.playerWhite) {
-							king = chessboard.kingWhite;
+							king = chessboard.getChessboard().kingWhite;
 						} else {
-							king = chessboard.kingBlack;
+							king = chessboard.getChessboard().kingBlack;
 						}
 
 						switch (king.isCheckmatedOrStalemated()) {

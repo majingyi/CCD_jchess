@@ -36,8 +36,6 @@ import javax.swing.JPanel;
 
 import jchess.Settings;
 import jchess.board.Chessboard;
-import jchess.pieces.King;
-import jchess.pieces.Pawn;
 import jchess.util.Moves;
 import jchess.util.Square;
 
@@ -47,65 +45,57 @@ import jchess.util.Square;
  */
 public class ChessboardUI extends JPanel {
 
-	private static final long		serialVersionUID		= -1717218347823342830L;
+	private static final long		serialVersionUID	= -1717218347823342830L;
 
-	public static final int			top									= 0;
-	public static final int			bottom							= 7;
+	public static final int			top								= 0;
+	public static final int			bottom						= 7;
 
-	private Chessboard					board								= null;
+	private Chessboard					board							= null;
 
 	// image of chessboard
-	private static final Image	orgImage						= GUI.loadImage("chessboard.png");
+	private static final Image	orgImage					= GUI.loadImage("chessboard.png");
 	// image of chessboard
-	private static Image				image								= ChessboardUI.orgImage;
+	private static Image				image							= ChessboardUI.orgImage;
 	// image of highlighted square
-	private static final Image	org_sel_square			= GUI.loadImage("sel_square.png");
+	private static final Image	org_sel_square		= GUI.loadImage("sel_square.png");
 	// image of highlighted square
-	private static Image				sel_square					= org_sel_square;
+	private static Image				sel_square				= org_sel_square;
 	// image of square where piece can go
-	private static final Image	org_able_square			= GUI.loadImage("able_square.png");
+	private static final Image	org_able_square		= GUI.loadImage("able_square.png");
 	// image of square where piece can go
-	private static Image				able_square					= org_able_square;
+	private static Image				able_square				= org_able_square;
 
-	private Image								upDownLabel					= null;
-	private Image								LeftRightLabel			= null;
-	private Point								topLeft							= new Point(0, 0);
-	private int									active_x_square;
-	private int									active_y_square;
+	private Image								upDownLabel				= null;
+	private Image								LeftRightLabel		= null;
+	private Point								topLeft						= new Point(0, 0);
 	private float								square_height;
 
-	public static final int			img_x								= 5;
-	public static final int			img_y								= img_x;
-	public static final int			img_widht						= 480;
-	public static final int			img_height					= img_widht;
+	public static final int			img_x							= 5;
+	public static final int			img_y							= img_x;
+	public static final int			img_widht					= 480;
+	public static final int			img_height				= img_widht;
 
 	private ArrayList<Square>		moves;
 	private Settings						settings;
-	public King									kingWhite;
-	public King									kingBlack;
-
-	public Pawn									twoSquareMovedPawn	= null;
-	public Pawn									twoSquareMovedPawn2	= null;
-	private Moves								moves_history;
 
 	/** Chessboard class constructor
 	 * @param settings reference to Settings class object for this chessboard
 	 * @param moves_history reference to Moves class object for this chessboard 
 	 */
 	public ChessboardUI(Settings settings, Moves moves_history) {
-		board = new Chessboard(this, settings);
+		board = new Chessboard(this, settings, moves_history);
 		this.settings = settings;
 		board.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
-		this.active_x_square = 0;
-		this.active_y_square = 0;
+		board.active_x_square = 0;
+		board.active_y_square = 0;
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
 				board.squares[i][y] = new Square(i, y, null);
 			}
 		}// --endOf--create object for each square
-		this.moves_history = moves_history;
+
 		this.setDoubleBuffered(true);
 		this.drawLabels((int) this.square_height);
 
@@ -235,18 +225,18 @@ public class ChessboardUI extends JPanel {
 				}
 			}
 		}// --endOf--drawPiecesOnSquares
-		if ((this.active_x_square != 0) && (this.active_y_square != 0)) // if
+		if ((board.active_x_square != 0) && (board.active_y_square != 0)) // if
 		// some
 		// square
 		// is
 		// active
 		{
-			g2d.drawImage(sel_square, ((this.active_x_square - 1) * (int) square_height) + topLeftPoint.x, ((this.active_y_square - 1) * (int) square_height)
+			g2d.drawImage(sel_square, ((board.active_x_square - 1) * (int) square_height) + topLeftPoint.x, ((board.active_y_square - 1) * (int) square_height)
 					+ topLeftPoint.y, null);// draw image of selected
 			// square
-			Square tmpSquare = board.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)];
+			Square tmpSquare = board.squares[(int) (board.active_x_square - 1)][(int) (board.active_y_square - 1)];
 			if (tmpSquare.piece != null) {
-				this.moves = board.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves();
+				this.moves = board.squares[(int) (board.active_x_square - 1)][(int) (board.active_y_square - 1)].piece.allMoves();
 			}
 
 			for (Iterator<Square> it = moves.iterator(); moves != null && it.hasNext();) {

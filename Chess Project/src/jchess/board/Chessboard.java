@@ -34,8 +34,8 @@ public class Chessboard {
 
 	public Square						activeSquare;
 
-	private int							active_x_square;
-	private int							active_y_square;
+	public int							active_x_square;
+	public int							active_y_square;
 
 	public static final int	img_x								= 5;
 	public static final int	img_y								= img_x;
@@ -50,8 +50,9 @@ public class Chessboard {
 	public Pawn							twoSquareMovedPawn2	= null;
 	private Moves						moves_history;
 
-	public Chessboard(ChessboardUI ui, Settings settings) {
+	public Chessboard(ChessboardUI ui, Settings settings, Moves movesHistory) {
 		uiChessboard = ui;
+		moves_history = movesHistory;
 
 		this.squares = new Square[8][8];// initalization of 8x8 chessboard
 
@@ -186,8 +187,8 @@ public class Chessboard {
 	}
 
 	/*--endOf-select--*//** Method set variables active_x_square & active_y_square
-																																																											* to 0 values.
-																																																											*/
+																																																															* to 0 values.
+																																																															*/
 	public void unselect() {
 		this.active_x_square = 0;
 		this.active_y_square = 0;

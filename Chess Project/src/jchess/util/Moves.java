@@ -211,13 +211,14 @@ public class Moves extends AbstractTableModel {
 			locMove += "(e.p)";// pawn take down opponent en passant
 			wasEnPassant = true;
 		}
-		if ((!this.enterBlack && this.game.chessboard.kingBlack.isChecked()) || (this.enterBlack && this.game.chessboard.kingWhite.isChecked())) {// if
-																																																																							// checked
+		if ((!this.enterBlack && this.game.chessboard.getChessboard().kingBlack.isChecked())
+				|| (this.enterBlack && this.game.chessboard.getChessboard().kingWhite.isChecked())) {// if
+			// checked
 
-			if ((!this.enterBlack && this.game.chessboard.kingBlack.isCheckmatedOrStalemated() == 1)
-					|| (this.enterBlack && this.game.chessboard.kingWhite.isCheckmatedOrStalemated() == 1)) {// check
-																																																		// if
-																																																		// checkmated
+			if ((!this.enterBlack && this.game.chessboard.getChessboard().kingBlack.isCheckmatedOrStalemated() == 1)
+					|| (this.enterBlack && this.game.chessboard.getChessboard().kingWhite.isCheckmatedOrStalemated() == 1)) {// check
+				// if
+				// checkmated
 				locMove += "#";// check mate
 			} else {
 				locMove += "+";// check
