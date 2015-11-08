@@ -20,27 +20,27 @@ public class Pawn extends Piece {
 
 	public Pawn(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		this.symbol = SYMBOL;
+		setSymbol(SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
 	public void promote(String newPiece) {
 		if (newPiece.equals("Queen")) {
 			setMoveBehavior(new QueenMoveBehavior(player, chessboard, square));
-			this.symbol = Queen.SYMBOL;
+			setSymbol(Queen.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Queen.SYMBOL));
 		} else if (newPiece.equals("Rook")) {
 			setMoveBehavior(new RookMoveBehavior(player, chessboard, square));
-			this.symbol = Rook.SYMBOL;
+			setSymbol(Rook.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Rook.SYMBOL));
 		} else if (newPiece.equals("Bishop")) {
 			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
-			this.symbol = Bishop.SYMBOL;
+			setSymbol(Bishop.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Bishop.SYMBOL));
 		} else // knight
 		{
 			setMoveBehavior(new KnightMoveBehavior(player, chessboard, square));
-			this.symbol = Knight.SYMBOL;
+			setSymbol(Knight.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Knight.SYMBOL));
 		}
 	}

@@ -38,7 +38,7 @@ public abstract class Piece {
 	public Chessboard				chessboard		= null;
 	protected Square				square				= null;
 	public Player						player				= null;
-	protected String				symbol				= Constants.EMPTY_STRING;
+	private String					symbol				= Constants.EMPTY_STRING;
 
 	protected IMoveBehavior	moveBehavior	= null;
 
@@ -128,6 +128,10 @@ public abstract class Piece {
 
 	public String getSymbol() {
 		return this.symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	public Square getSquare() {

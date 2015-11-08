@@ -13,7 +13,7 @@ public class Knight extends Piece {
 
 	public Knight(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		this.symbol = SYMBOL;
+		setSymbol(SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

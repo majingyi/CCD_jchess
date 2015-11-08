@@ -34,7 +34,7 @@ public class Rook extends Piece {
 
 	public Rook(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		this.symbol = SYMBOL;
+		setSymbol(SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

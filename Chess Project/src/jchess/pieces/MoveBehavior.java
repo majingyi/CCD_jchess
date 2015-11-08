@@ -24,7 +24,7 @@ public abstract class MoveBehavior implements IMoveBehavior {
 	 * @return true if can move, false otherwise
 	 * */
 	protected boolean checkPiece(int x, int y) {
-		if (chessboard.squares[x][y].piece != null && chessboard.squares[x][y].piece.symbol == King.SYMBOL) {
+		if (chessboard.squares[x][y].piece != null && chessboard.squares[x][y].piece.getSymbol() == King.SYMBOL) {
 			return false;
 		}
 		Piece piece = chessboard.squares[x][y].piece;

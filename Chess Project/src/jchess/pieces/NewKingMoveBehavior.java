@@ -53,7 +53,7 @@ public class NewKingMoveBehavior extends MoveBehavior {
 																																		// not moved
 			// before
 
-			if (chessboard.squares[0][this.square.pozY].piece != null && chessboard.squares[0][this.square.pozY].piece.symbol == Rook.SYMBOL) {
+			if (chessboard.squares[0][this.square.pozY].piece != null && chessboard.squares[0][this.square.pozY].piece.getSymbol() == Rook.SYMBOL) {
 				boolean canCastling = true;
 
 				Rook rook = (Rook) chessboard.squares[0][this.square.pozY].piece;
@@ -76,7 +76,7 @@ public class NewKingMoveBehavior extends MoveBehavior {
 					}
 				}
 			}
-			if (chessboard.squares[7][this.square.pozY].piece != null && chessboard.squares[7][this.square.pozY].piece.symbol == Rook.SYMBOL) {
+			if (chessboard.squares[7][this.square.pozY].piece != null && chessboard.squares[7][this.square.pozY].piece.getSymbol() == Rook.SYMBOL) {
 				boolean canCastling = true;
 				Rook rook = (Rook) chessboard.squares[7][this.square.pozY].piece;
 				if (!rook.wasMotion) {// if king was not moves before and is not checked

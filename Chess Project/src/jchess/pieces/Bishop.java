@@ -13,7 +13,7 @@ public class Bishop extends Piece {
 
 	public Bishop(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		this.symbol = SYMBOL;
+		setSymbol(SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
