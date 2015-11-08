@@ -38,7 +38,6 @@ public abstract class Piece {
 	public Chessboard				chessboard		= null;
 	protected Square				square				= null;
 	public Player						player				= null;
-	public String						name					= Constants.EMPTY_STRING;
 	public String						symbol				= Constants.EMPTY_STRING;
 
 	protected IMoveBehavior	moveBehavior	= null;
@@ -49,7 +48,6 @@ public abstract class Piece {
 	public Piece(Chessboard chessboard, Player player) {
 		this.chessboard = chessboard;
 		this.player = player;
-		this.name = this.getClass().getSimpleName();
 		this.moveBehavior = createMoveBehavior();
 	}
 

@@ -1,16 +1,13 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 
 /*
@@ -18,6 +15,7 @@
  */
 package jchess.util;
 
+import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
 import jchess.ui.ChessboardUI;
 import jchess.util.Moves.castling;
@@ -43,9 +41,9 @@ public class Move {
 		this.castlingMove = castlingMove;
 		this.wasEnPassant = wasEnPassant;
 
-		if (movedPiece.name.equals("Pawn") && Math.abs(to.pozY - from.pozY) == 2) {
+		if (movedPiece.symbol == Pawn.SYMBOL && Math.abs(to.pozY - from.pozY) == 2) {
 			this.wasPawnTwoFieldsMove = true;
-		} else if (movedPiece.name.equals("Pawn") && to.pozY == ChessboardUI.bottom || to.pozY == ChessboardUI.top && promotedPiece != null) {
+		} else if (movedPiece.symbol == Pawn.SYMBOL && to.pozY == ChessboardUI.bottom || to.pozY == ChessboardUI.top && promotedPiece != null) {
 			this.promotedTo = promotedPiece;
 		}
 	}

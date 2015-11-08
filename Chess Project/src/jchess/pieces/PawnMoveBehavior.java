@@ -69,7 +69,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 			// capture
 			sq = chessboard.squares[this.square.pozX - 1][first];
 			if (sq.piece != null) {// check if can hit left
-				if (this.player != sq.piece.player && !sq.piece.name.equals("King")) {
+				if (this.player != sq.piece.player && (sq.piece.symbol == King.SYMBOL) == false) {
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) {// white
 
@@ -92,7 +92,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				// can
 				// hit
 				// left
-				if (this.player != sq.piece.player && !sq.piece.name.equals("King")) {// unnecessary
+				if (this.player != sq.piece.player && (sq.piece.symbol == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) {// white
@@ -117,7 +117,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 			// capture
 			sq = chessboard.squares[this.square.pozX + 1][first];
 			if (sq.piece != null) {// check if can hit right
-				if (this.player != sq.piece.player && !sq.piece.name.equals("King")) {
+				if (this.player != sq.piece.player && (sq.piece.symbol == King.SYMBOL) == false) {
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) { // white
 
@@ -140,7 +140,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				// can
 				// hit
 				// left
-				if (this.player != sq.piece.player && !sq.piece.name.equals("King")) {// unnecessary
+				if (this.player != sq.piece.player && (sq.piece.symbol == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) {// white

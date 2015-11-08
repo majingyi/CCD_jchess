@@ -87,7 +87,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-				if (this.chessboard.squares[s.pozX][i].piece.name.equals("Rook") || this.chessboard.squares[s.pozX][i].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[s.pozX][i].piece.symbol == Rook.SYMBOL || this.chessboard.squares[s.pozX][i].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -112,7 +112,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-				if (this.chessboard.squares[s.pozX][i].piece.name.equals("Rook") || this.chessboard.squares[s.pozX][i].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[s.pozX][i].piece.symbol == Rook.SYMBOL || this.chessboard.squares[s.pozX][i].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -137,7 +137,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-				if (this.chessboard.squares[i][s.pozY].piece.name.equals("Rook") || this.chessboard.squares[i][s.pozY].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[i][s.pozY].piece.symbol == Rook.SYMBOL || this.chessboard.squares[i][s.pozY].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -162,7 +162,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-				if (this.chessboard.squares[i][s.pozY].piece.name.equals("Rook") || this.chessboard.squares[i][s.pozY].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[i][s.pozY].piece.symbol == Rook.SYMBOL || this.chessboard.squares[i][s.pozY].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -188,7 +188,7 @@ public class King extends Piece {
 																																						// our
 																																						// piece
 			{
-				if (this.chessboard.squares[h][i].piece.name.equals("Bishop") || this.chessboard.squares[h][i].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[h][i].piece.symbol == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -213,7 +213,7 @@ public class King extends Piece {
 																																						// our
 																																						// piece
 			{
-				if (this.chessboard.squares[h][i].piece.name.equals("Bishop") || this.chessboard.squares[h][i].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[h][i].piece.symbol == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -238,7 +238,7 @@ public class King extends Piece {
 																																						// our
 																																						// piece
 			{
-				if (this.chessboard.squares[h][i].piece.name.equals("Bishop") || this.chessboard.squares[h][i].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[h][i].piece.symbol == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -263,7 +263,7 @@ public class King extends Piece {
 																																						// our
 																																						// piece
 			{
-				if (this.chessboard.squares[h][i].piece.name.equals("Bishop") || this.chessboard.squares[h][i].piece.name.equals("Queen")) {
+				if (this.chessboard.squares[h][i].piece.symbol == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.symbol == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -290,7 +290,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -309,7 +309,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -328,7 +328,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -347,7 +347,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -366,7 +366,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -385,7 +385,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -404,7 +404,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -423,7 +423,7 @@ public class King extends Piece {
 																																									// our
 																																									// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.name.equals("Knight")) {
+			} else if (this.chessboard.squares[newX][newY].piece.symbol == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -456,7 +456,7 @@ public class King extends Piece {
 																																										// our
 																																										// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.name.equals("Pawn")) {
+				} else if (this.chessboard.squares[newX][newY].piece.symbol == Pawn.SYMBOL) {
 					return false;
 				}
 			}
@@ -471,7 +471,7 @@ public class King extends Piece {
 																																										// our
 																																										// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.name.equals("Pawn")) {
+				} else if (this.chessboard.squares[newX][newY].piece.symbol == Pawn.SYMBOL) {
 					return false;
 				}
 			}
@@ -488,7 +488,7 @@ public class King extends Piece {
 																																										// our
 																																										// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.name.equals("Pawn")) {
+				} else if (this.chessboard.squares[newX][newY].piece.symbol == Pawn.SYMBOL) {
 					return false;
 				}
 			}
@@ -503,7 +503,7 @@ public class King extends Piece {
 																																										// our
 																																										// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.name.equals("Pawn")) {
+				} else if (this.chessboard.squares[newX][newY].piece.symbol == Pawn.SYMBOL) {
 					return false;
 				}
 			}
