@@ -9,7 +9,7 @@ import jchess.util.Player;
  */
 public class Knight extends Piece {
 
-	public static final String	SYMBOL	= "N";
+	public static final String	SYMBOL	= "Knight";
 
 	public Knight(Chessboard chessboard, Player player) {
 		super(chessboard, player);
@@ -20,5 +20,10 @@ public class Knight extends Piece {
 	@Override
 	public IMoveBehavior createMoveBehavior() {
 		return new KnightMoveBehavior(player, chessboard, square);
+	}
+
+	@Override
+	public String getSymbolForMoveHistory() {
+		return "Kn";
 	}
 }

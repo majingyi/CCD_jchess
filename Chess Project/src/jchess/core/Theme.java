@@ -33,7 +33,7 @@ public class Theme {
 	private static String	IMAGE_BLACK_ROOK		= "Rook-B.png";
 
 	public static Image getImageForPiece(Player.colors color, Piece piece) {
-		return getImageForPiece(color, piece.symbol);
+		return getImageForPiece(color, piece.getSymbol());
 	}
 
 	public static Image getImageForPiece(Player.colors color, String pieceSymbol) {

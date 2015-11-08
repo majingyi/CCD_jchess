@@ -11,7 +11,7 @@ import jchess.util.Player;
  */
 public class Queen extends Piece {
 
-	public static final String	SYMBOL	= "Q";
+	public static final String	SYMBOL	= "Queen";
 
 	public Queen(Chessboard chessboard, Player player) {
 		super(chessboard, player);
@@ -22,5 +22,10 @@ public class Queen extends Piece {
 	@Override
 	public IMoveBehavior createMoveBehavior() {
 		return new QueenMoveBehavior(player, chessboard, square);
+	}
+
+	@Override
+	public String getSymbolForMoveHistory() {
+		return "Q";
 	}
 }

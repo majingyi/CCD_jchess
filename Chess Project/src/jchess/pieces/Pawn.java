@@ -2,7 +2,6 @@ package jchess.pieces;
 
 import jchess.board.Chessboard;
 import jchess.core.Theme;
-import jchess.util.Constants;
 import jchess.util.Player;
 
 /**
@@ -17,7 +16,7 @@ import jchess.util.Player;
  */
 public class Pawn extends Piece {
 
-	public static final String	SYMBOL	= Constants.EMPTY_STRING;
+	public static final String	SYMBOL	= "Pawn";
 
 	public Pawn(Chessboard chessboard, Player player) {
 		super(chessboard, player);
@@ -49,5 +48,10 @@ public class Pawn extends Piece {
 	@Override
 	public IMoveBehavior createMoveBehavior() {
 		return new PawnMoveBehavior(player, chessboard, square);
+	}
+
+	@Override
+	public String getSymbolForMoveHistory() {
+		return "P";
 	}
 }

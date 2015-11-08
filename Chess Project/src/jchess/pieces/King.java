@@ -14,7 +14,7 @@ import jchess.util.Square;
 
 public class King extends Piece {
 
-	public static final String	SYMBOL		= "K";
+	public static final String	SYMBOL		= "King";
 	public boolean							wasMotion	= false;	// maybe
 																									// change
 																									// to:
@@ -536,5 +536,10 @@ public class King extends Piece {
 	@Override
 	public IMoveBehavior createMoveBehavior() {
 		return new KingMoveBehavior(player, chessboard, square, this);
+	}
+
+	@Override
+	public String getSymbolForMoveHistory() {
+		return "K";
 	}
 }

@@ -38,7 +38,7 @@ public abstract class Piece {
 	public Chessboard				chessboard		= null;
 	protected Square				square				= null;
 	public Player						player				= null;
-	public String						symbol				= Constants.EMPTY_STRING;
+	protected String				symbol				= Constants.EMPTY_STRING;
 
 	protected IMoveBehavior	moveBehavior	= null;
 
@@ -147,4 +147,6 @@ public abstract class Piece {
 		this.image = image;
 		this.orgImage = image;
 	}
+
+	public abstract String getSymbolForMoveHistory();
 }

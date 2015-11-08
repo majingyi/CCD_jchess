@@ -27,6 +27,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import jchess.Settings;
+import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
 import jchess.ui.ChessboardUI;
 import jchess.ui.Game;
@@ -161,7 +162,7 @@ public class Moves extends AbstractTableModel {
 	}
 
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
-		String locMove = new String(begin.piece.symbol);
+		String locMove = new String(begin.piece.getSymbolForMoveHistory());
 
 		if (game.settings.upsideDown) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - begin.pozX) + 97));// add
@@ -210,7 +211,7 @@ public class Moves extends AbstractTableModel {
 																								// move was made
 		}
 
-		if (begin.piece.symbol.equals("") && begin.pozX - end.pozX != 0 && end.piece == null) {
+		if (begin.piece.getSymbol() == Pawn.SYMBOL && begin.pozX - end.pozX != 0 && end.piece == null) {
 			locMove += "(e.p)";// pawn take down opponent en passant
 			wasEnPassant = true;
 		}

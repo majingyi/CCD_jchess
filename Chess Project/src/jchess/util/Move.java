@@ -41,9 +41,9 @@ public class Move {
 		this.castlingMove = castlingMove;
 		this.wasEnPassant = wasEnPassant;
 
-		if (movedPiece.symbol == Pawn.SYMBOL && Math.abs(to.pozY - from.pozY) == 2) {
+		if (movedPiece.getSymbol() == Pawn.SYMBOL && Math.abs(to.pozY - from.pozY) == 2) {
 			this.wasPawnTwoFieldsMove = true;
-		} else if (movedPiece.symbol == Pawn.SYMBOL && to.pozY == ChessboardUI.bottom || to.pozY == ChessboardUI.top && promotedPiece != null) {
+		} else if (movedPiece.getSymbol() == Pawn.SYMBOL && to.pozY == ChessboardUI.bottom || to.pozY == ChessboardUI.top && promotedPiece != null) {
 			this.promotedTo = promotedPiece;
 		}
 	}

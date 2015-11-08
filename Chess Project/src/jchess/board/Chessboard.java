@@ -288,7 +288,7 @@ public class Chessboard {
 		// square
 		begin.piece = null;// make null piece for begining square
 
-		if (end.piece.symbol.equals("King")) {
+		if (end.piece.getSymbol().equals("King")) {
 			if (((King) end.piece).wasMotion == false) {
 				((King) end.piece).wasMotion = true;
 			}
@@ -308,11 +308,11 @@ public class Chessboard {
 				// return;
 			}
 			// endOf Castling
-		} else if (end.piece.symbol == Rook.SYMBOL) {
+		} else if (end.piece.getSymbol() == Rook.SYMBOL) {
 			if (((Rook) end.piece).wasMotion == false) {
 				((Rook) end.piece).wasMotion = true;
 			}
-		} else if (end.piece.symbol == Pawn.SYMBOL) {
+		} else if (end.piece.getSymbol() == Pawn.SYMBOL) {
 			if (twoSquareMovedPawn != null && squares[end.pozX][begin.pozY] == twoSquareMovedPawn.getSquare()) // en
 			// passant
 			{
@@ -357,7 +357,7 @@ public class Chessboard {
 					promotedPiece = end.piece;
 				}
 			}
-		} else if (end.piece.symbol == Pawn.SYMBOL == false) {
+		} else if (end.piece.getSymbol() == Pawn.SYMBOL == false) {
 			twoSquareMovedPawn = null; // erase last saved move (for En passant)
 		}
 
@@ -407,14 +407,14 @@ public class Chessboard {
 					}
 					((King) moved).wasMotion = false;
 					((Rook) rook).wasMotion = false;
-				} else if (moved.symbol == Rook.SYMBOL) {
+				} else if (moved.getSymbol() == Rook.SYMBOL) {
 					((Rook) moved).wasMotion = false;
-				} else if (moved.symbol == Pawn.SYMBOL && last.wasEnPassant()) {
+				} else if (moved.getSymbol() == Pawn.SYMBOL && last.wasEnPassant()) {
 					Pawn pawn = (Pawn) last.getTakenPiece();
 					this.squares[end.pozX][begin.pozY].piece = pawn;
 					pawn.setSquare(this.squares[end.pozX][begin.pozY]);
 
-				} else if (moved.symbol == Pawn.SYMBOL && last.getPromotedPiece() != null) {
+				} else if (moved.getSymbol() == Pawn.SYMBOL && last.getPromotedPiece() != null) {
 					Piece promoted = this.squares[end.pozX][end.pozY].piece;
 					promoted.setSquare(null);
 					this.squares[end.pozX][end.pozY].piece = null;
@@ -424,7 +424,7 @@ public class Chessboard {
 				Move oneMoveEarlier = this.moves_history.getLastMoveFromHistory();
 				if (oneMoveEarlier != null && oneMoveEarlier.wasPawnTwoFieldsMove()) {
 					Piece canBeTakenEnPassant = this.squares[oneMoveEarlier.getTo().pozX][oneMoveEarlier.getTo().pozY].piece;
-					if (canBeTakenEnPassant.symbol == Pawn.SYMBOL) {
+					if (canBeTakenEnPassant.getSymbol() == Pawn.SYMBOL) {
 						this.twoSquareMovedPawn = (Pawn) canBeTakenEnPassant;
 					}
 				}

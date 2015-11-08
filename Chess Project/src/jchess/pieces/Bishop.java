@@ -9,7 +9,7 @@ import jchess.util.Player;
  */
 public class Bishop extends Piece {
 
-	public static final String	SYMBOL	= "B";
+	public static final String	SYMBOL	= "Bishop";
 
 	public Bishop(Chessboard chessboard, Player player) {
 		super(chessboard, player);
@@ -20,5 +20,10 @@ public class Bishop extends Piece {
 	@Override
 	public IMoveBehavior createMoveBehavior() {
 		return new BishopMoveBehavior(player, chessboard, square);
+	}
+
+	@Override
+	public String getSymbolForMoveHistory() {
+		return "B";
 	}
 }
