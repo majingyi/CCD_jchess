@@ -1,22 +1,17 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 
 /*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
+ * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
 package jchess.ui;
 
@@ -39,9 +34,10 @@ import jchess.board.Chessboard;
 import jchess.util.Moves;
 import jchess.util.Square;
 
-/** Class to represent chessboard. Chessboard is made from squares.
- * It is setting the squers of chessboard and sets the pieces(pawns)
- * witch the owner is current player on it.
+/**
+ * Class to represent chessboard. Chessboard is made from squares. It is setting
+ * the squers of chessboard and sets the pieces(pawns) witch the owner is
+ * current player on it.
  */
 public class ChessboardUI extends JPanel {
 
@@ -78,9 +74,13 @@ public class ChessboardUI extends JPanel {
 	private ArrayList<Square>		moves;
 	private Settings						settings;
 
-	/** Chessboard class constructor
-	 * @param settings reference to Settings class object for this chessboard
-	 * @param moves_history reference to Moves class object for this chessboard 
+	/**
+	 * Chessboard class constructor
+	 * 
+	 * @param settings
+	 *          reference to Settings class object for this chessboard
+	 * @param moves_history
+	 *          reference to Moves class object for this chessboard
 	 */
 	public ChessboardUI(Settings settings, Moves moves_history) {
 		board = new Chessboard(this, settings, moves_history);
@@ -101,9 +101,13 @@ public class ChessboardUI extends JPanel {
 
 	}/*--endOf-Chessboard--*/
 
-	/** method to get reference to square from given x and y integeres
-	 * @param x x position on chessboard
-	 * @param y y position on chessboard
+	/**
+	 * method to get reference to square from given x and y integeres
+	 * 
+	 * @param x
+	 *          x position on chessboard
+	 * @param y
+	 *          y position on chessboard
 	 * @return reference to searched square
 	 */
 	public Square getSquare(int x, int y) {

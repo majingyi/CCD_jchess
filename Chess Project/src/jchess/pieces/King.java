@@ -7,40 +7,23 @@ package jchess.pieces;
  * square "in danger" by the opponent then it's a CheckedMate, and the game is
  * over.
  */
-import java.awt.Image;
-
 import jchess.board.Chessboard;
-import jchess.ui.GUI;
+import jchess.core.Theme;
 import jchess.util.Player;
 import jchess.util.Square;
 
 public class King extends Piece {
 
-	public boolean							wasMotion		= false;												// maybe
-																																					// change
-																																					// to:
-																																					// 'wasMotioned'
-	// public boolean checked = false;
-	public static short					value				= 99;
-	private static final Image	imageWhite	= GUI.loadImage("King-W.png");
-	private static final Image	imageBlack	= GUI.loadImage("King-B.png");
+	public static final String	SYMBOL		= "K";
+	public boolean							wasMotion	= false;	// maybe
+																									// change
+																									// to:
+																									// 'wasMotioned'
 
 	public King(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		// this.setImages("King-W.png", "King-B.png");
-		this.symbol = "K";
-		this.setImage();
-		// this.image = imageWhite;
-	}
-
-	@Override
-	void setImage() {
-		if (this.player.color == Player.colors.black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
-		}
-		orgImage = image;
+		this.symbol = SYMBOL;
+		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
 	/**

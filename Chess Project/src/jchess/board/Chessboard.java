@@ -6,7 +6,6 @@ import jchess.pieces.Bishop;
 import jchess.pieces.King;
 import jchess.pieces.Knight;
 import jchess.pieces.Pawn;
-import jchess.pieces.PawnDoubleStep;
 import jchess.pieces.Piece;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
@@ -189,7 +188,7 @@ public class Chessboard {
 			return;
 		}
 		for (int x = 0; x < 8; x++) {
-			this.squares[x][i].setPiece(new PawnDoubleStep(this, player));
+			this.squares[x][i].setPiece(new Pawn(this, player));
 		}
 	}
 
@@ -289,7 +288,7 @@ public class Chessboard {
 		// square
 		begin.piece = null;// make null piece for begining square
 
-		if (end.piece.name.equals("King")) {
+		if (end.piece.symbol.equals("King")) {
 			if (((King) end.piece).wasMotion == false) {
 				((King) end.piece).wasMotion = true;
 			}
@@ -353,44 +352,14 @@ public class Chessboard {
 					// new
 					// piece
 
-					if (newPiece.equals("Queen")) // transform pawn to queen
-					{
-						Queen queen = new Queen(this, end.piece.player);
-						queen.chessboard = end.piece.chessboard;
-						queen.player = end.piece.player;
-						queen.setSquare(end.piece.getSquare());
-						end.piece = queen;
-					} else if (newPiece.equals("Rook")) // transform pawn to
-					// rook
-					{
-						Rook rook = new Rook(this, end.piece.player);
-						rook.chessboard = end.piece.chessboard;
-						rook.player = end.piece.player;
-						rook.setSquare(end.piece.getSquare());
-						end.piece = rook;
-					} else if (newPiece.equals("Bishop")) // transform pawn to
-					// bishop
-					{
-						Bishop bishop = new Bishop(this, end.piece.player);
-						bishop.chessboard = end.piece.chessboard;
-						bishop.player = end.piece.player;
-						bishop.setSquare(end.piece.getSquare());
-						end.piece = bishop;
-					} else // transform pawn to knight
-					{
-						Knight knight = new Knight(this, end.piece.player);
-						knight.chessboard = end.piece.chessboard;
-						knight.player = end.piece.player;
-						knight.setSquare(end.piece.getSquare());
-						end.piece = knight;
-					}
+					Pawn pawn = (Pawn) end.piece;
+					pawn.promote(newPiece);
 					promotedPiece = end.piece;
 				}
 			}
-		} else if (!end.piece.name.equals("Pawn")) {
+		} else if (end.piece.name.equals("Pawn") == false) {
 			twoSquareMovedPawn = null; // erase last saved move (for En passant)
 		}
-		// }
 
 		if (refresh) {
 			this.unselect();// unselect square

@@ -1,9 +1,8 @@
 package jchess.pieces;
 
-import java.awt.Image;
-
 import jchess.board.Chessboard;
-import jchess.ui.GUI;
+import jchess.core.Theme;
+import jchess.util.Constants;
 import jchess.util.Player;
 
 /**
@@ -18,30 +17,33 @@ import jchess.util.Player;
  */
 public class Pawn extends Piece {
 
-	boolean												down;
-	protected static final Image	imageWhite	= GUI.loadImage("Pawn-W.png");
-	protected static final Image	imageBlack	= GUI.loadImage("Pawn-B.png");
-	public static short						value				= 1;
+	public static final String	SYMBOL	= Constants.EMPTY_STRING;
 
-	Pawn(Chessboard chessboard, Player player) {
+	public Pawn(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		// this.setImages("Pawn-W.png", "Pawn-B.png");
-		this.symbol = "";
-		this.setImage();
+		this.symbol = SYMBOL;
+		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
-	@Override
-	void setImage() {
-		if (this.player.color == Player.colors.black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
+	public void promote(String newPiece) {
+		if (newPiece.equals("Queen")) {
+			setMoveBehavior(new QueenMoveBehavior(player, chessboard, square));
+			this.symbol = Queen.SYMBOL;
+			setImage(Theme.getImageForPiece(player.color, Queen.SYMBOL));
+		} else if (newPiece.equals("Rook")) {
+			setMoveBehavior(new RookMoveBehavior(player, chessboard, square));
+			this.symbol = Rook.SYMBOL;
+			setImage(Theme.getImageForPiece(player.color, Rook.SYMBOL));
+		} else if (newPiece.equals("Bishop")) {
+			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
+			this.symbol = Bishop.SYMBOL;
+			setImage(Theme.getImageForPiece(player.color, Bishop.SYMBOL));
+		} else // knight
+		{
+			setMoveBehavior(new KnightMoveBehavior(player, chessboard, square));
+			this.symbol = Knight.SYMBOL;
+			setImage(Theme.getImageForPiece(player.color, Knight.SYMBOL));
 		}
-		orgImage = image;
-	}
-
-	void promote(Piece newPiece) {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override

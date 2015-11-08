@@ -1,9 +1,7 @@
 package jchess.pieces;
 
-import java.awt.Image;
-
 import jchess.board.Chessboard;
-import jchess.ui.GUI;
+import jchess.core.Theme;
 import jchess.util.Player;
 
 /**
@@ -13,24 +11,12 @@ import jchess.util.Player;
  */
 public class Queen extends Piece {
 
-	public static short						value				= 9;
-	protected static final Image	imageWhite	= GUI.loadImage("Queen-W.png");
-	protected static final Image	imageBlack	= GUI.loadImage("Queen-B.png");
+	public static final String	SYMBOL	= "Q";
 
 	public Queen(Chessboard chessboard, Player player) {
 		super(chessboard, player);
-		this.symbol = "Q";
-		this.setImage();
-	}
-
-	@Override
-	void setImage() {
-		if (this.player.color == Player.colors.black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
-		}
-		orgImage = image;
+		this.symbol = SYMBOL;
+		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
 	@Override

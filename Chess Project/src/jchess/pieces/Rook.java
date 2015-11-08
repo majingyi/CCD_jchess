@@ -16,10 +16,8 @@
 
 package jchess.pieces;
 
-import java.awt.Image;
-
 import jchess.board.Chessboard;
-import jchess.ui.GUI;
+import jchess.core.Theme;
 import jchess.util.Player;
 
 /**
@@ -30,25 +28,14 @@ import jchess.util.Player;
  */
 public class Rook extends Piece {
 
-	public boolean								wasMotion		= false;
-	protected static final Image	imageWhite	= GUI.loadImage("Rook-W.png");
-	protected static final Image	imageBlack	= GUI.loadImage("Rook-B.png");
-	public static short						value				= 5;
+	public static final String	SYMBOL		= "R";
+
+	public boolean							wasMotion	= false;
 
 	public Rook(Chessboard chessboard, Player player) {
-		super(chessboard, player);// call initializer of super type: Piece
-		this.symbol = "R";
-		this.setImage();
-	}
-
-	@Override
-	void setImage() {
-		if (this.player.color == Player.colors.black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
-		}
-		orgImage = image;
+		super(chessboard, player);
+		this.symbol = SYMBOL;
+		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
 	@Override

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
+import jchess.util.Constants;
 import jchess.util.Player;
 import jchess.util.Square;
 
@@ -34,41 +35,25 @@ import jchess.util.Square;
  */
 public abstract class Piece {
 
-	public Chessboard				chessboard;
-	protected Square				square;
-	public Player						player;
-	public String						name;
-	public String						symbol;
-
-	protected static Image	imageBlack		= null;
-	protected static Image	imageWhite		= null;
-
-	public Image						orgImage;
-	public Image						image;
+	public Chessboard				chessboard		= null;
+	protected Square				square				= null;
+	public Player						player				= null;
+	public String						name					= Constants.EMPTY_STRING;
+	public String						symbol				= Constants.EMPTY_STRING;
 
 	protected IMoveBehavior	moveBehavior	= null;
+
+	private Image						orgImage			= null;
+	private Image						image					= null;
 
 	public Piece(Chessboard chessboard, Player player) {
 		this.chessboard = chessboard;
 		this.player = player;
-		if (player.color == Player.colors.black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
-		}
 		this.name = this.getClass().getSimpleName();
-
-		moveBehavior = createMoveBehavior();
-
+		this.moveBehavior = createMoveBehavior();
 	}
 
 	public abstract IMoveBehavior createMoveBehavior();
-
-	/*
-	 * Method to draw piece on chessboard
-	 * 
-	 * @graph : where to draw
-	 */
 
 	public final void draw(Graphics g) {
 		try {
@@ -79,7 +64,7 @@ public abstract class Piece {
 			int x = (this.square.pozX * height) + topLeft.x;
 			int y = (this.square.pozY * height) + topLeft.y;
 
-			if (image != null && g != null) {
+			if (orgImage != null && g != null) {
 				Image tempImage = orgImage;
 				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
@@ -120,12 +105,23 @@ public abstract class Piece {
 		return false;// if not, piece cannot move
 	}
 
-	void setImage() {
-		if (this.player.color == Player.colors.black) {
-			image = imageBlack;
+	public Image getImage(Player.colors color) {
+		Image result = null;
+		if (color == Player.colors.black) {
+			result = getBlackImage();
 		} else {
-			image = imageWhite;
+			result = getWhiteImage();
 		}
+
+		return result;
+	}
+
+	protected Image getWhiteImage() {
+		return null;
+	}
+
+	protected Image getBlackImage() {
+		return null;
 	}
 
 	public ArrayList<Square> allMoves() {
@@ -143,5 +139,14 @@ public abstract class Piece {
 	public void setSquare(Square square) {
 		this.square = square;
 		moveBehavior.setSquare(this.square);
+	}
+
+	protected void setMoveBehavior(IMoveBehavior moveBehavior) {
+		this.moveBehavior = moveBehavior;
+	}
+
+	protected void setImage(Image image) {
+		this.image = image;
+		this.orgImage = image;
 	}
 }
