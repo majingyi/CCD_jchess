@@ -1,22 +1,17 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 
 /*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
+ * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
 package jchess.util;
 
@@ -36,11 +31,13 @@ import jchess.pieces.Piece;
 import jchess.ui.ChessboardUI;
 import jchess.ui.Game;
 
-/** Class representing the players moves, it's also checking
- * that the moves taken by player are correct. 
- * All moves which was taken by current player are saving as List of Strings
- * The history of moves is printing in a table
- * @param game The current game
+/**
+ * Class representing the players moves, it's also checking that the moves taken
+ * by player are correct. All moves which was taken by current player are saving
+ * as List of Strings The history of moves is printing in a table
+ * 
+ * @param game
+ *          The current game
  */
 public class Moves extends AbstractTableModel {
 
@@ -119,8 +116,11 @@ public class Moves extends AbstractTableModel {
 		return false;
 	}
 
-	/** Method of adding new moves to the table
-	 * @param str String which in is saved player move
+	/**
+	 * Method of adding new moves to the table
+	 * 
+	 * @param str
+	 *          String which in is saved player move
 	 */
 	protected void addMove2Table(String str) {
 		try {
@@ -145,8 +145,11 @@ public class Moves extends AbstractTableModel {
 		}
 	}
 
-	/** Method of adding new move
-	 * @param move String which in is capt player move
+	/**
+	 * Method of adding new move
+	 * 
+	 * @param move
+	 *          String which in is capt player move
 	 */
 	public void addMove(String move) {
 		if (isMoveCorrect(move)) {
@@ -323,8 +326,11 @@ public class Moves extends AbstractTableModel {
 
 	}
 
-	/** Method with is checking is the move is correct
-	 * @param move String which in is capt player move
+	/**
+	 * Method with is checking is the move is correct
+	 * 
+	 * @param move
+	 *          String which in is capt player move
 	 * @return boolean 1 if the move is correct, else 0
 	 */
 	static public boolean isMoveCorrect(String move) {
@@ -389,8 +395,10 @@ public class Moves extends AbstractTableModel {
 		}
 	}
 
-	/** Method of getting the moves in string
-	 *  @return str String which in is capt player move
+	/**
+	 * Method of getting the moves in string
+	 * 
+	 * @return str String which in is capt player move
 	 */
 	public String getMovesInString() {
 		int n = 1;
@@ -407,8 +415,12 @@ public class Moves extends AbstractTableModel {
 		return str;
 	}
 
-	/** Method to set all moves from String with validation test (usefoul for network game)
-	 *  @param  moves String to set in String like PGN with full-notation format
+	/**
+	 * Method to set all moves from String with validation test (usefoul for
+	 * network game)
+	 * 
+	 * @param moves
+	 *          String to set in String like PGN with full-notation format
 	 */
 	public void setMoves(String moves) {
 		int from = 0;
@@ -510,8 +522,8 @@ public class Moves extends AbstractTableModel {
 						for (Object square : pieceMoves) {
 							Square currSquare = (Square) square;
 							if (currSquare.pozX == xTo && currSquare.pozY == yTo) {
-								xFrom = squares[i][j].piece.square.pozX;
-								yFrom = squares[i][j].piece.square.pozY;
+								xFrom = squares[i][j].piece.getSquare().pozX;
+								yFrom = squares[i][j].piece.getSquare().pozY;
 								pieceFound = true;
 							}
 						}

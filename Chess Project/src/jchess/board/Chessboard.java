@@ -17,9 +17,10 @@ import jchess.util.Moves.castling;
 import jchess.util.Player;
 import jchess.util.Square;
 
-/** Class to represent chessboard. Chessboard is made from squares.
- * It is setting the squers of chessboard and sets the pieces(pawns)
- * witch the owner is current player on it.
+/**
+ * Class to represent chessboard. Chessboard is made from squares. It is setting
+ * the squers of chessboard and sets the pieces(pawns) witch the owner is
+ * current player on it.
  */
 
 public class Chessboard {
@@ -59,10 +60,15 @@ public class Chessboard {
 		this.settings = settings;
 	}
 
-	/** Method setPieces on begin of new game or loaded game
-	 * @param places string with pieces to set on chessboard
-	 * @param plWhite reference to white player
-	 * @param plBlack reference to black player
+	/**
+	 * Method setPieces on begin of new game or loaded game
+	 * 
+	 * @param places
+	 *          string with pieces to set on chessboard
+	 * @param plWhite
+	 *          reference to white player
+	 * @param plBlack
+	 *          reference to black player
 	 */
 
 	public void setPieces(String places, Player plWhite, Player plBlack) {
@@ -81,11 +87,17 @@ public class Chessboard {
 		}
 	}/*--endOf-setPieces--*/
 
-	/** Method to move piece over chessboard
-	 * @param xFrom from which x move piece
-	 * @param yFrom from which y move piece
-	 * @param xTo to which x move piece
-	 * @param yTo to which y move piece
+	/**
+	 * Method to move piece over chessboard
+	 * 
+	 * @param xFrom
+	 *          from which x move piece
+	 * @param yFrom
+	 *          from which y move piece
+	 * @param xTo
+	 *          to which x move piece
+	 * @param yTo
+	 *          to which y move piece
 	 */
 	public void move(int xFrom, int yFrom, int xTo, int yTo) {
 		Square fromSQ = null;
@@ -120,10 +132,15 @@ public class Chessboard {
 		this.setPawns4NewGame(6, player1);
 	}/*--endOf-setPieces(boolean upsideDown)--*/
 
-	/**  method set Figures in row (and set Queen and King to right position)
-	 *  @param i row where to set figures (Rook, Knight etc.)
-	 *  @param player which is owner of pawns
-	 *  @param upsideDown if true white pieces will be on top of chessboard
+	/**
+	 * method set Figures in row (and set Queen and King to right position)
+	 * 
+	 * @param i
+	 *          row where to set figures (Rook, Knight etc.)
+	 * @param player
+	 *          which is owner of pawns
+	 * @param upsideDown
+	 *          if true white pieces will be on top of chessboard
 	 * */
 	private void setFigures4NewGame(int i, Player player, boolean upsideDown) {
 
@@ -158,9 +175,13 @@ public class Chessboard {
 		}
 	}
 
-	/**  method set Pawns in row
-	 *  @param i row where to set pawns
-	 *  @param player player which is owner of pawns
+	/**
+	 * method set Pawns in row
+	 * 
+	 * @param i
+	 *          row where to set pawns
+	 * @param player
+	 *          player which is owner of pawns
 	 * */
 	private void setPawns4NewGame(int i, Player player) {
 		if (i != 1 && i != 6) {
@@ -172,8 +193,11 @@ public class Chessboard {
 		}
 	}
 
-	/** Method selecting piece in chessboard
-	 * @param  sq square to select (when clicked))
+	/**
+	 * Method selecting piece in chessboard
+	 * 
+	 * @param sq
+	 *          square to select (when clicked))
 	 */
 	public void select(Square sq) {
 		this.activeSquare = sq;
@@ -186,9 +210,10 @@ public class Chessboard {
 
 	}
 
-	/*--endOf-select--*//** Method set variables active_x_square & active_y_square
-																																																															* to 0 values.
-																																																															*/
+	/*--endOf-select--*//**
+	 * Method set variables active_x_square &
+	 * active_y_square to 0 values.
+	 */
 	public void unselect() {
 		this.active_x_square = 0;
 		this.active_y_square = 0;
@@ -218,11 +243,11 @@ public class Chessboard {
 				this.move(this.squares[from.pozX][from.pozY], this.squares[to.pozX][to.pozY], true, false);
 				if (first.getPromotedPiece() != null) {
 					Pawn pawn = (Pawn) this.squares[to.pozX][to.pozY].piece;
-					pawn.square = null;
+					pawn.setSquare(null);
 
 					this.squares[to.pozX][to.pozY].piece = first.getPromotedPiece();
 					Piece promoted = this.squares[to.pozX][to.pozY].piece;
-					promoted.square = this.squares[to.pozX][to.pozY];
+					promoted.setSquare(this.squares[to.pozX][to.pozY]);
 				}
 				return true;
 			}
@@ -235,10 +260,15 @@ public class Chessboard {
 		move(begin, end, true);
 	}
 
-	/** Method move piece from square to square
-	 * @param begin square from which move piece
-	 * @param end square where we want to move piece         *
-	 * @param refresh chessboard, default: true
+	/**
+	 * Method move piece from square to square
+	 * 
+	 * @param begin
+	 *          square from which move piece
+	 * @param end
+	 *          square where we want to move piece *
+	 * @param refresh
+	 *          chessboard, default: true
 	 * */
 	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
 
@@ -246,7 +276,7 @@ public class Chessboard {
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
 		if (end.piece != null) {
-			end.piece.square = null;
+			end.piece.setSquare(null);
 		}
 
 		Square tempBegin = new Square(begin);// 4 moves history
@@ -254,7 +284,7 @@ public class Chessboard {
 
 		twoSquareMovedPawn2 = twoSquareMovedPawn;
 
-		begin.piece.square = end;// set square of piece to ending
+		begin.piece.setSquare(end);// set square of piece to ending
 		end.piece = begin.piece;// for ending square set piece from beginin
 		// square
 		begin.piece = null;// make null piece for begining square
@@ -284,7 +314,7 @@ public class Chessboard {
 				((Rook) end.piece).wasMotion = true;
 			}
 		} else if (end.piece.name.equals("Pawn")) {
-			if (twoSquareMovedPawn != null && squares[end.pozX][begin.pozY] == twoSquareMovedPawn.square) // en
+			if (twoSquareMovedPawn != null && squares[end.pozX][begin.pozY] == twoSquareMovedPawn.getSquare()) // en
 			// passant
 			{
 
@@ -305,7 +335,7 @@ public class Chessboard {
 				// passant)
 			}
 
-			if (end.piece.square.pozY == 0 || end.piece.square.pozY == 7) // promote
+			if (end.piece.getSquare().pozY == 0 || end.piece.getSquare().pozY == 7) // promote
 			// Pawn
 			{
 				if (clearForwardHistory) {
@@ -328,7 +358,7 @@ public class Chessboard {
 						Queen queen = new Queen(this, end.piece.player);
 						queen.chessboard = end.piece.chessboard;
 						queen.player = end.piece.player;
-						queen.square = end.piece.square;
+						queen.setSquare(end.piece.getSquare());
 						end.piece = queen;
 					} else if (newPiece.equals("Rook")) // transform pawn to
 					// rook
@@ -336,7 +366,7 @@ public class Chessboard {
 						Rook rook = new Rook(this, end.piece.player);
 						rook.chessboard = end.piece.chessboard;
 						rook.player = end.piece.player;
-						rook.square = end.piece.square;
+						rook.setSquare(end.piece.getSquare());
 						end.piece = rook;
 					} else if (newPiece.equals("Bishop")) // transform pawn to
 					// bishop
@@ -344,14 +374,14 @@ public class Chessboard {
 						Bishop bishop = new Bishop(this, end.piece.player);
 						bishop.chessboard = end.piece.chessboard;
 						bishop.player = end.piece.player;
-						bishop.square = end.piece.square;
+						bishop.setSquare(end.piece.getSquare());
 						end.piece = bishop;
 					} else // transform pawn to knight
 					{
 						Knight knight = new Knight(this, end.piece.player);
 						knight.chessboard = end.piece.chessboard;
 						knight.player = end.piece.player;
-						knight.square = end.piece.square;
+						knight.setSquare(end.piece.getSquare());
 						end.piece = knight;
 					}
 					promotedPiece = end.piece;
@@ -390,7 +420,7 @@ public class Chessboard {
 				Piece moved = last.getMovedPiece();
 				this.squares[begin.pozX][begin.pozY].piece = moved;
 
-				moved.square = this.squares[begin.pozX][begin.pozY];
+				moved.setSquare(this.squares[begin.pozX][begin.pozY]);
 
 				Piece taken = last.getTakenPiece();
 				if (last.getCastlingMove() != castling.none) {
@@ -398,12 +428,12 @@ public class Chessboard {
 					if (last.getCastlingMove() == castling.shortCastling) {
 						rook = this.squares[end.pozX - 1][end.pozY].piece;
 						this.squares[7][begin.pozY].piece = rook;
-						rook.square = this.squares[7][begin.pozY];
+						rook.setSquare(this.squares[7][begin.pozY]);
 						this.squares[end.pozX - 1][end.pozY].piece = null;
 					} else {
 						rook = this.squares[end.pozX + 1][end.pozY].piece;
 						this.squares[0][begin.pozY].piece = rook;
-						rook.square = this.squares[0][begin.pozY];
+						rook.setSquare(this.squares[0][begin.pozY]);
 						this.squares[end.pozX + 1][end.pozY].piece = null;
 					}
 					((King) moved).wasMotion = false;
@@ -413,11 +443,11 @@ public class Chessboard {
 				} else if (moved.name.equals("Pawn") && last.wasEnPassant()) {
 					Pawn pawn = (Pawn) last.getTakenPiece();
 					this.squares[end.pozX][begin.pozY].piece = pawn;
-					pawn.square = this.squares[end.pozX][begin.pozY];
+					pawn.setSquare(this.squares[end.pozX][begin.pozY]);
 
 				} else if (moved.name.equals("Pawn") && last.getPromotedPiece() != null) {
 					Piece promoted = this.squares[end.pozX][end.pozY].piece;
-					promoted.square = null;
+					promoted.setSquare(null);
 					this.squares[end.pozX][end.pozY].piece = null;
 				}
 
@@ -432,7 +462,7 @@ public class Chessboard {
 
 				if (taken != null && !last.wasEnPassant()) {
 					this.squares[end.pozX][end.pozY].piece = taken;
-					taken.square = this.squares[end.pozX][end.pozY];
+					taken.setSquare(this.squares[end.pozX][end.pozY]);
 				} else {
 					this.squares[end.pozX][end.pozY].piece = null;
 				}
@@ -456,5 +486,21 @@ public class Chessboard {
 
 	public ChessboardUI getChessboardUI() {
 		return uiChessboard;
+	}
+
+	/**
+	 * Method is useful for out of bounds protection
+	 * 
+	 * @param x
+	 *          x position on chessboard
+	 * @param y
+	 *          y position on chessboard
+	 * @return true if parameters are out of bounds (array)
+	 * */
+	public static boolean isout(int x, int y) {
+		if (x < 0 || x > 7 || y < 0 || y > 7) {
+			return true;
+		}
+		return false;
 	}
 }

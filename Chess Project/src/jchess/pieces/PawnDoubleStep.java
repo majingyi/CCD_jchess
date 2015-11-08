@@ -10,8 +10,7 @@ public class PawnDoubleStep extends Pawn {
 	}
 
 	@Override
-	protected boolean isDoubleMoveAllowed() {
-		// we always allow 2 square moves for pawns
-		return true;
+	public IMoveBehavior createMoveBehavior() {
+		return new PawnDoubleStepMoveBehavior(player, chessboard, square);
 	}
 }
