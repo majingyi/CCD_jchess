@@ -24,16 +24,24 @@ public class Pawn extends Piece {
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
+	/**
+	 * Implements the promotion of a pawn.
+	 * 
+	 * It does not take into account, that the promotion is only allowed to pieces
+	 * already captured from the opponent.
+	 * 
+	 * @param newPiece
+	 */
 	public void promote(String newPiece) {
-		if (newPiece.equals("Queen")) {
+		if (newPiece.equals(Queen.SYMBOL)) {
 			setMoveBehavior(new QueenMoveBehavior(player, chessboard, square));
 			setSymbol(Queen.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Queen.SYMBOL));
-		} else if (newPiece.equals("Rook")) {
+		} else if (newPiece.equals(Rook.SYMBOL)) {
 			setMoveBehavior(new RookMoveBehavior(player, chessboard, square));
 			setSymbol(Rook.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Rook.SYMBOL));
-		} else if (newPiece.equals("Bishop")) {
+		} else if (newPiece.equals(Bishop.SYMBOL)) {
 			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
 			setSymbol(Bishop.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Bishop.SYMBOL));

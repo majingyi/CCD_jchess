@@ -1,29 +1,7 @@
-/*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
- */
 package jchess.ui;
 
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,23 +10,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-/** Class responsible for promotion of a pawn.
- * When pawn reach the end of the chessboard it can be change to rook,
- * bishop, queen or knight. For what pawn is promoted decideds player.
- * @param parent Information about the current piece
- * @param color The player color
+import jchess.pieces.Bishop;
+import jchess.pieces.Knight;
+import jchess.pieces.Pawn;
+import jchess.pieces.Queen;
+import jchess.pieces.Rook;
+
+/**
+ * Class responsible for promotion of a pawn. When pawn reach the end of the
+ * chessboard it can be change to rook, bishop, queen or knight. For what pawn
+ * is promoted decides player.
+ * 
+ * @param parent
+ *          Information about the current piece
+ * @param color
+ *          The player color
  */
 public class PawnPromotionWindow extends JDialog implements ActionListener {
 
 	private static final long	serialVersionUID	= -9128995891728983191L;
 
-	JButton										knightButton;
-	JButton										bishopButton;
-	JButton										rookButton;
-	JButton										queenButton;
-	GridBagLayout							gbl;
-	public String							result;
-	GridBagConstraints				gbc;
+	private JButton						knightButton			= null;
+	private JButton						bishopButton			= null;
+	private JButton						rookButton				= null;
+	private JButton						queenButton				= null;
+	private String						result						= Pawn.SYMBOL;
 
 	public PawnPromotionWindow(Frame parent, String color) {
 		super(parent);
@@ -58,15 +44,11 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 		this.setMaximumSize(new Dimension(520, 130));
 		this.setResizable(false);
 		this.setLayout(new GridLayout(1, 4));
-		// this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		this.gbl = new GridBagLayout();
-		this.gbc = new GridBagConstraints();
 		this.knightButton = new JButton(new ImageIcon(GUI.loadImage("Knight-" + color + ".png")));
 		this.bishopButton = new JButton(new ImageIcon(GUI.loadImage("Bishop-" + color + ".png")));
 		this.rookButton = new JButton(new ImageIcon(GUI.loadImage("Rook-" + color + ".png")));
 		this.queenButton = new JButton(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
-		this.result = "";
 
 		this.knightButton.addActionListener(this);
 		this.bishopButton.addActionListener(this);
@@ -79,8 +61,11 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 		this.add(knightButton);
 	}
 
-	/** Method setting the color fo promoted pawn
-	 * @param color The players color
+	/**
+	 * Method setting the color fo promoted pawn
+	 * 
+	 * @param color
+	 *          The players color
 	 */
 	public void setColor(String color) {
 		this.knightButton.setIcon(new ImageIcon(GUI.loadImage("Knight-" + color + ".png")));
@@ -89,20 +74,27 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 		this.queenButton.setIcon(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
 	}
 
-	/** Method wich is changing a pawn into queen, rook, bishop or knight
-	 * @param arg0 Capt information about performed action
+	/**
+	 * Method wich is changing a pawn into queen, rook, bishop or knight
+	 * 
+	 * @param arg0
+	 *          Capt information about performed action
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == queenButton) {
-			result = "Queen";
+			result = Queen.SYMBOL;
 		} else if (arg0.getSource() == rookButton) {
-			result = "Rook";
+			result = Rook.SYMBOL;
 		} else if (arg0.getSource() == bishopButton) {
-			result = "Bishop";
+			result = Bishop.SYMBOL;
 		} else // knight
 		{
-			result = "Knight";
+			result = Knight.SYMBOL;
 		}
 		this.setVisible(false);
+	}
+
+	public String getResult() {
+		return result;
 	}
 }
