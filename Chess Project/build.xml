@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
- <project basedir="." default="build" name="Chess Project">
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Chess Project">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../../../Eclipse/3.8/eclipse"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
     <path id="Chess Project.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/appframework-1.0.3.jar"/>
         <pathelement location="lib/swing-worker-1.1.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -21,6 +32,7 @@
     <target name="clean">
         <delete dir="bin"/>
     </target>
+    <target depends="Junit Tests" name="test" />
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project" name="build"/>
     <target name="build-subprojects"/>
@@ -45,9 +57,36 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="New_configuration">
+    <target name="Chess Application Java Debugger">
+        <java classname="jchess.JChessApp" failonerror="true" fork="yes">
+            <jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"/>
+            <classpath refid="Chess Project.classpath"/>
+        </java>
+    </target>
+    <target name="Chess Application">
         <java classname="jchess.JChessApp" failonerror="true" fork="yes">
             <classpath refid="Chess Project.classpath"/>
         </java>
+    </target>
+    <target name="CommunicationDebugger">
+        <java classname="jchess.debugger.CommunicationDebugger" failonerror="true" fork="yes">
+            <classpath refid="Chess Project.classpath"/>
+        </java>
+    </target>
+    <target name="Junit Tests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.AllTests" todir="${junit.output.dir}"/>
+            <classpath refid="Chess Project.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>
