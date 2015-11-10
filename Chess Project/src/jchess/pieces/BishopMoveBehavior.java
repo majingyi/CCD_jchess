@@ -17,7 +17,7 @@ public class BishopMoveBehavior extends MoveBehavior {
 
 		for (int h = this.square.pozX - 1, i = this.square.pozY + 1; Chessboard.isout(h, i) == false; --h, ++i) // left-up
 		{
-			if (this.checkPiece(h, i)) // if on this sqhuare isn't piece
+			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
 				if (this.player.color == Player.colors.white) // white
 				{
@@ -35,13 +35,13 @@ public class BishopMoveBehavior extends MoveBehavior {
 					break;
 				}
 			} else {
-				break;// we've to break becouse we cannot go beside other piece!!
+				break;// we've to break because we cannot go beside other piece!!
 			}
 		}
 
 		for (int h = this.square.pozX - 1, i = this.square.pozY - 1; Chessboard.isout(h, i) == false; --h, --i) // left-down
 		{
-			if (this.checkPiece(h, i)) // if on this sqhuare isn't piece
+			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
 				if (this.player.color == Player.colors.white) // white
 				{
@@ -59,13 +59,13 @@ public class BishopMoveBehavior extends MoveBehavior {
 					break;
 				}
 			} else {
-				break;// we've to break becouse we cannot go beside other piece!!
+				break;// we've to break because we cannot go beside other piece!!
 			}
 		}
 
 		for (int h = this.square.pozX + 1, i = this.square.pozY + 1; Chessboard.isout(h, i) == false; ++h, ++i) // right-up
 		{
-			if (this.checkPiece(h, i)) // if on this sqhuare isn't piece
+			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
 				if (this.player.color == Player.colors.white) // white
 				{
@@ -83,13 +83,13 @@ public class BishopMoveBehavior extends MoveBehavior {
 					break;
 				}
 			} else {
-				break;// we've to break becouse we cannot go beside other piece!!
+				break;// we've to break because we cannot go beside other piece!!
 			}
 		}
 
 		for (int h = this.square.pozX + 1, i = this.square.pozY - 1; Chessboard.isout(h, i) == false; ++h, --i) // right-down
 		{
-			if (this.checkPiece(h, i)) // if on this sqhuare isn't piece
+			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
 				if (this.player.color == Player.colors.white) // white
 				{
@@ -107,11 +107,10 @@ public class BishopMoveBehavior extends MoveBehavior {
 					break;
 				}
 			} else {
-				break;// we've to break becouse we cannot go beside other piece!!
+				break;// we've to break because we cannot go beside other piece!!
 			}
 		}
 
 		return list;
 	}
-
 }
