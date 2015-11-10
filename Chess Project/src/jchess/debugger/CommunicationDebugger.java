@@ -35,9 +35,6 @@ public class CommunicationDebugger {
 				EventSet eventSet = eventQueue.remove();
 
 				for (Event event : eventSet) {
-					System.out.println("Event happend");
-					System.out.println("Event Class: " + event.getClass());
-
 					if (event instanceof MethodEntryEvent) {
 						MethodEntryEvent entryEvent = (MethodEntryEvent) event;
 						Method m = entryEvent.location().method();
