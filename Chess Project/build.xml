@@ -1,90 +1,127 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Chess Project">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../../../../../Eclipse/3.8/eclipse"/>
-    <property name="junit.output.dir" value="junit"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
-    <path id="Chess Project.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="lib/appframework-1.0.3.jar"/>
-        <pathelement location="lib/swing-worker-1.1.jar"/>
-        <pathelement location="lib/junit.jar"/>
-        <pathelement location="lib/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
-        <pathelement location="lib/log4j-1.2.17.jar"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-    </target>
-    <target depends="Junit Tests" name="test" />
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="Chess Project.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
-    <target name="Chess Application Java Debugger">
-        <java classname="jchess.JChessApp" failonerror="true" fork="yes">
-            <jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"/>
-            <classpath refid="Chess Project.classpath"/>
-        </java>
-    </target>
-    <target name="Chess Application">
-        <java classname="jchess.JChessApp" failonerror="true" fork="yes">
-            <classpath refid="Chess Project.classpath"/>
-        </java>
-    </target>
-    <target name="CommunicationDebugger">
-        <java classname="jchess.debugger.CommunicationDebugger" failonerror="true" fork="yes">
-            <classpath refid="Chess Project.classpath"/>
-        </java>
-    </target>
-    <target name="Junit Tests">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="tests.AllTests" todir="${junit.output.dir}"/>
-            <classpath refid="Chess Project.classpath"/>
-        </junit>
-    </target>
-    <target name="junitreport">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
-    </target>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chess-compile-test-coverage" default="all" basedir=".">
+ 
+     <!-- properties -->
+     <property name="libs.dir" value="lib" />
+     <property name="src.dir" value="src" />
+     <property name="test.dir" value="src/tests" />
+     <property name="target.dir" value="bin" />
+     <property name="classes.dir" value="${target.dir}/classes" />
+     <property name="instrumentedclasses.dir" value="${target.dir}/instrumentedclasses" />
+     <property name="testclasses.dir" value="${target.dir}/testclasses" />
+     <property name="config.dir" value="config" />
+     <property name="junit.reports.dir" value="${target.dir}/junit" />
+     <property name="cobertura.reports.dir" value="${target.dir}/cobertura" />
+     <property name="cobertura.datafile" value="${target.dir}/cobertura.ser" />
+     <property name="project.name" value="${ant.project.name}" />
+ 
+     <!-- paths -->
+     <path id="src.compile.classpath" description="classpath for compiling sources">
+          <pathelement location="${libs.dir}/log4j-1.2.17.jar" />
+     	  <pathelement location="${libs.dir}/appframework-1.0.3.jar"/>
+     	  <pathelement location="${libs.dir}/swing-worker-1.1.jar"/>
+     	  <pathelement location="${libs.dir}/junit.jar"/>
+     	  <pathelement location="${libs.dir}/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+     	  <pathelement location="${libs.dir}/log4j-1.2.17.jar"/>
+     </path>
+     <path id="test.compile.classpath" description="classpath for compiling test-sources">
+          <pathelement location="${classes.dir}" />
+          <pathelement location="${libs.dir}/junit.jar" />
+     </path>
+     <path id="test.runtime.classpath" description="classpath for running junit-tests">
+          <pathelement location="${testclasses.dir}" />
+          <pathelement location="${instrumentedclasses.dir}" />
+          <pathelement location="${config.dir}" />
+          <pathelement location="${libs.dir}/junit.jar" />
+          <pathelement location="${libs.dir}/org.hamcrest.core_1.1.0.v20090501071000.jar" />
+          <pathelement location="${libs.dir}/log4j-1.2.17.jar" />
+     </path>
+     <path id="cobertura.classpath" description="classpath for instrumenting classes">
+          <pathelement location="${libs.dir}/cobertura-2.0.3.jar" />
+          <fileset dir="${libs.dir}">
+               <include name="cobertura_Dependencies/*.jar" />
+          </fileset>
+     </path>
+ 
+     <!-- taskdefs -->
+     <taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+ 
+     <!-- targets -->
+     <target name="all">
+          <echo message="clean: deleting the target-directory" />
+          <ant target="clean" />
+           
+          <echo message="prepare: create the necessary directories" />
+          <ant target="prepare" />
+           
+          <echo message="compile.sources: compile all stuff in src-directory" />
+          <ant target="build" />
+           
+          <echo message="instrument.classes: instrument all compiled classes with coverage-markers" />
+          <ant target="instrument.classes" />
+           
+          <echo message="compile.tests: compile all stuff in test-directory" />
+          <ant target="compile.tests" />
+           
+          <echo message="test: execute the junit-test and create junit- and cobertura-reports" />
+          <ant target="test" />
+                
+          <echo message="package: put all stuff from classes into jar" />
+          <ant target="package" />
+     </target>
+ 
+     <target name="clean" description="deleting the target-directory">
+          <delete includeEmptyDirs="true" failonerror="false">
+               <fileset dir="${target.dir}" />
+          </delete>
+     </target>
+ 
+     <target name="prepare" description="creating the needed directories within target-directory">
+          <mkdir dir="${target.dir}" />
+          <mkdir dir="${classes.dir}" />
+          <mkdir dir="${testclasses.dir}" />
+          <mkdir dir="${junit.reports.dir}" />
+          <mkdir dir="${cobertura.reports.dir}" />
+     </target>
+ 
+     <target name="build">
+          <javac classpathref="src.compile.classpath" srcdir="${src.dir}" destdir="${classes.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
+     </target>
+ 
+     <target name="instrument.classes">
+          <cobertura-instrument todir="${instrumentedclasses.dir}" datafile="${cobertura.datafile}">
+               <includeclasses regex=".*" />
+               <instrumentationClasspath>
+                    <pathelement location="${classes.dir}" />
+               </instrumentationClasspath>
+          </cobertura-instrument>
+     </target>
+ 
+     <target name="compile.tests">
+          <javac classpathref="test.compile.classpath" srcdir="${test.dir}" destdir="${testclasses.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
+     </target>
+ 
+     <target name="test" description="run the unit-test. attention: haltonfailure=no, because we want to bring the whole build to its end, even if there are testfailures for now">
+          <junit printsummary="yes" haltonfailure="no" showoutput="true">
+               <!-- junit-specific -->
+               <formatter type="xml" />
+               <classpath refid="test.runtime.classpath" />
+               <batchtest fork="yes" todir="${junit.reports.dir}">
+                    <fileset dir="${test.dir}">
+                         <include name="**/*Test.java" />
+                    </fileset>
+               </batchtest>
+ 
+               <!-- cobertura-specific -->
+               <sysproperty key="net.sourceforge.cobertura.datafile" file="${cobertura.datafile}" />
+               <classpath refid="cobertura.classpath" />
+          </junit>
+ 
+          <cobertura-report format="html" destdir="${cobertura.reports.dir}" datafile="${cobertura.datafile}" srcdir="${src.dir}" />
+     </target>
+ 
+     <target name="package">
+          <jar destfile="${target.dir}/${project.name}.jar" basedir="${classes.dir}"/>
+     </target>
+ 
 </project>
