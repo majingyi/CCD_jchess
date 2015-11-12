@@ -14,7 +14,6 @@ public class PawnMoveBehavior extends MoveBehavior {
 
 	@Override
 	public ArrayList<Square> allMoves() {
-		// System.out.println(this.player.goDown);//4test
 		ArrayList<Square> list = new ArrayList<Square>();
 		Square sq;
 		Square sq1;

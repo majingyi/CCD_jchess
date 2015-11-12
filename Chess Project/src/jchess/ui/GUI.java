@@ -1,23 +1,3 @@
-/*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
- */
 package jchess.ui;
 
 import java.awt.Image;
@@ -31,7 +11,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import jchess.JChessApp;
-
+import jchess.core.Logging;
 
 /**
  * Class representing the game interface which is seen by a player and where are
@@ -66,16 +46,15 @@ public class GUI {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		try {
 			String imageLink = "resources/theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
-			System.out.println(configFile.getProperty("THEME"));
+			Logging.log(configFile.getProperty("THEME"));
 			url = JChessApp.class.getResource(imageLink);
 			img = tk.getImage(url);
 
 		} catch (Exception e) {
-			System.out.println("some error loading image!");
-			e.printStackTrace();
+			Logging.log("some error loading image!", e);
 		}
 		return img;
-	}/*--endOf-loadImage--*/
+	}
 
 	public static boolean themeIsValid(String name) {
 		return true;
@@ -100,7 +79,7 @@ public class GUI {
 			try {
 				confFile.load(new FileInputStream(configFile));
 			} catch (java.io.IOException exc) {
-				System.out.println("some error loading properties file. Cause: " + exc);
+				Logging.log("some error loading properties file. Cause: ", exc);
 				exc.printStackTrace();
 			}
 		}
@@ -113,10 +92,10 @@ public class GUI {
 			File outFile = new File(GUI.getJarPath() + File.separator + "config.txt");
 			configFile.store(new FileOutputStream(outFile), null);
 		} catch (FileNotFoundException e) {
-			System.out.println("some error storing properties file. Cause: " + e);
+			Logging.log("some error storing properties file. Cause: ", e);
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("some error storing properties file. Cause: " + e);
+			Logging.log("some error storing properties file. Cause: ", e);
 			e.printStackTrace();
 		}
 	}

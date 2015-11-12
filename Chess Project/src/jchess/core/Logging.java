@@ -35,11 +35,19 @@ public class Logging {
 		logger.error(message);
 	}
 
-	public static void logException(Exception e) {
-		logException("Exception occurred", e);// TODO externalize Strings
+	public static void log(Throwable e) {
+		log("Exception occurred", e);// TODO externalize Strings
 	}
 
-	public static void logException(String message, Exception e) {
+	public static void log(String message, Throwable e) {
 		logger.error(message, e);
+	}
+
+	public static void log(int number) {
+		logger.info(number);
+	}
+
+	public static void log(boolean bool) {
+		logger.info(bool);
 	}
 }

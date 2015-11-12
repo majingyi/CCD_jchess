@@ -1,18 +1,3 @@
-/*
- * # This program is free software: you can redistribute it and/or modify # it
- * under the terms of the GNU General Public License as published by # the Free
- * Software Foundation, either version 3 of the License, or # (at your option)
- * any later version. # # This program is distributed in the hope that it will
- * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
- * Public License for more details. # # You should have received a copy of the
- * GNU General Public License # along with this program. If not, see
- * <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
- */
 package jchess.util;
 
 import java.awt.Dimension;
@@ -27,6 +12,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import jchess.Settings;
+import jchess.core.Logging;
 import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
 import jchess.ui.ChessboardUI;
@@ -352,7 +338,7 @@ public class Moves extends AbstractTableModel {
 					break; // R like Rook
 			}
 			sign = move.charAt(from);
-			System.out.println(sign);
+			Logging.log(sign);
 			if (sign < 97 || sign > 104) // if lower than 'a' or higher than 'h'
 			{
 				return false;
@@ -432,11 +418,11 @@ public class Moves extends AbstractTableModel {
 		while (true) {
 			from = moves.indexOf(" ", from);
 			to = moves.indexOf(" ", from + 1);
-			// System.out.println(from+">"+to);
+			// Logging.log(from+">"+to);
 			try {
 				tempArray.add(moves.substring(from + 1, to).trim());
 			} catch (java.lang.StringIndexOutOfBoundsException exc) {
-				System.out.println("error parsing file to load: " + exc);
+				Logging.log("error parsing file to load: ", exc);
 				break;
 			}
 			if (n % 2 == 0) {

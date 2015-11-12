@@ -443,7 +443,7 @@ public class King extends Piece {
 
 		// Pawn
 		if (this.player.goDown) // check if player "go" down or up
-		{// System.out.println("go down");
+		{
 			newX = s.pozX - 1;
 			newY = s.pozY + 1;
 			if (Chessboard.isout(newX, newY) == false) {
@@ -475,7 +475,7 @@ public class King extends Piece {
 					return false;
 				}
 			}
-		} else {// System.out.println("go up");
+		} else {
 			newX = s.pozX - 1;
 			newY = s.pozY - 1;
 			if (Chessboard.isout(newX, newY) == false) {

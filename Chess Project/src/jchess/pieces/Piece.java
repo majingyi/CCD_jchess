@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
+import jchess.core.Logging;
 import jchess.util.Constants;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -72,11 +73,11 @@ public abstract class Piece {
 				image = resized.getScaledInstance(height, height, 0);
 				g2d.drawImage(image, x, y, null);
 			} else {
-				System.out.println("image is null!");
+				Logging.logError("image is null!");
 			}
 
 		} catch (java.lang.NullPointerException exc) {
-			System.out.println("Something wrong when painting piece: " + exc.getMessage());
+			Logging.log("Something wrong when painting piece: ", exc);
 		}
 	}
 

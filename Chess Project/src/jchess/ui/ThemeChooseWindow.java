@@ -1,23 +1,3 @@
-/*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
- */
 package jchess.ui;
 
 import java.awt.Dimension;
@@ -41,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Logging;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 
@@ -59,7 +40,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 
 		File dir = new File(GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator);
 
-		System.out.println("Theme path: " + dir.getPath());
+		Logging.log("Theme path: " + dir.getPath());
 
 		File[] files = dir.listFiles();
 		if (files != null && dir.exists()) {
@@ -87,7 +68,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 			try {
 				this.themePreview = new ImageIcon(GUI.loadImage("Preview.png"));
 			} catch (java.lang.NullPointerException exc) {
-				System.out.println("Cannot find preview image: " + exc);
+				Logging.log("Cannot find preview image: ", exc);
 				this.themePreview = new ImageIcon(JChessApp.class.getResource("resources/theme/noPreview.png"));
 				return;
 			}
@@ -112,9 +93,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 	public void valueChanged(ListSelectionEvent event) {
 		String element = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
 		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator;
-		// String path =
-		// JChessApp.class.getResource("theme/").getPath().toString();
-		System.out.println(path + element + "/images/Preview.png");
+		Logging.log(path + element + "/images/Preview.png");
 		this.themePreview = new ImageIcon(path + element + "/images/Preview.png");
 		this.themePreviewButton.setIcon(this.themePreview);
 	}
@@ -123,7 +102,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 	 * Method which is changing a pawn into queen, rook, bishop or knight
 	 * 
 	 * @param evt
-	 *            Capt information about performed action
+	 *          Capt information about performed action
 	 */
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == this.okButton) {
@@ -145,7 +124,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 				this.setVisible(false);
 
 			}
-			System.out.print(prp.getProperty("THEME"));
+			Logging.log(prp.getProperty("THEME"));
 		}
 	}
 }

@@ -1,21 +1,17 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 
 /*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
+ * Authors: Mateusz Sławomir Lach ( matlak, msl )
  */
 package jchess.ui;
 
@@ -40,14 +36,17 @@ import javax.swing.JTextField;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Logging;
 import jchess.server.MD5;
 import jchess.server.Server;
 import jchess.util.Client;
 
 /**
- * Class responible for drawing Network Settings, when player want to start
- * a game on a network
- * @param parent Where are saved default settings
+ * Class responible for drawing Network Settings, when player want to start a
+ * game on a network
+ * 
+ * @param parent
+ *          Where are saved default settings
  */
 public class DrawNetworkSettings extends JPanel implements ActionListener {
 
@@ -241,7 +240,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener {
 
 				if (isJoining) // Client connection: succesful
 				{
-					System.out.println("Client connection: succesful");
+					Logging.log("Client connection: succesful");
 					// create new game and draw chessboard
 					Game newGUI = JChessApp.jcv.addNewTab("Network game, table: " + textGameID.getText()/*
 																																															 * client
@@ -279,7 +278,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener {
 				}
 
 			} catch (Error err) {
-				System.out.println("Client connection: failure");
+				Logging.log("Client connection: failure", err);
 				JOptionPane.showMessageDialog(this, err);
 			}
 		}

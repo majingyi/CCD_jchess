@@ -2,6 +2,7 @@ package jchess.board;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Logging;
 import jchess.pieces.Bishop;
 import jchess.pieces.King;
 import jchess.pieces.Knight;
@@ -105,7 +106,7 @@ public class Chessboard {
 			fromSQ = this.squares[xFrom][yFrom];
 			toSQ = this.squares[xTo][yTo];
 		} catch (java.lang.IndexOutOfBoundsException exc) {
-			System.out.println("error moving piece: " + exc);
+			Logging.log("error moving piece: ", exc);
 			return;
 		}
 		this.move(fromSQ, toSQ, true);
@@ -144,7 +145,7 @@ public class Chessboard {
 	private void setFigures4NewGame(int i, Player player, boolean upsideDown) {
 
 		if (i != 0 && i != 7) {
-			System.out.println("error setting figures like rook etc.");
+			Logging.logError("error setting figures like rook etc.");
 			return;
 		} else if (i == 0) {
 			player.goDown = true;
@@ -184,7 +185,7 @@ public class Chessboard {
 	 * */
 	private void setPawns4NewGame(int i, Player player) {
 		if (i != 1 && i != 6) {
-			System.out.println("error setting pawns etc.");
+			Logging.logError("error setting pawns etc.");
 			return;
 		}
 		for (int x = 0; x < 8; x++) {
@@ -203,10 +204,8 @@ public class Chessboard {
 		this.active_x_square = sq.pozX + 1;
 		this.active_y_square = sq.pozY + 1;
 
-		// this.draw();//redraw
-		System.out.println("active_x: " + this.active_x_square + " active_y: " + this.active_y_square);// 4tests
+		Logging.log("active_x: " + this.active_x_square + " active_y: " + this.active_y_square);// 4tests
 		uiChessboard.repaint();
-
 	}
 
 	/*--endOf-select--*//**

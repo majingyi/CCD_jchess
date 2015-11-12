@@ -1,22 +1,17 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 
 /*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
+ * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
 package jchess.ui;
 
@@ -40,16 +35,17 @@ import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Logging;
 import jchess.pieces.King;
 import jchess.util.Client;
 import jchess.util.Moves;
 import jchess.util.Player;
 import jchess.util.Square;
 
-/** Class responsible for the starts of new games, loading games,
- * saving it, and for ending it.
- * This class is also responsible for appoing player with have
- * a move at the moment
+/**
+ * Class responsible for the starts of new games, loading games, saving it, and
+ * for ending it. This class is also responsible for appoing player with have a
+ * move at the moment
  */
 public class Game extends JPanel implements MouseListener, ComponentListener {
 
@@ -96,8 +92,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.setDoubleBuffered(true);
 	}
 
-	/** Method to save actual state of game
-	 * @param path address of place where game will be saved
+	/**
+	 * Method to save actual state of game
+	 * 
+	 * @param path
+	 *          address of place where game will be saved
 	 */
 	public void saveGame(File path) {
 		File file = path;
@@ -120,15 +119,18 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			fileW.flush();
 			fileW.close();
 		} catch (java.io.IOException exc) {
-			System.out.println("error writing to file: " + exc);
+			Logging.log("error writing to file: ", exc);
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
 		}
 		JOptionPane.showMessageDialog(this, Settings.lang("game_saved_properly"));
 	}
 
-	/** Loading game method(loading game state from the earlier saved file)
-	 *  @param file File where is saved game
+	/**
+	 * Loading game method(loading game state from the earlier saved file)
+	 * 
+	 * @param file
+	 *          File where is saved game
 	 */
 
 	/*
@@ -144,7 +146,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileR = new FileReader(file);
 		} catch (java.io.IOException exc) {
-			System.out.println("Something wrong reading file: " + exc);
+			Logging.log("Something wrong reading file: ", exc);
 			return;
 		}
 		BufferedReader br = new BufferedReader(fileR);
@@ -157,7 +159,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			blackName = getValue(tempStr);
 			tempStr = getLineWithVar(br, new String("1."));
 		} catch (ReadGameError err) {
-			System.out.println("Error reading file: " + err);
+			Logging.log("Error reading file: ", err);
 			return;
 		}
 		Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName);
@@ -177,11 +179,17 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		// newGUI.chessboard.draw();
 	}
 
-	/** Method checking in with of line there is an error
-	 *  @param  br BufferedReader class object to operate on
-	 *  @param  srcStr String class object with text which variable you want to get in file
-	 *  @return String with searched variable in file (whole line)
-	 *  @throws ReadGameError class object when something goes wrong when reading file
+	/**
+	 * Method checking in with of line there is an error
+	 * 
+	 * @param br
+	 *          BufferedReader class object to operate on
+	 * @param srcStr
+	 *          String class object with text which variable you want to get in
+	 *          file
+	 * @return String with searched variable in file (whole line)
+	 * @throws ReadGameError
+	 *           class object when something goes wrong when reading file
 	 */
 	static public String getLineWithVar(BufferedReader br, String srcStr) throws ReadGameError {
 		String str = new String();
@@ -189,7 +197,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			try {
 				str = br.readLine();
 			} catch (java.io.IOException exc) {
-				System.out.println("Something wrong reading file: " + exc);
+				Logging.log("Something wrong reading file: ", exc);
 			}
 			if (str == null) {
 				throw new ReadGameError();
@@ -200,13 +208,16 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		}
 	}
 
-	/** Method to get value from loaded txt line
-	 *  @param line Line which is readed
-	 *  @return result String with loaded value
-	 *  @throws ReadGameError object class when something goes wrong
+	/**
+	 * Method to get value from loaded txt line
+	 * 
+	 * @param line
+	 *          Line which is readed
+	 * @return result String with loaded value
+	 * @throws ReadGameError
+	 *           object class when something goes wrong
 	 */
 	static public String getValue(String line) throws ReadGameError {
-		// System.out.println("getValue called with: "+line);
 		int from = line.indexOf("\"");
 		int to = line.lastIndexOf("\"");
 		int size = line.length() - 1;
@@ -217,19 +228,18 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			result = line.substring(from + 1, to);
 		} catch (java.lang.StringIndexOutOfBoundsException exc) {
-			System.out.println("error getting value: " + exc);
+			Logging.log("error getting value: ", exc);
 			return "none";
 		}
 		return result;
 	}
 
-	/** Method to Start new game
-	 *
+	/**
+	 * Method to Start new game
+	 * 
 	 */
 	public void newGame() {
 		chessboard.getChessboard().setPieces("", settings.playerWhite, settings.playerBlack);
-
-		// System.out.println("new game, game type: "+settings.gameType.name());
 
 		activePlayer = settings.playerWhite;
 		if (activePlayer.playerType != Player.playerTypes.localUser) {
@@ -248,16 +258,21 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		// dirty hacks ends over here :)
 	}
 
-	/** Method to end game
-	 *  @param message what to show player(s) at end of the game (for example "draw", "black wins" etc.)
+	/**
+	 * Method to end game
+	 * 
+	 * @param message
+	 *          what to show player(s) at end of the game (for example "draw",
+	 *          "black wins" etc.)
 	 */
 	public void endGame(String massage) {
 		this.blockedChessboard = true;
-		System.out.println(massage);
+		Logging.log(massage);
 		JOptionPane.showMessageDialog(null, massage);
 	}
 
-	/** Method to swich active players after move
+	/**
+	 * Method to swich active players after move
 	 */
 	public void switchActive() {
 		if (activePlayer == settings.playerWhite) {
@@ -269,20 +284,22 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.gameClock.switch_clocks();
 	}
 
-	/** Method of getting accualy active player
-	 *  @return  player The player which have a move
+	/**
+	 * Method of getting accualy active player
+	 * 
+	 * @return player The player which have a move
 	 */
 	public Player getActivePlayer() {
 		return this.activePlayer;
 	}
 
-	/** Method to go to next move (checks if game is local/network etc.)
+	/**
+	 * Method to go to next move (checks if game is local/network etc.)
 	 */
 	public void nextMove() {
 		switchActive();
 
-		System.out
-				.println("next move, active player: " + activePlayer.name + ", color: " + activePlayer.color.name() + ", type: " + activePlayer.playerType.name());
+		Logging.log("next move, active player: " + activePlayer.name + ", color: " + activePlayer.color.name() + ", type: " + activePlayer.playerType.name());
 		if (activePlayer.playerType == Player.playerTypes.localUser) {
 			this.blockedChessboard = false;
 		} else if (activePlayer.playerType == Player.playerTypes.networkUser) {
@@ -291,11 +308,18 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		}
 	}
 
-	/** Method to simulate Move to check if it's correct etc. (usable for network game).
-	 * @param beginX from which X (on chessboard) move starts
-	 * @param beginY from which Y (on chessboard) move starts
-	 * @param endX   to   which X (on chessboard) move go
-	 * @param endY   to   which Y (on chessboard) move go
+	/**
+	 * Method to simulate Move to check if it's correct etc. (usable for network
+	 * game).
+	 * 
+	 * @param beginX
+	 *          from which X (on chessboard) move starts
+	 * @param beginY
+	 *          from which Y (on chessboard) move starts
+	 * @param endX
+	 *          to which X (on chessboard) move go
+	 * @param endY
+	 *          to which Y (on chessboard) move go
 	 * */
 	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
 		try {
@@ -304,7 +328,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			{
 				chessboard.getChessboard().move(chessboard.getChessboard().squares[beginX][beginY], chessboard.getChessboard().squares[endX][endY]);
 			} else {
-				System.out.println("Bad move");
+				Logging.log("Bad move");
 				return false;
 			}
 			chessboard.getChessboard().unselect();
@@ -451,10 +475,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					return;
 				}
 			} else if (blockedChessboard) {
-				System.out.println("Chessboard is blocked");
+				Logging.log("Chessboard is blocked");
 			}
 		}
-		// chessboard.repaint();
 	}
 
 	public void mouseReleased(MouseEvent arg0) {

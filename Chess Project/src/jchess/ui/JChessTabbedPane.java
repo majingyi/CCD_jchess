@@ -1,22 +1,17 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>..
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>..
  */
 
 /*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
+ * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
 package jchess.ui;
 
@@ -33,6 +28,7 @@ import javax.swing.Icon;
 import javax.swing.JTabbedPane;
 
 import jchess.JChessApp;
+import jchess.core.Logging;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {
 
@@ -59,7 +55,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 
 	public void addTab(String title, Component component, Icon closeIcon) {
 		super.addTab(title, new TabbedPaneIcon(closeIcon), component);
-		System.out.println("Present number of tabs: " + this.getTabCount());
+		Logging.log("Present number of tabs: " + this.getTabCount());
 		this.updateAddIconRect();
 	}
 
@@ -83,7 +79,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 		if (tabNumber >= 0) {
 			rect = ((TabbedPaneIcon) getIconAt(tabNumber)).getBounds();
 			if (rect.contains(e.getX(), e.getY())) {
-				System.out.println("Removing tab with " + tabNumber + " number!...");
+				Logging.log("Removing tab with " + tabNumber + " number!...");
 				this.removeTabAt(tabNumber);// remove tab
 				this.updateAddIconRect();
 			}
@@ -91,11 +87,9 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 				this.showNewGameWindow();
 			}
 		} else if (this.addIconRect != null && this.addIconRect.contains(e.getX(), e.getY())) {
-			System.out.println("newGame by + button");
+			Logging.log("newGame by + button");
 			this.showNewGameWindow();
 		}
-		// System.out.println("x:"
-		// +e.getX()+" y: "+e.getY()+" x:"+this.addIconRect.x+" y::"+this.addIconRect.y+" width:"+this.addIconRect.width+" height: "+this.addIconRect.height);
 	}
 
 	public void mouseEntered(MouseEvent e) {

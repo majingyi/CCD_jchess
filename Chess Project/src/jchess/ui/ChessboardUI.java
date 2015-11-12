@@ -31,6 +31,7 @@ import javax.swing.JPanel;
 
 import jchess.Settings;
 import jchess.board.Chessboard;
+import jchess.core.Logging;
 import jchess.util.Moves;
 import jchess.util.Square;
 
@@ -115,7 +116,7 @@ public class ChessboardUI extends JPanel {
 		// is out of
 		// chessboard
 		{
-			System.out.println("click out of chessboard.");
+			Logging.log("click out of chessboard.");
 			return null;
 		}
 		if (this.settings.renderLabels) {
@@ -137,12 +138,12 @@ public class ChessboardUI extends JPanel {
 		}
 		// Square newActiveSquare =
 		// this.squares[(int)square_x-1][(int)square_y-1];//4test
-		System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
+		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 		Square result;
 		try {
 			result = board.squares[(int) square_x - 1][(int) square_y - 1];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
+			Logging.log("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : ", exc);
 			return null;
 		}
 		return result;

@@ -1,23 +1,3 @@
-/*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
- * Damian Marciniak
- */
 package jchess.ui;
 
 import java.awt.Color;
@@ -30,11 +10,15 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import jchess.Settings;
+import jchess.core.Logging;
 import jchess.util.Clock;
 import jchess.util.Player;
 
-/** Class to representing the full game time
- * @param game The current game
+/**
+ * Class to representing the full game time
+ * 
+ * @param game
+ *          The current game
  */
 public class GameClock extends JPanel implements Runnable {
 
@@ -71,13 +55,15 @@ public class GameClock extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 	}
 
-	/** Method to init game clock
+	/**
+	 * Method to init game clock
 	 */
 	public void start() {
 		this.thread.start();
 	}
 
-	/** Method to stop game clock
+	/**
+	 * Method to stop game clock
 	 */
 	public void stop() {
 		this.runningClock = null;
@@ -85,13 +71,14 @@ public class GameClock extends JPanel implements Runnable {
 		try {// block this thread
 			this.thread.wait();
 		} catch (java.lang.InterruptedException exc) {
-			System.out.println("Error blocking thread: " + exc);
+			Logging.log("Error blocking thread: ", exc);
 		} catch (java.lang.IllegalMonitorStateException exc1) {
-			System.out.println("Error blocking thread: " + exc1);
+			Logging.log("Error blocking thread: ", exc1);
 		}
 	}
 
-	/** Method of drawing graphical background of clock
+	/**
+	 * Method of drawing graphical background of clock
 	 */
 	void drawBackground() {
 		Graphics gr = this.background.getGraphics();
@@ -115,12 +102,13 @@ public class GameClock extends JPanel implements Runnable {
 	}
 
 	/**
-	Annotation to superclass Graphics drawing the clock graphics
-	 * @param g Graphics2D Capt object to paint
+	 * Annotation to superclass Graphics drawing the clock graphics
+	 * 
+	 * @param g
+	 *          Graphics2D Capt object to paint
 	 */
 	@Override
 	public void paint(Graphics g) {
-		// System.out.println("rysuje zegary");
 		super.paint(g);
 		white_clock = this.clock1.prepareString();
 		black_clock = this.clock2.prepareString();
@@ -151,15 +139,18 @@ public class GameClock extends JPanel implements Runnable {
 	}
 
 	/**
-	Annotation to superclass Graphics updateing clock graphisc
-	 * @param g Graphics2D Capt object to paint
+	 * Annotation to superclass Graphics updateing clock graphisc
+	 * 
+	 * @param g
+	 *          Graphics2D Capt object to paint
 	 */
 	@Override
 	public void update(Graphics g) {
 		paint(g);
 	}
 
-	/** Method of swiching the players clocks
+	/**
+	 * Method of swiching the players clocks
 	 */
 	public void switch_clocks() {
 		/*
@@ -174,9 +165,13 @@ public class GameClock extends JPanel implements Runnable {
 		}
 	}
 
-	/** Method with is setting the players clocks time
-	 * @param t1 Capt the player time
-	 * @param t2 Capt the player time
+	/**
+	 * Method with is setting the players clocks time
+	 * 
+	 * @param t1
+	 *          Capt the player time
+	 * @param t2
+	 *          Capt the player time
 	 */
 	public void setTimes(int t1, int t2) {
 		/*
@@ -187,9 +182,13 @@ public class GameClock extends JPanel implements Runnable {
 		this.clock2.init(t2);
 	}
 
-	/** Method with is setting the players clocks
-	 * @param p1 Capt player information
-	 * @param p2 Capt player information
+	/**
+	 * Method with is setting the players clocks
+	 * 
+	 * @param p1
+	 *          Capt player information
+	 * @param p2
+	 *          Capt player information
 	 */
 	private void setPlayers(Player p1, Player p2) {
 		/*
@@ -206,7 +205,8 @@ public class GameClock extends JPanel implements Runnable {
 		}
 	}
 
-	/** Method with is running the time on clock
+	/**
+	 * Method with is running the time on clock
 	 */
 	public void run() {
 		while (true) {
@@ -216,7 +216,7 @@ public class GameClock extends JPanel implements Runnable {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						System.out.println("Some error in gameClock thread: " + e);
+						Logging.log("Some error in gameClock thread: ", e);
 					}
 					// if(this.game.blockedChessboard)
 					// this.game.blockedChessboard = false;
@@ -228,7 +228,8 @@ public class GameClock extends JPanel implements Runnable {
 		}
 	}
 
-	/** Method of checking is the time of the game is not over
+	/**
+	 * Method of checking is the time of the game is not over
 	 */
 	private void timeOver() {
 		String color = new String();
@@ -237,11 +238,9 @@ public class GameClock extends JPanel implements Runnable {
 		} else if (this.clock2.get_left_time() == 0) {
 			color = this.clock1.getPlayer().color.toString();
 		} else {// if called in wrong moment
-			System.out.println("Time over called when player got time 2 play");
+			Logging.log("Time over called when player got time 2 play");
 		}
 		this.game.endGame("Time is over! " + color + " player win the game.");
 		this.stop();
-
-		// JOptionPane.showMessageDialog(this, "koniec czasu");
 	}
 }

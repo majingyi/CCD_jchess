@@ -1,21 +1,17 @@
 /*
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * # This program is free software: you can redistribute it and/or modify # it
+ * under the terms of the GNU General Public License as published by # the Free
+ * Software Foundation, either version 3 of the License, or # (at your option)
+ * any later version. # # This program is distributed in the hope that it will
+ * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
+ * Public License for more details. # # You should have received a copy of the
+ * GNU General Public License # along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 
 /*
- * Authors:
- * Mateusz Sławomir Lach ( matlak, msl )
+ * Authors: Mateusz Sławomir Lach ( matlak, msl )
  */
 package jchess.ui;
 
@@ -46,6 +42,7 @@ import javax.swing.text.BadLocationException;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Logging;
 import jchess.util.Player;
 
 /**
@@ -111,9 +108,12 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 
 																																																										;
 
-	/** Method witch is checking correction of edit tables
-	 * @param e Object where is saving this what contents edit tables
-	*/
+	/**
+	 * Method witch is checking correction of edit tables
+	 * 
+	 * @param e
+	 *          Object where is saving this what contents edit tables
+	 */
 	public void textValueChanged(TextEvent e) {
 		Object target = e.getSource();
 		if (target == this.firstName || target == this.secondName) {
@@ -129,15 +129,18 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				try {
 					temp.setText(temp.getText(0, 7));
 				} catch (BadLocationException exc) {
-					System.out.println("Something wrong in editables: \n" + exc);
+					Logging.log("Something wrong in editables: \n", exc);
 				}
 			}
 		}
 	}
 
-	/** Method responsible for changing the options which can make a player
-	 * when he want to start new local game
-	 * @param e where is saving data of performed action
+	/**
+	 * Method responsible for changing the options which can make a player when he
+	 * want to start new local game
+	 * 
+	 * @param e
+	 *          where is saving data of performed action
 	 */
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource();
@@ -211,9 +214,9 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				newGUI.gameClock.setTimes(sett.timeForGame, sett.timeForGame);
 				newGUI.gameClock.start();
 			}
-			System.out.println(this.time4Game.getActionCommand());
+			Logging.log(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-			System.out.println("****************\nStarting new game: " + pl1.name + " vs. " + pl2.name + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: "
+			Logging.log("****************\nStarting new game: " + pl1.name + " vs. " + pl2.name + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: "
 					+ sett.timeLimitSet + "\nwhite on top?: " + sett.upsideDown + "\n****************");// 4test
 			newGUI.newGame();// start new Game
 			this.parent.setVisible(false);// hide parent
@@ -320,8 +323,11 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 
 	/**
 	 * Method responsible for triming white symbols from strings
-	 * @param txt Where is capt value to equal
-	 * @param length How long is the string
+	 * 
+	 * @param txt
+	 *          Where is capt value to equal
+	 * @param length
+	 *          How long is the string
 	 * @return result trimmed String
 	 */
 	public String trimString(JTextField txt, int length) {
@@ -329,7 +335,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		try {
 			result = txt.getText(0, length);
 		} catch (BadLocationException exc) {
-			System.out.println("Something wrong in editables: \n" + exc);
+			Logging.log("Something wrong in editables: \n", exc);
 		}
 		return result;
 	}

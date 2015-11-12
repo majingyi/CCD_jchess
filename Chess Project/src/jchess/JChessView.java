@@ -1,15 +1,3 @@
-/*
- * # This program is free software: you can redistribute it and/or modify # it
- * under the terms of the GNU General Public License as published by # the Free
- * Software Foundation, either version 3 of the License, or # (at your option)
- * any later version. # # This program is distributed in the hope that it will
- * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
- * Public License for more details. # # You should have received a copy of the
- * GNU General Public License # along with this program. If not, see
- * <http://www.gnu.org/licenses/>.
- */
-
 package jchess;
 
 import java.awt.event.ActionEvent;
@@ -26,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import jchess.core.Logging;
 import jchess.ui.GUI;
 import jchess.ui.Game;
 import jchess.ui.JChessAboutBox;
@@ -73,7 +62,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 						try {
 							selFile.createNewFile();
 						} catch (java.io.IOException exc) {
-							System.out.println("error creating file: " + exc);
+							Logging.log("error creating file: " + exc);
 						}
 					} else if (selFile.exists()) {
 						int opt = JOptionPane.showConfirmDialog(tempGUI, Settings.lang("file_exists"), Settings.lang("file_exists"), JOptionPane.YES_NO_OPTION);
@@ -86,7 +75,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 					if (selFile.canWrite()) {
 						tempGUI.saveGame(selFile);
 					}
-					System.out.println(fc.getSelectedFile().isFile());
+					Logging.log(fc.getSelectedFile().isFile());
 					break;
 				} else if (retVal == JFileChooser.CANCEL_OPTION) {
 					break;
@@ -108,7 +97,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				JChessApp.getApplication().show(choose);
 			} catch (Exception exc) {
 				JOptionPane.showMessageDialog(JChessApp.getApplication().getMainFrame(), exc.getMessage());
-				System.out.println("Something wrong creating window - perhaps themeList is null");
+				Logging.log("Something wrong creating window - perhaps themeList is null", exc);
 			}
 		} else if (target == this.languageSettingsMenu) {
 			try {
@@ -117,7 +106,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				renameAllVisibleItems();
 			} catch (Exception exc) {
 				JOptionPane.showMessageDialog(JChessApp.getApplication().getMainFrame(), exc.getMessage());
-				System.out.println("Something wrong creating window - perhaps languageList is null");
+				Logging.log("Something wrong creating window - perhaps languageList is null", exc);
 			}
 		}
 	}
@@ -559,7 +548,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	public JDialog										newGameFrame;
 
 	public void componentResized(ComponentEvent e) {
-		System.out.println("jchessView resized!!;");
+		Logging.log("jchessView resized!!;");
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
