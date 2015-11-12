@@ -4,7 +4,7 @@
      <!-- properties -->
      <property name="libs.dir" value="lib" />
      <property name="src.dir" value="src" />
-     <property name="test.dir" value="src/tests" />
+     <property name="test.dir" value="tests" />
      <property name="target.dir" value="bin" />
      <property name="classes.dir" value="${target.dir}/classes" />
      <property name="instrumentedclasses.dir" value="${target.dir}/instrumentedclasses" />
@@ -31,8 +31,11 @@
      <path id="test.runtime.classpath" description="classpath for running junit-tests">
           <pathelement location="${testclasses.dir}" />
           <pathelement location="${instrumentedclasses.dir}" />
-          <pathelement location="${config.dir}" />
-          <pathelement location="${libs.dir}/junit.jar" />
+     	  <pathelement location="${classes.dir}" />
+     	  <pathelement location="${config.dir}" />
+     	  <pathelement location="${libs.dir}/appframework-1.0.3.jar"/>
+     	  <pathelement location="${libs.dir}/swing-worker-1.1.jar"/>
+     	  <pathelement location="${libs.dir}/junit.jar" />
           <pathelement location="${libs.dir}/org.hamcrest.core_1.1.0.v20090501071000.jar" />
           <pathelement location="${libs.dir}/log4j-1.2.17.jar" />
      </path>

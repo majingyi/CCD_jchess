@@ -1,5 +1,3 @@
-package tests;
-
 import jchess.Settings;
 import jchess.board.Chessboard;
 import jchess.pieces.Bishop;
