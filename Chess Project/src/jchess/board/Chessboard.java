@@ -55,9 +55,19 @@ public class Chessboard {
 		uiChessboard = ui;
 		moves_history = movesHistory;
 
-		this.squares = new Square[8][8];// initalization of 8x8 chessboard
+		initChessBoard();
 
 		this.settings = settings;
+	}
+
+	private void initChessBoard() {
+		squares = new Square[8][8];
+
+		for (int i = 0; i < 8; i++) {// create object for each square
+			for (int y = 0; y < 8; y++) {
+				squares[i][y] = new Square(i, y, null);
+			}
+		}// --endOf--create object for each square
 	}
 
 	/**

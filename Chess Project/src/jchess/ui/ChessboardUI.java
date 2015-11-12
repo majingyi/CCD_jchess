@@ -91,11 +91,6 @@ public class ChessboardUI extends JPanel {
 		// of field
 		board.active_x_square = 0;
 		board.active_y_square = 0;
-		for (int i = 0; i < 8; i++) {// create object for each square
-			for (int y = 0; y < 8; y++) {
-				board.squares[i][y] = new Square(i, y, null);
-			}
-		}// --endOf--create object for each square
 
 		this.setDoubleBuffered(true);
 		this.drawLabels((int) this.square_height);
