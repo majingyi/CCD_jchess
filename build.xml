@@ -71,8 +71,9 @@
  
      <target name="build">
           <javac classpathref="src.compile.classpath" srcdir="${src.dir}" destdir="${classes.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
-     </target>
- 
+           <copy todir="${classes.dir}/jchess/resources">
+               <fileset dir="${src.dir}/jchess/resources" />
+          </copy></target>
      <target name="compile.tests">
           <javac classpathref="test.compile.classpath" srcdir="${test.dir}" destdir="${testclasses.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
      </target>
@@ -91,9 +92,6 @@
      </target>
  
      <target name="package">
-          <copy todir="${classes.dir}/resources">
-               <fileset dir="${src.dir}/jchess/resources" />
-          </copy>
           <jar destfile="${target.dir}/${project.name}.jar" basedir="${classes.dir}"/>
      </target>
 </project>
