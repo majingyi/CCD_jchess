@@ -11,6 +11,7 @@
      <property name="config.dir" value="config" />
      <property name="junit.reports.dir" value="${target.dir}/junit" />
      <property name="project.name" value="CCD_Chess_Project" />
+     <property name="clover.license.path" location="/opt/bamboo/clover.license"/>
  
      <!-- paths -->
      <path id="src.compile.classpath" description="classpath for compiling sources">
@@ -89,6 +90,13 @@
                          <include name="**/*Test.java" />
                     </fileset>
                </batchtest>
+               
+               <clover-report initstring="target/clover/database/clover.db">			
+               <current outfile="target/site/clover/clover.xml" />
+               <current outfile="target/site/clover">
+                 <format type="html"/>
+               </current>
+               </clover-report>
           </junit>
      </target>
  
