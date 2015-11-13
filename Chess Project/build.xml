@@ -47,9 +47,6 @@
           <echo message="compile.sources: compile all stuff in src-directory" />
           <ant target="build" />
            
-          <echo message="instrument.classes: instrument all compiled classes with coverage-markers" />
-          <ant target="instrument.classes" />
-           
           <echo message="compile.tests: compile all stuff in test-directory" />
           <ant target="compile.tests" />
            
