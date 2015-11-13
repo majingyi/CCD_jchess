@@ -23,9 +23,4 @@ public class Queen extends Piece {
 	public IMoveBehavior createMoveBehavior() {
 		return new QueenMoveBehavior(player, chessboard, square);
 	}
-
-	@Override
-	public String getSymbolForMoveHistory() {
-		return "Q";
-	}
 }

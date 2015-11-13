@@ -537,9 +537,4 @@ public class King extends Piece {
 	public IMoveBehavior createMoveBehavior() {
 		return new KingMoveBehavior(player, chessboard, square, this);
 	}
-
-	@Override
-	public String getSymbolForMoveHistory() {
-		return "K";
-	}
 }

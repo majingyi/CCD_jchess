@@ -153,5 +153,16 @@ public abstract class Piece {
 		this.orgImage = image;
 	}
 
-	public abstract String getSymbolForMoveHistory();
+	/**
+	 * Used for testing purposes.
+	 * 
+	 * @return
+	 */
+	public Class<? extends IMoveBehavior> getMoveBehaviorClass() {
+		return moveBehavior.getClass();
+	}
+
+	public String getSymbolForMoveHistory() {
+		return symbol.startsWith("K") ? symbol.substring(0, 2) : symbol.substring(0, 1);
+	}
 }

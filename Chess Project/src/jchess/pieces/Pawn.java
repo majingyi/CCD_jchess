@@ -57,9 +57,4 @@ public class Pawn extends Piece {
 	public IMoveBehavior createMoveBehavior() {
 		return new PawnMoveBehavior(player, chessboard, square);
 	}
-
-	@Override
-	public String getSymbolForMoveHistory() {
-		return "P";
-	}
 }

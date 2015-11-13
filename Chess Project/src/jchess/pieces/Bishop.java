@@ -21,9 +21,4 @@ public class Bishop extends Piece {
 	public IMoveBehavior createMoveBehavior() {
 		return new BishopMoveBehavior(player, chessboard, square);
 	}
-
-	@Override
-	public String getSymbolForMoveHistory() {
-		return "B";
-	}
 }

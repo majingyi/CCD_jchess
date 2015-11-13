@@ -42,9 +42,4 @@ public class Rook extends Piece {
 	public IMoveBehavior createMoveBehavior() {
 		return new RookMoveBehavior(player, chessboard, square);
 	}
-
-	@Override
-	public String getSymbolForMoveHistory() {
-		return "R";
-	}
 }

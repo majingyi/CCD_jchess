@@ -21,9 +21,4 @@ public class Knight extends Piece {
 	public IMoveBehavior createMoveBehavior() {
 		return new KnightMoveBehavior(player, chessboard, square);
 	}
-
-	@Override
-	public String getSymbolForMoveHistory() {
-		return "Kn";
-	}
 }
