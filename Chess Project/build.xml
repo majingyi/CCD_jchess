@@ -61,6 +61,7 @@
      </target>
  
      <target name="clean" description="deleting the target-directory">
+          <echo message="clean: deleting the target-directory: ${target.dir}" />
           <delete includeEmptyDirs="true" failonerror="false">
                <fileset dir="${target.dir}" />
           </delete>
