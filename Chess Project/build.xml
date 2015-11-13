@@ -91,9 +91,9 @@
                     </fileset>
                </batchtest>
                
-               <clover-report initstring="target/clover/database/clover.db">			
-               <current outfile="target/site/clover/clover.xml" />
-               <current outfile="target/site/clover">
+               <clover-report initstring="${junit.reports.dir}/clover.db">			
+               <current outfile="${junit.reports.dir}/clover.xml" />
+               <current outfile="${junit.reports.dir}">
                  <format type="html"/>
                </current>
                </clover-report>
