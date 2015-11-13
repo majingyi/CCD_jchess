@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chess-compile-test-coverage" default="all" basedir=".">
+ 
+     <!-- properties -->
+     <property name="libs.dir" value="lib" />
+     <property name="src.dir" value="src" />
+     <property name="test.dir" value="tests" />
+     <property name="target.dir" value="bin" />
+     <property name="classes.dir" value="${target.dir}/classes" />
+     <property name="testclasses.dir" value="${target.dir}/testclasses" />
+     <property name="config.dir" value="config" />
+     <property name="junit.reports.dir" value="${target.dir}/junit" />
+     <property name="project.name" value="CCD_Chess_Project" />
+     
+     <!-- paths -->
+     <path id="src.compile.classpath" description="classpath for compiling sources">
+          <pathelement location="${libs.dir}/log4j-1.2.17.jar" />
+     	  <pathelement location="${libs.dir}/appframework-1.0.3.jar"/>
+     	  <pathelement location="${libs.dir}/swing-worker-1.1.jar"/>
+     	  <pathelement location="${libs.dir}/junit.jar"/>
+     	  <pathelement location="${libs.dir}/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+     	  <pathelement location="${libs.dir}/log4j-1.2.17.jar"/>
+     </path>
+     <path id="test.compile.classpath" description="classpath for compiling test-sources">
+          <pathelement location="${classes.dir}" />
+          <pathelement location="${libs.dir}/junit.jar" />
+     </path>
+     <path id="test.runtime.classpath" description="classpath for running junit-tests">
+          <pathelement location="${testclasses.dir}" />
+     	  <pathelement location="${classes.dir}" />
+     	  <pathelement location="${config.dir}" />
+     	  <pathelement location="${libs.dir}/appframework-1.0.3.jar"/>
+     	  <pathelement location="${libs.dir}/swing-worker-1.1.jar"/>
+     	  <pathelement location="${libs.dir}/junit.jar" />
+          <pathelement location="${libs.dir}/org.hamcrest.core_1.1.0.v20090501071000.jar" />
+          <pathelement location="${libs.dir}/log4j-1.2.17.jar" />
+     </path>
+     
+     <!-- targets -->
+     <target name="all">
+          <echo message="clean: deleting the target-directory" />
+          <ant target="clean" />
+           
+          <echo message="prepare: create the necessary directories" />
+          <ant target="prepare" />
+           
+          <echo message="compile.sources: compile all stuff in src-directory" />
+          <ant target="build" />
+           
+          <echo message="compile.tests: compile all stuff in test-directory" />
+          <ant target="compile.tests" />
+           
+          <echo message="test: execute the junit-test" />
+          <ant target="test" />
+                
+          <echo message="package: put all stuff from classes into jar" />
+          <ant target="package" />
+     </target>
+ 
+     <target name="clean" description="deleting the target-directory">
+          <echo message="clean: deleting the target-directory: ${target.dir}" />
+          <delete includeEmptyDirs="true" failonerror="false">
+               <fileset dir="${target.dir}" />
+          </delete>
+     </target>
+ 
+     <target name="prepare" description="creating the needed directories within target-directory">
+          <mkdir dir="${target.dir}" />
+          <mkdir dir="${classes.dir}" />
+          <mkdir dir="${testclasses.dir}" />
+          <mkdir dir="${junit.reports.dir}" />
+     </target>
+ 
+     <target name="build">
+          <javac classpathref="src.compile.classpath" srcdir="${src.dir}" destdir="${classes.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
+     </target>
+ 
+     <target name="compile.tests">
+          <javac classpathref="test.compile.classpath" srcdir="${test.dir}" destdir="${testclasses.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
+     </target>
+ 
+     <target name="test" description="run the unit-test. attention: haltonfailure=no, because we want to bring the whole build to its end, even if there are testfailures for now">
+          <junit printsummary="yes" haltonfailure="no" showoutput="true">
+               <!-- junit-specific -->
+               <formatter type="xml" />
+               <classpath refid="test.runtime.classpath" />
+               <batchtest fork="yes" todir="${junit.reports.dir}">
+                    <fileset dir="${test.dir}">
+                         <include name="**/*Test.java" />
+                    </fileset>
+               </batchtest>
+          </junit>
+     </target>
+ 
+     <target name="package">
+          <jar destfile="${target.dir}/${project.name}.jar" basedir="${classes.dir}"/>
+     </target>
+</project>
