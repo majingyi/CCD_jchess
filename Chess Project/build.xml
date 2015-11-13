@@ -90,14 +90,14 @@
                          <include name="**/*Test.java" />
                     </fileset>
                </batchtest>
-               
-               <clover-report initstring="${junit.reports.dir}/clover.db">			
-               <current outfile="${junit.reports.dir}/clover.xml" />
-               <current outfile="${junit.reports.dir}">
-                 <format type="html"/>
-               </current>
-               </clover-report>
           </junit>
+               
+          <clover-report initstring="${junit.reports.dir}/clover.db">			
+             <current outfile="${junit.reports.dir}/clover.xml" />
+             <current outfile="${junit.reports.dir}">
+                 <format type="html"/>
+             </current>
+          </clover-report>
      </target>
  
      <target name="package">
