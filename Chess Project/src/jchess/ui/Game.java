@@ -355,7 +355,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public void mouseClicked(MouseEvent arg0) {
 	}
 
-	public boolean undo() {
+	public boolean undo() throws Exception {
 		boolean status = false;
 
 		if (this.settings.gameType == Settings.gameTypes.local) {
@@ -372,7 +372,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		return status;
 	}
 
-	public boolean rewindToBegin() {
+	public boolean rewindToBegin() throws Exception {
 		boolean result = false;
 
 		if (this.settings.gameType == Settings.gameTypes.local) {
@@ -415,21 +415,16 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	public void mousePressed(MouseEvent event) {
-		if (event.getButton() == MouseEvent.BUTTON3) // right button
-		{
-			this.undo();
-		} else if (event.getButton() == MouseEvent.BUTTON2 && settings.gameType == Settings.gameTypes.local) {
-			try {
+		try {
+			if (event.getButton() == MouseEvent.BUTTON3) // right button
+			{
+				this.undo();
+			} else if (event.getButton() == MouseEvent.BUTTON2 && settings.gameType == Settings.gameTypes.local) {
 				this.redo();
-			} catch (Exception e) {
-				// TODO Inform User
-				Logging.log(e);
-			}
-		} else if (event.getButton() == MouseEvent.BUTTON1) // left button
-		{
+			} else if (event.getButton() == MouseEvent.BUTTON1) // left button
+			{
 
-			if (blockedChessboard == false) {
-				try {
+				if (blockedChessboard == false) {
 					int x = event.getX();// get X position of mouse
 					int y = event.getY();// get Y position of mouse
 
@@ -477,15 +472,15 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 								break;
 						}
 					}
-
-				} catch (Exception exc) {
-					Logging.log(exc);
-					chessboard.repaint();
-					return;
+				} else if (blockedChessboard) {
+					Logging.log("Chessboard is blocked");
 				}
-			} else if (blockedChessboard) {
-				Logging.log("Chessboard is blocked");
 			}
+		} catch (Exception e) {
+			// TODO Inform User
+			Logging.log(e);
+			chessboard.repaint();
+			return;
 		}
 	}
 

@@ -46,14 +46,16 @@ public abstract class Piece {
 	private Image						orgImage			= null;
 	private Image						image					= null;
 
-	public Piece(Chessboard chessboard, Player player) {
+	public Piece(Chessboard chessboard, Player player, String symbol) throws Exception {
 		this.chessboard = chessboard;
 		this.player = player;
+		setSymbol(symbol);
 		this.moveBehavior = createMoveBehavior();
 	}
 
 	public abstract IMoveBehavior createMoveBehavior();
 
+	// TODO move to UI
 	public final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
@@ -128,17 +130,24 @@ public abstract class Piece {
 		return this.symbol;
 	}
 
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
+	public void setSymbol(String symbol) throws Exception {
+		if (symbol != null && symbol.length() > 0) {
+			this.symbol = symbol;
+		} else
+			throw new Exception("Symbol is not allowed to be null or empty string.");
 	}
 
 	public Square getSquare() {
 		return square;
 	}
 
-	public void setSquare(Square square) {
-		this.square = square;
-		moveBehavior.setSquare(this.square);
+	public void setSquare(Square square) throws Exception {
+		if (Chessboard.isValidSquare(square)) {
+			this.square = square;
+			moveBehavior.setSquare(this.square);
+		} else {
+			throw new Exception("Given square is outside the board borders.");
+		}
 	}
 
 	protected void setMoveBehavior(IMoveBehavior moveBehavior) {
@@ -160,6 +169,14 @@ public abstract class Piece {
 	}
 
 	public String getSymbolForMoveHistory() {
-		return symbol.startsWith("K") ? symbol.substring(0, 2) : symbol.substring(0, 1);
+		String result = null;
+		if (symbol != null && symbol.length() > 0) {
+			if (symbol.startsWith("K") && symbol.length() > 1) {
+				result = symbol.substring(0, 2);
+			} else {
+				result = symbol.substring(0, 1);
+			}
+		}
+		return result;
 	}
 }

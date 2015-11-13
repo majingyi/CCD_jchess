@@ -20,9 +20,8 @@ public class King extends Piece {
 																									// to:
 																									// 'wasMotioned'
 
-	public King(Chessboard chessboard, Player player) {
-		super(chessboard, player);
-		setSymbol(SYMBOL);
+	public King(Chessboard chessboard, Player player) throws Exception {
+		super(chessboard, player, SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

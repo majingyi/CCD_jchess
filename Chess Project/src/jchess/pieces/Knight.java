@@ -11,9 +11,8 @@ public class Knight extends Piece {
 
 	public static final String	SYMBOL	= "Knight";
 
-	public Knight(Chessboard chessboard, Player player) {
-		super(chessboard, player);
-		setSymbol(SYMBOL);
+	public Knight(Chessboard chessboard, Player player) throws Exception {
+		super(chessboard, player, SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

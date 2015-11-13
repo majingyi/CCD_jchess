@@ -42,7 +42,7 @@ public class Square {
 		return new Square(square);
 	}
 
-	public void setPiece(Piece piece) {
+	public void setPiece(Piece piece) throws Exception {
 		this.piece = piece;
 		this.piece.setSquare(this);
 	}

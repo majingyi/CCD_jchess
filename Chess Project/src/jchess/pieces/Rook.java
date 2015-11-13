@@ -32,9 +32,8 @@ public class Rook extends Piece {
 
 	public boolean							wasMotion	= false;
 
-	public Rook(Chessboard chessboard, Player player) {
-		super(chessboard, player);
-		setSymbol(SYMBOL);
+	public Rook(Chessboard chessboard, Player player) throws Exception {
+		super(chessboard, player, SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

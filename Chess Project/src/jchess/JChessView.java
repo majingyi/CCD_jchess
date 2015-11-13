@@ -449,23 +449,20 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void moveBackItemActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_moveBackItemActionPerformed
-	{// GEN-HEADEREND:event_moveBackItemActionPerformed
-		if (gui != null && gui.game != null) {
-			gui.game.undo();
-		} else {
-			try {
+	{
+		try {
+			if (gui != null && gui.game != null) {
+				gui.game.undo();
+			} else {
 				Game activeGame = this.getActiveTabGame();
-				if (!activeGame.undo()) {
-					JOptionPane.showMessageDialog(null, "Nie da sie cofnac!");
+				if (activeGame.undo() == false) {
+					JOptionPane.showMessageDialog(null, "Undo Failed!");
 				}
-			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-				JOptionPane.showMessageDialog(null, "Brak aktywnej karty!");
-			} catch (UnsupportedOperationException exc) {
-				JOptionPane.showMessageDialog(null, exc.getMessage());
 			}
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(null, exc.getMessage());
 		}
-
-	}// GEN-LAST:event_moveBackItemActionPerformed
+	}
 
 	private void moveBackItemMouseClicked(java.awt.event.MouseEvent evt)// GEN-FIRST:event_moveBackItemMouseClicked
 	{// GEN-HEADEREND:event_moveBackItemMouseClicked
@@ -499,18 +496,16 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	}// GEN-LAST:event_moveForwardItemActionPerformed
 
 	private void rewindToBeginActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_rewindToBeginActionPerformed
-	{// GEN-HEADEREND:event_rewindToBeginActionPerformed
+	{
 		try {
 			Game activeGame = this.getActiveTabGame();
-			if (!activeGame.rewindToBegin()) {
-				JOptionPane.showMessageDialog(null, "W pamieci brak ruchow do przodu!");
+			if (activeGame.rewindToBegin() == false) {
+				JOptionPane.showMessageDialog(null, "Undo to game start failed.");
 			}
-		} catch (ArrayIndexOutOfBoundsException exc) {
-			JOptionPane.showMessageDialog(null, "Brak aktywnej karty!");
-		} catch (UnsupportedOperationException exc) {
+		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(null, exc.getMessage());
 		}
-	}// GEN-LAST:event_rewindToBeginActionPerformed
+	}
 
 	private void rewindToEndActionPerformed(java.awt.event.ActionEvent evt) throws Exception// GEN-FIRST:event_rewindToEndActionPerformed
 	{// GEN-HEADEREND:event_rewindToEndActionPerformed

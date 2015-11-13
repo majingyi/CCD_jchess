@@ -11,9 +11,8 @@ public class Bishop extends Piece {
 
 	public static final String	SYMBOL	= "Bishop";
 
-	public Bishop(Chessboard chessboard, Player player) {
-		super(chessboard, player);
-		setSymbol(SYMBOL);
+	public Bishop(Chessboard chessboard, Player player) throws Exception {
+		super(chessboard, player, SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

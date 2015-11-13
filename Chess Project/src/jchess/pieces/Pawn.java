@@ -18,9 +18,8 @@ public class Pawn extends Piece {
 
 	public static final String	SYMBOL	= "Pawn";
 
-	public Pawn(Chessboard chessboard, Player player) {
-		super(chessboard, player);
-		setSymbol(SYMBOL);
+	public Pawn(Chessboard chessboard, Player player) throws Exception {
+		super(chessboard, player, SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 

@@ -49,11 +49,15 @@ public class PawnTest {
 		Assert.assertEquals("Q", p.getSymbolForMoveHistory());
 
 		p = createPawn();
+		boolean exception = false;
 		try {
 			p.promote(King.SYMBOL);
 		} catch (Exception e) {
 			Assert.assertEquals("Pawn can not be promoted to King.", e.getMessage());
+			exception = true;
 		}
+		Assert.assertTrue(exception);
+
 		p = createPawn();
 		p.promote(Knight.SYMBOL);
 		Assert.assertEquals(Knight.SYMBOL, p.getSymbol());
@@ -73,7 +77,7 @@ public class PawnTest {
 		Assert.assertEquals("R", p.getSymbolForMoveHistory());
 	}
 
-	private Pawn createPawn() {
+	private Pawn createPawn() throws Exception {
 		Player pl = new Player();
 		Chessboard board = new Chessboard(null, new Settings(), null);
 		Pawn p = new Pawn(board, pl);

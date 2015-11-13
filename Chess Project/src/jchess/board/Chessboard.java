@@ -130,7 +130,7 @@ public class Chessboard {
 		this.move(begin, end, refresh, true);
 	}
 
-	private void setPieces4NewGame(boolean upsideDown, Player plWhite, Player plBlack) {
+	private void setPieces4NewGame(boolean upsideDown, Player plWhite, Player plBlack) throws Exception {
 
 		/* WHITE PIECES */
 		Player player = plBlack;
@@ -155,8 +155,9 @@ public class Chessboard {
 	 *          which is owner of pawns
 	 * @param upsideDown
 	 *          if true white pieces will be on top of chessboard
+	 * @throws Exception
 	 * */
-	private void setFigures4NewGame(int i, Player player, boolean upsideDown) {
+	private void setFigures4NewGame(int i, Player player, boolean upsideDown) throws Exception {
 
 		if (i != 0 && i != 7) {
 			Logging.logError("error setting figures like rook etc.");
@@ -196,8 +197,9 @@ public class Chessboard {
 	 *          row where to set pawns
 	 * @param player
 	 *          player which is owner of pawns
+	 * @throws Exception
 	 * */
-	private void setPawns4NewGame(int i, Player player) {
+	private void setPawns4NewGame(int i, Player player) throws Exception {
 		if (i != 1 && i != 6) {
 			Logging.logError("error setting pawns etc.");
 			return;
@@ -388,11 +390,13 @@ public class Chessboard {
 		}
 	}/* endOf-move()- */
 
-	public boolean undo() {
+	public boolean undo() throws Exception {
 		return undo(true);
 	}
 
-	public synchronized boolean undo(boolean refresh) // undo last move
+	public synchronized boolean undo(boolean refresh) throws Exception // undo
+																																			// last
+																																			// move
 	{
 		Move last = this.moves_history.undo();
 
@@ -485,5 +489,15 @@ public class Chessboard {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Checks is a given square is on the board, or outside the board borders.
+	 * 
+	 * @param sq
+	 * @return
+	 */
+	public static boolean isValidSquare(Square sq) {
+		return isout(sq.pozX, sq.pozY) == false;
 	}
 }

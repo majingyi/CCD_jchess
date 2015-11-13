@@ -13,9 +13,8 @@ public class Queen extends Piece {
 
 	public static final String	SYMBOL	= "Queen";
 
-	public Queen(Chessboard chessboard, Player player) {
-		super(chessboard, player);
-		setSymbol(SYMBOL);
+	public Queen(Chessboard chessboard, Player player) throws Exception {
+		super(chessboard, player, SYMBOL);
 		setImage(Theme.getImageForPiece(player.color, this));
 	}
 
