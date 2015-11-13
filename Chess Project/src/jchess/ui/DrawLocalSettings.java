@@ -218,7 +218,11 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
 			Logging.log("****************\nStarting new game: " + pl1.name + " vs. " + pl2.name + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: "
 					+ sett.timeLimitSet + "\nwhite on top?: " + sett.upsideDown + "\n****************");// 4test
-			newGUI.newGame();// start new Game
+			try {
+				newGUI.newGame();
+			} catch (Exception e1) {
+				Logging.log(e1);
+			}// start new Game
 			this.parent.setVisible(false);// hide parent
 			newGUI.chessboard.repaint();
 			newGUI.chessboard.draw();

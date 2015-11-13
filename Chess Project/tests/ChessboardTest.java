@@ -383,7 +383,7 @@ public class ChessboardTest {
 		try {
 			board.setPieces(Constants.EMPTY_STRING, white, black);
 		} catch (Exception e) {
-			Assert.assertTrue(e.getMessage().equals("Both Players have same color"));
+			Assert.assertEquals("Both player have the same color.", e.getMessage());
 			exception = true;
 		}
 

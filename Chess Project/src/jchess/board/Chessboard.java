@@ -11,6 +11,7 @@ import jchess.pieces.Piece;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
 import jchess.ui.ChessboardUI;
+import jchess.util.Constants;
 import jchess.util.Move;
 import jchess.util.Moves;
 import jchess.util.Moves.castling;
@@ -79,23 +80,25 @@ public class Chessboard {
 	 *          reference to white player
 	 * @param plBlack
 	 *          reference to black player
+	 * @throws Exception
 	 */
 
-	public void setPieces(String places, Player plWhite, Player plBlack) {
+	public void setPieces(String places, Player plWhite, Player plBlack) throws Exception {
 
-		if (places.equals("")) // if newGame
-		{
-			if (this.settings.upsideDown) {
-				this.setPieces4NewGame(true, plWhite, plBlack);
-			} else {
-				this.setPieces4NewGame(false, plWhite, plBlack);
+		if ((plWhite.color == plBlack.color) == false) {
+
+			if (places.equals(Constants.EMPTY_STRING)) // if newGame
+			{
+				if (this.settings.upsideDown) {
+					this.setPieces4NewGame(true, plWhite, plBlack);
+				} else {
+					this.setPieces4NewGame(false, plWhite, plBlack);
+				}
 			}
-
-		} else // if loadedGame
-		{
-			return;
+		} else {
+			throw new Exception("Both player have the same color.");
 		}
-	}/*--endOf-setPieces--*/
+	}
 
 	/**
 	 * Method to move piece over chessboard

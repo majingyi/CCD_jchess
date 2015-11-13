@@ -131,6 +131,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * 
 	 * @param file
 	 *          File where is saved game
+	 * @throws Exception
 	 */
 
 	/*
@@ -141,7 +142,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * width) { super.setSize((int)min.getWidth(), height); } else {
 	 * super.setSize(width, height); } }
 	 */
-	static public void loadGame(File file) {
+	static public void loadGame(File file) throws Exception {
 		FileReader fileR = null;
 		try {
 			fileR = new FileReader(file);
@@ -237,8 +238,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	/**
 	 * Method to Start new game
 	 * 
+	 * @throws Exception
+	 * 
 	 */
-	public void newGame() {
+	public void newGame() throws Exception {
 		chessboard.getChessboard().setPieces("", settings.playerWhite, settings.playerBlack);
 
 		activePlayer = settings.playerWhite;

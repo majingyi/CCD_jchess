@@ -124,7 +124,7 @@ public class Client implements Runnable {
 					try {
 						this.sett = (Settings) input.readObject();
 					} catch (ClassNotFoundException ex) {
-						Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+						Logging.log(ex);
 					}
 
 					game.settings = this.sett;
@@ -156,7 +156,10 @@ public class Client implements Runnable {
 			} catch (IOException ex) {
 				isOK = false;
 				game.chat.addMessage("** " + Settings.lang("error_connecting_to_server") + " **");
-				Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+				Logging.log(ex);
+			} catch (Exception e) {
+				isOK = false;
+				Logging.log(e);
 			}
 		}
 	}

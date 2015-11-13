@@ -88,7 +88,11 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 			if (retVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				if (file.exists() && file.canRead()) {
-					Game.loadGame(file);
+					try {
+						Game.loadGame(file);
+					} catch (Exception e) {
+						Logging.log(e);
+					}
 				}
 			}
 		} else if (target == this.themeSettingsMenu) {
