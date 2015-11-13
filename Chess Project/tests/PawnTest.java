@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import jchess.Settings;
 import jchess.board.Chessboard;
 import jchess.pieces.Bishop;
@@ -12,7 +14,10 @@ import jchess.pieces.Queen;
 import jchess.pieces.QueenMoveBehavior;
 import jchess.pieces.Rook;
 import jchess.pieces.RookMoveBehavior;
+import jchess.ui.Game;
+import jchess.util.Constants;
 import jchess.util.Player;
+import jchess.util.Square;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,6 +80,84 @@ public class PawnTest {
 		Assert.assertEquals(Rook.SYMBOL, p.getSymbol());
 		Assert.assertTrue(p.getMoveBehaviorClass().equals(RookMoveBehavior.class));
 		Assert.assertEquals("R", p.getSymbolForMoveHistory());
+	}
+
+	@Test
+	public void testAllMoves() throws Exception {
+		Game game = new Game();
+		Chessboard board = game.chessboard.getChessboard();
+
+		Player white = new Player("hans", Player.colors.white);
+		Player black = new Player("wurst", Player.colors.black);
+
+		board.setPieces(Constants.EMPTY_STRING, white, black);
+
+		// first move
+		Pawn p = (Pawn) board.squares[1][1].piece;
+		ArrayList<Square> possibleMoves = p.allMoves();
+		Assert.assertEquals(possibleMoves.size(), 2);
+
+		Square first = possibleMoves.get(0);
+		Square second = possibleMoves.get(1);
+
+		Assert.assertEquals(first.pozX, 1);
+		Assert.assertEquals(first.pozY, 2);
+		Assert.assertEquals(second.pozX, 1);
+		Assert.assertEquals(second.pozY, 3);
+
+		// second move
+		board.move(board.squares[1][1], second);
+
+		Square newSquare = p.getSquare();
+		Assert.assertEquals(1, newSquare.pozX);
+		Assert.assertEquals(3, newSquare.pozY);
+
+		possibleMoves = p.allMoves();
+		Assert.assertEquals(possibleMoves.size(), 1);
+		first = possibleMoves.get(0);
+
+		Assert.assertEquals(first.pozX, 1);
+		Assert.assertEquals(first.pozY, 4);
+
+		// blocked
+		board.move(board.squares[1][6], board.squares[1][4]);
+		possibleMoves = p.allMoves();
+		Assert.assertEquals(0, possibleMoves.size());
+
+		// pawn to capture
+		board.move(board.squares[2][1], board.squares[2][3]);
+		possibleMoves = board.squares[2][3].piece.allMoves();
+		Assert.assertEquals(2, possibleMoves.size());
+		first = possibleMoves.get(0);
+		Assert.assertEquals(first.pozX, 2);
+		Assert.assertEquals(first.pozY, 4);
+		second = possibleMoves.get(1);
+		Assert.assertEquals(second.pozX, 1);
+		Assert.assertEquals(second.pozY, 4);
+
+		board.move(board.squares[2][6], board.squares[2][4]);
+		possibleMoves = p.allMoves();
+		Assert.assertEquals(1, possibleMoves.size());
+		first = possibleMoves.get(0);
+		Assert.assertEquals(first.pozX, 2);
+		Assert.assertEquals(first.pozY, 4);
+
+		possibleMoves = board.squares[2][3].piece.allMoves();
+		Assert.assertEquals(1, possibleMoves.size());
+		first = possibleMoves.get(0);
+		Assert.assertEquals(first.pozX, 1);
+		Assert.assertEquals(first.pozY, 4);
+
+		// wrong en passante
+		board.move(board.squares[5][6], board.squares[5][4]);
+		board.move(board.squares[4][1], board.squares[4][3]);
+		board.move(board.squares[5][4], board.squares[5][3]);
+
+		possibleMoves = board.squares[4][3].piece.allMoves();
+		Assert.assertEquals(1, possibleMoves.size());
+		first = possibleMoves.get(0);
+		Assert.assertEquals(first.pozX, 4);
+		Assert.assertEquals(first.pozY, 4);
 	}
 
 	private Pawn createPawn() throws Exception {
