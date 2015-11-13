@@ -31,8 +31,9 @@ public class Pawn extends Piece {
 	 * already captured from the opponent.
 	 * 
 	 * @param newPiece
+	 * @throws Exception
 	 */
-	public void promote(String newPiece) {
+	public void promote(String newPiece) throws Exception {
 		if (newPiece.equals(Queen.SYMBOL)) {
 			setMoveBehavior(new QueenMoveBehavior(player, chessboard, square));
 			setSymbol(Queen.SYMBOL);
@@ -45,6 +46,8 @@ public class Pawn extends Piece {
 			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
 			setSymbol(Bishop.SYMBOL);
 			setImage(Theme.getImageForPiece(player.color, Bishop.SYMBOL));
+		} else if (newPiece.equals(King.SYMBOL)) {
+			throw new Exception("Pawn can not be promoted to King.");
 		} else // knight
 		{
 			setMoveBehavior(new KnightMoveBehavior(player, chessboard, square));

@@ -111,8 +111,9 @@ public class Chessboard {
 	 *          to which x move piece
 	 * @param yTo
 	 *          to which y move piece
+	 * @throws Exception
 	 */
-	public void move(int xFrom, int yFrom, int xTo, int yTo) {
+	public void move(int xFrom, int yFrom, int xTo, int yTo) throws Exception {
 		Square fromSQ = null;
 		Square toSQ = null;
 		try {
@@ -125,7 +126,7 @@ public class Chessboard {
 		this.move(fromSQ, toSQ, true);
 	}
 
-	public void move(Square begin, Square end, boolean refresh) {
+	public void move(Square begin, Square end, boolean refresh) throws Exception {
 		this.move(begin, end, refresh, true);
 	}
 
@@ -234,11 +235,11 @@ public class Chessboard {
 		uiChessboard.repaint();
 	}/*--endOf-unselect--*/
 
-	public boolean redo() {
+	public boolean redo() throws Exception {
 		return redo(true);
 	}
 
-	public boolean redo(boolean refresh) {
+	public boolean redo(boolean refresh) throws Exception {
 		if (this.settings.gameType == Settings.gameTypes.local) // redo only for
 		// local game
 		{
@@ -267,7 +268,7 @@ public class Chessboard {
 		return false;
 	}
 
-	public void move(Square begin, Square end) {
+	public void move(Square begin, Square end) throws Exception {
 		move(begin, end, true);
 	}
 
@@ -280,8 +281,9 @@ public class Chessboard {
 	 *          square where we want to move piece *
 	 * @param refresh
 	 *          chessboard, default: true
+	 * @throws Exception
 	 * */
-	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
+	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) throws Exception {
 
 		castling wasCastling = Moves.castling.none;
 		Piece promotedPiece = null;

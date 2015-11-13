@@ -408,8 +408,9 @@ public class Moves extends AbstractTableModel {
 	 * 
 	 * @param moves
 	 *          String to set in String like PGN with full-notation format
+	 * @throws Exception
 	 */
-	public void setMoves(String moves) {
+	public void setMoves(String moves) throws Exception {
 		int from = 0;
 		int to = 0;
 		int n = 1;

@@ -341,7 +341,12 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		});
 		moveForwardItem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				moveForwardItemActionPerformed(evt);
+				try {
+					moveForwardItemActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Inform User
+					Logging.log(e);
+				}
 			}
 		});
 		gameMenu.add(moveForwardItem);
@@ -363,7 +368,12 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		rewindToEnd.setName("rewindToEnd"); // NOI18N
 		rewindToEnd.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				rewindToEndActionPerformed(evt);
+				try {
+					rewindToEndActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Inform User
+					Logging.log(e);
+				}
 			}
 		});
 		gameMenu.add(rewindToEnd);
@@ -469,7 +479,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	}// GEN-LAST:event_moveForwardItemMouseClicked
 
-	private void moveForwardItemActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_moveForwardItemActionPerformed
+	private void moveForwardItemActionPerformed(java.awt.event.ActionEvent evt) throws Exception// GEN-FIRST:event_moveForwardItemActionPerformed
 	{// GEN-HEADEREND:event_moveForwardItemActionPerformed
 		// TODO add your handling code here:
 		if (gui != null && gui.game != null) {
@@ -502,7 +512,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		}
 	}// GEN-LAST:event_rewindToBeginActionPerformed
 
-	private void rewindToEndActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_rewindToEndActionPerformed
+	private void rewindToEndActionPerformed(java.awt.event.ActionEvent evt) throws Exception// GEN-FIRST:event_rewindToEndActionPerformed
 	{// GEN-HEADEREND:event_rewindToEndActionPerformed
 		try {
 			Game activeGame = this.getActiveTabGame();

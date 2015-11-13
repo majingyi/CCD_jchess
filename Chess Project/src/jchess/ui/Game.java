@@ -323,8 +323,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *          to which X (on chessboard) move go
 	 * @param endY
 	 *          to which Y (on chessboard) move go
+	 * @throws Exception
 	 * */
-	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
+	public boolean simulateMove(int beginX, int beginY, int endX, int endY) throws Exception {
 		try {
 			chessboard.getChessboard().select(chessboard.getChessboard().squares[beginX][beginY]);
 			if (chessboard.getChessboard().activeSquare.piece.allMoves().indexOf(chessboard.getChessboard().squares[endX][endY]) != -1) // move
@@ -385,7 +386,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		return result;
 	}
 
-	public boolean rewindToEnd() throws UnsupportedOperationException {
+	public boolean rewindToEnd() throws Exception {
 		boolean result = false;
 
 		if (this.settings.gameType == Settings.gameTypes.local) {
@@ -399,7 +400,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		return result;
 	}
 
-	public boolean redo() {
+	public boolean redo() throws Exception {
 		boolean status = chessboard.getChessboard().redo();
 		if (this.settings.gameType == Settings.gameTypes.local) {
 			if (status) {
@@ -418,11 +419,16 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		{
 			this.undo();
 		} else if (event.getButton() == MouseEvent.BUTTON2 && settings.gameType == Settings.gameTypes.local) {
-			this.redo();
+			try {
+				this.redo();
+			} catch (Exception e) {
+				// TODO Inform User
+				Logging.log(e);
+			}
 		} else if (event.getButton() == MouseEvent.BUTTON1) // left button
 		{
 
-			if (!blockedChessboard) {
+			if (blockedChessboard == false) {
 				try {
 					int x = event.getX();// get X position of mouse
 					int y = event.getY();// get Y position of mouse
@@ -472,8 +478,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 						}
 					}
 
-				} catch (NullPointerException exc) {
-					System.err.println(exc.getMessage());
+				} catch (Exception exc) {
+					Logging.log(exc);
 					chessboard.repaint();
 					return;
 				}
