@@ -11,7 +11,9 @@
      <property name="config.dir" value="config" />
      <property name="junit.reports.dir" value="${target.dir}/junit" />
      <property name="project.name" value="CCD_Chess_Project" />
-     <property name="clover.license.path" location="/opt/bamboo/clover.license"/>
+     <property name="clover.jar" location="CLOVER_HOME/lib/clover.jar"/>
+ 
+     <taskdef resource="cloverlib.xml" classpath="${clover.jar}"/>
  
      <!-- paths -->
      <path id="src.compile.classpath" description="classpath for compiling sources">
@@ -51,8 +53,14 @@
           <echo message="compile.tests: compile all stuff in test-directory" />
           <ant target="compile.tests" />
            
+          <echo message="with.clover: prepare clover" />
+          <ant target="with.clover" />
+           
           <echo message="test: execute the junit-test" />
           <ant target="test" />
+                
+          <echo message="clover.xml: generate clover result xml" />
+          <ant target="clover.xml" />
                 
           <echo message="package: put all stuff from classes into jar" />
           <ant target="package" />
@@ -63,6 +71,10 @@
           <delete includeEmptyDirs="true" failonerror="false">
                <fileset dir="${target.dir}" />
           </delete>
+     </target>
+ 
+     <target name="with.clover">
+       <clover-setup/>
      </target>
  
      <target name="prepare" description="creating the needed directories within target-directory">
@@ -80,6 +92,14 @@
           <javac classpathref="test.compile.classpath" srcdir="${test.dir}" destdir="${testclasses.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
      </target>
  
+     <target name="clover.xml">
+      <clover-report>
+       <current outfile="coverage.xml">
+          <format type="xml"/>
+       </current>
+      </clover-report>
+     </target>
+ 
      <target name="test" description="run the unit-test. attention: haltonfailure=no, because we want to bring the whole build to its end, even if there are testfailures for now">
           <junit printsummary="yes" haltonfailure="no" showoutput="true">
                <!-- junit-specific -->
@@ -90,14 +110,10 @@
                          <include name="**/*Test.java" />
                     </fileset>
                </batchtest>
+               <classpath>
+                 <pathelement path="${clover.jar}"/>
+               </classpath>
           </junit>
-               
-          <clover-report>			
-             <current outfile="${junit.reports.dir}/clover.xml" />
-             <current outfile="${junit.reports.dir}">
-                 <format type="html"/>
-             </current>
-          </clover-report>
      </target>
  
      <target name="package">
