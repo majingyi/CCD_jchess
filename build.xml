@@ -2,13 +2,12 @@
 <project name="chess-compile-test-coverage" default="all" basedir=".">
  
      <!-- properties -->
-     <property name="libs.dir" value="lib" />
-     <property name="src.dir" value="src" />
-     <property name="test.dir" value="tests" />
-     <property name="target.dir" value="bin" />
+     <property name="libs.dir" value="Chess Project/lib" />
+     <property name="src.dir" value="Chess Project/src" />
+     <property name="test.dir" value="Chess Project/tests" />
+     <property name="target.dir" value="Chess Project/bin" />
      <property name="classes.dir" value="${target.dir}/classes" />
      <property name="testclasses.dir" value="${target.dir}/testclasses" />
-     <property name="config.dir" value="config" />
      <property name="junit.reports.dir" value="${target.dir}/junit" />
      <property name="project.name" value="CCD_Chess_Project" />
      
@@ -28,7 +27,6 @@
      <path id="test.runtime.classpath" description="classpath for running junit-tests">
           <pathelement location="${testclasses.dir}" />
      	  <pathelement location="${classes.dir}" />
-     	  <pathelement location="${config.dir}" />
      	  <pathelement location="${libs.dir}/appframework-1.0.3.jar"/>
      	  <pathelement location="${libs.dir}/swing-worker-1.1.jar"/>
      	  <pathelement location="${libs.dir}/junit.jar" />
