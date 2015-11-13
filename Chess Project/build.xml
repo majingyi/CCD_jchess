@@ -92,7 +92,7 @@
                </batchtest>
           </junit>
                
-          <clover-report initstring="${junit.reports.dir}/clover.db">			
+          <clover-report>			
              <current outfile="${junit.reports.dir}/clover.xml" />
              <current outfile="${junit.reports.dir}">
                  <format type="html"/>
