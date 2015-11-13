@@ -92,7 +92,7 @@
  
      <target name="package">
           <copy todir="${classes.dir}/resources">
-               <fileset dir="${source.dir}/jchess/resources" />
+               <fileset dir="${src.dir}/jchess/resources" />
           </copy>
           <jar destfile="${target.dir}/${project.name}.jar" basedir="${classes.dir}"/>
      </target>
