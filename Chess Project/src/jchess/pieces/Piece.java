@@ -81,9 +81,6 @@ public abstract class Piece {
 		}
 	}
 
-	protected void clean() {
-	}
-
 	/**
 	 * method check if Piece can move to given square
 	 * 
