@@ -8,7 +8,6 @@ package jchess.pieces;
  * over.
  */
 import jchess.board.Chessboard;
-import jchess.core.Theme;
 import jchess.util.Player;
 import jchess.util.Square;
 
@@ -22,7 +21,6 @@ public class King extends Piece {
 
 	public King(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);
-		setImage(Theme.getImageForPiece(player.color, SYMBOL));
 	}
 
 	/**

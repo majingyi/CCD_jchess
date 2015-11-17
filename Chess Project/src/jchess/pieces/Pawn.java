@@ -1,7 +1,6 @@
 package jchess.pieces;
 
 import jchess.board.Chessboard;
-import jchess.core.Theme;
 import jchess.util.Player;
 
 /**
@@ -20,7 +19,6 @@ public class Pawn extends Piece {
 
 	public Pawn(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);
-		setImage(Theme.getImageForPiece(player.color, SYMBOL));
 	}
 
 	/**
@@ -36,22 +34,18 @@ public class Pawn extends Piece {
 		if (newPiece.equals(Queen.SYMBOL)) {
 			setMoveBehavior(new QueenMoveBehavior(player, chessboard, square));
 			setSymbol(Queen.SYMBOL);
-			setImage(Theme.getImageForPiece(player.color, Queen.SYMBOL));
 		} else if (newPiece.equals(Rook.SYMBOL)) {
 			setMoveBehavior(new RookMoveBehavior(player, chessboard, square));
 			setSymbol(Rook.SYMBOL);
-			setImage(Theme.getImageForPiece(player.color, Rook.SYMBOL));
 		} else if (newPiece.equals(Bishop.SYMBOL)) {
 			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
 			setSymbol(Bishop.SYMBOL);
-			setImage(Theme.getImageForPiece(player.color, Bishop.SYMBOL));
 		} else if (newPiece.equals(King.SYMBOL)) {
 			throw new Exception("Pawn can not be promoted to King.");
 		} else // knight
 		{
 			setMoveBehavior(new KnightMoveBehavior(player, chessboard, square));
 			setSymbol(Knight.SYMBOL);
-			setImage(Theme.getImageForPiece(player.color, Knight.SYMBOL));
 		}
 	}
 

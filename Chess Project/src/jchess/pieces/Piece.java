@@ -15,17 +15,10 @@
  */
 package jchess.pieces;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
-import jchess.core.Logging;
 import jchess.util.Constants;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -48,9 +41,6 @@ public abstract class Piece {
 
 	protected IMoveBehavior	moveBehavior	= null;
 
-	private Image						orgImage			= null;
-	private Image						image					= null;
-
 	public Piece(Chessboard chessboard, Player player, String symbol) throws Exception {
 		this.chessboard = chessboard;
 		this.player = player;
@@ -59,34 +49,6 @@ public abstract class Piece {
 	}
 
 	public abstract IMoveBehavior createMoveBehavior();
-
-	// TODO move to UI
-	public final void draw(Graphics g) {
-		try {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.chessboard.getChessboardUI().getTopLeftPoint();
-			int height = this.chessboard.getChessboardUI().get_square_height();
-			int x = (this.square.pozX * height) + topLeft.x;
-			int y = (this.square.pozY * height) + topLeft.y;
-
-			if (orgImage != null && g != null) {
-				Image tempImage = orgImage;
-				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, height, height, null);
-				imageGr.dispose();
-				image = resized.getScaledInstance(height, height, 0);
-				g2d.drawImage(image, x, y, null);
-			} else {
-				Logging.logError("image is null!");
-			}
-
-		} catch (java.lang.NullPointerException exc) {
-			Logging.log("Something wrong when painting piece: ", exc);
-		}
-	}
 
 	/**
 	 * method check if Piece can move to given square
@@ -106,25 +68,6 @@ public abstract class Piece {
 			}
 		}
 		return false;// if not, piece cannot move
-	}
-
-	public Image getImage(Player.colors color) {
-		Image result = null;
-		if (color == Player.colors.black) {
-			result = getBlackImage();
-		} else {
-			result = getWhiteImage();
-		}
-
-		return result;
-	}
-
-	protected Image getWhiteImage() {
-		return null;
-	}
-
-	protected Image getBlackImage() {
-		return null;
 	}
 
 	public ArrayList<Square> allMoves() {
@@ -157,11 +100,6 @@ public abstract class Piece {
 
 	protected void setMoveBehavior(IMoveBehavior moveBehavior) {
 		this.moveBehavior = moveBehavior;
-	}
-
-	protected void setImage(Image image) {
-		this.image = image;
-		this.orgImage = image;
 	}
 
 	/**

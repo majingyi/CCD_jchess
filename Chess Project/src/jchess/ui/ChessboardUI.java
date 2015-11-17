@@ -33,6 +33,7 @@ import jchess.Settings;
 import jchess.board.Chessboard;
 import jchess.core.Logging;
 import jchess.core.Theme;
+import jchess.pieces.Piece;
 import jchess.util.Moves;
 import jchess.util.Square;
 
@@ -66,10 +67,8 @@ public class ChessboardUI extends JPanel {
 	private Image								upDownLabel				= null;
 	private Image								LeftRightLabel		= null;
 	private Point								topLeft						= new Point(0, 0);
-	private float								square_height;
+	private float								square_height			= 0;
 
-	public static final int			img_x							= 5;
-	public static final int			img_y							= img_x;
 	public static final int			img_widht					= 480;
 	public static final int			img_height				= img_widht;
 
@@ -222,7 +221,7 @@ public class ChessboardUI extends JPanel {
 		{
 			for (int y = 0; y < 8; y++) {
 				if (board.squares[i][y].piece != null) {
-					board.squares[i][y].piece.draw(g);// draw image of Piece
+					drawPieceImage(g, board.squares[i][y].piece);
 				}
 			}
 		}// --endOf--drawPiecesOnSquares
@@ -247,12 +246,39 @@ public class ChessboardUI extends JPanel {
 		}
 	}/*--endOf-paint--*/
 
+	private void drawPieceImage(Graphics g, Piece piece) {
+		try {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			Point topLeft = getTopLeftPoint();
+			int height = get_square_height();
+			Square sq = piece.getSquare();
+			int x = (sq.pozX * height) + topLeft.x;
+			int y = (sq.pozY * height) + topLeft.y;
+
+			if (g != null) {
+				Image tempImage = Theme.getImageForPiece(piece.player.color, piece.getSymbol());
+				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
+				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				imageGr.drawImage(tempImage, 0, 0, height, height, null);
+				imageGr.dispose();
+				Image img = resized.getScaledInstance(height, height, 0);
+				g2d.drawImage(img, x, y, null);
+			} else {
+				Logging.logError("image is null!");
+			}
+		} catch (java.lang.NullPointerException exc) {
+			Logging.log("Something wrong when painting piece: ", exc);
+		}
+	}
+
 	public void resizeChessboard(int height) {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
 		g.drawImage(ChessboardUI.orgImage, 0, 0, height, height, null);
 		g.dispose();
-		ChessboardUI.image = resized.getScaledInstance(height, height, 0);
+		image = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
 		if (this.settings.renderLabels) {
 			height += 2 * (this.upDownLabel.getHeight(null));
@@ -261,15 +287,15 @@ public class ChessboardUI extends JPanel {
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(ChessboardUI.org_able_square, 0, 0, (int) square_height, (int) square_height, null);
+		g.drawImage(org_able_square, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
-		ChessboardUI.able_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
+		able_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(ChessboardUI.org_sel_square, 0, 0, (int) square_height, (int) square_height, null);
+		g.drawImage(org_sel_square, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
-		ChessboardUI.sel_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
+		sel_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 		this.drawLabels();
 	}
 

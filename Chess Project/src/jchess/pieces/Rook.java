@@ -1,7 +1,6 @@
 package jchess.pieces;
 
 import jchess.board.Chessboard;
-import jchess.core.Theme;
 import jchess.util.Player;
 
 /**
@@ -18,7 +17,6 @@ public class Rook extends Piece {
 
 	public Rook(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);
-		setImage(Theme.getImageForPiece(player.color, SYMBOL));
 	}
 
 	@Override
