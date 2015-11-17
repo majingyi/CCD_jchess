@@ -90,7 +90,7 @@ public class Chessboard {
 
 			if (places.equals(Constants.EMPTY_STRING)) // if newGame
 			{
-				if (this.settings.upsideDown) {
+				if (this.settings.isUpsideDown()) {
 					this.setPieces4NewGame(true, plWhite, plBlack);
 				} else {
 					this.setPieces4NewGame(false, plWhite, plBlack);

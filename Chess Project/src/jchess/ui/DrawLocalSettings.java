@@ -104,8 +104,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	JButton										okButton;
 	JCheckBox									timeGame;
 	JComboBox<String>					time4Game;
-	String										colors[]					= { Language.getString("white"), Language.getString("black") }; //$NON-NLS-1$ //$NON-NLS-2$
-	String										times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
+	String										colors[]					= { Language.getString("white"), Language.getString("black") };			//$NON-NLS-1$ //$NON-NLS-2$
+	String										times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };	//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
 
 																																																										;
 
@@ -199,9 +199,9 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			}
 			if (this.upsideDown.isSelected()) // if upsideDown is checked
 			{
-				sett.upsideDown = true;
+				sett.setUpsideDown(true);
 			} else {
-				sett.upsideDown = false;
+				sett.setUpsideDown(false);
 			}
 			if (this.timeGame.isSelected()) // if timeGame is checked
 			{
@@ -209,16 +209,17 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 																																			// for
 																																			// game
 				Integer val = new Integer(value);
-				sett.timeLimitSet = true;
-				sett.timeForGame = (int) val * 60;// set time for game and mult it to
-																					// seconds
-				newGUI.gameClock.setTimes(sett.timeForGame, sett.timeForGame);
+				sett.setTimeLimetSet(true);
+				sett.setTimeForGame((int) val * 60);// set time for game and mult it to
+				// seconds
+				newGUI.gameClock.setTimes(sett.getTimeForGame(), sett.getTimeForGame());
 				newGUI.gameClock.start();
 			}
 			Logging.log(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-			Logging.log(Language.getString("DrawLocalSettings.18") + pl1.name + Language.getString("DrawLocalSettings.19") + pl2.name + Language.getString("DrawLocalSettings.20") + sett.timeForGame + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-					+ sett.timeLimitSet + Language.getString("DrawLocalSettings.22") + sett.upsideDown + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
+			Logging
+					.log(Language.getString("DrawLocalSettings.18") + pl1.name + Language.getString("DrawLocalSettings.19") + pl2.name + Language.getString("DrawLocalSettings.20") + sett.getTimeForGame() + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+							+ sett.getTimeForGame() + Language.getString("DrawLocalSettings.22") + sett.isUpsideDown() + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
 			try {
 				newGUI.newGame();
 			} catch (Exception e1) {

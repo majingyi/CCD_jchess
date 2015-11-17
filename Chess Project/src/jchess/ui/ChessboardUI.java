@@ -55,11 +55,11 @@ public class ChessboardUI extends JPanel {
 	// image of chessboard
 	private static Image				image							= null;
 	// image of highlighted square
-	private static final Image	org_sel_square		= Theme.getImage("sel_square.png"); //$NON-NLS-1$
+	private static final Image	org_sel_square		= Theme.getImage("sel_square.png");	//$NON-NLS-1$
 	// image of highlighted square
 	private static Image				sel_square				= org_sel_square;
 	// image of square where piece can go
-	private static final Image	org_able_square		= Theme.getImage("able_square.png"); //$NON-NLS-1$
+	private static final Image	org_able_square		= Theme.getImage("able_square.png");	//$NON-NLS-1$
 	// image of square where piece can go
 	private static Image				able_square				= org_able_square;
 
@@ -323,7 +323,7 @@ public class ChessboardUI extends JPanel {
 		}
 
 		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-		if (!this.settings.upsideDown) {
+		if (this.settings.isUpsideDown() == false) {
 			for (int i = 1; i <= letters.length; i++) {
 				uDL2D.drawString(letters[i - 1], (square_height * (i - 1)) + addX, 10 + (labelHeight / 3));
 			}
@@ -345,7 +345,7 @@ public class ChessboardUI extends JPanel {
 		uDL2D.setColor(Color.black);
 		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 
-		if (this.settings.upsideDown) {
+		if (this.settings.isUpsideDown()) {
 			for (int i = 1; i <= 8; i++) {
 				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
 			}

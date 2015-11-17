@@ -49,7 +49,7 @@ public class GameClock extends JPanel implements Runnable {
 		this.setPlayers(this.settings.playerBlack, this.settings.playerWhite);
 
 		this.thread = new Thread(this);
-		if (this.settings.timeLimitSet) {
+		if (this.settings.isTimeLimitSet()) {
 			thread.start();
 		}
 		this.drawBackground();

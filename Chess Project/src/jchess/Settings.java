@@ -21,13 +21,12 @@ public class Settings implements Serializable {
 	private static final long	serialVersionUID	= -9058658425673782782L;
 
 	private static Locale			locale						= Locale.US;
-	public int								timeForGame;
-	public boolean						runningChat;
-	public boolean						runningGameClock;
+	private int								timeForGame;
+	private boolean						runningGameClock;
 
 	// tell us if player choose time 4 game or it's infinity
-	public boolean						timeLimitSet;
-	public boolean						upsideDown;
+	private boolean						timeLimitSet;
+	private boolean						upsideDown;
 
 	public enum gameModes {
 		newGame, loadGame
@@ -45,7 +44,6 @@ public class Settings implements Serializable {
 	public boolean		renderLabels	= true;
 
 	public Settings() {
-		// temporally
 		this.playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
 		this.playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
 		this.timeLimitSet = false;
@@ -70,6 +68,7 @@ public class Settings implements Serializable {
 		return locale;
 	}
 
+	// TODO move to ImageFactory
 	public static Icon getIcon(String key) {
 		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main"); //$NON-NLS-1$
 		String imageName = bundle.getString(key);
@@ -85,5 +84,25 @@ public class Settings implements Serializable {
 		}
 
 		return img;
+	}
+
+	public boolean isUpsideDown() {
+		return upsideDown;
+	}
+
+	public void setUpsideDown(boolean upsideDown) {
+		this.upsideDown = upsideDown;
+	}
+
+	public void setTimeLimetSet(boolean timeLimit) {
+		this.timeLimitSet = timeLimit;
+	}
+
+	public void setTimeForGame(int limit) {
+		this.timeForGame = limit;
+	}
+
+	public boolean isTimeLimitSet() {
+		return timeLimitSet;
 	}
 }

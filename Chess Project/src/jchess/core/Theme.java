@@ -20,7 +20,7 @@ public class Theme {
 
 	/* Constants */
 
-	private final static String				DEFAULT_THEME	= "default"; //$NON-NLS-1$
+	private final static String				DEFAULT_THEME	= "default";										//$NON-NLS-1$
 
 	/* Member */
 
@@ -52,7 +52,9 @@ public class Theme {
 	 * 
 	 * @param imageName
 	 * @return
+	 * 
 	 */
+	// TODO move to ImageFactory
 	public static Image getImage(String imageName) {
 		Image img = imageCache.get(imageName);
 

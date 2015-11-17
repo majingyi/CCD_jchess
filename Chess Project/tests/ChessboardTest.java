@@ -135,7 +135,7 @@ public class ChessboardTest {
 	@Test
 	public void testSetPiecesPlayer1WhiteUpsideDown() throws Exception {
 		Settings settings = new Settings();
-		settings.upsideDown = true;
+		settings.setUpsideDown(true);
 		Chessboard board = new Chessboard(null, settings, null);
 
 		Player white = new Player("hans", Player.colors.white);

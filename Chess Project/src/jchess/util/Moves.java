@@ -151,7 +151,7 @@ public class Moves extends AbstractTableModel {
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
 		String locMove = new String(begin.piece.getSymbolForMoveHistory());
 
-		if (game.settings.upsideDown) {
+		if (game.settings.isUpsideDown()) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - begin.pozX) + 97));// add
 			// letter
 			// of
@@ -178,7 +178,7 @@ public class Moves extends AbstractTableModel {
 			locMove += "-";// normal move //$NON-NLS-1$
 		}
 
-		if (game.settings.upsideDown) {
+		if (game.settings.isUpsideDown()) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - end.pozX) + 97));// add
 			// letter
 			// of
