@@ -18,7 +18,7 @@ public class Logging {
 			ConsoleAppender consoleAppender = new ConsoleAppender(layout);
 			logger.addAppender(consoleAppender);
 
-			FileAppender fileAppender = new FileAppender(layout, "log.log", false);
+			FileAppender fileAppender = new FileAppender(layout, "log.log", false); //$NON-NLS-1$
 			logger.addAppender(fileAppender);
 
 			logger.setLevel(Level.INFO);
@@ -36,7 +36,7 @@ public class Logging {
 	}
 
 	public static void log(Throwable e) {
-		log("Exception occurred", e);// TODO externalize Strings
+		log(Language.getString("Logging.1"), e);// TODO externalize Strings //$NON-NLS-1$
 	}
 
 	public static void log(String message, Throwable e) {

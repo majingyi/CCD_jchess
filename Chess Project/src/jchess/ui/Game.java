@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.pieces.King;
 import jchess.util.Constants;
@@ -81,7 +82,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			fileW = new FileWriter(file);
 		} catch (java.io.IOException exc) {
 			Logging.log("error creating fileWriter: ", exc);
-			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
+			JOptionPane.showMessageDialog(this, Language.getString("error_writing_to_file") + ": " + exc);
 			return;
 		}
 		Calendar cal = Calendar.getInstance();
@@ -96,10 +97,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			fileW.close();
 		} catch (java.io.IOException exc) {
 			Logging.log("error writing to file: ", exc);
-			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
+			JOptionPane.showMessageDialog(this, Language.getString("error_writing_to_file") + ": " + exc);
 			return;
 		}
-		JOptionPane.showMessageDialog(this, Settings.lang("game_saved_properly"));
+		JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly"));
 	}
 
 	/**
@@ -336,7 +337,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				result = true;
 			}
 		} else {
-			throw new UnsupportedOperationException(Settings.lang("operation_supported_only_in_local_game"));
+			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game"));
 		}
 
 		return result;
@@ -350,7 +351,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				result = true;
 			}
 		} else {
-			throw new UnsupportedOperationException(Settings.lang("operation_supported_only_in_local_game"));
+			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game"));
 		}
 
 		return result;
@@ -365,7 +366,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				chessboard.repaint();// repaint for sure
 			}
 		} else {
-			throw new UnsupportedOperationException(Settings.lang("operation_supported_only_in_local_game"));
+			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game"));
 		}
 		return status;
 	}

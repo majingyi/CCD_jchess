@@ -3,7 +3,7 @@ package jchess.ui;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import jchess.Settings;
+import jchess.core.Language;
 
 public class NewGameWindow extends JDialog {
 
@@ -15,9 +15,10 @@ public class NewGameWindow extends JDialog {
 	public NewGameWindow() {
 		initComponents();
 
+		this.setTitle("New Game");
 		this.setSize(400, 700);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.jTabbedPane1.addTab(Settings.lang("local_game"), new DrawLocalSettings(this));
+		this.jTabbedPane1.addTab(Language.getString("local_game"), new DrawLocalSettings(this));
 	}
 
 	private void initComponents() {
@@ -40,5 +41,4 @@ public class NewGameWindow extends JDialog {
 
 		pack();
 	}
-
 }

@@ -42,6 +42,7 @@ import javax.swing.text.BadLocationException;
 
 import jchess.JChessApp;
 import jchess.Settings;
+import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.util.Player;
 
@@ -103,7 +104,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	JButton										okButton;
 	JCheckBox									timeGame;
 	JComboBox<String>					time4Game;
-	String										colors[]					= { Settings.lang("white"), Settings.lang("black") };
+	String										colors[]					= { Language.getString("white"), Language.getString("black") };
 	String										times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };
 
 																																																										;
@@ -165,11 +166,11 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				this.secondName.setText(this.trimString(secondName, 9));
 			}
 			if (!this.oponentComp.isSelected() && (this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
-				JOptionPane.showMessageDialog(this, Settings.lang("fill_names"));
+				JOptionPane.showMessageDialog(this, Language.getString("fill_names"));
 				return;
 			}
 			if ((this.oponentComp.isSelected() && this.firstName.getText().length() == 0)) {
-				JOptionPane.showMessageDialog(this, Settings.lang("fill_name"));
+				JOptionPane.showMessageDialog(this, Language.getString("fill_name"));
 				return;
 			}
 			Game newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + " vs " + this.secondName.getText());
@@ -238,23 +239,23 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
 		this.sep = new JSeparator();
-		this.okButton = new JButton(Settings.lang("ok"));
-		this.compLevLab = new JLabel(Settings.lang("computer_level"));
+		this.okButton = new JButton(Language.getString("ok"));
+		this.compLevLab = new JLabel(Language.getString("computer_level"));
 
 		this.firstName = new JTextField("Player1", 10);
 		this.firstName.setSize(new Dimension(200, 50));
 		this.secondName = new JTextField("Player2", 10);
 		this.secondName.setSize(new Dimension(200, 50));
-		this.firstNameLab = new JLabel(Settings.lang("first_player_name") + ": ");
-		this.secondNameLab = new JLabel(Settings.lang("second_player_name") + ": ");
+		this.firstNameLab = new JLabel(Language.getString("first_player_name") + ": ");
+		this.secondNameLab = new JLabel(Language.getString("second_player_name") + ": ");
 		this.oponentChoos = new ButtonGroup();
 		this.computerLevel = new JSlider();
-		this.upsideDown = new JCheckBox(Settings.lang("upside_down"));
-		this.timeGame = new JCheckBox(Settings.lang("time_game_min"));
+		this.upsideDown = new JCheckBox(Language.getString("upside_down"));
+		this.timeGame = new JCheckBox(Language.getString("time_game_min"));
 		this.time4Game = new JComboBox(times);
 
-		this.oponentComp = new JRadioButton(Settings.lang("against_computer"), false);
-		this.oponentHuman = new JRadioButton(Settings.lang("against_other_human"), true);
+		this.oponentComp = new JRadioButton(Language.getString("against_computer"), false);
+		this.oponentHuman = new JRadioButton(Language.getString("against_other_human"), true);
 
 		this.setLayout(gbl);
 		this.oponentComp.addActionListener(this);

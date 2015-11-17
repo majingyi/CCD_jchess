@@ -12,6 +12,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import jchess.Settings;
+import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
@@ -33,7 +34,7 @@ public class Moves extends AbstractTableModel {
 	private ArrayList<String>		move							= new ArrayList<String>();
 	private int									columnsNum				= 3;
 	private int									rowsNum						= 0;
-	private String[]						names							= new String[] { Settings.lang("white"), Settings.lang("black") };
+	private String[]						names							= new String[] { Language.getString("white"), Language.getString("black") };
 	private MyDefaultTableModel	tableModel;
 	private JScrollPane					scrollPane;
 	private JTable							table;
@@ -443,7 +444,7 @@ public class Moves extends AbstractTableModel {
 		{
 			if (!Moves.isMoveCorrect(locMove.trim())) // if not
 			{
-				JOptionPane.showMessageDialog(this.game, Settings.lang("invalid_file_to_load") + move);
+				JOptionPane.showMessageDialog(this.game, Language.getString("invalid_file_to_load") + move);
 				return;// show message and finish reading game
 			}
 		}
@@ -480,7 +481,7 @@ public class Moves extends AbstractTableModel {
 
 				if (!canMove) // if move is illegal
 				{
-					JOptionPane.showMessageDialog(this.game, Settings.lang("illegal_move_on") + locMove);
+					JOptionPane.showMessageDialog(this.game, Language.getString("illegal_move_on") + locMove);
 					return;// finish reading game and show message
 				}
 				continue;
@@ -528,7 +529,7 @@ public class Moves extends AbstractTableModel {
 			canMove = this.game.simulateMove(xFrom, yFrom, xTo, yTo);
 			if (!canMove) // if move is illegal
 			{
-				JOptionPane.showMessageDialog(this.game, Settings.lang("illegal_move_on") + locMove);
+				JOptionPane.showMessageDialog(this.game, Language.getString("illegal_move_on") + locMove);
 				this.game.chessboard.getChessboard().activeSquare = null;
 				return;// finish reading game and show message
 			}

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import jchess.Settings;
+import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.core.Theme;
 
@@ -36,7 +36,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 		super(parent);
 
 		String[] themes = Theme.getAvailableThemes();
-		this.setTitle(Settings.lang("choose_theme_window_title"));
+		this.setTitle(Language.getString("choose_theme_window_title"));
 		Dimension winDim = new Dimension(550, 230);
 		this.setMinimumSize(winDim);
 		this.setMaximumSize(winDim);
@@ -94,7 +94,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 			String theme = this.themesList.getModel().getElementAt(element).toString();
 			if (Theme.themeIsValid(theme)) {
 				Theme.setActiveTheme(theme);
-				JOptionPane.showMessageDialog(this, Settings.lang("changes_visible_after_restart"));
+				JOptionPane.showMessageDialog(this, Language.getString("changes_visible_after_restart"));
 				this.setVisible(false);
 			}
 		}

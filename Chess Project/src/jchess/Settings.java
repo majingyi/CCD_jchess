@@ -1,12 +1,14 @@
 package jchess;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
-import jchess.ui.JChessAboutBox;
+import jchess.core.Logging;
 import jchess.util.Constants;
 import jchess.util.Player;
 
@@ -27,17 +29,15 @@ public class Settings implements Serializable {
 	public boolean						upsideDown;
 
 	public enum gameModes {
-
 		newGame, loadGame
 	}
 
-	public gameModes	gameMode;
-	public Player			playerWhite;
-	public Player			playerBlack;
+	public gameModes	gameMode		= null;
+	public Player			playerWhite	= null;
+	public Player			playerBlack	= null;
 
 	public enum gameTypes {
-
-		local, network
+		local
 	}
 
 	public gameTypes	gameType;
@@ -65,50 +65,24 @@ public class Settings implements Serializable {
 		locale = localization;
 	}
 
-	// TODO move to Language
-	public static String lang(String key) {
-		String result = "";
-
-		Locale.setDefault(locale);
-		ResourceBundle.clearCache();
-		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main");
-
-		try {
-			result = bundle.getString(key);
-		} catch (java.util.MissingResourceException exc) {
-			// ignore
-		}
-
-		if (result.equals("")) {
-			bundle = ResourceBundle.getBundle("jchess.resources.JChessView");
-		}
-
-		try {
-			result = bundle.getString(key);
-		} catch (java.util.MissingResourceException exc) {
-			// ignore
-		}
-
-		if (result.equals(Constants.EMPTY_STRING)) {
-			bundle = ResourceBundle.getBundle("jchess.resources.JChessAboutBox");
-		}
-
-		try {
-			result = bundle.getString(key);
-		} catch (java.util.MissingResourceException exc) {
-			result = key;
-		}
-
-		return result;
-	}
-
 	public static Locale getLocale() {
 		return locale;
 	}
 
 	public static Icon getIcon(String key) {
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
-				.getResourceMap(JChessAboutBox.class);
-		return resourceMap.getIcon(key);
+		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main");
+		String imageName = bundle.getString(key);
+
+		URL url = null;
+		Icon img = null;
+		try {
+			String imageLink = "resources/" + imageName;
+			url = JChessApp.class.getResource(imageLink);
+			img = new ImageIcon(url);
+		} catch (Exception e) {
+			Logging.log("some error loading image!", e);
+		}
+
+		return img;
 	}
 }
