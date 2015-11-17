@@ -227,13 +227,12 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			newGUI.chessboard.repaint();
 			newGUI.chessboard.draw();
 		}
-
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	DrawLocalSettings(JDialog parent) {
 		super();
-		// this.setA//choose oponent
+
 		this.parent = parent;
 		this.color = new JComboBox(colors);
 		this.gbl = new GridBagLayout();
@@ -242,9 +241,9 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.okButton = new JButton(Settings.lang("ok"));
 		this.compLevLab = new JLabel(Settings.lang("computer_level"));
 
-		this.firstName = new JTextField("", 10);
+		this.firstName = new JTextField("Player1", 10);
 		this.firstName.setSize(new Dimension(200, 50));
-		this.secondName = new JTextField("", 10);
+		this.secondName = new JTextField("Player2", 10);
 		this.secondName.setSize(new Dimension(200, 50));
 		this.firstNameLab = new JLabel(Settings.lang("first_player_name") + ": ");
 		this.secondNameLab = new JLabel(Settings.lang("second_player_name") + ": ");
