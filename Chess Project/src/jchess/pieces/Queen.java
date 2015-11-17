@@ -10,7 +10,7 @@ import jchess.util.Player;
  */
 public class Queen extends Piece {
 
-	public static final String	SYMBOL	= "Queen";
+	public static final String	SYMBOL	= "Queen"; //$NON-NLS-1$
 
 	public Queen(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);

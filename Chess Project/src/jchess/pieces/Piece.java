@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
+import jchess.resources.i18n.Language;
 import jchess.util.Constants;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -82,7 +83,7 @@ public abstract class Piece {
 		if (symbol != null && symbol.length() > 0) {
 			this.symbol = symbol;
 		} else
-			throw new Exception("Symbol is not allowed to be null or empty string.");
+			throw new Exception(Language.getString("Piece.0")); //$NON-NLS-1$
 	}
 
 	public Square getSquare() {
@@ -94,7 +95,7 @@ public abstract class Piece {
 			this.square = square;
 			moveBehavior.setSquare(this.square);
 		} else {
-			throw new Exception("Given square is outside the board borders.");
+			throw new Exception(Language.getString("Piece.1")); //$NON-NLS-1$
 		}
 	}
 
@@ -114,7 +115,7 @@ public abstract class Piece {
 	public String getSymbolForMoveHistory() {
 		String result = null;
 		if (symbol != null && symbol.length() > 0) {
-			if (symbol.startsWith("K") && symbol.length() > 1) {
+			if (symbol.startsWith("K") && symbol.length() > 1) { //$NON-NLS-1$
 				result = symbol.substring(0, 2);
 			} else {
 				result = symbol.substring(0, 1);

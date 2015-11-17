@@ -28,7 +28,7 @@ import javax.swing.JDialog;
 import javax.swing.JRadioButton;
 
 import jchess.Settings;
-import jchess.core.Language;
+import jchess.resources.i18n.Language;
 
 public class LanguageChooseWindow extends JDialog implements ActionListener {
 
@@ -42,7 +42,7 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 	public LanguageChooseWindow(Frame parent) throws Exception {
 		super(parent);
 
-		this.setTitle(Language.getString("choose_language_window_title"));
+		this.setTitle(Language.getString("choose_language_window_title")); //$NON-NLS-1$
 		Dimension winDim = new Dimension(250, 150);
 		this.setMinimumSize(winDim);
 		this.setMaximumSize(winDim);
@@ -51,12 +51,12 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 		this.setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		this.englishButton = new JRadioButton("English", Settings.getLocale().equals(Locale.US));
+		this.englishButton = new JRadioButton(Language.getString("LanguageChooseWindow.1"), Settings.getLocale().equals(Locale.US)); //$NON-NLS-1$
 		this.englishButton.setLocation(new Point(25, 20));
 		this.englishButton.setSize(75, 30);
 		this.add(this.englishButton);
 
-		this.germanButton = new JRadioButton("German", Settings.getLocale().equals(Locale.GERMANY));
+		this.germanButton = new JRadioButton(Language.getString("LanguageChooseWindow.2"), Settings.getLocale().equals(Locale.GERMANY)); //$NON-NLS-1$
 		this.germanButton.setLocation(new Point(155, 20));
 		this.germanButton.setSize(75, 30);
 		this.add(this.germanButton);
@@ -65,7 +65,7 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 		group.add(englishButton);
 		group.add(germanButton);
 
-		this.okButton = new JButton("OK");
+		this.okButton = new JButton(Language.getString("LanguageChooseWindow.3")); //$NON-NLS-1$
 		this.okButton.setLocation(new Point(80, 70));
 		this.okButton.setSize(new Dimension(75, 30));
 		this.add(this.okButton);
@@ -81,7 +81,7 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 				Settings.setLocale(Locale.GERMANY);
 			}
 
-			GUI.configFile.setProperty("Language", Settings.getLocale().toString());
+			GUI.configFile.setProperty("Language", Settings.getLocale().toString()); //$NON-NLS-1$
 
 			this.setVisible(false);
 		}

@@ -11,7 +11,7 @@ import jchess.util.Player;
  */
 public class Rook extends Piece {
 
-	public static final String	SYMBOL		= "Rook";
+	public static final String	SYMBOL		= "Rook"; //$NON-NLS-1$
 
 	public boolean							wasMotion	= false;
 

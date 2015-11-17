@@ -8,7 +8,7 @@ import jchess.util.Player;
  */
 public class Knight extends Piece {
 
-	public static final String	SYMBOL	= "Knight";
+	public static final String	SYMBOL	= "Knight"; //$NON-NLS-1$
 
 	public Knight(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);

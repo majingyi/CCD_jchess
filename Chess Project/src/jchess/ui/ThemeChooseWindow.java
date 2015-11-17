@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.core.Theme;
+import jchess.resources.i18n.Language;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 
@@ -36,7 +36,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 		super(parent);
 
 		String[] themes = Theme.getAvailableThemes();
-		this.setTitle(Language.getString("choose_theme_window_title"));
+		this.setTitle(Language.getString("choose_theme_window_title")); //$NON-NLS-1$
 		Dimension winDim = new Dimension(550, 230);
 		this.setMinimumSize(winDim);
 		this.setMaximumSize(winDim);
@@ -55,9 +55,9 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
 		try {
-			this.themePreview = new ImageIcon(Theme.getImage("Preview.png"));
+			this.themePreview = new ImageIcon(Theme.getImage("Preview.png")); //$NON-NLS-1$
 		} catch (java.lang.NullPointerException exc) {
-			Logging.log("Cannot find preview image: ", exc);
+			Logging.log(Language.getString("ThemeChooseWindow.2"), exc); //$NON-NLS-1$
 			this.themePreview = Theme.getNoPreviewImage();
 			return;
 		}
@@ -66,7 +66,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 		this.themePreviewButton.setLocation(new Point(110, 10));
 		this.themePreviewButton.setSize(new Dimension(420, 120));
 		this.add(this.themePreviewButton);
-		this.okButton = new JButton("OK");
+		this.okButton = new JButton(Language.getString("ThemeChooseWindow.3")); //$NON-NLS-1$
 		this.okButton.setLocation(new Point(175, 140));
 		this.okButton.setSize(new Dimension(200, 50));
 		this.add(this.okButton);
@@ -94,7 +94,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 			String theme = this.themesList.getModel().getElementAt(element).toString();
 			if (Theme.themeIsValid(theme)) {
 				Theme.setActiveTheme(theme);
-				JOptionPane.showMessageDialog(this, Language.getString("changes_visible_after_restart"));
+				JOptionPane.showMessageDialog(this, Language.getString("changes_visible_after_restart")); //$NON-NLS-1$
 				this.setVisible(false);
 			}
 		}

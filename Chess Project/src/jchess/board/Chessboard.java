@@ -10,6 +10,7 @@ import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
+import jchess.resources.i18n.Language;
 import jchess.ui.ChessboardUI;
 import jchess.util.Constants;
 import jchess.util.Move;
@@ -96,7 +97,7 @@ public class Chessboard {
 				}
 			}
 		} else {
-			throw new Exception("Both player have the same color.");
+			throw new Exception(Language.getString("Chessboard.0")); //$NON-NLS-1$
 		}
 	}
 
@@ -120,7 +121,7 @@ public class Chessboard {
 			fromSQ = this.squares[xFrom][yFrom];
 			toSQ = this.squares[xTo][yTo];
 		} catch (java.lang.IndexOutOfBoundsException exc) {
-			Logging.log("error moving piece: ", exc);
+			Logging.log(Language.getString("Chessboard.1"), exc); //$NON-NLS-1$
 			return;
 		}
 		this.move(fromSQ, toSQ, true);
@@ -160,7 +161,7 @@ public class Chessboard {
 	private void setFigures4NewGame(int i, Player player, boolean upsideDown) throws Exception {
 
 		if (i != 0 && i != 7) {
-			Logging.logError("error setting figures like rook etc.");
+			Logging.logError(Language.getString("Chessboard.2")); //$NON-NLS-1$
 			return;
 		} else if (i == 0) {
 			player.goDown = true;
@@ -201,7 +202,7 @@ public class Chessboard {
 	 * */
 	private void setPawns4NewGame(int i, Player player) throws Exception {
 		if (i != 1 && i != 6) {
-			Logging.logError("error setting pawns etc.");
+			Logging.logError(Language.getString("Chessboard.3")); //$NON-NLS-1$
 			return;
 		}
 		for (int x = 0; x < 8; x++) {
@@ -220,7 +221,7 @@ public class Chessboard {
 		this.active_x_square = sq.pozX + 1;
 		this.active_y_square = sq.pozY + 1;
 
-		Logging.log("active_x: " + this.active_x_square + " active_y: " + this.active_y_square);// 4tests
+		Logging.log("active_x: " + this.active_x_square + " active_y: " + this.active_y_square);// 4tests //$NON-NLS-1$ //$NON-NLS-2$
 		uiChessboard.repaint();
 	}
 
@@ -304,7 +305,7 @@ public class Chessboard {
 		// square
 		begin.piece = null;// make null piece for begining square
 
-		if (end.piece.getSymbol().equals("King")) {
+		if (end.piece.getSymbol().equals("King")) { //$NON-NLS-1$
 			if (((King) end.piece).wasMotion == false) {
 				((King) end.piece).wasMotion = true;
 			}

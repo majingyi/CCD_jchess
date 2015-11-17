@@ -30,6 +30,7 @@ import javax.swing.JTabbedPane;
 import jchess.JChessApp;
 import jchess.core.Logging;
 import jchess.core.Theme;
+import jchess.resources.i18n.Language;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {
 
@@ -43,7 +44,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 	public JChessTabbedPane() {
 		super();
 		this.closeIcon = new TabbedPaneIcon(this.closeIcon);
-		this.unclickedAddIcon = Theme.getImage("add-tab-icon.png");
+		this.unclickedAddIcon = Theme.getImage("add-tab-icon.png"); //$NON-NLS-1$
 		this.addIcon = this.unclickedAddIcon;
 		this.setDoubleBuffered(true);
 		super.addMouseListener(this);
@@ -56,7 +57,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 
 	public void addTab(String title, Component component, Icon closeIcon) {
 		super.addTab(title, new TabbedPaneIcon(closeIcon), component);
-		Logging.log("Present number of tabs: " + this.getTabCount());
+		Logging.log(Language.getString("JChessTabbedPane.1") + this.getTabCount()); //$NON-NLS-1$
 		this.updateAddIconRect();
 	}
 
@@ -80,7 +81,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 		if (tabNumber >= 0) {
 			rect = ((TabbedPaneIcon) getIconAt(tabNumber)).getBounds();
 			if (rect.contains(e.getX(), e.getY())) {
-				Logging.log("Removing tab with " + tabNumber + " number!...");
+				Logging.log(Language.getString("JChessTabbedPane.2") + tabNumber + Language.getString("JChessTabbedPane.3")); //$NON-NLS-1$ //$NON-NLS-2$
 				this.removeTabAt(tabNumber);// remove tab
 				this.updateAddIconRect();
 			}
@@ -88,7 +89,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 				this.showNewGameWindow();
 			}
 		} else if (this.addIconRect != null && this.addIconRect.contains(e.getX(), e.getY())) {
-			Logging.log("newGame by + button");
+			Logging.log(Language.getString("JChessTabbedPane.4")); //$NON-NLS-1$
 			this.showNewGameWindow();
 		}
 	}

@@ -34,6 +34,7 @@ import jchess.board.Chessboard;
 import jchess.core.Logging;
 import jchess.core.Theme;
 import jchess.pieces.Piece;
+import jchess.resources.i18n.Language;
 import jchess.util.Moves;
 import jchess.util.Square;
 
@@ -54,11 +55,11 @@ public class ChessboardUI extends JPanel {
 	// image of chessboard
 	private static Image				image							= null;
 	// image of highlighted square
-	private static final Image	org_sel_square		= Theme.getImage("sel_square.png");
+	private static final Image	org_sel_square		= Theme.getImage("sel_square.png"); //$NON-NLS-1$
 	// image of highlighted square
 	private static Image				sel_square				= org_sel_square;
 	// image of square where piece can go
-	private static final Image	org_able_square		= Theme.getImage("able_square.png");
+	private static final Image	org_able_square		= Theme.getImage("able_square.png"); //$NON-NLS-1$
 	// image of square where piece can go
 	private static Image				able_square				= org_able_square;
 
@@ -109,7 +110,7 @@ public class ChessboardUI extends JPanel {
 		// is out of
 		// chessboard
 		{
-			Logging.log("click out of chessboard.");
+			Logging.log(Language.getString("ChessboardUI.2")); //$NON-NLS-1$
 			return null;
 		}
 		if (this.settings.renderLabels) {
@@ -131,12 +132,12 @@ public class ChessboardUI extends JPanel {
 		}
 		// Square newActiveSquare =
 		// this.squares[(int)square_x-1][(int)square_y-1];//4test
-		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
+		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		Square result;
 		try {
 			result = board.squares[(int) square_x - 1][(int) square_y - 1];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-			Logging.log("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : ", exc);
+			Logging.log(Language.getString("ChessboardUI.6"), exc); //$NON-NLS-1$
 			return null;
 		}
 		return result;
@@ -264,17 +265,17 @@ public class ChessboardUI extends JPanel {
 				Image img = resized.getScaledInstance(height, height, 0);
 				g2d.drawImage(img, x, y, null);
 			} else {
-				Logging.logError("image is null!");
+				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
 			}
 		} catch (java.lang.NullPointerException exc) {
-			Logging.log("Something wrong when painting piece: ", exc);
+			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
 		}
 	}
 
 	public void resizeChessboard(int height) {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
-		g.drawImage(Theme.getImage("chessboard.png"), 0, 0, height, height, null);
+		g.drawImage(Theme.getImage("chessboard.png"), 0, 0, height, height, null); //$NON-NLS-1$
 		g.dispose();
 		image = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
@@ -315,13 +316,13 @@ public class ChessboardUI extends JPanel {
 
 		uDL2D.fillRect(0, 0, labelWidth + min_label_height, labelHeight);
 		uDL2D.setColor(Color.black);
-		uDL2D.setFont(new Font("Arial", Font.BOLD, 12));
+		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 		int addX = (square_height / 2);
 		if (this.settings.renderLabels) {
 			addX += labelHeight;
 		}
 
-		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" };
+		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		if (!this.settings.upsideDown) {
 			for (int i = 1; i <= letters.length; i++) {
 				uDL2D.drawString(letters[i - 1], (square_height * (i - 1)) + addX, 10 + (labelHeight / 3));
@@ -342,7 +343,7 @@ public class ChessboardUI extends JPanel {
 		// uDL2D.fillRect(0, 0, 800, 800);
 		uDL2D.fillRect(0, 0, labelHeight, labelWidth + min_label_height);
 		uDL2D.setColor(Color.black);
-		uDL2D.setFont(new Font("Arial", Font.BOLD, 12));
+		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 
 		if (this.settings.upsideDown) {
 			for (int i = 1; i <= 8; i++) {

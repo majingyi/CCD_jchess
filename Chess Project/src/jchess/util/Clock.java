@@ -87,13 +87,13 @@ public class Clock {
 		Integer time_min = new Integer(this.get_left_time() / 60);
 		Integer time_sec = new Integer(this.get_left_time() % 60);
 		if (time_min < 10) {// prepare MINUTES
-			strMin = "0" + time_min.toString();
+			strMin = "0" + time_min.toString(); //$NON-NLS-1$
 		} else {
 			strMin = time_min.toString();
 		}
-		String result = new String(strMin + ":");
+		String result = new String(strMin + ":"); //$NON-NLS-1$
 		if (time_sec < 10) {// prepare SECONDS
-			result = result + "0" + time_sec.toString();
+			result = result + "0" + time_sec.toString(); //$NON-NLS-1$
 		} else {
 			result = result + time_sec.toString();
 		}

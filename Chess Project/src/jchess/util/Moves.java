@@ -12,10 +12,10 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import jchess.Settings;
-import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
+import jchess.resources.i18n.Language;
 import jchess.ui.ChessboardUI;
 import jchess.ui.Game;
 
@@ -34,7 +34,7 @@ public class Moves extends AbstractTableModel {
 	private ArrayList<String>		move							= new ArrayList<String>();
 	private int									columnsNum				= 3;
 	private int									rowsNum						= 0;
-	private String[]						names							= new String[] { Language.getString("white"), Language.getString("black") };
+	private String[]						names							= new String[] { Language.getString("white"), Language.getString("black") };	//$NON-NLS-1$ //$NON-NLS-2$
 	private MyDefaultTableModel	tableModel;
 	private JScrollPane					scrollPane;
 	private JTable							table;
@@ -173,9 +173,9 @@ public class Moves extends AbstractTableModel {
 		}
 
 		if (end.piece != null) {
-			locMove += "x";// take down opponent piece
+			locMove += "x";// take down opponent piece //$NON-NLS-1$
 		} else {
-			locMove += "-";// normal move
+			locMove += "-";// normal move //$NON-NLS-1$
 		}
 
 		if (game.settings.upsideDown) {
@@ -199,7 +199,7 @@ public class Moves extends AbstractTableModel {
 		}
 
 		if (begin.piece.getSymbol() == Pawn.SYMBOL && begin.pozX - end.pozX != 0 && end.piece == null) {
-			locMove += "(e.p)";// pawn take down opponent en passant
+			locMove += "(e.p)";// pawn take down opponent en passant //$NON-NLS-1$
 			wasEnPassant = true;
 		}
 		if ((!this.enterBlack && this.game.chessboard.getChessboard().kingBlack.isChecked())
@@ -210,15 +210,15 @@ public class Moves extends AbstractTableModel {
 					|| (this.enterBlack && this.game.chessboard.getChessboard().kingWhite.isCheckmatedOrStalemated() == 1)) {// check
 				// if
 				// checkmated
-				locMove += "#";// check mate
+				locMove += "#";// check mate //$NON-NLS-1$
 			} else {
-				locMove += "+";// check
+				locMove += "+";// check //$NON-NLS-1$
 			}
 		}
 		if (castlingMove == castling.shortCastling) {
-			this.addCastling("0-0");
+			this.addCastling("0-0"); //$NON-NLS-1$
 		} else if (castlingMove == castling.longCastling) {
-			this.addCastling("0-0-0");
+			this.addCastling("0-0-0"); //$NON-NLS-1$
 		} else {
 			this.move.add(locMove);
 			this.addMove2Table(locMove);
@@ -276,7 +276,7 @@ public class Moves extends AbstractTableModel {
 					this.moveForwardStack.push(last);
 				}
 				if (this.enterBlack) {
-					this.tableModel.setValueAt("", this.tableModel.getRowCount() - 1, 0);
+					this.tableModel.setValueAt("", this.tableModel.getRowCount() - 1, 0); //$NON-NLS-1$
 					this.tableModel.removeRow(this.tableModel.getRowCount() - 1);
 
 					if (this.rowsNum > 0) {
@@ -284,7 +284,7 @@ public class Moves extends AbstractTableModel {
 					}
 				} else {
 					if (this.tableModel.getRowCount() > 0) {
-						this.tableModel.setValueAt("", this.tableModel.getRowCount() - 1, 1);
+						this.tableModel.setValueAt("", this.tableModel.getRowCount() - 1, 1); //$NON-NLS-1$
 					}
 				}
 				this.move.remove(this.move.size() - 1);
@@ -321,8 +321,9 @@ public class Moves extends AbstractTableModel {
 	 *          String which in is capt player move
 	 * @return boolean 1 if the move is correct, else 0
 	 */
-	static public boolean isMoveCorrect(String move) {
-		if (move.equals("O-O") || move.equals("O-O-O")) {
+	static public boolean isMoveCorrect(String move) {// TODO not correct, Symbols
+																										// where changed
+		if (move.equals("O-O") || move.equals("O-O-O")) { //$NON-NLS-1$ //$NON-NLS-2$
 			return true;
 		}
 		try {
@@ -394,10 +395,10 @@ public class Moves extends AbstractTableModel {
 		String str = new String();
 		for (String locMove : this.getMoves()) {
 			if (i % 2 == 0) {
-				str += n + ". ";
+				str += n + ". "; //$NON-NLS-1$
 				n += 1;
 			}
-			str += locMove + " ";
+			str += locMove + " "; //$NON-NLS-1$
 			i += 1;
 		}
 		return str;
@@ -418,17 +419,17 @@ public class Moves extends AbstractTableModel {
 		ArrayList<String> tempArray = new ArrayList<String>();
 		int tempStrSize = moves.length() - 1;
 		while (true) {
-			from = moves.indexOf(" ", from);
-			to = moves.indexOf(" ", from + 1);
+			from = moves.indexOf(" ", from); //$NON-NLS-1$
+			to = moves.indexOf(" ", from + 1); //$NON-NLS-1$
 			// Logging.log(from+">"+to);
 			try {
 				tempArray.add(moves.substring(from + 1, to).trim());
 			} catch (java.lang.StringIndexOutOfBoundsException exc) {
-				Logging.log("error parsing file to load: ", exc);
+				Logging.log(Language.getString("Moves.0"), exc); //$NON-NLS-1$
 				break;
 			}
 			if (n % 2 == 0) {
-				from = moves.indexOf(".", to);
+				from = moves.indexOf(".", to); //$NON-NLS-1$
 				if (from < to) {
 					break;
 				}
@@ -444,16 +445,16 @@ public class Moves extends AbstractTableModel {
 		{
 			if (!Moves.isMoveCorrect(locMove.trim())) // if not
 			{
-				JOptionPane.showMessageDialog(this.game, Language.getString("invalid_file_to_load") + move);
+				JOptionPane.showMessageDialog(this.game, Language.getString("invalid_file_to_load") + move); //$NON-NLS-1$
 				return;// show message and finish reading game
 			}
 		}
 		boolean canMove = false;
 		for (String locMove : tempArray) {
-			if (locMove.equals("O-O-O") || locMove.equals("O-O")) // if castling
+			if (locMove.equals("O-O-O") || locMove.equals("O-O")) // if castling //$NON-NLS-1$ //$NON-NLS-2$
 			{
 				int[] values = new int[4];
-				if (locMove.equals("O-O-O")) {
+				if (locMove.equals("O-O-O")) { //$NON-NLS-1$
 					if (this.game.getActivePlayer().color == Player.colors.black) // if
 																																				// black
 																																				// turn
@@ -464,7 +465,7 @@ public class Moves extends AbstractTableModel {
 						values = new int[] { 4, 7, 2, 7 };// move value for castling (King
 																							// move)
 					}
-				} else if (locMove.equals("O-O")) // if short castling
+				} else if (locMove.equals("O-O")) // if short castling //$NON-NLS-1$
 				{
 					if (this.game.getActivePlayer().color == Player.colors.black) // if
 																																				// black
@@ -481,7 +482,7 @@ public class Moves extends AbstractTableModel {
 
 				if (!canMove) // if move is illegal
 				{
-					JOptionPane.showMessageDialog(this.game, Language.getString("illegal_move_on") + locMove);
+					JOptionPane.showMessageDialog(this.game, Language.getString("illegal_move_on") + locMove); //$NON-NLS-1$
 					return;// finish reading game and show message
 				}
 				continue;
@@ -529,7 +530,7 @@ public class Moves extends AbstractTableModel {
 			canMove = this.game.simulateMove(xFrom, yFrom, xTo, yTo);
 			if (!canMove) // if move is illegal
 			{
-				JOptionPane.showMessageDialog(this.game, Language.getString("illegal_move_on") + locMove);
+				JOptionPane.showMessageDialog(this.game, Language.getString("illegal_move_on") + locMove); //$NON-NLS-1$
 				this.game.chessboard.getChessboard().activeSquare = null;
 				return;// finish reading game and show message
 			}

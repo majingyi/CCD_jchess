@@ -2,6 +2,8 @@ package jchess.core;
 
 import java.io.IOException;
 
+import jchess.resources.i18n.Language;
+
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
@@ -36,7 +38,7 @@ public class Logging {
 	}
 
 	public static void log(Throwable e) {
-		log(Language.getString("Logging.1"), e);// TODO externalize Strings //$NON-NLS-1$
+		log(Language.getString("Logging.1"), e); //$NON-NLS-1$
 	}
 
 	public static void log(String message, Throwable e) {

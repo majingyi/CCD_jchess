@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 
 import jchess.JChessApp;
+import jchess.resources.i18n.Language;
 import jchess.ui.GUI;
 import jchess.util.Player;
 
@@ -19,7 +20,7 @@ public class Theme {
 
 	/* Constants */
 
-	private final static String				DEFAULT_THEME	= "default";
+	private final static String				DEFAULT_THEME	= "default"; //$NON-NLS-1$
 
 	/* Member */
 
@@ -29,19 +30,19 @@ public class Theme {
 
 	static {
 		themeList.add(DEFAULT_THEME);
-		themeList.add("hunter");
-		themeList.add("matlak");
+		themeList.add("hunter"); //$NON-NLS-1$
+		themeList.add("matlak"); //$NON-NLS-1$
 	}
 
 	public static Image getImageForPiece(Player.colors color, String pieceSymbol) {
 		String imageName = pieceSymbol;
 
 		if (color == Player.colors.white) {
-			imageName = imageName + "-W.png";
+			imageName = imageName + "-W.png"; //$NON-NLS-1$
 		} else if (color == Player.colors.black) {
-			imageName = imageName + "-B.png";
+			imageName = imageName + "-B.png"; //$NON-NLS-1$
 		} else if (color == Player.colors.gray) {
-			imageName = imageName + "-G.png";
+			imageName = imageName + "-G.png"; //$NON-NLS-1$
 		}
 		return getImage(imageName);
 	}
@@ -59,12 +60,12 @@ public class Theme {
 			URL url = null;
 			Toolkit tk = Toolkit.getDefaultToolkit();
 			try {
-				String imageLink = "resources/theme/" + activeTheme + "/images/" + imageName;
+				String imageLink = "resources/theme/" + activeTheme + "/images/" + imageName; //$NON-NLS-1$ //$NON-NLS-2$
 				url = JChessApp.class.getResource(imageLink);
 				img = tk.getImage(url);
 				imageCache.put(imageName, img);
 			} catch (Exception e) {
-				Logging.log("some error loading image!", e);
+				Logging.log(Language.getString("Theme.8"), e); //$NON-NLS-1$
 			}
 		}
 
@@ -87,12 +88,12 @@ public class Theme {
 	}
 
 	public static ImageIcon getNoPreviewImage() {
-		return new ImageIcon(JChessApp.class.getResource("resources/theme/noPreview.png"));
+		return new ImageIcon(JChessApp.class.getResource("resources/theme/noPreview.png")); //$NON-NLS-1$
 	}
 
 	public static ImageIcon getThemePreviewImage(String theme) {
-		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator;
-		Logging.log(path + theme + "/images/Preview.png");
-		return new ImageIcon(path + theme + "/images/Preview.png");
+		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		Logging.log(path + theme + "/images/Preview.png"); //$NON-NLS-1$
+		return new ImageIcon(path + theme + "/images/Preview.png"); //$NON-NLS-1$
 	}
 }

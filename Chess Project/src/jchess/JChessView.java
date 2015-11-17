@@ -14,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import jchess.core.Language;
 import jchess.core.Logging;
+import jchess.resources.i18n.Language;
 import jchess.ui.GUI;
 import jchess.ui.Game;
 import jchess.ui.JChessAboutBox;
@@ -26,7 +26,6 @@ import jchess.ui.ThemeChooseWindow;
 import jchess.util.Player;
 
 import org.jdesktop.application.FrameView;
-import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
@@ -181,7 +180,6 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		initComponents();
 		// status bar initialization - message timeout, idle icon and busy
 		// animation, etc
-		ResourceMap resourceMap = getResourceMap();
 		int messageTimeout = MESSAGE_TIMEOUT;
 		messageTimer = new Timer(messageTimeout, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,7 +189,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		messageTimer.setRepeats(false);
 		int busyAnimationRate = BUSY_ANIMATION_RATE;
 		for (int i = 0; i < busyIcons.length; i++) {
-			busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]"); //$NON-NLS-1$ //$NON-NLS-2$
+			busyIcons[i] = Settings.getIcon("StatusBar.busyIcons[" + i + "]"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -199,7 +197,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
 			}
 		});
-		idleIcon = resourceMap.getIcon("StatusBar.idleIcon"); //$NON-NLS-1$
+		idleIcon = Settings.getIcon("StatusBar.idleIcon"); //$NON-NLS-1$
 		statusAnimationLabel.setIcon(idleIcon);
 		progressBar.setVisible(false);
 

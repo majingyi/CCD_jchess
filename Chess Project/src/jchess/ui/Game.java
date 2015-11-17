@@ -18,9 +18,9 @@ import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
 import jchess.Settings;
-import jchess.core.Language;
 import jchess.core.Logging;
 import jchess.pieces.King;
+import jchess.resources.i18n.Language;
 import jchess.util.Constants;
 import jchess.util.Moves;
 import jchess.util.Player;
@@ -81,14 +81,14 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileW = new FileWriter(file);
 		} catch (java.io.IOException exc) {
-			Logging.log("error creating fileWriter: ", exc);
-			JOptionPane.showMessageDialog(this, Language.getString("error_writing_to_file") + ": " + exc);
+			Logging.log(Language.getString("Game.0"), exc); //$NON-NLS-1$
+			JOptionPane.showMessageDialog(this, Language.getString("Game.1") + ": " + exc); //$NON-NLS-1$ //$NON-NLS-2$
 			return;
 		}
 		Calendar cal = Calendar.getInstance();
-		String str = new String("");
-		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH)
-				+ "\"]\n" + "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n");
+		String str = new String(""); //$NON-NLS-1$
+		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ "\"]\n" + "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		str += info;
 		str += this.moves.getMovesInString();
 		try {
@@ -96,11 +96,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			fileW.flush();
 			fileW.close();
 		} catch (java.io.IOException exc) {
-			Logging.log("error writing to file: ", exc);
-			JOptionPane.showMessageDialog(this, Language.getString("error_writing_to_file") + ": " + exc);
+			Logging.log(Language.getString("Game.11"), exc); //$NON-NLS-1$
+			JOptionPane.showMessageDialog(this, Language.getString(Language.getString("Game.12")) + ": " + exc); //$NON-NLS-1$ //$NON-NLS-2$
 			return;
 		}
-		JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly"));
+		JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly")); //$NON-NLS-1$
 	}
 
 	/**
@@ -116,23 +116,23 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileR = new FileReader(file);
 		} catch (java.io.IOException exc) {
-			Logging.log("Something wrong reading file: ", exc);
+			Logging.log(Language.getString("Game.2"), exc); //$NON-NLS-1$
 			return;
 		}
 		BufferedReader br = new BufferedReader(fileR);
 		String tempStr = new String();
 		String blackName, whiteName;
 		try {
-			tempStr = getLineWithVar(br, new String("[White"));
+			tempStr = getLineWithVar(br, new String("[White")); //$NON-NLS-1$
 			whiteName = getValue(tempStr);
-			tempStr = getLineWithVar(br, new String("[Black"));
+			tempStr = getLineWithVar(br, new String("[Black")); //$NON-NLS-1$
 			blackName = getValue(tempStr);
-			tempStr = getLineWithVar(br, new String("1."));
+			tempStr = getLineWithVar(br, new String("1.")); //$NON-NLS-1$
 		} catch (ReadGameError err) {
-			Logging.log("Error reading file: ", err);
+			Logging.log(Language.getString("Game.19"), err); //$NON-NLS-1$
 			return;
 		}
-		Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName);
+		Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
 		Settings locSetts = newGUI.settings;
 		locSetts.playerBlack.name = blackName;
 		locSetts.playerWhite.name = whiteName;
@@ -166,7 +166,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			try {
 				str = br.readLine();
 			} catch (java.io.IOException exc) {
-				Logging.log("Something wrong reading file: ", exc);
+				Logging.log(Language.getString("Game.21"), exc); //$NON-NLS-1$
 			}
 			if (str == null) {
 				throw new ReadGameError();
@@ -187,8 +187,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *           object class when something goes wrong
 	 */
 	static public String getValue(String line) throws ReadGameError {
-		int from = line.indexOf("\"");
-		int to = line.lastIndexOf("\"");
+		int from = line.indexOf("\""); //$NON-NLS-1$
+		int to = line.lastIndexOf("\""); //$NON-NLS-1$
 		int size = line.length() - 1;
 		String result = new String();
 		if (to < from || from > size || to > size || to < 0 || from < 0) {
@@ -197,8 +197,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			result = line.substring(from + 1, to);
 		} catch (java.lang.StringIndexOutOfBoundsException exc) {
-			Logging.log("error getting value: ", exc);
-			return "none";
+			Logging.log(Language.getString("Game.24"), exc); //$NON-NLS-1$
+			return "none"; //$NON-NLS-1$
 		}
 		return result;
 	}
@@ -267,7 +267,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public void nextMove() {
 		switchActive();
 
-		Logging.log("next move, active player: " + activePlayer.name + ", color: " + activePlayer.color.name() + ", type: " + activePlayer.playerType.name());
+		Logging.log("next move, active player: " + activePlayer.name + ", color: " + activePlayer.color.name() + ", type: " + activePlayer.playerType.name()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		if (activePlayer.playerType == Player.playerTypes.localUser) {
 			this.blockedChessboard = false;
 		}
@@ -294,7 +294,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			{
 				chessboard.getChessboard().move(chessboard.getChessboard().squares[beginX][beginY], chessboard.getChessboard().squares[endX][endY]);
 			} else {
-				Logging.log("Bad move");
+				Logging.log(Language.getString("Game.29")); //$NON-NLS-1$
 				return false;
 			}
 			chessboard.getChessboard().unselect();
@@ -337,7 +337,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				result = true;
 			}
 		} else {
-			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game"));
+			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game")); //$NON-NLS-1$
 		}
 
 		return result;
@@ -351,7 +351,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				result = true;
 			}
 		} else {
-			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game"));
+			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game")); //$NON-NLS-1$
 		}
 
 		return result;
@@ -366,7 +366,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				chessboard.repaint();// repaint for sure
 			}
 		} else {
-			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game"));
+			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game")); //$NON-NLS-1$
 		}
 		return status;
 	}
@@ -419,15 +419,15 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 						switch (king.isCheckmatedOrStalemated()) {
 							case 1:
-								this.endGame("Checkmate! " + king.player.color.toString() + " player lose!");
+								this.endGame("Checkmate! " + king.player.color.toString() + " player lose!"); //$NON-NLS-1$ //$NON-NLS-2$
 								break;
 							case 2:
-								this.endGame("Stalemate! Draw!");
+								this.endGame(Language.getString("Game.35")); //$NON-NLS-1$
 								break;
 						}
 					}
 				} else if (blockedChessboard) {
-					Logging.log("Chessboard is blocked");
+					Logging.log(Language.getString("Game.36")); //$NON-NLS-1$
 				}
 			}
 		} catch (Exception e) {

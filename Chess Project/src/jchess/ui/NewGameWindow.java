@@ -3,7 +3,7 @@ package jchess.ui;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import jchess.core.Language;
+import jchess.resources.i18n.Language;
 
 public class NewGameWindow extends JDialog {
 
@@ -15,10 +15,10 @@ public class NewGameWindow extends JDialog {
 	public NewGameWindow() {
 		initComponents();
 
-		this.setTitle("New Game");
+		this.setTitle(Language.getString("NewGameWindow.0")); //$NON-NLS-1$
 		this.setSize(400, 700);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.jTabbedPane1.addTab(Language.getString("local_game"), new DrawLocalSettings(this));
+		this.jTabbedPane1.addTab(Language.getString("local_game"), new DrawLocalSettings(this)); //$NON-NLS-1$
 	}
 
 	private void initComponents() {
@@ -26,9 +26,9 @@ public class NewGameWindow extends JDialog {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
-		setName("Form"); // NOI18N
+		setName("Form"); // NOI18N //$NON-NLS-1$
 
-		jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+		jTabbedPane1.setName("jTabbedPane1"); // NOI18N //$NON-NLS-1$
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);

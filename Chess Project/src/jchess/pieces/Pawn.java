@@ -1,6 +1,7 @@
 package jchess.pieces;
 
 import jchess.board.Chessboard;
+import jchess.resources.i18n.Language;
 import jchess.util.Player;
 
 /**
@@ -15,7 +16,7 @@ import jchess.util.Player;
  */
 public class Pawn extends Piece {
 
-	public static final String	SYMBOL	= "Pawn";
+	public static final String	SYMBOL	= "Pawn"; //$NON-NLS-1$
 
 	public Pawn(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);
@@ -41,7 +42,7 @@ public class Pawn extends Piece {
 			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
 			setSymbol(Bishop.SYMBOL);
 		} else if (newPiece.equals(King.SYMBOL)) {
-			throw new Exception("Pawn can not be promoted to King.");
+			throw new Exception(Language.getString("Pawn.1")); //$NON-NLS-1$
 		} else // knight
 		{
 			setMoveBehavior(new KnightMoveBehavior(player, chessboard, square));

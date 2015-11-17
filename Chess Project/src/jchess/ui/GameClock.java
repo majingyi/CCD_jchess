@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import jchess.Settings;
 import jchess.core.Logging;
+import jchess.resources.i18n.Language;
 import jchess.util.Clock;
 import jchess.util.Player;
 
@@ -71,9 +72,9 @@ public class GameClock extends JPanel implements Runnable {
 		try {// block this thread
 			this.thread.wait();
 		} catch (java.lang.InterruptedException exc) {
-			Logging.log("Error blocking thread: ", exc);
+			Logging.log(Language.getString("GameClock.0"), exc); //$NON-NLS-1$
 		} catch (java.lang.IllegalMonitorStateException exc1) {
-			Logging.log("Error blocking thread: ", exc1);
+			Logging.log(Language.getString("GameClock.1"), exc1); //$NON-NLS-1$
 		}
 	}
 
@@ -84,7 +85,7 @@ public class GameClock extends JPanel implements Runnable {
 		Graphics gr = this.background.getGraphics();
 		Graphics2D g2d = (Graphics2D) gr;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		Font font = new Font("Serif", Font.ITALIC, 20);
+		Font font = new Font("Serif", Font.ITALIC, 20); //$NON-NLS-1$
 
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(5, 30, 80, 30);
@@ -95,7 +96,7 @@ public class GameClock extends JPanel implements Runnable {
 		g2d.drawRect(5, 30, 170, 30);
 		g2d.drawRect(5, 60, 170, 30);
 		g2d.drawLine(85, 30, 85, 90);
-		font = new Font("Serif", Font.ITALIC, 16);
+		font = new Font("Serif", Font.ITALIC, 16); //$NON-NLS-1$
 		g2d.drawString(settings.playerWhite.getName(), 10, 50);
 		g2d.setColor(Color.WHITE);
 		g2d.drawString(settings.playerBlack.getName(), 100, 50);
@@ -115,7 +116,7 @@ public class GameClock extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		Font font = new Font("Serif", Font.ITALIC, 20);
+		Font font = new Font("Serif", Font.ITALIC, 20); //$NON-NLS-1$
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(5, 30, 80, 30);
@@ -126,7 +127,7 @@ public class GameClock extends JPanel implements Runnable {
 		g2d.drawRect(5, 30, 170, 30);
 		g2d.drawRect(5, 60, 170, 30);
 		g2d.drawLine(85, 30, 85, 90);
-		font = new Font("Serif", Font.ITALIC, 14);
+		font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setFont(font);
 		g.drawString(settings.playerWhite.getName(), 10, 50);
@@ -216,7 +217,7 @@ public class GameClock extends JPanel implements Runnable {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						Logging.log("Some error in gameClock thread: ", e);
+						Logging.log(Language.getString("GameClock.6"), e); //$NON-NLS-1$
 					}
 					// if(this.game.blockedChessboard)
 					// this.game.blockedChessboard = false;
@@ -238,9 +239,9 @@ public class GameClock extends JPanel implements Runnable {
 		} else if (this.clock2.get_left_time() == 0) {
 			color = this.clock1.getPlayer().color.toString();
 		} else {// if called in wrong moment
-			Logging.log("Time over called when player got time 2 play");
+			Logging.log(Language.getString("GameClock.7")); //$NON-NLS-1$
 		}
-		this.game.endGame("Time is over! " + color + " player win the game.");
+		this.game.endGame(Language.getString("GameClock.8") + color + Language.getString("GameClock.9")); //$NON-NLS-1$ //$NON-NLS-2$
 		this.stop();
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import jchess.core.Logging;
+import jchess.resources.i18n.Language;
 import jchess.util.Constants;
 import jchess.util.Player;
 
@@ -70,17 +71,17 @@ public class Settings implements Serializable {
 	}
 
 	public static Icon getIcon(String key) {
-		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main");
+		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main"); //$NON-NLS-1$
 		String imageName = bundle.getString(key);
 
 		URL url = null;
 		Icon img = null;
 		try {
-			String imageLink = "resources/" + imageName;
+			String imageLink = "resources/" + imageName; //$NON-NLS-1$
 			url = JChessApp.class.getResource(imageLink);
 			img = new ImageIcon(url);
 		} catch (Exception e) {
-			Logging.log("some error loading image!", e);
+			Logging.log(Language.getString("Settings.2"), e); //$NON-NLS-1$
 		}
 
 		return img;

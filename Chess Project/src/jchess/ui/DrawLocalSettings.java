@@ -42,8 +42,8 @@ import javax.swing.text.BadLocationException;
 
 import jchess.JChessApp;
 import jchess.Settings;
-import jchess.core.Language;
 import jchess.core.Logging;
+import jchess.resources.i18n.Language;
 import jchess.util.Player;
 
 /**
@@ -104,8 +104,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	JButton										okButton;
 	JCheckBox									timeGame;
 	JComboBox<String>					time4Game;
-	String										colors[]					= { Language.getString("white"), Language.getString("black") };
-	String										times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };
+	String										colors[]					= { Language.getString("white"), Language.getString("black") }; //$NON-NLS-1$ //$NON-NLS-2$
+	String										times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
 
 																																																										;
 
@@ -130,7 +130,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				try {
 					temp.setText(temp.getText(0, 7));
 				} catch (BadLocationException exc) {
-					Logging.log("Something wrong in editables: \n", exc);
+					Logging.log(Language.getString("DrawLocalSettings.13"), exc); //$NON-NLS-1$
 				}
 			}
 		}
@@ -166,21 +166,21 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				this.secondName.setText(this.trimString(secondName, 9));
 			}
 			if (!this.oponentComp.isSelected() && (this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
-				JOptionPane.showMessageDialog(this, Language.getString("fill_names"));
+				JOptionPane.showMessageDialog(this, Language.getString("fill_names")); //$NON-NLS-1$
 				return;
 			}
 			if ((this.oponentComp.isSelected() && this.firstName.getText().length() == 0)) {
-				JOptionPane.showMessageDialog(this, Language.getString("fill_name"));
+				JOptionPane.showMessageDialog(this, Language.getString("fill_name")); //$NON-NLS-1$
 				return;
 			}
-			Game newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + " vs " + this.secondName.getText());
+			Game newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText()); //$NON-NLS-1$
 			Settings sett = newGUI.settings;// sett local settings variable
 			Player pl1 = sett.playerWhite;// set local player variable
 			Player pl2 = sett.playerBlack;// set local player variable
 			sett.gameMode = Settings.gameModes.newGame;
 			// if(this.firstName.getText().length() >9 )
 			// this.firstName.setText(this.firstName.getText(0,8));
-			if (this.color.getActionCommand().equals("biały")) // if first player is
+			if (this.color.getActionCommand().equals("biały")) // if first player is //$NON-NLS-1$
 																													// white
 			{
 				pl1.setName(this.firstName.getText());// set name of player
@@ -217,8 +217,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			}
 			Logging.log(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-			Logging.log("****************\nStarting new game: " + pl1.name + " vs. " + pl2.name + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: "
-					+ sett.timeLimitSet + "\nwhite on top?: " + sett.upsideDown + "\n****************");// 4test
+			Logging.log(Language.getString("DrawLocalSettings.18") + pl1.name + Language.getString("DrawLocalSettings.19") + pl2.name + Language.getString("DrawLocalSettings.20") + sett.timeForGame + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					+ sett.timeLimitSet + Language.getString("DrawLocalSettings.22") + sett.upsideDown + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
 			try {
 				newGUI.newGame();
 			} catch (Exception e1) {
@@ -239,23 +239,23 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
 		this.sep = new JSeparator();
-		this.okButton = new JButton(Language.getString("ok"));
-		this.compLevLab = new JLabel(Language.getString("computer_level"));
+		this.okButton = new JButton(Language.getString(Language.getString("DrawLocalSettings.24"))); //$NON-NLS-1$
+		this.compLevLab = new JLabel(Language.getString(Language.getString("DrawLocalSettings.25"))); //$NON-NLS-1$
 
-		this.firstName = new JTextField("Player1", 10);
+		this.firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
 		this.firstName.setSize(new Dimension(200, 50));
-		this.secondName = new JTextField("Player2", 10);
+		this.secondName = new JTextField(Language.getString("DrawLocalSettings.27"), 10); //$NON-NLS-1$
 		this.secondName.setSize(new Dimension(200, 50));
-		this.firstNameLab = new JLabel(Language.getString("first_player_name") + ": ");
-		this.secondNameLab = new JLabel(Language.getString("second_player_name") + ": ");
+		this.firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
+		this.secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
 		this.oponentChoos = new ButtonGroup();
 		this.computerLevel = new JSlider();
-		this.upsideDown = new JCheckBox(Language.getString("upside_down"));
-		this.timeGame = new JCheckBox(Language.getString("time_game_min"));
+		this.upsideDown = new JCheckBox(Language.getString("upside_down")); //$NON-NLS-1$
+		this.timeGame = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
 		this.time4Game = new JComboBox(times);
 
-		this.oponentComp = new JRadioButton(Language.getString("against_computer"), false);
-		this.oponentHuman = new JRadioButton(Language.getString("against_other_human"), true);
+		this.oponentComp = new JRadioButton(Language.getString("against_computer"), false); //$NON-NLS-1$
+		this.oponentHuman = new JRadioButton(Language.getString("against_other_human"), true); //$NON-NLS-1$
 
 		this.setLayout(gbl);
 		this.oponentComp.addActionListener(this);
@@ -339,7 +339,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		try {
 			result = txt.getText(0, length);
 		} catch (BadLocationException exc) {
-			Logging.log("Something wrong in editables: \n", exc);
+			Logging.log(Language.getString("DrawLocalSettings.36"), exc); //$NON-NLS-1$
 		}
 		return result;
 	}
