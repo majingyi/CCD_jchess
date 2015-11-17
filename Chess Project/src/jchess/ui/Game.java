@@ -1,18 +1,3 @@
-/*
- * # This program is free software: you can redistribute it and/or modify # it
- * under the terms of the GNU General Public License as published by # the Free
- * Software Foundation, either version 3 of the License, or # (at your option)
- * any later version. # # This program is distributed in the hope that it will
- * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
- * Public License for more details. # # You should have received a copy of the
- * GNU General Public License # along with this program. If not, see
- * <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
- */
 package jchess.ui;
 
 import java.awt.Dimension;
@@ -37,7 +22,6 @@ import jchess.JChessApp;
 import jchess.Settings;
 import jchess.core.Logging;
 import jchess.pieces.King;
-import jchess.util.Client;
 import jchess.util.Moves;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -56,9 +40,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public ChessboardUI				chessboard;
 	private Player						activePlayer;
 	public GameClock					gameClock;
-	public Client							client;
 	public Moves							moves;
-	public Chat								chat;
 
 	public Game() {
 		this.setLayout(null);
@@ -80,11 +62,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		movesHistory.setSize(new Dimension(180, 350));
 		movesHistory.setLocation(new Point(500, 121));
 		this.add(movesHistory);
-
-		this.chat = new Chat();
-		this.chat.setSize(new Dimension(380, 100));
-		this.chat.setLocation(new Point(0, 500));
-		this.chat.setMinimumSize(new Dimension(400, 100));
 
 		this.blockedChessboard = false;
 		this.setLayout(null);
@@ -365,9 +342,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			} else {
 				chessboard.repaint();// repaint for sure
 			}
-		} else if (this.settings.gameType == Settings.gameTypes.network) {
-			this.client.sendUndoAsk();
-			status = true;
 		}
 		return status;
 	}
@@ -445,9 +419,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					{
 						if (settings.gameType == Settings.gameTypes.local) {
 							chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
-						} else if (settings.gameType == Settings.gameTypes.network) {
-							client.sendMove(chessboard.getChessboard().activeSquare.pozX, chessboard.getChessboard().activeSquare.pozY, sq.pozX, sq.pozY);
-							chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
 						}
 
 						chessboard.getChessboard().unselect();
@@ -501,10 +472,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.moves.getScrollPane().setLocation(new Point(chess_height + 5, 100));
 		this.moves.getScrollPane().setSize(this.moves.getScrollPane().getWidth(), chess_height - 100);
 		this.gameClock.setLocation(new Point(chess_height + 5, 0));
-		if (this.chat != null) {
-			this.chat.setLocation(new Point(0, chess_height + 5));
-			this.chat.setSize(new Dimension(chess_height, this.getHeight() - (chess_height + 5)));
-		}
 	}
 
 	public void componentMoved(ComponentEvent e) {
