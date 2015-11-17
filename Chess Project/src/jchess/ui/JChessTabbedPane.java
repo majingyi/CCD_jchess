@@ -29,6 +29,7 @@ import javax.swing.JTabbedPane;
 
 import jchess.JChessApp;
 import jchess.core.Logging;
+import jchess.core.Theme;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {
 
@@ -42,7 +43,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 	public JChessTabbedPane() {
 		super();
 		this.closeIcon = new TabbedPaneIcon(this.closeIcon);
-		this.unclickedAddIcon = GUI.loadImage("add-tab-icon.png");
+		this.unclickedAddIcon = Theme.getImage("add-tab-icon.png");
 		this.addIcon = this.unclickedAddIcon;
 		this.setDoubleBuffered(true);
 		super.addMouseListener(this);

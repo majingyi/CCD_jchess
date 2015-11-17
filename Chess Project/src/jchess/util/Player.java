@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Class representing the player in the game
+ * 
+ * TODO drop up and dwon, not applicable for three player chess
  */
 public class Player implements Serializable {
 
@@ -12,15 +14,13 @@ public class Player implements Serializable {
 	public String							name							= null;
 
 	public enum colors {
-
-		white, black
+		white, black, gray
 	}
 
 	public colors	color;
 
 	public enum playerTypes {
-
-		localUser, networkUser, computer
+		localUser, computer
 	}
 
 	public playerTypes	playerType;

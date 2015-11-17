@@ -36,6 +36,11 @@ import jchess.util.Square;
  */
 public abstract class Piece {
 
+	// TODO Piece class is not allowed to have image, this needs to be moved to
+	// scheme
+
+	// TODO this class shall not draw itself, checkBoardUI is responsible for this
+
 	public Chessboard				chessboard		= null;
 	protected Square				square				= null;
 	public Player						player				= null;

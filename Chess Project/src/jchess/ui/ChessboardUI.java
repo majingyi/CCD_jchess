@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import jchess.Settings;
 import jchess.board.Chessboard;
 import jchess.core.Logging;
+import jchess.core.Theme;
 import jchess.util.Moves;
 import jchess.util.Square;
 
@@ -50,15 +51,15 @@ public class ChessboardUI extends JPanel {
 	private Chessboard					board							= null;
 
 	// image of chessboard
-	private static final Image	orgImage					= GUI.loadImage("chessboard.png");
+	private static final Image	orgImage					= Theme.getImage("chessboard.png");
 	// image of chessboard
 	private static Image				image							= ChessboardUI.orgImage;
 	// image of highlighted square
-	private static final Image	org_sel_square		= GUI.loadImage("sel_square.png");
+	private static final Image	org_sel_square		= Theme.getImage("sel_square.png");
 	// image of highlighted square
 	private static Image				sel_square				= org_sel_square;
 	// image of square where piece can go
-	private static final Image	org_able_square		= GUI.loadImage("able_square.png");
+	private static final Image	org_able_square		= Theme.getImage("able_square.png");
 	// image of square where piece can go
 	private static Image				able_square				= org_able_square;
 

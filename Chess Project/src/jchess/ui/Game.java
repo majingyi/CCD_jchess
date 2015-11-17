@@ -11,8 +11,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,6 +20,7 @@ import jchess.JChessApp;
 import jchess.Settings;
 import jchess.core.Logging;
 import jchess.pieces.King;
+import jchess.util.Constants;
 import jchess.util.Moves;
 import jchess.util.Player;
 import jchess.util.Square;
@@ -35,12 +34,12 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	private static final long	serialVersionUID	= -8817954027095178257L;
 
-	public Settings						settings;
-	public boolean						blockedChessboard;
-	public ChessboardUI				chessboard;
-	private Player						activePlayer;
-	public GameClock					gameClock;
-	public Moves							moves;
+	public Settings						settings					= null;
+	public boolean						blockedChessboard	= false;
+	public ChessboardUI				chessboard				= null;
+	private Player						activePlayer			= null;
+	public GameClock					gameClock					= null;
+	public Moves							moves							= null;
 
 	public Game() {
 		this.setLayout(null);
@@ -81,7 +80,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileW = new FileWriter(file);
 		} catch (java.io.IOException exc) {
-			System.err.println("error creating fileWriter: " + exc);
+			Logging.log("error creating fileWriter: ", exc);
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
 		}
@@ -111,15 +110,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * @throws Exception
 	 */
 
-	/*
-	 * @Override public void setSize(int width, int height) { Dimension min =
-	 * this.getMinimumSize(); if(min.getHeight() < height && min.getWidth() <
-	 * width) { super.setSize(width, height); } else if(min.getHeight() < height)
-	 * { super.setSize(width, (int)min.getHeight()); } else if(min.getWidth() <
-	 * width) { super.setSize((int)min.getWidth(), height); } else {
-	 * super.setSize(width, height); } }
-	 */
-	static public void loadGame(File file) throws Exception {
+	public static void loadGame(File file) throws Exception {
 		FileReader fileR = null;
 		try {
 			fileR = new FileReader(file);
@@ -154,7 +145,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		newGUI.moves.setMoves(tempStr);
 		newGUI.blockedChessboard = false;
 		newGUI.chessboard.repaint();
-		// newGUI.chessboard.draw();
 	}
 
 	/**
@@ -169,7 +159,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * @throws ReadGameError
 	 *           class object when something goes wrong when reading file
 	 */
-	static public String getLineWithVar(BufferedReader br, String srcStr) throws ReadGameError {
+	public static String getLineWithVar(BufferedReader br, String srcStr) throws ReadGameError {
 		String str = new String();
 		while (true) {
 			try {
@@ -219,14 +209,12 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * 
 	 */
 	public void newGame() throws Exception {
-		chessboard.getChessboard().setPieces("", settings.playerWhite, settings.playerBlack);
+		chessboard.getChessboard().setPieces(Constants.EMPTY_STRING, settings.playerWhite, settings.playerBlack);
 
 		activePlayer = settings.playerWhite;
 		if (activePlayer.playerType != Player.playerTypes.localUser) {
 			this.blockedChessboard = true;
 		}
-		// dirty hacks starts over here :)
-		// to fix rendering artefacts on first run
 		Game activeGame = JChessApp.jcv.getActiveTabGame();
 		if (activeGame != null && JChessApp.jcv.getNumberOfOpenedTabs() == 0) {
 			activeGame.chessboard.resizeChessboard(activeGame.chessboard.get_height(false));
@@ -235,7 +223,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		}
 		chessboard.repaint();
 		this.repaint();
-		// dirty hacks ends over here :)
 	}
 
 	/**
@@ -282,9 +269,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		Logging.log("next move, active player: " + activePlayer.name + ", color: " + activePlayer.color.name() + ", type: " + activePlayer.playerType.name());
 		if (activePlayer.playerType == Player.playerTypes.localUser) {
 			this.blockedChessboard = false;
-		} else if (activePlayer.playerType == Player.playerTypes.networkUser) {
-			this.blockedChessboard = true;
-		} else if (activePlayer.playerType == Player.playerTypes.computer) {
 		}
 	}
 
@@ -323,8 +307,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			return false;
 		} catch (NullPointerException exc) {
 			return false;
-		} finally {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, "ERROR");
 		}
 	}
 

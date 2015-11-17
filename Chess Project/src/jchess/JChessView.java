@@ -22,6 +22,7 @@ import jchess.ui.LanguageChooseWindow;
 import jchess.ui.NewGameWindow;
 import jchess.ui.PawnPromotionWindow;
 import jchess.ui.ThemeChooseWindow;
+import jchess.util.Player;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
@@ -210,7 +211,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		JChessApp.getApplication().show(aboutBox);
 	}
 
-	public String showPawnPromotionBox(String color) {
+	public String showPawnPromotionBox(Player.colors color) {
 		if (promotionBox == null) {
 			JFrame mainFrame = JChessApp.getApplication().getMainFrame();
 			promotionBox = new PawnPromotionWindow(mainFrame, color);

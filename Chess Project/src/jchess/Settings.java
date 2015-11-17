@@ -65,6 +65,7 @@ public class Settings implements Serializable {
 		locale = localization;
 	}
 
+	// TODO move to Language
 	public static String lang(String key) {
 		String result = "";
 
@@ -88,7 +89,7 @@ public class Settings implements Serializable {
 			// ignore
 		}
 
-		if (result.equals("")) {
+		if (result.equals(Constants.EMPTY_STRING)) {
 			bundle = ResourceBundle.getBundle("jchess.resources.JChessAboutBox");
 		}
 

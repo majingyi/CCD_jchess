@@ -1,83 +1,98 @@
 package jchess.core;
 
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import jchess.pieces.Bishop;
-import jchess.pieces.King;
-import jchess.pieces.Knight;
-import jchess.pieces.Pawn;
-import jchess.pieces.Piece;
-import jchess.pieces.Queen;
-import jchess.pieces.Rook;
+import javax.swing.ImageIcon;
+
+import jchess.JChessApp;
 import jchess.ui.GUI;
 import jchess.util.Player;
 
 public class Theme {
 
-	private static String	IMAGE_WHITE_BISHOP	= "Bishop-W.png";
-	private static String	IMAGE_BLACK_BISHOP	= "Bishop-B.png";
+	/* Constants */
 
-	private static String	IMAGE_WHITE_KING		= "King-W.png";
-	private static String	IMAGE_BLACK_KING		= "King-B.png";
+	private final static String				DEFAULT_THEME	= "default";
 
-	private static String	IMAGE_WHITE_KNIGHT	= "Knight-W.png";
-	private static String	IMAGE_BLACK_KNIGHT	= "Knight-B.png";
+	/* Member */
 
-	private static String	IMAGE_WHITE_PAWN		= "Pawn-W.png";
-	private static String	IMAGE_BLACK_PAWN		= "Pawn-B.png";
+	private static String							activeTheme		= DEFAULT_THEME;
+	private static Map<String, Image>	imageCache		= new HashMap<String, Image>();
+	private static List<String>				themeList			= new ArrayList<String>();
 
-	private static String	IMAGE_WHITE_QUEEN		= "Queen-W.png";
-	private static String	IMAGE_BLACK_QUEEN		= "Queen-B.png";
-
-	private static String	IMAGE_WHITE_ROOK		= "Rook-W.png";
-	private static String	IMAGE_BLACK_ROOK		= "Rook-B.png";
-
-	public static Image getImageForPiece(Player.colors color, Piece piece) {
-		return getImageForPiece(color, piece.getSymbol());
+	static {
+		themeList.add(DEFAULT_THEME);
+		themeList.add("hunter");
+		themeList.add("matlak");
 	}
 
 	public static Image getImageForPiece(Player.colors color, String pieceSymbol) {
-		Image result = null;
+		String imageName = pieceSymbol;
 
-		if (pieceSymbol == King.SYMBOL) {
-			if (color == Player.colors.black) {
-				result = GUI.loadImage(IMAGE_BLACK_KING);
-			} else {
-				result = GUI.loadImage(IMAGE_WHITE_KING);
-			}
-		} else if (pieceSymbol == Bishop.SYMBOL) {
-			if (color == Player.colors.black) {
-				result = GUI.loadImage(IMAGE_BLACK_BISHOP);
-			} else {
-				result = GUI.loadImage(IMAGE_WHITE_BISHOP);
-			}
-		} else if (pieceSymbol == Knight.SYMBOL) {
-			if (color == Player.colors.black) {
-				result = GUI.loadImage(IMAGE_BLACK_KNIGHT);
-			} else {
-				result = GUI.loadImage(IMAGE_WHITE_KNIGHT);
-			}
-		} else if (pieceSymbol == Pawn.SYMBOL) {
-			if (color == Player.colors.black) {
-				result = GUI.loadImage(IMAGE_BLACK_PAWN);
-			} else {
-				result = GUI.loadImage(IMAGE_WHITE_PAWN);
-			}
-		} else if (pieceSymbol == Queen.SYMBOL) {
-			if (color == Player.colors.black) {
-				result = GUI.loadImage(IMAGE_BLACK_QUEEN);
-			} else {
-				result = GUI.loadImage(IMAGE_WHITE_QUEEN);
-			}
-		} else if (pieceSymbol == Rook.SYMBOL) {
-			if (color == Player.colors.black) {
-				result = GUI.loadImage(IMAGE_BLACK_ROOK);
-			} else {
-				result = GUI.loadImage(IMAGE_WHITE_ROOK);
+		if (color == Player.colors.white) {
+			imageName = imageName + "-W.png";
+		} else if (color == Player.colors.black) {
+			imageName = imageName + "-B.png";
+		} else if (color == Player.colors.gray) {
+			imageName = imageName + "-G.png";
+		}
+		return getImage(imageName);
+	}
+
+	/**
+	 * Loads image from resources folder
+	 * 
+	 * @param imageName
+	 * @return
+	 */
+	public static Image getImage(String imageName) {
+		Image img = imageCache.get(imageName);
+
+		if (img == null) {
+			URL url = null;
+			Toolkit tk = Toolkit.getDefaultToolkit();
+			try {
+				String imageLink = "resources/theme/" + activeTheme + "/images/" + imageName;
+				url = JChessApp.class.getResource(imageLink);
+				img = tk.getImage(url);
+				imageCache.put(imageName, img);
+			} catch (Exception e) {
+				Logging.log("some error loading image!", e);
 			}
 		}
 
-		return result;
+		return img;
 	}
 
+	public static boolean themeIsValid(String name) {
+		return true;
+	}
+
+	public static void setActiveTheme(String theme) {
+		if (activeTheme.equals(theme) == false) {
+			activeTheme = theme;
+			imageCache.clear();
+		}
+	}
+
+	public static String[] getAvailableThemes() {
+		return themeList.toArray(new String[themeList.size()]);
+	}
+
+	public static ImageIcon getNoPreviewImage() {
+		return new ImageIcon(JChessApp.class.getResource("resources/theme/noPreview.png"));
+	}
+
+	public static ImageIcon getThemePreviewImage(String theme) {
+		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator;
+		Logging.log(path + theme + "/images/Preview.png");
+		return new ImageIcon(path + theme + "/images/Preview.png");
+	}
 }

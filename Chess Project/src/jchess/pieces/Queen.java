@@ -15,7 +15,7 @@ public class Queen extends Piece {
 
 	public Queen(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);
-		setImage(Theme.getImageForPiece(player.color, this));
+		setImage(Theme.getImageForPiece(player.color, SYMBOL));
 	}
 
 	@Override

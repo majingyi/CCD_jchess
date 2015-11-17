@@ -10,11 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import jchess.core.Theme;
 import jchess.pieces.Bishop;
 import jchess.pieces.Knight;
 import jchess.pieces.Pawn;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
+import jchess.util.Player;
+
+// TODO promotion needs to take into account, that there can only be promotion
+// to already captured piece.
 
 /**
  * Class responsible for promotion of a pawn. When pawn reach the end of the
@@ -36,7 +41,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	private JButton						queenButton				= null;
 	private String						result						= Pawn.SYMBOL;
 
-	public PawnPromotionWindow(Frame parent, String color) {
+	public PawnPromotionWindow(Frame parent, Player.colors color) {
 		super(parent);
 		this.setTitle("Choose piece");
 		this.setMinimumSize(new Dimension(520, 130));
@@ -45,10 +50,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 		this.setResizable(false);
 		this.setLayout(new GridLayout(1, 4));
 
-		this.knightButton = new JButton(new ImageIcon(GUI.loadImage("Knight-" + color + ".png")));
-		this.bishopButton = new JButton(new ImageIcon(GUI.loadImage("Bishop-" + color + ".png")));
-		this.rookButton = new JButton(new ImageIcon(GUI.loadImage("Rook-" + color + ".png")));
-		this.queenButton = new JButton(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
+		setColor(color);
 
 		this.knightButton.addActionListener(this);
 		this.bishopButton.addActionListener(this);
@@ -67,25 +69,26 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	 * @param color
 	 *          The players color
 	 */
-	public void setColor(String color) {
-		this.knightButton.setIcon(new ImageIcon(GUI.loadImage("Knight-" + color + ".png")));
-		this.bishopButton.setIcon(new ImageIcon(GUI.loadImage("Bishop-" + color + ".png")));
-		this.rookButton.setIcon(new ImageIcon(GUI.loadImage("Rook-" + color + ".png")));
-		this.queenButton.setIcon(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
+	public void setColor(Player.colors color) {
+		this.knightButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Knight.SYMBOL)));
+		this.bishopButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Bishop.SYMBOL)));
+		this.rookButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Rook.SYMBOL)));
+		this.queenButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Queen.SYMBOL)));
+
 	}
 
 	/**
-	 * Method wich is changing a pawn into queen, rook, bishop or knight
+	 * Method which is changing a pawn into queen, rook, bishop or knight
 	 * 
-	 * @param arg0
-	 *          Capt information about performed action
+	 * @param event
+	 *          Capture information about performed action
 	 */
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == queenButton) {
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == queenButton) {
 			result = Queen.SYMBOL;
-		} else if (arg0.getSource() == rookButton) {
+		} else if (event.getSource() == rookButton) {
 			result = Rook.SYMBOL;
-		} else if (arg0.getSource() == bishopButton) {
+		} else if (event.getSource() == bishopButton) {
 			result = Bishop.SYMBOL;
 		} else // knight
 		{

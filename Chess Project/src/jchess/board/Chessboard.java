@@ -354,20 +354,7 @@ public class Chessboard {
 			// Pawn
 			{
 				if (clearForwardHistory) {
-					String color;
-					if (end.piece.player.color == Player.colors.white) {
-						color = "W"; // promotionWindow was show with pieces in
-						// this color
-					} else {
-						color = "B";
-					}
-
-					String newPiece = JChessApp.jcv.showPawnPromotionBox(color); // return
-					// name
-					// of
-					// new
-					// piece
-
+					String newPiece = JChessApp.jcv.showPawnPromotionBox(end.piece.player.color);
 					Pawn pawn = (Pawn) end.piece;
 					pawn.promote(newPiece);
 					promotedPiece = end.piece;
