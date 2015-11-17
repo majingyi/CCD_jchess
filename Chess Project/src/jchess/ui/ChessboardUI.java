@@ -52,9 +52,7 @@ public class ChessboardUI extends JPanel {
 	private Chessboard					board							= null;
 
 	// image of chessboard
-	private static final Image	orgImage					= Theme.getImage("chessboard.png");
-	// image of chessboard
-	private static Image				image							= ChessboardUI.orgImage;
+	private static Image				image							= null;
 	// image of highlighted square
 	private static final Image	org_sel_square		= Theme.getImage("sel_square.png");
 	// image of highlighted square
@@ -276,7 +274,7 @@ public class ChessboardUI extends JPanel {
 	public void resizeChessboard(int height) {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
-		g.drawImage(ChessboardUI.orgImage, 0, 0, height, height, null);
+		g.drawImage(Theme.getImage("chessboard.png"), 0, 0, height, height, null);
 		g.dispose();
 		image = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
