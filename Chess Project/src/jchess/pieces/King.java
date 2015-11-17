@@ -13,7 +13,7 @@ import jchess.util.Square;
 
 public class King extends Piece {
 
-	public static final String	SYMBOL		= "King";
+	public static final String	SYMBOL		= "King"; //$NON-NLS-1$
 	public boolean							wasMotion	= false;	// maybe
 																									// change
 																									// to:
