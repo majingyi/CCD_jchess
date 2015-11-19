@@ -1,15 +1,8 @@
 package jchess;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
-import jchess.core.Logging;
-import jchess.ui.lang.Language;
 import jchess.util.Constants;
 import jchess.util.Player;
 
@@ -21,8 +14,7 @@ public class Settings implements Serializable {
 	private static final long	serialVersionUID	= -9058658425673782782L;
 
 	private static Locale			locale						= Locale.US;
-	private int								timeForGame;
-	private boolean						runningGameClock;
+	private int								timeForGame				= 0;
 
 	// tell us if player choose time 4 game or it's infinity
 	private boolean						timeLimitSet;
@@ -66,24 +58,6 @@ public class Settings implements Serializable {
 
 	public static Locale getLocale() {
 		return locale;
-	}
-
-	// TODO move to ImageFactory
-	public static Icon getIcon(String key) {
-		ResourceBundle bundle = ResourceBundle.getBundle("jchess.ui.lang.main"); //$NON-NLS-1$
-		String imageName = bundle.getString(key);
-
-		URL url = null;
-		Icon img = null;
-		try {
-			String imageLink = "resources/" + imageName; //$NON-NLS-1$
-			url = JChessApp.class.getResource(imageLink);
-			img = new ImageIcon(url);
-		} catch (Exception e) {
-			Logging.log(Language.getString("Settings.2"), e); //$NON-NLS-1$
-		}
-
-		return img;
 	}
 
 	public boolean isUpsideDown() {

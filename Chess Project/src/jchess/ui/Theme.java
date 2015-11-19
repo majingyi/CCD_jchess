@@ -1,32 +1,25 @@
 package jchess.ui;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 
 import jchess.JChessApp;
-import jchess.core.Logging;
-import jchess.ui.lang.Language;
 import jchess.util.Player;
 
 public class Theme {
 
 	/* Constants */
 
-	private final static String				DEFAULT_THEME	= "default";										//$NON-NLS-1$
+	private final static String	DEFAULT_THEME	= "default";								//$NON-NLS-1$
 
 	/* Member */
 
-	private static String							activeTheme		= DEFAULT_THEME;
-	private static Map<String, Image>	imageCache		= new HashMap<String, Image>();
-	private static List<String>				themeList			= new ArrayList<String>();
+	private static String				activeTheme		= DEFAULT_THEME;
+	private static List<String>	themeList			= new ArrayList<String>();
 
 	static {
 		themeList.add(DEFAULT_THEME);
@@ -47,41 +40,19 @@ public class Theme {
 		return getImage(imageName);
 	}
 
-	/**
-	 * Loads image from resources folder
-	 * 
-	 * @param imageName
-	 * @return
-	 * 
-	 */
-	// TODO move to ImageFactory
 	public static Image getImage(String imageName) {
-		Image img = imageCache.get(imageName);
-
-		if (img == null) {
-			URL url = null;
-			Toolkit tk = Toolkit.getDefaultToolkit();
-			try {
-				String imageLink = "resources/theme/" + activeTheme + "/images/" + imageName; //$NON-NLS-1$ //$NON-NLS-2$
-				url = JChessApp.class.getResource(imageLink);
-				img = tk.getImage(url);
-				imageCache.put(imageName, img);
-			} catch (Exception e) {
-				Logging.log(Language.getString("Theme.8"), e); //$NON-NLS-1$
-			}
-		}
-
-		return img;
+		String imagePath = "resources/theme/" + activeTheme + "/images/" + imageName; //$NON-NLS-1$ //$NON-NLS-2$
+		return ImageFactory.getImage(imagePath);
 	}
 
 	public static boolean themeIsValid(String name) {
+		// TODO check if theme exist
 		return true;
 	}
 
 	public static void setActiveTheme(String theme) {
 		if (activeTheme.equals(theme) == false) {
 			activeTheme = theme;
-			imageCache.clear();
 		}
 	}
 
@@ -94,8 +65,8 @@ public class Theme {
 	}
 
 	public static ImageIcon getThemePreviewImage(String theme) {
-		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		Logging.log(path + theme + "/images/Preview.png"); //$NON-NLS-1$
-		return new ImageIcon(path + theme + "/images/Preview.png"); //$NON-NLS-1$
+		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator + theme
+				+ "/images/Preview.png";
+		return ImageFactory.getImageIcon(path);
 	}
 }

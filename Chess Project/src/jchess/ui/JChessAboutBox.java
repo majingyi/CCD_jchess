@@ -12,7 +12,6 @@
 
 package jchess.ui;
 
-import jchess.Settings;
 import jchess.ui.lang.Language;
 
 import org.jdesktop.application.Action;
@@ -88,7 +87,7 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		appDescLabel.setText(Language.getString("appDescLabel.text")); // NOI18N //$NON-NLS-1$
 		appDescLabel.setName("appDescLabel"); // NOI18N //$NON-NLS-1$
 
-		imageLabel.setIcon(Settings.getIcon("imageLabel.icon")); // NOI18N //$NON-NLS-1$
+		imageLabel.setIcon(ImageFactory.getIcon("imageLabel.icon")); // NOI18N //$NON-NLS-1$
 		imageLabel.setName("imageLabel"); // NOI18N //$NON-NLS-1$
 
 		vendorLabel1.setFont(vendorLabel1.getFont().deriveFont(vendorLabel1.getFont().getStyle() | java.awt.Font.BOLD));

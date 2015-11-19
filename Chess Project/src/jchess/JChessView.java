@@ -17,6 +17,7 @@ import javax.swing.Timer;
 import jchess.core.Logging;
 import jchess.ui.GUI;
 import jchess.ui.Game;
+import jchess.ui.ImageFactory;
 import jchess.ui.JChessAboutBox;
 import jchess.ui.LanguageChooseWindow;
 import jchess.ui.NewGameWindow;
@@ -189,7 +190,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		messageTimer.setRepeats(false);
 		int busyAnimationRate = BUSY_ANIMATION_RATE;
 		for (int i = 0; i < busyIcons.length; i++) {
-			busyIcons[i] = Settings.getIcon("StatusBar.busyIcons[" + i + "]"); //$NON-NLS-1$ //$NON-NLS-2$
+			busyIcons[i] = ImageFactory.getIcon("StatusBar.busyIcons[" + i + "]"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -197,7 +198,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
 			}
 		});
-		idleIcon = Settings.getIcon("StatusBar.idleIcon"); //$NON-NLS-1$
+		idleIcon = ImageFactory.getIcon("StatusBar.idleIcon"); //$NON-NLS-1$
 		statusAnimationLabel.setIcon(idleIcon);
 		progressBar.setVisible(false);
 
