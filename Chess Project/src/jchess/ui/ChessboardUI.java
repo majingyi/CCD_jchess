@@ -32,7 +32,6 @@ import javax.swing.JPanel;
 import jchess.Settings;
 import jchess.board.Chessboard;
 import jchess.core.Logging;
-import jchess.core.Theme;
 import jchess.pieces.Piece;
 import jchess.ui.lang.Language;
 import jchess.util.Moves;

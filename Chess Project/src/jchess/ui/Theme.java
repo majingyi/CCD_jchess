@@ -1,4 +1,4 @@
-package jchess.core;
+package jchess.ui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 
 import jchess.JChessApp;
-import jchess.ui.GUI;
+import jchess.core.Logging;
 import jchess.ui.lang.Language;
 import jchess.util.Player;
 

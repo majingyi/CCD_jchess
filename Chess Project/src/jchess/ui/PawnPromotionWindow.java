@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import jchess.core.Theme;
 import jchess.pieces.Bishop;
 import jchess.pieces.Knight;
 import jchess.pieces.Pawn;
