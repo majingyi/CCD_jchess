@@ -97,9 +97,14 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 			int element = this.themesList.getSelectedIndex();
 			String theme = this.themesList.getModel().getElementAt(element).toString();
 			if (Theme.themeIsValid(theme)) {
-				Theme.setActiveTheme(theme);
-				JOptionPane.showMessageDialog(this, Language.getString("changes_visible_after_restart")); //$NON-NLS-1$
-				this.setVisible(false);
+				try {
+					Theme.setActiveTheme(theme);
+					JOptionPane.showMessageDialog(this, Language.getString("changes_visible_after_restart")); //$NON-NLS-1$
+					this.setVisible(false);
+				} catch (Exception e) {
+					Logging.log(e);
+					// TODO show erro message to user
+				}
 			}
 		}
 	}

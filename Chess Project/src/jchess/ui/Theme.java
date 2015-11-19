@@ -69,9 +69,13 @@ public class Theme {
 		return result;
 	}
 
-	public static void setActiveTheme(String theme) {
-		if (activeTheme.equals(theme) == false) {
-			activeTheme = theme;
+	public static void setActiveTheme(String theme) throws Exception {
+		if (themeIsValid(theme)) {
+			if (activeTheme.equals(theme) == false) {
+				activeTheme = theme;
+			}
+		} else {
+			throw new Exception("The theme '" + theme + "' is invalid.");
 		}
 	}
 
@@ -88,5 +92,9 @@ public class Theme {
 		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator + theme
 				+ "/images/Preview.png";
 		return ImageFactory.getImageIcon(path);
+	}
+
+	public static String getActiveTheme() {
+		return activeTheme;
 	}
 }
