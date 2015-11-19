@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import jchess.JChessApp;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
 
@@ -55,10 +54,9 @@ public class Theme {
 		boolean result = name != null && name.length() > 0;
 
 		if (result) {
-			String filePath = JChessApp.class.getResource(Constants.EMPTY_STRING).getFile().replaceAll("%20", Constants.WHITE_SPACE_STRING);
-
+			String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
 			String themePath = "resources/theme/" + name + Constants.SLASH_STRING;
-			File folder = new File(filePath + Constants.SLASH_STRING + themePath);
+			File folder = new File(basePath + Constants.SLASH_STRING + themePath);
 			result &= folder.exists();
 
 			for (String themeImage : themeImages) {

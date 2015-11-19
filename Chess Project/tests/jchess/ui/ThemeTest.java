@@ -171,7 +171,7 @@ public class ThemeTest {
 		try {
 			prev = Theme.getThemePreviewImage(Constants.EMPTY_STRING);
 		} catch (FileNotFoundException e) {
-			Assert.assertTrue(e.getMessage(), e.getMessage().endsWith("resources\\theme\\/images/Preview.png"));
+			Assert.assertTrue(e.getMessage(), e.getMessage().endsWith("resources/theme//images/Preview.png"));
 			exception = true;
 		}
 		Assert.assertTrue(exception);
@@ -180,7 +180,7 @@ public class ThemeTest {
 		try {
 			prev = Theme.getThemePreviewImage("hdwf");
 		} catch (FileNotFoundException e) {
-			Assert.assertTrue(e.getMessage(), e.getMessage().endsWith("resources\\theme\\hdwf/images/Preview.png"));
+			Assert.assertTrue(e.getMessage(), e.getMessage().endsWith("resources/theme/hdwf/images/Preview.png"));
 			exception = true;
 		}
 		Assert.assertTrue(exception);
