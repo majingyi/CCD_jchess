@@ -1,4 +1,4 @@
-package jchess.util;
+package jchess.core.util;
 
 import java.io.Serializable;
 

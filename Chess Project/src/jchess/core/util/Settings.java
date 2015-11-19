@@ -1,10 +1,8 @@
-package jchess;
+package jchess.core.util;
 
 import java.io.Serializable;
 import java.util.Locale;
 
-import jchess.util.Constants;
-import jchess.util.Player;
 
 /**
  * Class representing game settings available for the current player

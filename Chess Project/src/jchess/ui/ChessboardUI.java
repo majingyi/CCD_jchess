@@ -29,13 +29,13 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-import jchess.Settings;
-import jchess.board.Chessboard;
 import jchess.core.Logging;
-import jchess.pieces.Piece;
+import jchess.core.board.Chessboard;
+import jchess.core.pieces.Piece;
+import jchess.core.util.Moves;
+import jchess.core.util.Settings;
+import jchess.core.util.Square;
 import jchess.ui.lang.Language;
-import jchess.util.Moves;
-import jchess.util.Square;
 
 /**
  * Class to represent chessboard. Chessboard is made from squares. It is setting

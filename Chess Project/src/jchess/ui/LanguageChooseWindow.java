@@ -27,7 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JRadioButton;
 
-import jchess.Settings;
+import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
 public class LanguageChooseWindow extends JDialog implements ActionListener {

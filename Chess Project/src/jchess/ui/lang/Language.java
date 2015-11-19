@@ -3,8 +3,8 @@ package jchess.ui.lang;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import jchess.Settings;
-import jchess.util.Constants;
+import jchess.core.util.Constants;
+import jchess.core.util.Settings;
 
 public class Language {
 	private static final String	BUNDLE_NAME	= "jchess.ui.lang.main";	//$NON-NLS-1$

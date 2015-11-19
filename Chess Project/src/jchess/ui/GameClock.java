@@ -9,11 +9,11 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import jchess.Settings;
 import jchess.core.Logging;
+import jchess.core.util.Clock;
+import jchess.core.util.Player;
+import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
-import jchess.util.Clock;
-import jchess.util.Player;
 
 /**
  * Class to representing the full game time

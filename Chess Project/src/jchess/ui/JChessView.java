@@ -1,4 +1,4 @@
-package jchess;
+package jchess.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,17 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import jchess.JChessApp;
 import jchess.core.Logging;
-import jchess.ui.GUI;
-import jchess.ui.Game;
-import jchess.ui.ImageFactory;
-import jchess.ui.JChessAboutBox;
-import jchess.ui.LanguageChooseWindow;
-import jchess.ui.NewGameWindow;
-import jchess.ui.PawnPromotionWindow;
-import jchess.ui.ThemeChooseWindow;
+import jchess.core.util.Player;
 import jchess.ui.lang.Language;
-import jchess.util.Player;
 
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.SingleFrameApplication;

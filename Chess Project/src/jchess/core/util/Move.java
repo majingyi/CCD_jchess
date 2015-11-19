@@ -13,12 +13,12 @@
 /*
  * Author: Mateusz Sławomir Lach ( matlak, msl )
  */
-package jchess.util;
+package jchess.core.util;
 
-import jchess.pieces.Pawn;
-import jchess.pieces.Piece;
+import jchess.core.pieces.Pawn;
+import jchess.core.pieces.Piece;
+import jchess.core.util.Moves.castling;
 import jchess.ui.ChessboardUI;
-import jchess.util.Moves.castling;
 
 public class Move {
 

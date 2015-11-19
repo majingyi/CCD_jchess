@@ -1,4 +1,4 @@
-package jchess.pieces;
+package jchess.core.pieces;
 
 /**
  * Class to represent a chess pawn king. King is the most important piece for
@@ -7,9 +7,9 @@ package jchess.pieces;
  * square "in danger" by the opponent then it's a CheckedMate, and the game is
  * over.
  */
-import jchess.board.Chessboard;
-import jchess.util.Player;
-import jchess.util.Square;
+import jchess.core.board.Chessboard;
+import jchess.core.util.Player;
+import jchess.core.util.Square;
 
 public class King extends Piece {
 

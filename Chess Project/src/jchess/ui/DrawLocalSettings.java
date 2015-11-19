@@ -41,10 +41,10 @@ import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 
 import jchess.JChessApp;
-import jchess.Settings;
 import jchess.core.Logging;
+import jchess.core.util.Player;
+import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
-import jchess.util.Player;
 
 /**
  * Class responsible for drawing the fold with local game settings

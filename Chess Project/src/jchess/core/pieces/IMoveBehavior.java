@@ -1,8 +1,8 @@
-package jchess.pieces;
+package jchess.core.pieces;
 
 import java.util.ArrayList;
 
-import jchess.util.Square;
+import jchess.core.util.Square;
 
 public interface IMoveBehavior {
 

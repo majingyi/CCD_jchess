@@ -8,7 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import jchess.JChessApp;
-import jchess.util.Player;
+import jchess.core.util.Player;
 
 public class Theme {
 

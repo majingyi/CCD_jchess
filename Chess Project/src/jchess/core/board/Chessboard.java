@@ -1,23 +1,23 @@
-package jchess.board;
+package jchess.core.board;
 
 import jchess.JChessApp;
-import jchess.Settings;
 import jchess.core.Logging;
-import jchess.pieces.Bishop;
-import jchess.pieces.King;
-import jchess.pieces.Knight;
-import jchess.pieces.Pawn;
-import jchess.pieces.Piece;
-import jchess.pieces.Queen;
-import jchess.pieces.Rook;
+import jchess.core.pieces.Bishop;
+import jchess.core.pieces.King;
+import jchess.core.pieces.Knight;
+import jchess.core.pieces.Pawn;
+import jchess.core.pieces.Piece;
+import jchess.core.pieces.Queen;
+import jchess.core.pieces.Rook;
+import jchess.core.util.Constants;
+import jchess.core.util.Move;
+import jchess.core.util.Moves;
+import jchess.core.util.Player;
+import jchess.core.util.Settings;
+import jchess.core.util.Square;
+import jchess.core.util.Moves.castling;
 import jchess.ui.ChessboardUI;
 import jchess.ui.lang.Language;
-import jchess.util.Constants;
-import jchess.util.Move;
-import jchess.util.Moves;
-import jchess.util.Moves.castling;
-import jchess.util.Player;
-import jchess.util.Square;
 
 /**
  * Class to represent chessboard. Chessboard is made from squares. It is setting

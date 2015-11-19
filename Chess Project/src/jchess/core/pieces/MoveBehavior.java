@@ -1,8 +1,8 @@
-package jchess.pieces;
+package jchess.core.pieces;
 
-import jchess.board.Chessboard;
-import jchess.util.Player;
-import jchess.util.Square;
+import jchess.core.board.Chessboard;
+import jchess.core.util.Player;
+import jchess.core.util.Square;
 
 public abstract class MoveBehavior implements IMoveBehavior {
 

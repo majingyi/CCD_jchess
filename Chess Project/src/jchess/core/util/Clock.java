@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.util;
+package jchess.core.util;
 
 
 /** Class to represent seperate wall-clock for one player.

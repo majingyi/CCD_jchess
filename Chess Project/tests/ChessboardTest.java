@@ -1,13 +1,13 @@
-import jchess.Settings;
-import jchess.board.Chessboard;
-import jchess.pieces.Bishop;
-import jchess.pieces.King;
-import jchess.pieces.Knight;
-import jchess.pieces.Pawn;
-import jchess.pieces.Queen;
-import jchess.pieces.Rook;
-import jchess.util.Constants;
-import jchess.util.Player;
+import jchess.core.board.Chessboard;
+import jchess.core.pieces.Bishop;
+import jchess.core.pieces.King;
+import jchess.core.pieces.Knight;
+import jchess.core.pieces.Pawn;
+import jchess.core.pieces.Queen;
+import jchess.core.pieces.Rook;
+import jchess.core.util.Constants;
+import jchess.core.util.Player;
+import jchess.core.util.Settings;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -17,14 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
-import jchess.Settings;
 import jchess.core.Logging;
-import jchess.pieces.King;
+import jchess.core.pieces.King;
+import jchess.core.util.Constants;
+import jchess.core.util.Moves;
+import jchess.core.util.Player;
+import jchess.core.util.Settings;
+import jchess.core.util.Square;
 import jchess.ui.lang.Language;
-import jchess.util.Constants;
-import jchess.util.Moves;
-import jchess.util.Player;
-import jchess.util.Square;
 
 /**
  * Class responsible for the starts of new games, loading games, saving it, and

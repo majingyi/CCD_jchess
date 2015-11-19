@@ -1,7 +1,7 @@
-package jchess.pieces;
+package jchess.core.pieces;
 
-import jchess.board.Chessboard;
-import jchess.util.Player;
+import jchess.core.board.Chessboard;
+import jchess.core.util.Player;
 
 /**
  * Class to represent a chess pawn rook.

@@ -1,4 +1,4 @@
-package jchess.util;
+package jchess.core.util;
 
 public class Constants {
 

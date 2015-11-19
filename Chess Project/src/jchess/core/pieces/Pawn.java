@@ -1,8 +1,8 @@
-package jchess.pieces;
+package jchess.core.pieces;
 
-import jchess.board.Chessboard;
+import jchess.core.board.Chessboard;
+import jchess.core.util.Player;
 import jchess.ui.lang.Language;
-import jchess.util.Player;
 
 /**
  * Class to represent a pawn piece.

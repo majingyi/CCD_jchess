@@ -10,13 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import jchess.pieces.Bishop;
-import jchess.pieces.Knight;
-import jchess.pieces.Pawn;
-import jchess.pieces.Queen;
-import jchess.pieces.Rook;
+import jchess.core.pieces.Bishop;
+import jchess.core.pieces.Knight;
+import jchess.core.pieces.Pawn;
+import jchess.core.pieces.Queen;
+import jchess.core.pieces.Rook;
+import jchess.core.util.Player;
 import jchess.ui.lang.Language;
-import jchess.util.Player;
 
 // TODO promotion needs to take into account, that there can only be promotion
 // to already captured piece.

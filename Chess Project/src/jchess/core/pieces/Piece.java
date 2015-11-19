@@ -13,16 +13,16 @@
 /*
  * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
-package jchess.pieces;
+package jchess.core.pieces;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jchess.board.Chessboard;
+import jchess.core.board.Chessboard;
+import jchess.core.util.Constants;
+import jchess.core.util.Player;
+import jchess.core.util.Square;
 import jchess.ui.lang.Language;
-import jchess.util.Constants;
-import jchess.util.Player;
-import jchess.util.Square;
 
 /**
  * Class to represent a piece (any kind) - this class should be extended to

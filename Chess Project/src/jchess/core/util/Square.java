@@ -13,9 +13,9 @@
 /*
  * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
-package jchess.util;
+package jchess.core.util;
 
-import jchess.pieces.Piece;
+import jchess.core.pieces.Piece;
 
 /**
  * Class to represent a chessboard square
