@@ -71,9 +71,13 @@
  
      <target name="build">
           <javac classpathref="src.compile.classpath" srcdir="${src.dir}" destdir="${classes.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
-           <copy todir="${classes.dir}/jchess/resources">
-               <fileset dir="${src.dir}/jchess/resources" />
-          </copy></target>
+          <copy todir="${classes.dir}/jchess/resources">
+			<fileset dir="${src.dir}/jchess/resources" />
+          </copy>
+		  <copy todir="${classes.dir}/jchess/ui/lang">
+               <fileset file="${src.dir}/jchess/ui/lang/main_en_US.properties" />
+          </copy>
+	</target>
      <target name="compile.tests">
           <javac classpathref="test.compile.classpath" srcdir="${test.dir}" destdir="${testclasses.dir}" debug="on" source="1.6" fork="true" includeantruntime="no" />
      </target>
