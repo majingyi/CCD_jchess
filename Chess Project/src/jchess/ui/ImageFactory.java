@@ -49,7 +49,7 @@ public class ImageFactory {
 	 */
 	public static Image getImage(String imagePath) throws FileNotFoundException {
 		Image img = null;
-		String basePath = JChessApp.class.getResource(Constants.EMPTY_STRING).getFile().replace("%20", Constants.WHITE_SPACE_STRING);
+		String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess";
 		File file = new File(basePath, imagePath);
 		if (file.exists()) {
 			img = imageCache.get(imagePath);
