@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -173,7 +174,12 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				JOptionPane.showMessageDialog(this, Language.getString("fill_name")); //$NON-NLS-1$
 				return;
 			}
-			Game newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText()); //$NON-NLS-1$
+			Game newGUI = null;
+			try {
+				newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText());
+			} catch (FileNotFoundException e2) {
+				Logging.log(e2);
+			}
 			Settings sett = newGUI.settings;// sett local settings variable
 			Player pl1 = sett.playerWhite;// set local player variable
 			Player pl2 = sett.playerBlack;// set local player variable

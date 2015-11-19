@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -76,9 +77,13 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 	@Override
 	// TODO check if event gives selected theme
 	public void valueChanged(ListSelectionEvent event) {
-		String theme = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
-		this.themePreview = Theme.getThemePreviewImage(theme);
-		this.themePreviewButton.setIcon(this.themePreview);
+		try {
+			String theme = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
+			this.themePreview = Theme.getThemePreviewImage(theme);
+			this.themePreviewButton.setIcon(this.themePreview);
+		} catch (FileNotFoundException e) {
+			Logging.log(e);
+		}
 	}
 
 	/**

@@ -24,6 +24,7 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -44,34 +45,34 @@ import jchess.ui.lang.Language;
  */
 public class ChessboardUI extends JPanel {
 
-	private static final long		serialVersionUID	= -1717218347823342830L;
+	private static final long	serialVersionUID	= -1717218347823342830L;
 
-	public static final int			top								= 0;
-	public static final int			bottom						= 7;
+	public static final int		top								= 0;
+	public static final int		bottom						= 7;
 
-	private Chessboard					board							= null;
+	private Chessboard				board							= null;
 
 	// image of chessboard
-	private static Image				image							= null;
+	private static Image			image							= null;
 	// image of highlighted square
-	private static final Image	org_sel_square		= Theme.getImage("sel_square.png");	//$NON-NLS-1$
+	private static Image			org_sel_square		= null;
 	// image of highlighted square
-	private static Image				sel_square				= org_sel_square;
+	private static Image			sel_square				= org_sel_square;
 	// image of square where piece can go
-	private static final Image	org_able_square		= Theme.getImage("able_square.png");	//$NON-NLS-1$
+	private static Image			org_able_square		= null;
 	// image of square where piece can go
-	private static Image				able_square				= org_able_square;
+	private static Image			able_square				= org_able_square;
 
-	private Image								upDownLabel				= null;
-	private Image								LeftRightLabel		= null;
-	private Point								topLeft						= new Point(0, 0);
-	private float								square_height			= 0;
+	private Image							upDownLabel				= null;
+	private Image							LeftRightLabel		= null;
+	private Point							topLeft						= new Point(0, 0);
+	private float							square_height			= 0;
 
-	public static final int			img_widht					= 480;
-	public static final int			img_height				= img_widht;
+	public static final int		img_widht					= 480;
+	public static final int		img_height				= img_widht;
 
-	private ArrayList<Square>		moves;
-	private Settings						settings;
+	private ArrayList<Square>	moves;
+	private Settings					settings;
 
 	/**
 	 * Chessboard class constructor
@@ -80,8 +81,9 @@ public class ChessboardUI extends JPanel {
 	 *          reference to Settings class object for this chessboard
 	 * @param moves_history
 	 *          reference to Moves class object for this chessboard
+	 * @throws FileNotFoundException
 	 */
-	public ChessboardUI(Settings settings, Moves moves_history) {
+	public ChessboardUI(Settings settings, Moves moves_history) throws FileNotFoundException {
 		board = new Chessboard(this, settings, moves_history);
 		this.settings = settings;
 		board.activeSquare = null;
@@ -92,6 +94,9 @@ public class ChessboardUI extends JPanel {
 
 		this.setDoubleBuffered(true);
 		this.drawLabels((int) this.square_height);
+
+		org_sel_square = Theme.getImage("sel_square.png");
+		org_able_square = Theme.getImage("able_square.png");
 
 	}/*--endOf-Chessboard--*/
 
@@ -219,7 +224,12 @@ public class ChessboardUI extends JPanel {
 		{
 			for (int y = 0; y < 8; y++) {
 				if (board.squares[i][y].piece != null) {
-					drawPieceImage(g, board.squares[i][y].piece);
+					try {
+						drawPieceImage(g, board.squares[i][y].piece);
+					} catch (FileNotFoundException e) {
+						Logging.log(e);
+						// TODO tell user
+					}
 				}
 			}
 		}// --endOf--drawPiecesOnSquares
@@ -244,7 +254,7 @@ public class ChessboardUI extends JPanel {
 		}
 	}/*--endOf-paint--*/
 
-	private void drawPieceImage(Graphics g, Piece piece) {
+	private void drawPieceImage(Graphics g, Piece piece) throws FileNotFoundException {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -271,7 +281,7 @@ public class ChessboardUI extends JPanel {
 		}
 	}
 
-	public void resizeChessboard(int height) {
+	public void resizeChessboard(int height) throws FileNotFoundException {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
 		g.drawImage(Theme.getImage("chessboard.png"), 0, 0, height, height, null); //$NON-NLS-1$

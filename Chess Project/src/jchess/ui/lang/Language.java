@@ -15,7 +15,7 @@ public class Language {
 	public static String getString(String key) {
 		try {
 			String lang = Settings.getLocale().toString();
-			ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME + Constants.UNDER_SCORE + lang);
+			ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME + Constants.UNDER_SCORE_STRING + lang);
 			return bundle.getString(key);
 		} catch (MissingResourceException e) {
 			return '!' + key + '!';

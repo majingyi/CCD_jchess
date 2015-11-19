@@ -2,12 +2,14 @@ package jchess.ui;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 
 import jchess.JChessApp;
+import jchess.core.util.Constants;
 import jchess.core.util.Player;
 
 public class Theme {
@@ -17,17 +19,21 @@ public class Theme {
 	private final static String	DEFAULT_THEME	= "default";								//$NON-NLS-1$
 
 	/* Member */
-
 	private static String				activeTheme		= DEFAULT_THEME;
 	private static List<String>	themeList			= new ArrayList<String>();
+	private static String[]			themeImages		= null;
 
 	static {
 		themeList.add(DEFAULT_THEME);
 		themeList.add("hunter"); //$NON-NLS-1$
 		themeList.add("matlak"); //$NON-NLS-1$
+
+		themeImages = new String[] { "able_square.png", "add-tab-icon.png", "Bishop-B.png", "Bishop-W.png", "chessboard.png", "clicked-add-tab-icon.png",
+			"King-B.png", "King-W.png", "Knight-B.png", "Knight-W.png", "Pawn-B.png", "Pawn-W.png", "Preview.png", "Queen-B.png", "Queen-W.png", "Rook-B.png",
+			"Rook-W.png", "sel_square.png" };
 	}
 
-	public static Image getImageForPiece(Player.colors color, String pieceSymbol) {
+	public static Image getImageForPiece(Player.colors color, String pieceSymbol) throws FileNotFoundException {
 		String imageName = pieceSymbol;
 
 		if (color == Player.colors.white) {
@@ -40,14 +46,27 @@ public class Theme {
 		return getImage(imageName);
 	}
 
-	public static Image getImage(String imageName) {
+	public static Image getImage(String imageName) throws FileNotFoundException {
 		String imagePath = "resources/theme/" + activeTheme + "/images/" + imageName; //$NON-NLS-1$ //$NON-NLS-2$
 		return ImageFactory.getImage(imagePath);
 	}
 
 	public static boolean themeIsValid(String name) {
-		// TODO check if theme exist
-		return true;
+		boolean result = name != null && name.length() > 0;
+
+		if (result) {
+			String filePath = JChessApp.class.getResource(Constants.EMPTY_STRING).getFile().replaceAll("%20", Constants.WHITE_SPACE_STRING);
+
+			String themePath = "resources/theme/" + name + Constants.SLASH_STRING;
+			File folder = new File(filePath + Constants.SLASH_STRING + themePath);
+			result &= folder.exists();
+
+			for (String themeImage : themeImages) {
+				File image = new File(folder, "images" + Constants.SLASH_STRING + themeImage);
+				result &= image.exists();
+			}
+		}
+		return result;
 	}
 
 	public static void setActiveTheme(String theme) {
@@ -60,11 +79,12 @@ public class Theme {
 		return themeList.toArray(new String[themeList.size()]);
 	}
 
-	public static ImageIcon getNoPreviewImage() {
-		return new ImageIcon(JChessApp.class.getResource("resources/theme/noPreview.png")); //$NON-NLS-1$
+	public static ImageIcon getNoPreviewImage() throws FileNotFoundException {
+		String file = JChessApp.class.getResource(Constants.EMPTY_STRING).getFile().replace("%20", Constants.WHITE_SPACE_STRING);
+		return ImageFactory.getImageIcon(file + "resources/theme/noPreview.png"); //$NON-NLS-1$
 	}
 
-	public static ImageIcon getThemePreviewImage(String theme) {
+	public static ImageIcon getThemePreviewImage(String theme) throws FileNotFoundException {
 		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator + theme
 				+ "/images/Preview.png";
 		return ImageFactory.getImageIcon(path);

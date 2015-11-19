@@ -23,6 +23,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
+import java.io.FileNotFoundException;
 
 import javax.swing.Icon;
 import javax.swing.JTabbedPane;
@@ -40,7 +41,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 	private Image							unclickedAddIcon	= null;
 	private Rectangle					addIconRect				= null;
 
-	public JChessTabbedPane() {
+	public JChessTabbedPane() throws FileNotFoundException {
 		super();
 		this.closeIcon = new TabbedPaneIcon(this.closeIcon);
 		this.unclickedAddIcon = Theme.getImage("add-tab-icon.png"); //$NON-NLS-1$

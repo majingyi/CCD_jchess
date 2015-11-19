@@ -1,3 +1,4 @@
+package core.pieces;
 import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;

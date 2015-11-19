@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
@@ -42,7 +43,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public GameClock					gameClock					= null;
 	public Moves							moves							= null;
 
-	public Game() {
+	public Game() throws FileNotFoundException {
 		this.setLayout(null);
 		this.moves = new Moves(this);
 		settings = new Settings();
@@ -448,13 +449,17 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	public void componentResized(ComponentEvent e) {
-		int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();
-		int chess_height = (int) Math.round((height * 0.8) / 8) * 8;
-		this.chessboard.resizeChessboard((int) chess_height);
-		chess_height = this.chessboard.getHeight();
-		this.moves.getScrollPane().setLocation(new Point(chess_height + 5, 100));
-		this.moves.getScrollPane().setSize(this.moves.getScrollPane().getWidth(), chess_height - 100);
-		this.gameClock.setLocation(new Point(chess_height + 5, 0));
+		try {
+			int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();
+			int chess_height = (int) Math.round((height * 0.8) / 8) * 8;
+			this.chessboard.resizeChessboard((int) chess_height);
+			chess_height = this.chessboard.getHeight();
+			this.moves.getScrollPane().setLocation(new Point(chess_height + 5, 100));
+			this.moves.getScrollPane().setSize(this.moves.getScrollPane().getWidth(), chess_height - 100);
+			this.gameClock.setLocation(new Point(chess_height + 5, 0));
+		} catch (FileNotFoundException e1) {
+			Logging.log(e1);
+		}
 	}
 
 	public void componentMoved(ComponentEvent e) {

@@ -5,6 +5,7 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,7 +42,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	private JButton						queenButton				= null;
 	private String						result						= Pawn.SYMBOL;
 
-	public PawnPromotionWindow(Frame parent, Player.colors color) {
+	public PawnPromotionWindow(Frame parent, Player.colors color) throws FileNotFoundException {
 		super(parent);
 		this.setTitle(Language.getString("PawnPromotionWindow.0")); //$NON-NLS-1$
 		this.setMinimumSize(new Dimension(520, 130));
@@ -64,12 +65,13 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	}
 
 	/**
-	 * Method setting the color fo promoted pawn
+	 * Method setting the color for promoted pawn
 	 * 
 	 * @param color
 	 *          The players color
+	 * @throws FileNotFoundException
 	 */
-	public void setColor(Player.colors color) {
+	public void setColor(Player.colors color) throws FileNotFoundException {
 		this.knightButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Knight.SYMBOL)));
 		this.bishopButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Bishop.SYMBOL)));
 		this.rookButton = new JButton(new ImageIcon(Theme.getImageForPiece(color, Rook.SYMBOL)));
