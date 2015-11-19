@@ -84,8 +84,8 @@ public class Theme {
 	}
 
 	public static ImageIcon getNoPreviewImage() throws FileNotFoundException {
-		String file = JChessApp.class.getResource(Constants.EMPTY_STRING).getFile().replace("%20", Constants.WHITE_SPACE_STRING);
-		return ImageFactory.getImageIcon(file + "resources/theme/noPreview.png"); //$NON-NLS-1$
+		String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
+		return ImageFactory.getImageIcon(basePath + "resources/theme/noPreview.png"); //$NON-NLS-1$
 	}
 
 	public static ImageIcon getThemePreviewImage(String theme) throws FileNotFoundException {
