@@ -1,7 +1,7 @@
 package jchess.pieces;
 
 import jchess.board.Chessboard;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Player;
 
 /**

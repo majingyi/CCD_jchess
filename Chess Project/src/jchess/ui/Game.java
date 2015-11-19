@@ -20,7 +20,7 @@ import jchess.JChessApp;
 import jchess.Settings;
 import jchess.core.Logging;
 import jchess.pieces.King;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Constants;
 import jchess.util.Moves;
 import jchess.util.Player;

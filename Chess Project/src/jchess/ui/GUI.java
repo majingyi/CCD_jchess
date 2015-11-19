@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import jchess.core.Logging;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 
 /**
  * Class representing the game interface which is seen by a player and where are

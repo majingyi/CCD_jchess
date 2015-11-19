@@ -18,7 +18,7 @@ import javax.swing.event.ListSelectionListener;
 
 import jchess.core.Logging;
 import jchess.core.Theme;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 

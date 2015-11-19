@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import jchess.Settings;
 import jchess.core.Logging;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Clock;
 import jchess.util.Player;
 

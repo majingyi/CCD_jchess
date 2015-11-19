@@ -9,7 +9,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import jchess.core.Logging;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Constants;
 import jchess.util.Player;
 
@@ -70,7 +70,7 @@ public class Settings implements Serializable {
 
 	// TODO move to ImageFactory
 	public static Icon getIcon(String key) {
-		ResourceBundle bundle = ResourceBundle.getBundle("jchess.resources.i18n.main"); //$NON-NLS-1$
+		ResourceBundle bundle = ResourceBundle.getBundle("jchess.ui.lang.main"); //$NON-NLS-1$
 		String imageName = bundle.getString(key);
 
 		URL url = null;

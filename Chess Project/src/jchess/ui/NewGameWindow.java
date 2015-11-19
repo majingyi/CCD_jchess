@@ -3,7 +3,7 @@ package jchess.ui;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 
 public class NewGameWindow extends JDialog {
 

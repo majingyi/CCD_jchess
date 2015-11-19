@@ -12,8 +12,8 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 
 import jchess.JChessApp;
-import jchess.resources.i18n.Language;
 import jchess.ui.GUI;
+import jchess.ui.lang.Language;
 import jchess.util.Player;
 
 public class Theme {

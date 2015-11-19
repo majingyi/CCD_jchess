@@ -1,4 +1,4 @@
-package jchess.resources.i18n;
+package jchess.ui.lang;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -7,7 +7,7 @@ import jchess.Settings;
 import jchess.util.Constants;
 
 public class Language {
-	private static final String	BUNDLE_NAME	= "jchess.resources.i18n.main"; //$NON-NLS-1$
+	private static final String	BUNDLE_NAME	= "jchess.ui.lang.main";	//$NON-NLS-1$
 
 	private Language() {
 	}

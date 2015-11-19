@@ -13,7 +13,7 @@
 package jchess.ui;
 
 import jchess.Settings;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 
 import org.jdesktop.application.Action;
 

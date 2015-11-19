@@ -34,7 +34,7 @@ import jchess.board.Chessboard;
 import jchess.core.Logging;
 import jchess.core.Theme;
 import jchess.pieces.Piece;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Moves;
 import jchess.util.Square;
 

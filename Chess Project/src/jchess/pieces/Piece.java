@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Constants;
 import jchess.util.Player;
 import jchess.util.Square;

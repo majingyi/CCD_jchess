@@ -43,7 +43,7 @@ import javax.swing.text.BadLocationException;
 import jchess.JChessApp;
 import jchess.Settings;
 import jchess.core.Logging;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Player;
 
 /**

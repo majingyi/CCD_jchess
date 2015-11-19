@@ -2,7 +2,7 @@ package jchess.core;
 
 import java.io.IOException;
 
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.FileAppender;

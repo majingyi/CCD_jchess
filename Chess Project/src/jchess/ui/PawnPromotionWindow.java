@@ -16,7 +16,7 @@ import jchess.pieces.Knight;
 import jchess.pieces.Pawn;
 import jchess.pieces.Queen;
 import jchess.pieces.Rook;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 import jchess.util.Player;
 
 // TODO promotion needs to take into account, that there can only be promotion

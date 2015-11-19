@@ -15,9 +15,9 @@ import jchess.Settings;
 import jchess.core.Logging;
 import jchess.pieces.Pawn;
 import jchess.pieces.Piece;
-import jchess.resources.i18n.Language;
 import jchess.ui.ChessboardUI;
 import jchess.ui.Game;
+import jchess.ui.lang.Language;
 
 /**
  * Class representing the players moves, it's also checking that the moves taken

@@ -30,7 +30,7 @@ import javax.swing.JTabbedPane;
 import jchess.JChessApp;
 import jchess.core.Logging;
 import jchess.core.Theme;
-import jchess.resources.i18n.Language;
+import jchess.ui.lang.Language;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {
 

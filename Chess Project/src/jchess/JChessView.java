@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import jchess.core.Logging;
-import jchess.resources.i18n.Language;
 import jchess.ui.GUI;
 import jchess.ui.Game;
 import jchess.ui.JChessAboutBox;
@@ -23,6 +22,7 @@ import jchess.ui.LanguageChooseWindow;
 import jchess.ui.NewGameWindow;
 import jchess.ui.PawnPromotionWindow;
 import jchess.ui.ThemeChooseWindow;
+import jchess.ui.lang.Language;
 import jchess.util.Player;
 
 import org.jdesktop.application.FrameView;
