@@ -1,4 +1,4 @@
-package jchess.core;
+package jchess.core.util;
 
 import java.io.IOException;
 

@@ -3,8 +3,8 @@ package jchess.core.pieces;
 import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.Square;
 import jchess.core.util.Player;
-import jchess.core.util.Square;
 
 public class KnightMoveBehavior extends MoveBehavior {
 

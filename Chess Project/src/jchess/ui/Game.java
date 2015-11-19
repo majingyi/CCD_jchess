@@ -17,13 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
-import jchess.core.Logging;
+import jchess.core.board.Square;
 import jchess.core.pieces.King;
 import jchess.core.util.Constants;
+import jchess.core.util.Logging;
 import jchess.core.util.Moves;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
-import jchess.core.util.Square;
 import jchess.ui.lang.Language;
 
 /**

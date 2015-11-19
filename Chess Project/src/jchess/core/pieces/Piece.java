@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.Square;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
-import jchess.core.util.Square;
 import jchess.ui.lang.Language;
 
 /**

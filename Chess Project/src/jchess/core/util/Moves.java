@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-import jchess.core.Logging;
+import jchess.core.board.Square;
 import jchess.core.pieces.Pawn;
 import jchess.core.pieces.Piece;
 import jchess.ui.ChessboardUI;

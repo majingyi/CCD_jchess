@@ -1,6 +1,6 @@
 package jchess;
 
-import jchess.core.Logging;
+import jchess.core.util.Logging;
 import jchess.ui.GUI;
 import jchess.ui.JChessView;
 

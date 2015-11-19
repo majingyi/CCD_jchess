@@ -9,8 +9,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import jchess.core.Logging;
 import jchess.core.util.Clock;
+import jchess.core.util.Logging;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;

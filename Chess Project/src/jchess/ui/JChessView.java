@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import jchess.JChessApp;
-import jchess.core.Logging;
+import jchess.core.util.Logging;
 import jchess.core.util.Player;
 import jchess.ui.lang.Language;
 

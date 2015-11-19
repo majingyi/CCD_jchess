@@ -41,7 +41,7 @@ import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 
 import jchess.JChessApp;
-import jchess.core.Logging;
+import jchess.core.util.Logging;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;

@@ -13,7 +13,7 @@
 /*
  * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
  */
-package jchess.core.util;
+package jchess.core.board;
 
 import jchess.core.pieces.Piece;
 

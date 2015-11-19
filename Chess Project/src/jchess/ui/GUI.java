@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import jchess.core.Logging;
+import jchess.core.util.Logging;
 import jchess.ui.lang.Language;
 
 /**

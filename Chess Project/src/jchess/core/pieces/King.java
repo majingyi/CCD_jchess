@@ -8,8 +8,8 @@ package jchess.core.pieces;
  * over.
  */
 import jchess.core.board.Chessboard;
+import jchess.core.board.Square;
 import jchess.core.util.Player;
-import jchess.core.util.Square;
 
 public class King extends Piece {
 

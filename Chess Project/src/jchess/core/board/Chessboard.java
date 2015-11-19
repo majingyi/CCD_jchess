@@ -1,7 +1,6 @@
 package jchess.core.board;
 
 import jchess.JChessApp;
-import jchess.core.Logging;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -10,11 +9,11 @@ import jchess.core.pieces.Piece;
 import jchess.core.pieces.Queen;
 import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
+import jchess.core.util.Logging;
 import jchess.core.util.Move;
 import jchess.core.util.Moves;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
-import jchess.core.util.Square;
 import jchess.core.util.Moves.castling;
 import jchess.ui.ChessboardUI;
 import jchess.ui.lang.Language;

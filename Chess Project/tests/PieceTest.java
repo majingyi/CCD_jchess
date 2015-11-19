@@ -1,10 +1,10 @@
 import jchess.core.board.Chessboard;
+import jchess.core.board.Square;
 import jchess.core.pieces.IMoveBehavior;
 import jchess.core.pieces.PawnMoveBehavior;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
-import jchess.core.util.Square;
 import junit.framework.Assert;
 
 import org.junit.Test;

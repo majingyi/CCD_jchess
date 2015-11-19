@@ -29,12 +29,12 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-import jchess.core.Logging;
 import jchess.core.board.Chessboard;
+import jchess.core.board.Square;
 import jchess.core.pieces.Piece;
+import jchess.core.util.Logging;
 import jchess.core.util.Moves;
 import jchess.core.util.Settings;
-import jchess.core.util.Square;
 import jchess.ui.lang.Language;
 
 /**

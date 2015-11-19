@@ -15,6 +15,7 @@
  */
 package jchess.core.util;
 
+import jchess.core.board.Square;
 import jchess.core.pieces.Pawn;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Moves.castling;

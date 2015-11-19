@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.Square;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.BishopMoveBehavior;
 import jchess.core.pieces.IMoveBehavior;
@@ -16,7 +17,6 @@ import jchess.core.pieces.RookMoveBehavior;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
-import jchess.core.util.Square;
 import jchess.ui.Game;
 
 import org.junit.Assert;
