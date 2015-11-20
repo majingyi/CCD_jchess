@@ -56,8 +56,7 @@ public class ChessboardUI extends JPanel {
 	public static final int		img_widht					= 480;
 	public static final int		img_height				= img_widht;
 
-	private ArrayList<Square>	moves;
-	private Settings					settings;
+	private ArrayList<Square>	moves							= null;
 
 	/**
 	 * Chessboard class constructor
@@ -68,14 +67,13 @@ public class ChessboardUI extends JPanel {
 	 *          reference to Moves class object for this chessboard
 	 * @throws FileNotFoundException
 	 */
-	public ChessboardUI(Settings settings, Moves moves_history) throws FileNotFoundException {
-		board = new Chessboard(this, settings, moves_history);
-		this.settings = settings;
+	public ChessboardUI(Moves moves_history) throws FileNotFoundException {
+		board = new Chessboard(this, moves_history);
 		board.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
-		board.active_x_square = 0;
-		board.active_y_square = 0;
+		board.setActive_x_square(0);
+		board.setActive_y_square(0);
 
 		this.setDoubleBuffered(true);
 		this.drawLabels((int) this.square_height);
@@ -102,7 +100,7 @@ public class ChessboardUI extends JPanel {
 			Logging.log(Language.getString("ChessboardUI.2")); //$NON-NLS-1$
 			return null;
 		}
-		if (this.settings.renderLabels) {
+		if (Settings.getRenderLabels()) {
 			x -= this.upDownLabel.getHeight(null);
 			y -= this.upDownLabel.getHeight(null);
 		}
@@ -145,7 +143,7 @@ public class ChessboardUI extends JPanel {
 	}/*--endOf-get_widht--*/
 
 	int get_height(boolean includeLabels) {
-		if (this.settings.renderLabels) {
+		if (Settings.getRenderLabels()) {
 			return ChessboardUI.image.getHeight(null) + upDownLabel.getHeight(null);
 		}
 		return ChessboardUI.image.getHeight(null);
@@ -178,7 +176,7 @@ public class ChessboardUI extends JPanel {
 	}
 
 	public Point getTopLeftPoint() {
-		if (this.settings.renderLabels) {
+		if (Settings.getRenderLabels()) {
 			return new Point(this.topLeft.x + this.upDownLabel.getHeight(null), this.topLeft.y + this.upDownLabel.getHeight(null));
 		}
 		return this.topLeft;
@@ -189,7 +187,7 @@ public class ChessboardUI extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Point topLeftPoint = this.getTopLeftPoint();
-		if (this.settings.renderLabels) {
+		if (Settings.getRenderLabels()) {
 			if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) // if renderLabels
 			// and (0,0), than
 			// draw it! (for
@@ -218,18 +216,21 @@ public class ChessboardUI extends JPanel {
 				}
 			}
 		}// --endOf--drawPiecesOnSquares
-		if ((board.active_x_square != 0) && (board.active_y_square != 0)) // if
+		if ((board.getActive_x_square() != 0) && (board.getActive_y_square() != 0)) // if
 		// some
 		// square
 		// is
 		// active
 		{
-			g2d.drawImage(sel_square, ((board.active_x_square - 1) * (int) square_height) + topLeftPoint.x, ((board.active_y_square - 1) * (int) square_height)
-					+ topLeftPoint.y, null);// draw image of selected
+			g2d.drawImage(sel_square, ((board.getActive_x_square() - 1) * (int) square_height) + topLeftPoint.x,
+					((board.getActive_y_square() - 1) * (int) square_height) + topLeftPoint.y, null);// draw
+																																														// image
+																																														// of
+																																														// selected
 			// square
-			Square tmpSquare = board.squares[(int) (board.active_x_square - 1)][(int) (board.active_y_square - 1)];
+			Square tmpSquare = board.squares[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)];
 			if (tmpSquare.piece != null) {
-				this.moves = board.squares[(int) (board.active_x_square - 1)][(int) (board.active_y_square - 1)].piece.allMoves();
+				this.moves = board.squares[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)].piece.allMoves();
 			}
 
 			for (Iterator<Square> it = moves.iterator(); moves != null && it.hasNext();) {
@@ -273,7 +274,7 @@ public class ChessboardUI extends JPanel {
 		g.dispose();
 		image = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
-		if (this.settings.renderLabels) {
+		if (Settings.getRenderLabels()) {
 			height += 2 * (this.upDownLabel.getHeight(null));
 		}
 		this.setSize(height, height);
@@ -312,12 +313,12 @@ public class ChessboardUI extends JPanel {
 		uDL2D.setColor(Color.black);
 		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 		int addX = (square_height / 2);
-		if (this.settings.renderLabels) {
+		if (Settings.getRenderLabels()) {
 			addX += labelHeight;
 		}
 
 		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-		if (this.settings.isUpsideDown() == false) {
+		if (Settings.isUpsideDown() == false) {
 			for (int i = 1; i <= letters.length; i++) {
 				uDL2D.drawString(letters[i - 1], (square_height * (i - 1)) + addX, 10 + (labelHeight / 3));
 			}
@@ -339,7 +340,7 @@ public class ChessboardUI extends JPanel {
 		uDL2D.setColor(Color.black);
 		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 
-		if (this.settings.isUpsideDown()) {
+		if (Settings.isUpsideDown()) {
 			for (int i = 1; i <= 8; i++) {
 				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
 			}

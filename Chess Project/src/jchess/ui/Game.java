@@ -38,7 +38,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	private static final long	serialVersionUID	= -8817954027095178257L;
 
-	public Settings						settings					= null;
 	public boolean						blockedChessboard	= false;
 	public ChessboardUI				chessboard				= null;
 	private Player						activePlayer			= null;
@@ -48,8 +47,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public Game() throws Exception {
 		this.setLayout(null);
 		this.moves = new Moves(this);
-		settings = new Settings();
-		chessboard = new ChessboardUI(this.settings, this.moves);
+
+		Settings.setPlayerWhite(new Player(Constants.EMPTY_STRING, Player.colors.white));
+		Settings.setPlayerBlack(new Player(Constants.EMPTY_STRING, Player.colors.black));
+
+		chessboard = new ChessboardUI(this.moves);
 		chessboard.setVisible(true);
 		chessboard.setSize(ChessboardUI.img_height, ChessboardUI.img_widht);
 		chessboard.addMouseListener(this);
@@ -91,7 +93,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		Calendar cal = Calendar.getInstance();
 		String str = new String(""); //$NON-NLS-1$
 		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				+ "\"]\n" + "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ "\"]\n" + "[White \"" + Settings.getPlayerWhite().name + "\"]\n[Black \"" + Settings.getPlayerBlack().name + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		str += info;
 		str += this.moves.getMovesInString();
 		try {
@@ -135,14 +137,19 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			Logging.log(Language.getString("Game.19"), err); //$NON-NLS-1$
 			return;
 		}
+
 		Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
-		Settings locSetts = newGUI.settings;
-		locSetts.playerBlack.name = blackName;
-		locSetts.playerWhite.name = whiteName;
-		locSetts.playerBlack.setType(Player.playerTypes.localUser);
-		locSetts.playerWhite.setType(Player.playerTypes.localUser);
-		locSetts.gameMode = Settings.gameModes.loadGame;
-		locSetts.gameType = Settings.gameTypes.local;
+
+		Settings.setPlayerWhite(new Player(Constants.EMPTY_STRING, Player.colors.white));
+		Settings.setPlayerBlack(new Player(Constants.EMPTY_STRING, Player.colors.black));
+
+		Settings.getPlayerBlack().name = blackName;
+		Settings.getPlayerWhite().name = whiteName;
+		Settings.getPlayerBlack().setType(Player.playerTypes.localUser);
+		Settings.getPlayerWhite().setType(Player.playerTypes.localUser);
+
+		Settings.setGameMode(Settings.gameModes.loadGame);
+		Settings.setGameType(Settings.gameTypes.local);
 
 		newGUI.newGame();
 		newGUI.blockedChessboard = true;
@@ -213,9 +220,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * 
 	 */
 	public void newGame() throws Exception {
-		chessboard.getChessboard().setPieces(Constants.EMPTY_STRING, settings.playerWhite, settings.playerBlack);
+		chessboard.getChessboard().setPieces(Constants.EMPTY_STRING, Settings.getPlayerWhite(), Settings.getPlayerBlack());
 
-		activePlayer = settings.playerWhite;
+		activePlayer = Settings.getPlayerWhite();
 		if (activePlayer.playerType != Player.playerTypes.localUser) {
 			this.blockedChessboard = true;
 		}
@@ -246,10 +253,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * Method to swich active players after move
 	 */
 	public void switchActive() {
-		if (activePlayer == settings.playerWhite) {
-			activePlayer = settings.playerBlack;
+		if (activePlayer == Settings.getPlayerWhite()) {
+			activePlayer = Settings.getPlayerBlack();
 		} else {
-			activePlayer = settings.playerWhite;
+			activePlayer = Settings.getPlayerWhite();
 		}
 
 		this.gameClock.switch_clocks();
@@ -321,7 +328,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean undo() throws Exception {
 		boolean status = false;
 
-		if (this.settings.gameType == Settings.gameTypes.local) {
+		if (Settings.getGameType() == Settings.gameTypes.local) {
 			status = chessboard.getChessboard().undo();
 			if (status) {
 				this.switchActive();
@@ -335,7 +342,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean rewindToBegin() throws Exception {
 		boolean result = false;
 
-		if (this.settings.gameType == Settings.gameTypes.local) {
+		if (Settings.getGameType() == Settings.gameTypes.local) {
 			while (chessboard.getChessboard().undo()) {
 				result = true;
 			}
@@ -349,7 +356,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean rewindToEnd() throws Exception {
 		boolean result = false;
 
-		if (this.settings.gameType == Settings.gameTypes.local) {
+		if (Settings.getGameType() == Settings.gameTypes.local) {
 			while (chessboard.getChessboard().redo()) {
 				result = true;
 			}
@@ -362,7 +369,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	public boolean redo() throws Exception {
 		boolean status = chessboard.getChessboard().redo();
-		if (this.settings.gameType == Settings.gameTypes.local) {
+		if (Settings.getGameType() == Settings.gameTypes.local) {
 			if (status) {
 				this.nextMove();
 			} else {
@@ -379,7 +386,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			if (event.getButton() == MouseEvent.BUTTON3) // right button
 			{
 				this.undo();
-			} else if (event.getButton() == MouseEvent.BUTTON2 && settings.gameType == Settings.gameTypes.local) {
+			} else if (event.getButton() == MouseEvent.BUTTON2 && Settings.getGameType() == Settings.gameTypes.local) {
 				this.redo();
 			} else if (event.getButton() == MouseEvent.BUTTON1) // left button
 			{
@@ -403,7 +410,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					} else if (chessboard.getChessboard().activeSquare != null && chessboard.getChessboard().activeSquare.piece != null
 							&& chessboard.getChessboard().activeSquare.piece.allMoves().indexOf(sq) != -1) // move
 					{
-						if (settings.gameType == Settings.gameTypes.local) {
+						if (Settings.getGameType() == Settings.gameTypes.local) {
 							chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
 						}
 
@@ -414,10 +421,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 						// checkmate or stalemate
 						King king;
-						if (this.activePlayer == settings.playerWhite) {
-							king = chessboard.getChessboard().kingWhite;
+						if (this.activePlayer == Settings.getPlayerWhite()) {
+							king = chessboard.getChessboard().getWhiteKing();
 						} else {
-							king = chessboard.getChessboard().kingBlack;
+							king = chessboard.getChessboard().getBlackKing();
 						}
 
 						switch (king.isCheckmatedOrStalemated()) {

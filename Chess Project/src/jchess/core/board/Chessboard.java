@@ -32,32 +32,24 @@ public class Chessboard {
 	private ChessboardUI		uiChessboard				= null;
 
 	// squares of chessboard
-	public Square						squares[][];
-	public Square						activeSquare;
+	public Square						squares[][]					= null;
+	public Square						activeSquare				= null;
 
-	public int							active_x_square;
-	public int							active_y_square;
+	private int							active_x_square			= -1;
+	private int							active_y_square			= -1;
 
-	public static final int	img_x								= 5;
-	public static final int	img_y								= img_x;
-	public static final int	img_widht						= 480;
-	public static final int	img_height					= img_widht;
-
-	private Settings				settings;
-	public King							kingWhite;
-	public King							kingBlack;
+	private King						kingWhite						= null;
+	private King						kingBlack						= null;
 
 	public Pawn							twoSquareMovedPawn	= null;
 	public Pawn							twoSquareMovedPawn2	= null;
-	private Moves						moves_history;
+	private Moves						moves_history				= null;
 
-	public Chessboard(ChessboardUI ui, Settings settings, Moves movesHistory) {
+	public Chessboard(ChessboardUI ui, Moves movesHistory) {
 		uiChessboard = ui;
 		moves_history = movesHistory;
 
 		initChessBoard();
-
-		this.settings = settings;
 	}
 
 	private void initChessBoard() {
@@ -86,7 +78,7 @@ public class Chessboard {
 		if ((plWhite.color == plBlack.color) == false) {
 			if (places.equals(Constants.EMPTY_STRING)) // if newGame
 			{
-				if (this.settings.isUpsideDown()) {
+				if (Settings.isUpsideDown()) {
 					this.setPieces4NewGame(true, plWhite, plBlack);
 				} else {
 					this.setPieces4NewGame(false, plWhite, plBlack);
@@ -213,10 +205,10 @@ public class Chessboard {
 	 */
 	public void select(Square sq) {
 		this.activeSquare = sq;
-		this.active_x_square = sq.pozX + 1;
-		this.active_y_square = sq.pozY + 1;
+		this.setActive_x_square(sq.pozX + 1);
+		this.setActive_y_square(sq.pozY + 1);
 
-		Logging.log("active_x: " + this.active_x_square + " active_y: " + this.active_y_square);// 4tests //$NON-NLS-1$ //$NON-NLS-2$
+		Logging.log("active_x: " + this.getActive_x_square() + " active_y: " + this.getActive_y_square());// 4tests //$NON-NLS-1$ //$NON-NLS-2$
 		uiChessboard.repaint();
 	}
 
@@ -224,8 +216,8 @@ public class Chessboard {
 	 * Method set variables active_x_square & active_y_square to 0 values.
 	 */
 	public void unselect() {
-		this.active_x_square = 0;
-		this.active_y_square = 0;
+		this.setActive_x_square(0);
+		this.setActive_y_square(0);
 		this.activeSquare = null;
 
 		uiChessboard.repaint();
@@ -236,7 +228,7 @@ public class Chessboard {
 	}
 
 	public boolean redo(boolean refresh) throws Exception {
-		if (this.settings.gameType == Settings.gameTypes.local) // redo only for
+		if (Settings.getGameType() == Settings.gameTypes.local) // redo only for
 		// local game
 		{
 			Move first = this.moves_history.redo();
@@ -468,5 +460,29 @@ public class Chessboard {
 	 */
 	public static boolean isValidSquare(Square sq) {
 		return isout(sq.pozX, sq.pozY) == false;
+	}
+
+	public King getWhiteKing() {
+		return kingWhite;
+	}
+
+	public King getBlackKing() {
+		return kingBlack;
+	}
+
+	public int getActive_x_square() {
+		return active_x_square;
+	}
+
+	public void setActive_x_square(int active_x_square) {
+		this.active_x_square = active_x_square;
+	}
+
+	public int getActive_y_square() {
+		return active_y_square;
+	}
+
+	public void setActive_y_square(int active_y_square) {
+		this.active_y_square = active_y_square;
 	}
 }

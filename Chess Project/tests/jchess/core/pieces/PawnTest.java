@@ -1,23 +1,11 @@
 package jchess.core.pieces;
+
 import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.Square;
-import jchess.core.pieces.Bishop;
-import jchess.core.pieces.BishopMoveBehavior;
-import jchess.core.pieces.IMoveBehavior;
-import jchess.core.pieces.King;
-import jchess.core.pieces.Knight;
-import jchess.core.pieces.KnightMoveBehavior;
-import jchess.core.pieces.Pawn;
-import jchess.core.pieces.PawnMoveBehavior;
-import jchess.core.pieces.Queen;
-import jchess.core.pieces.QueenMoveBehavior;
-import jchess.core.pieces.Rook;
-import jchess.core.pieces.RookMoveBehavior;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
-import jchess.core.util.Settings;
 import jchess.ui.Game;
 
 import org.junit.Assert;
@@ -163,7 +151,7 @@ public class PawnTest {
 
 	private Pawn createPawn() throws Exception {
 		Player pl = new Player();
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 		Pawn p = new Pawn(board, pl);
 		return p;
 	}

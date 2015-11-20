@@ -32,12 +32,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 			// list.add(sq);//add
 			if (this.player.color == Player.colors.white) {// white
 
-				if (this.chessboard.kingWhite.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
+				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
 					list.add(chessboard.squares[this.square.pozX][first]);
 				}
 			} else {// or black
 
-				if (this.chessboard.kingBlack.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
+				if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
 					list.add(chessboard.squares[this.square.pozX][first]);
 				}
 			}
@@ -48,12 +48,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 					// list.add(sq1);//only in first move
 					if (this.player.color == Player.colors.white) {// white
 
-						if (this.chessboard.kingWhite.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
+						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
 							list.add(chessboard.squares[this.square.pozX][second]);
 						}
 					} else {// or black
 
-						if (this.chessboard.kingBlack.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
+						if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
 							list.add(chessboard.squares[this.square.pozX][second]);
 						}
 					}
@@ -72,12 +72,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) {// white
 
-						if (this.chessboard.kingWhite.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
+						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
 							list.add(chessboard.squares[this.square.pozX - 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.kingBlack.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
+						if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
 							list.add(chessboard.squares[this.square.pozX - 1][first]);
 						}
 					}
@@ -96,12 +96,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) {// white
 
-						if (this.chessboard.kingWhite.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
+						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
 							list.add(chessboard.squares[this.square.pozX - 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.kingBlack.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
+						if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
 							list.add(chessboard.squares[this.square.pozX - 1][first]);
 						}
 					}
@@ -120,12 +120,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) { // white
 
-						if (this.chessboard.kingWhite.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
+						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
 							list.add(chessboard.squares[this.square.pozX + 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.kingBlack.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
+						if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
 							list.add(chessboard.squares[this.square.pozX + 1][first]);
 						}
 					}
@@ -144,12 +144,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 					// list.add(sq);
 					if (this.player.color == Player.colors.white) {// white
 
-						if (this.chessboard.kingWhite.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
+						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
 							list.add(chessboard.squares[this.square.pozX + 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.kingBlack.willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
+						if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
 							list.add(chessboard.squares[this.square.pozX + 1][first]);
 						}
 					}

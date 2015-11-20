@@ -5,38 +5,38 @@ import java.util.Locale;
 
 /**
  * Class representing game settings available for the current player
+ * 
+ * TODO documentation
  */
 public class Settings implements Serializable {
 
 	private static final long	serialVersionUID	= -9058658425673782782L;
 
 	private static Locale			locale						= Locale.US;
-	private int								timeForGame				= 0;
+	private static int				timeForGame				= 0;
 
-	private boolean						timeLimitSet			= false;
-	private boolean						upsideDown				= false;
+	private static boolean		timeLimitSet			= false;
+	private static boolean		upsideDown				= false;
 
 	public enum gameModes {
 		newGame, loadGame
 	}
 
-	public gameModes	gameMode		= null;
-	public Player			playerWhite	= null;
-	public Player			playerBlack	= null;
+	private static gameModes	gameMode		= null;
+	private static Player			playerWhite	= null;
+	private static Player			playerBlack	= null;
 
+	// TODO remove
 	public enum gameTypes {
 		local
 	}
 
-	public gameTypes	gameType;
-	public boolean		renderLabels	= true;
+	private static gameTypes	gameType			= gameTypes.local;
+	private static boolean		renderLabels	= true;
 
-	public Settings() {
-		this.playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
-		this.playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
-		this.timeLimitSet = false;
+	// prevent from instantiation
+	private Settings() {
 
-		gameMode = gameModes.newGame;
 	}
 
 	/**
@@ -44,8 +44,8 @@ public class Settings implements Serializable {
 	 * 
 	 * @return timeFofGame int with how long the game will leasts
 	 */
-	public int getTimeForGame() {
-		return this.timeForGame;
+	public static int getTimeForGame() {
+		return timeForGame;
 	}
 
 	public static void setLocale(Locale localization) {
@@ -56,23 +56,59 @@ public class Settings implements Serializable {
 		return locale;
 	}
 
-	public boolean isUpsideDown() {
+	public static boolean isUpsideDown() {
 		return upsideDown;
 	}
 
-	public void setUpsideDown(boolean upsideDown) {
-		this.upsideDown = upsideDown;
+	public static void setUpsideDown(boolean uDown) {
+		upsideDown = uDown;
 	}
 
-	public void setTimeLimetSet(boolean timeLimit) {
-		this.timeLimitSet = timeLimit;
+	public static void setTimeLimetSet(boolean timeLimit) {
+		timeLimitSet = timeLimit;
 	}
 
-	public void setTimeForGame(int limit) {
-		this.timeForGame = limit;
+	public static void setTimeForGame(int limit) {
+		timeForGame = limit;
 	}
 
-	public boolean isTimeLimitSet() {
+	public static boolean isTimeLimitSet() {
 		return timeLimitSet;
+	}
+
+	public static gameTypes getGameType() {
+		return gameType;
+	}
+
+	public static boolean getRenderLabels() {
+		return renderLabels;
+	}
+
+	public static Player getPlayerWhite() {
+		return playerWhite;
+	}
+
+	public static Player getPlayerBlack() {
+		return playerBlack;
+	}
+
+	public static void setGameMode(gameModes gMode) {
+		gameMode = gMode;
+	}
+
+	public static gameModes getGameMode() {
+		return gameMode;
+	}
+
+	public static void setGameType(gameTypes local) {
+		gameType = local;
+	}
+
+	public static void setPlayerWhite(Player player) {
+		playerWhite = player;
+	}
+
+	public static void setPlayerBlack(Player player) {
+		playerBlack = player;
 	}
 }

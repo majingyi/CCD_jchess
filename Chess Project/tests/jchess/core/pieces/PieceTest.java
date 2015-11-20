@@ -1,11 +1,8 @@
 package jchess.core.pieces;
+
 import jchess.core.board.Chessboard;
 import jchess.core.board.Square;
-import jchess.core.pieces.IMoveBehavior;
-import jchess.core.pieces.PawnMoveBehavior;
-import jchess.core.pieces.Piece;
 import jchess.core.util.Player;
-import jchess.core.util.Settings;
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -26,7 +23,7 @@ public class PieceTest {
 
 	@Test
 	public void testSetGetSymbol() throws Exception {
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
 		Assert.assertEquals("T", p.getSymbolForMoveHistory());
 
@@ -51,7 +48,7 @@ public class PieceTest {
 
 	@Test
 	public void testGetSquare() throws Exception {
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
 
 		Assert.assertEquals(null, p.getSquare());
@@ -107,7 +104,7 @@ public class PieceTest {
 
 	@Test
 	public void testGetSymbolForMoveHistory() throws Exception {
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
 		Assert.assertEquals("T", p.getSymbolForMoveHistory());
 

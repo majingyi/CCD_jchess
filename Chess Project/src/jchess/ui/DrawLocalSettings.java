@@ -150,7 +150,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 																										// digits
 				this.secondName.setText(this.trimString(secondName, 9));
 			}
-			if (!this.oponentComp.isSelected() && (this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
+			if (this.oponentComp.isSelected() == false && (this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
 				JOptionPane.showMessageDialog(this, Language.getString("fill_names")); //$NON-NLS-1$
 				return;
 			}
@@ -165,12 +165,10 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				Logging.log(e2);
 			}
 
-			Settings sett = newGUI.settings;// sett local settings variable
-			Player pl1 = sett.playerWhite;// set local player variable
-			Player pl2 = sett.playerBlack;// set local player variable
-			sett.gameMode = Settings.gameModes.newGame;
-			// if(this.firstName.getText().length() >9 )
-			// this.firstName.setText(this.firstName.getText(0,8));
+			Player pl1 = Settings.getPlayerWhite();// set local player variable
+			Player pl2 = Settings.getPlayerBlack();// set local player variable
+
+			// TODO white?
 			if (this.color.getActionCommand().equals("biały")) // if first player is //$NON-NLS-1$
 																													// white
 			{
@@ -183,16 +181,16 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			}
 			pl1.setType(Player.playerTypes.localUser);// set type of player
 			pl2.setType(Player.playerTypes.localUser);// set type of player
-			sett.gameType = Settings.gameTypes.local;
+			Settings.setGameType(Settings.gameTypes.local);
 			if (this.oponentComp.isSelected()) // if computer oponent is checked
 			{
 				pl2.setType(Player.playerTypes.computer);
 			}
 			if (this.upsideDown.isSelected()) // if upsideDown is checked
 			{
-				sett.setUpsideDown(true);
+				Settings.setUpsideDown(true);
 			} else {
-				sett.setUpsideDown(false);
+				Settings.setUpsideDown(false);
 			}
 			if (this.timeGame.isSelected()) // if timeGame is checked
 			{
@@ -200,10 +198,11 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 																																			// for
 																																			// game
 				Integer val = new Integer(value);
-				sett.setTimeLimetSet(true);
-				sett.setTimeForGame((int) val * 60);// set time for game and mult it to
+				Settings.setTimeLimetSet(true);
+				Settings.setTimeForGame((int) val * 60);// set time for game and mult it
+																								// to
 				// seconds
-				newGUI.gameClock.setTime(sett.getTimeForGame());
+				newGUI.gameClock.setTime(Settings.getTimeForGame());
 				try {
 					newGUI.gameClock.start();
 				} catch (Exception e1) {
@@ -214,8 +213,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			Logging.log(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
 			Logging
-					.log(Language.getString("DrawLocalSettings.18") + pl1.name + Language.getString("DrawLocalSettings.19") + pl2.name + Language.getString("DrawLocalSettings.20") + sett.getTimeForGame() + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-							+ sett.getTimeForGame() + Language.getString("DrawLocalSettings.22") + sett.isUpsideDown() + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
+					.log(Language.getString("DrawLocalSettings.18") + pl1.name + Language.getString("DrawLocalSettings.19") + pl2.name + Language.getString("DrawLocalSettings.20") + Settings.getTimeForGame() + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+							+ Settings.getTimeForGame() + Language.getString("DrawLocalSettings.22") + Settings.isUpsideDown() + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
 			try {
 				newGUI.newGame();
 			} catch (Exception e1) {

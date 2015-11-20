@@ -150,7 +150,7 @@ public class Moves extends AbstractTableModel {
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
 		String locMove = new String(begin.piece.getSymbolForMoveHistory());
 
-		if (game.settings.isUpsideDown()) {
+		if (Settings.isUpsideDown()) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - begin.pozX) + 97));// add
 			// letter
 			// of
@@ -177,7 +177,7 @@ public class Moves extends AbstractTableModel {
 			locMove += "-";// normal move //$NON-NLS-1$
 		}
 
-		if (game.settings.isUpsideDown()) {
+		if (Settings.isUpsideDown()) {
 			locMove += Character.toString((char) ((ChessboardUI.bottom - end.pozX) + 97));// add
 			// letter
 			// of
@@ -201,12 +201,12 @@ public class Moves extends AbstractTableModel {
 			locMove += "(e.p)";// pawn take down opponent en passant //$NON-NLS-1$
 			wasEnPassant = true;
 		}
-		if ((!this.enterBlack && this.game.chessboard.getChessboard().kingBlack.isChecked())
-				|| (this.enterBlack && this.game.chessboard.getChessboard().kingWhite.isChecked())) {// if
+		if ((!this.enterBlack && this.game.chessboard.getChessboard().getBlackKing().isChecked())
+				|| (this.enterBlack && this.game.chessboard.getChessboard().getWhiteKing().isChecked())) {// if
 			// checked
 
-			if ((!this.enterBlack && this.game.chessboard.getChessboard().kingBlack.isCheckmatedOrStalemated() == 1)
-					|| (this.enterBlack && this.game.chessboard.getChessboard().kingWhite.isCheckmatedOrStalemated() == 1)) {// check
+			if ((!this.enterBlack && this.game.chessboard.getChessboard().getBlackKing().isCheckmatedOrStalemated() == 1)
+					|| (this.enterBlack && this.game.chessboard.getChessboard().getWhiteKing().isCheckmatedOrStalemated() == 1)) {// check
 				// if
 				// checkmated
 				locMove += "#";// check mate //$NON-NLS-1$
@@ -264,13 +264,13 @@ public class Moves extends AbstractTableModel {
 		try {
 			Move last = this.moveBackStack.pop();
 			if (last != null) {
-				if (this.game.settings.gameType == Settings.gameTypes.local) // moveForward
-																																			// / redo
-																																			// available
-																																			// only
-																																			// for
-																																			// local
-																																			// game
+				if (Settings.getGameType() == Settings.gameTypes.local) // moveForward
+																																// / redo
+																																// available
+																																// only
+																																// for
+																																// local
+																																// game
 				{
 					this.moveForwardStack.push(last);
 				}
@@ -300,17 +300,15 @@ public class Moves extends AbstractTableModel {
 
 	public synchronized Move redo() {
 		try {
-			if (this.game.settings.gameType == Settings.gameTypes.local) {
+			if (Settings.getGameType() == Settings.gameTypes.local) {
 				Move first = this.moveForwardStack.pop();
 				this.moveBackStack.push(first);
-
 				return first;
 			}
 			return null;
 		} catch (java.util.EmptyStackException exc) {
 			return null;
 		}
-
 	}
 
 	/**

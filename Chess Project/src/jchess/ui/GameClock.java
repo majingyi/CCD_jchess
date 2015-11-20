@@ -23,7 +23,6 @@ public class GameClock extends JPanel implements IClockListener {
 	private Clock							clock1						= null;
 	private Clock							clock2						= null;
 	private Clock							runningClock			= null;
-	private Settings					settings					= null;
 	private Game							game							= null;
 	private String						white_clock				= null;
 	private String						black_clock				= null;
@@ -32,8 +31,7 @@ public class GameClock extends JPanel implements IClockListener {
 	public GameClock(Game game) throws Exception {
 		super();
 		this.game = game;
-		settings = game.settings;
-		int time = this.settings.getTimeForGame();
+		int time = Settings.getTimeForGame();
 
 		clock1 = new Clock(time);// white player clock
 		clock2 = new Clock(time);// black player clock
@@ -54,7 +52,7 @@ public class GameClock extends JPanel implements IClockListener {
 	 * @throws Exception
 	 */
 	public void start() throws Exception {
-		if (this.settings.isTimeLimitSet()) {
+		if (Settings.isTimeLimitSet()) {
 			clock1.start();
 			clock2.start();
 		}
@@ -84,9 +82,9 @@ public class GameClock extends JPanel implements IClockListener {
 		g2d.drawRect(5, 60, 170, 30);
 		g2d.drawLine(85, 30, 85, 90);
 		font = new Font("Serif", Font.ITALIC, 16); //$NON-NLS-1$
-		g2d.drawString(settings.playerWhite.getName(), 10, 50);
+		g2d.drawString(Settings.getPlayerWhite().getName(), 10, 50);
 		g2d.setColor(Color.WHITE);
-		g2d.drawString(settings.playerBlack.getName(), 100, 50);
+		g2d.drawString(Settings.getPlayerBlack().getName(), 100, 50);
 	}
 
 	@Override
@@ -111,9 +109,9 @@ public class GameClock extends JPanel implements IClockListener {
 		font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setFont(font);
-		g.drawString(settings.playerWhite.getName(), 10, 50);
+		g.drawString(Settings.getPlayerWhite().getName(), 10, 50);
 		g.setColor(Color.WHITE);
-		g.drawString(settings.playerBlack.getName(), 100, 50);
+		g.drawString(Settings.getPlayerWhite().getName(), 100, 50);
 		g2d.setFont(font);
 		g.setColor(Color.BLACK);
 		g2d.drawString(white_clock, 10, 80);

@@ -1,5 +1,5 @@
 package jchess.core.board;
-import jchess.core.board.Chessboard;
+
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -17,7 +17,7 @@ public class ChessboardTest {
 
 	@Test
 	public void testSetPiecesPlayer1White() throws Exception {
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 
 		Player white = new Player("hans", Player.colors.white);
 		Player black = new Player("wurst", Player.colors.black);
@@ -135,9 +135,8 @@ public class ChessboardTest {
 
 	@Test
 	public void testSetPiecesPlayer1WhiteUpsideDown() throws Exception {
-		Settings settings = new Settings();
-		settings.setUpsideDown(true);
-		Chessboard board = new Chessboard(null, settings, null);
+		Settings.setUpsideDown(true);
+		Chessboard board = new Chessboard(null, null);
 
 		Player white = new Player("hans", Player.colors.white);
 		Player black = new Player("wurst", Player.colors.black);
@@ -255,7 +254,7 @@ public class ChessboardTest {
 
 	@Test
 	public void testSetPiecesPlayer2White() throws Exception {
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 
 		Player white = new Player("hans", Player.colors.white);
 		Player black = new Player("wurst", Player.colors.black);
@@ -374,7 +373,7 @@ public class ChessboardTest {
 
 	@Test
 	public void testSetPiecesAllPlayerSameColor() throws Exception {
-		Chessboard board = new Chessboard(null, new Settings(), null);
+		Chessboard board = new Chessboard(null, null);
 
 		Player white = new Player("hans", Player.colors.white);
 		Player black = new Player("wurst", Player.colors.white);
