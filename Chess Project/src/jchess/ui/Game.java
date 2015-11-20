@@ -45,7 +45,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public GameClock					gameClock					= null;
 	public Moves							moves							= null;
 
-	public Game() throws FileNotFoundException {
+	public Game() throws Exception {
 		this.setLayout(null);
 		this.moves = new Moves(this);
 		settings = new Settings();

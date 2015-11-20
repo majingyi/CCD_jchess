@@ -67,7 +67,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	private PawnPromotionWindow				promotionBox					= null;
 	public JDialog										newGameFrame					= null;
 
-	public Game addNewTab(String title) throws FileNotFoundException {
+	public Game addNewTab(String title) throws Exception {
 		Game newGUI = new Game();
 		this.gamesPane.addTab(title, newGUI);
 		return newGUI;

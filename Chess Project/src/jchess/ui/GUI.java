@@ -20,7 +20,7 @@ public class GUI {
 	public Game											game				= null;
 	static final public Properties	configFile	= GUI.getConfigFile();
 
-	public GUI() throws FileNotFoundException {
+	public GUI() throws Exception {
 		this.game = new Game();
 	}
 

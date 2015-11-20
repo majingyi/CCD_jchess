@@ -1,12 +1,18 @@
 package jchess.core.util;
 
-import jchess.ui.GameClock;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Clock {
 
-	private int	currentSeconds	= 0;
+	private int										currentSeconds	= 0;
+	private List<IClockListener>	listeners				= new ArrayList<IClockListener>();
+	private ClockThread						clockThread			= null;
 
-	public Clock(int time) {
+	public Clock(int time) throws Exception {
+		if (time < 0) {
+			throw new Exception("Time needs to be greater or equal than 0.");
+		}
 		currentSeconds = time;
 	}
 
@@ -30,33 +36,53 @@ public class Clock {
 		return result;
 	}
 
-	public void start() {
-		// TODO Auto-generated method stub
-
+	public void start() throws Exception {
+		if (clockThread == null) {
+			clockThread = new ClockThread(currentSeconds, listeners, this);
+			clockThread.start();
+		} else {
+			throw new Exception("Clock Thread is already running.");
+		}
 	}
 
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		if (clockThread != null) {
+			clockThread.stopClock();
+			clockThread = null;
+		}
 	}
 
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		if (clockThread != null) {
+			clockThread.pauseClock();
+		}
 	}
 
 	public void resume() {
-		// TODO Auto-generated method stub
-
+		if (clockThread != null) {
+			clockThread.resumeClock();
+		}
 	}
 
-	public void addClockListener(GameClock gameClock) {
-		// TODO Auto-generated method stub
-
+	public void addClockListener(IClockListener listener) {
+		listeners.add(listener);
 	}
 
 	public void setTime(int timeForGame) {
 		stop();
 		currentSeconds = timeForGame;
+	}
+
+	public int getRemainingTime() {
+		int result = currentSeconds;
+		if (clockThread != null) {
+			result = clockThread.getRemainingTime();
+		}
+		return result;
+	}
+
+	public boolean isClockRunning() {
+		boolean result = (clockThread != null) && (clockThread.isRunning());
+		return result;
 	}
 }

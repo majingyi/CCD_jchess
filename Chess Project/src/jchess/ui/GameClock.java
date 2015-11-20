@@ -29,7 +29,7 @@ public class GameClock extends JPanel implements IClockListener {
 	private String						black_clock				= null;
 	private BufferedImage			background				= null;
 
-	public GameClock(Game game) {
+	public GameClock(Game game) throws Exception {
 		super();
 		this.game = game;
 		settings = game.settings;
@@ -50,8 +50,10 @@ public class GameClock extends JPanel implements IClockListener {
 
 	/**
 	 * Method to init game clock
+	 * 
+	 * @throws Exception
 	 */
-	public void start() {
+	public void start() throws Exception {
 		if (this.settings.isTimeLimitSet()) {
 			clock1.start();
 			clock2.start();
