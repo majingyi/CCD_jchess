@@ -3,7 +3,6 @@ package jchess.core.util;
 import java.io.Serializable;
 import java.util.Locale;
 
-
 /**
  * Class representing game settings available for the current player
  */
@@ -14,9 +13,8 @@ public class Settings implements Serializable {
 	private static Locale			locale						= Locale.US;
 	private int								timeForGame				= 0;
 
-	// tell us if player choose time 4 game or it's infinity
-	private boolean						timeLimitSet;
-	private boolean						upsideDown;
+	private boolean						timeLimitSet			= false;
+	private boolean						upsideDown				= false;
 
 	public enum gameModes {
 		newGame, loadGame
