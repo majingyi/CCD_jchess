@@ -10,11 +10,6 @@ public class Clock {
 		currentSeconds = time;
 	}
 
-	/**
-	 * Method to prepare time in nice looking String
-	 * 
-	 * @return String of actual left game time with ':' digits in mm:ss format
-	 */
 	public String toString() {
 		String result = Constants.EMPTY_STRING;
 
