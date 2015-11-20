@@ -171,5 +171,4 @@ public class PawnMoveBehavior extends MoveBehavior {
 	protected boolean isDoubleMoveAllowed() {
 		return (player.goDown && this.square.pozY == 1) || (!player.goDown && this.square.pozY == 6);
 	}
-
 }

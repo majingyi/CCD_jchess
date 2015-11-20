@@ -38,9 +38,6 @@ public class King extends Piece {
 	 * @return int 0 if nothing, 1 if checkmate, else returns 2
 	 */
 	public int isCheckmatedOrStalemated() {
-		/*
-		 * returns: 0-nothing, 1-checkmate, 2-stalemate
-		 */
 		if (this.allMoves().size() == 0) {
 			for (int i = 0; i < 8; ++i) {
 				for (int j = 0; j < 8; ++j) {

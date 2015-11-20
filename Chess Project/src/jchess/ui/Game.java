@@ -31,6 +31,8 @@ import jchess.ui.lang.Language;
  * Class responsible for the starts of new games, loading games, saving it, and
  * for ending it. This class is also responsible for appoing player with have a
  * move at the moment
+ * 
+ * TODO move the UI stuff to GUI
  */
 public class Game extends JPanel implements MouseListener, ComponentListener {
 

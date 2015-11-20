@@ -537,11 +537,6 @@ public class Moves extends AbstractTableModel {
 	}
 }
 
-/*
- * Overriding DefaultTableModel and isCellEditable method (history cannot be
- * edited by player)
- */
-
 class MyDefaultTableModel extends DefaultTableModel {
 
 	private static final long	serialVersionUID	= 7349152369577914941L;

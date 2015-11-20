@@ -1,15 +1,3 @@
-/*
- * # This program is free software: you can redistribute it and/or modify # it
- * under the terms of the GNU General Public License as published by # the Free
- * Software Foundation, either version 3 of the License, or # (at your option)
- * any later version. # # This program is distributed in the hope that it will
- * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
- * Public License for more details. # # You should have received a copy of the
- * GNU General Public License # along with this program. If not, see
- * <http://www.gnu.org/licenses/>.
- */
-
 package jchess.ui;
 
 import java.io.FileNotFoundException;
@@ -20,7 +8,9 @@ import org.jdesktop.application.Action;
 
 public class JChessAboutBox extends javax.swing.JDialog {
 
-	private static final long	serialVersionUID	= 1604980974366922289L;
+	private javax.swing.JButton	closeButton				= null;
+
+	private static final long		serialVersionUID	= 1604980974366922289L;
 
 	public JChessAboutBox(java.awt.Frame parent) throws FileNotFoundException {
 		super(parent);
@@ -181,10 +171,6 @@ public class JChessAboutBox extends javax.swing.JDialog {
 																								.addComponent(appHomepageLabel3))).addGap(36, 36, 36)))));
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton	closeButton;
-	// End of variables declaration//GEN-END:variables
+	}
 
 }

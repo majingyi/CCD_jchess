@@ -86,12 +86,6 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 		}
 	}
 
-	/**
-	 * Method which is changing a pawn into queen, rook, bishop or knight
-	 * 
-	 * @param evt
-	 *          Capture information about performed action
-	 */
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == this.okButton) {
 			int element = this.themesList.getSelectedIndex();
@@ -103,7 +97,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 					this.setVisible(false);
 				} catch (Exception e) {
 					Logging.log(e);
-					// TODO show erro message to user
+					// TODO show error message to user
 				}
 			}
 		}

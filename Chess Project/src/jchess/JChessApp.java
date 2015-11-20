@@ -32,11 +32,6 @@ public class JChessApp extends SingleFrameApplication {
 		}
 	}
 
-	/**
-	 * This method is to initialize the specified window by injecting resources.
-	 * Windows shown in our application come fully initialized from the GUI
-	 * builder, so this additional configuration is not needed.
-	 */
 	@Override
 	protected void configureWindow(java.awt.Window root) {
 	}
@@ -50,9 +45,6 @@ public class JChessApp extends SingleFrameApplication {
 		return Application.getInstance(JChessApp.class);
 	}
 
-	/**
-	 * Main method launching the application.
-	 */
 	public static void main(String[] args) {
 		launch(JChessApp.class, args);
 	}

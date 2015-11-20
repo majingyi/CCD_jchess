@@ -22,10 +22,9 @@ public class GUI {
 
 	public GUI() throws FileNotFoundException {
 		this.game = new Game();
+	}
 
-		// this.drawGUI();
-	}/*--endOf-GUI--*/
-
+	// TODO Move to Util class - created if not existing
 	public static String getJarPath() {
 		String path = GUI.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 		path = path.replaceAll("[a-zA-Z0-9%!@#$%^&*\\(\\)\\[\\]\\{\\}\\.\\,\\s]+\\.jar", ""); //$NON-NLS-1$ //$NON-NLS-2$
@@ -54,6 +53,7 @@ public class GUI {
 		return confFile;
 	}
 
+	// TODO move to settings
 	public static void storeConfigFile() {
 		try {
 			File outFile = new File(GUI.getJarPath() + File.separator + "config.txt"); //$NON-NLS-1$

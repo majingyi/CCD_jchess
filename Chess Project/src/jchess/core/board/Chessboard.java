@@ -12,9 +12,9 @@ import jchess.core.util.Constants;
 import jchess.core.util.Logging;
 import jchess.core.util.Move;
 import jchess.core.util.Moves;
+import jchess.core.util.Moves.castling;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
-import jchess.core.util.Moves.castling;
 import jchess.ui.ChessboardUI;
 import jchess.ui.lang.Language;
 
@@ -33,7 +33,6 @@ public class Chessboard {
 
 	// squares of chessboard
 	public Square						squares[][];
-
 	public Square						activeSquare;
 
 	public int							active_x_square;
@@ -68,7 +67,7 @@ public class Chessboard {
 			for (int y = 0; y < 8; y++) {
 				squares[i][y] = new Square(i, y, null);
 			}
-		}// --endOf--create object for each square
+		}
 	}
 
 	/**
@@ -82,11 +81,9 @@ public class Chessboard {
 	 *          reference to black player
 	 * @throws Exception
 	 */
-
 	public void setPieces(String places, Player plWhite, Player plBlack) throws Exception {
 
 		if ((plWhite.color == plBlack.color) == false) {
-
 			if (places.equals(Constants.EMPTY_STRING)) // if newGame
 			{
 				if (this.settings.isUpsideDown()) {
@@ -132,7 +129,6 @@ public class Chessboard {
 
 	private void setPieces4NewGame(boolean upsideDown, Player plWhite, Player plBlack) throws Exception {
 
-		/* WHITE PIECES */
 		Player player = plBlack;
 		Player player1 = plWhite;
 		if (upsideDown) // if white on Top
@@ -144,7 +140,7 @@ public class Chessboard {
 		this.setPawns4NewGame(1, player);
 		this.setFigures4NewGame(7, player1, upsideDown);
 		this.setPawns4NewGame(6, player1);
-	}/*--endOf-setPieces(boolean upsideDown)--*/
+	}
 
 	/**
 	 * method set Figures in row (and set Queen and King to right position)
@@ -224,18 +220,16 @@ public class Chessboard {
 		uiChessboard.repaint();
 	}
 
-	/*--endOf-select--*//**
-	 * Method set variables active_x_square &
-	 * active_y_square to 0 values.
+	/**
+	 * Method set variables active_x_square & active_y_square to 0 values.
 	 */
 	public void unselect() {
 		this.active_x_square = 0;
 		this.active_y_square = 0;
 		this.activeSquare = null;
-		// this.draw();//redraw
 
 		uiChessboard.repaint();
-	}/*--endOf-unselect--*/
+	}
 
 	public boolean redo() throws Exception {
 		return redo(true);
@@ -286,7 +280,6 @@ public class Chessboard {
 	 * @throws Exception
 	 * */
 	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) throws Exception {
-
 		castling wasCastling = Moves.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
@@ -309,21 +302,13 @@ public class Chessboard {
 				((King) end.piece).wasMotion = true;
 			}
 
-			// Castling
 			if (begin.pozX + 2 == end.pozX) {
 				move(squares[7][begin.pozY], squares[end.pozX - 1][begin.pozY], false, false);
 				wasCastling = Moves.castling.shortCastling;
-				// this.moves_history.addMove(tempBegin, tempEnd,
-				// clearForwardHistory, wasCastling, wasEnPassant);
-				// return;
 			} else if (begin.pozX - 2 == end.pozX) {
 				move(squares[0][begin.pozY], squares[end.pozX + 1][begin.pozY], false, false);
 				wasCastling = Moves.castling.longCastling;
-				// this.moves_history.addMove(tempBegin, tempEnd,
-				// clearForwardHistory, wasCastling, wasEnPassant);
-				// return;
 			}
-			// endOf Castling
 		} else if (end.piece.getSymbol() == Rook.SYMBOL) {
 			if (((Rook) end.piece).wasMotion == false) {
 				((Rook) end.piece).wasMotion = true;
@@ -332,10 +317,7 @@ public class Chessboard {
 			if (twoSquareMovedPawn != null && squares[end.pozX][begin.pozY] == twoSquareMovedPawn.getSquare()) // en
 			// passant
 			{
-
 				tempEnd.piece = squares[end.pozX][begin.pozY].piece; // ugly
-				// hack - put taken pawn in en passant plasty do end square
-
 				squares[end.pozX][begin.pozY].piece = null;
 				wasEnPassant = true;
 			}
@@ -375,7 +357,7 @@ public class Chessboard {
 		} else {
 			this.moves_history.addMove(tempBegin, tempEnd, false, wasCastling, wasEnPassant, promotedPiece);
 		}
-	}/* endOf-move()- */
+	}
 
 	public boolean undo() throws Exception {
 		return undo(true);

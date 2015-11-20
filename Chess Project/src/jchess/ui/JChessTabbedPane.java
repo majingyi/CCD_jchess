@@ -1,18 +1,3 @@
-/*
- * # This program is free software: you can redistribute it and/or modify # it
- * under the terms of the GNU General Public License as published by # the Free
- * Software Foundation, either version 3 of the License, or # (at your option)
- * any later version. # # This program is distributed in the hope that it will
- * be useful, # but WITHOUT ANY WARRANTY; without even the implied warranty of #
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the # GNU General
- * Public License for more details. # # You should have received a copy of the
- * GNU General Public License # along with this program. If not, see
- * <http://www.gnu.org/licenses/>..
- */
-
-/*
- * Authors: Mateusz Sławomir Lach ( matlak, msl ) Damian Marciniak
- */
 package jchess.ui;
 
 import java.awt.Color;
@@ -146,7 +131,7 @@ class TabbedPaneIcon implements Icon {
 		this.fileIcon = fileIcon;
 		width = 16;
 		height = 16;
-	}// --endOf-TabbedPaneIcon--
+	}
 
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -167,15 +152,15 @@ class TabbedPaneIcon implements Icon {
 		if (fileIcon != null) {
 			fileIcon.paintIcon(c, g, x + width, y_p);
 		}
-	}// --endOf-PaintIcon--
+	}
 
 	public int getIconWidth() {
 		return width + (fileIcon != null ? fileIcon.getIconWidth() : 0);
-	}// --endOf-getIconWidth--
+	}
 
 	public int getIconHeight() {
 		return height;
-	}// --endOf-getIconHeight()--
+	}
 
 	public Rectangle getBounds() {
 		return new Rectangle(x_pos, y_pos, width, height);

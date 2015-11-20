@@ -11,7 +11,6 @@ public class NewGameWindow extends JDialog {
 
 	private javax.swing.JTabbedPane	jTabbedPane1			= null;
 
-	/** Creates new form NewGameWindow */
 	public NewGameWindow() {
 		initComponents();
 

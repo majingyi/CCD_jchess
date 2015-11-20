@@ -26,7 +26,7 @@ import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
 /**
- * The application's main frame.
+ * The application's main view.
  */
 public class JChessView extends FrameView implements ActionListener, ComponentListener {
 
@@ -111,7 +111,6 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				} else if (retVal == JFileChooser.CANCEL_OPTION) {
 					break;
 				}
-				// /JChessView.gui.game.saveGame(fc.);
 			}
 		} else if (target == loadGameItem) { // loadGame
 			JFileChooser fc = new JFileChooser();
@@ -146,28 +145,25 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		}
 	}
 
-	// /--endOf- don't delete, becouse they're interfaces for MouseEvent
-
 	private void renameAllVisibleItems() {
-		fileMenu.setText(Language.getString("fileMenu.text")); // NOI18N //$NON-NLS-1$
-		newGameItem.setText(Language.getString("newGameItem.text")); // NOI18N //$NON-NLS-1$
-		loadGameItem.setText(Language.getString("loadGameItem.text")); // NOI18N //$NON-NLS-1$
-		saveGameItem.setText(Language.getString("saveGameItem.text")); // NOI18N //$NON-NLS-1$
-		gameMenu.setText(Language.getString("gameMenu.text")); // NOI18N //$NON-NLS-1$
+		fileMenu.setText(Language.getString("fileMenu.text")); //$NON-NLS-1$
+		newGameItem.setText(Language.getString("newGameItem.text")); //$NON-NLS-1$
+		loadGameItem.setText(Language.getString("loadGameItem.text")); //$NON-NLS-1$
+		saveGameItem.setText(Language.getString("saveGameItem.text")); //$NON-NLS-1$
+		gameMenu.setText(Language.getString("gameMenu.text")); //$NON-NLS-1$
 
-		moveBackItem.setText(Language.getString("moveBackItem.text")); // NOI18N //$NON-NLS-1$
-		moveForwardItem.setText(Language.getString("moveForwardItem.text")); // NOI18N //$NON-NLS-1$
+		moveBackItem.setText(Language.getString("moveBackItem.text")); //$NON-NLS-1$
+		moveForwardItem.setText(Language.getString("moveForwardItem.text")); //$NON-NLS-1$
 
-		rewindToBegin.setText(Language.getString("rewindToBegin.text")); // NOI18N //$NON-NLS-1$
-		rewindToEnd.setText(Language.getString("rewindToEnd.text")); // NOI18N //$NON-NLS-1$
+		rewindToBegin.setText(Language.getString("rewindToBegin.text")); //$NON-NLS-1$
+		rewindToEnd.setText(Language.getString("rewindToEnd.text")); //$NON-NLS-1$
 
-		optionsMenu.setText(Language.getString("optionsMenu.text")); // NOI18N //$NON-NLS-1$
-		themeSettingsMenu.setText(Language.getString("themeSettingsMenu.text")); // NOI18N //$NON-NLS-1$
+		optionsMenu.setText(Language.getString("optionsMenu.text")); //$NON-NLS-1$
+		themeSettingsMenu.setText(Language.getString("themeSettingsMenu.text")); //$NON-NLS-1$
 
-		languageSettingsMenu.setText(Language.getString("languageSettingMenu.text"));// NOI18N //$NON-NLS-1$
+		languageSettingsMenu.setText(Language.getString("languageSettingMenu.text")); //$NON-NLS-1$
 
-		helpMenu.setText(Language.getString("helpMenu.text")); // NOI18N //$NON-NLS-1$
-
+		helpMenu.setText(Language.getString("helpMenu.text")); //$NON-NLS-1$
 	}
 
 	public JChessView(SingleFrameApplication app) throws FileNotFoundException {
@@ -287,10 +283,10 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 		mainPanel.setMaximumSize(new java.awt.Dimension(800, 600));
 		mainPanel.setMinimumSize(new java.awt.Dimension(800, 600));
-		mainPanel.setName("mainPanel"); // NOI18N //$NON-NLS-1$
+		mainPanel.setName("mainPanel"); //$NON-NLS-1$
 		mainPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
-		gamesPane.setName("gamesPane"); // NOI18N //$NON-NLS-1$
+		gamesPane.setName("gamesPane"); //$NON-NLS-1$
 
 		javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
 		mainPanel.setLayout(mainPanelLayout);
@@ -300,46 +296,46 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		mainPanelLayout.setVerticalGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				mainPanelLayout.createSequentialGroup().addContainerGap().addComponent(gamesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)));
 
-		menuBar.setName("menuBar"); // NOI18N //$NON-NLS-1$
+		menuBar.setName("menuBar"); //$NON-NLS-1$
 
-		fileMenu.setText(Language.getString("fileMenu.text")); // NOI18N //$NON-NLS-1$
-		fileMenu.setName("fileMenu"); // NOI18N //$NON-NLS-1$
+		fileMenu.setText(Language.getString("fileMenu.text")); //$NON-NLS-1$
+		fileMenu.setName("fileMenu"); //$NON-NLS-1$
 
 		newGameItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-		newGameItem.setText(Language.getString("newGameItem.text")); // NOI18N //$NON-NLS-1$
-		newGameItem.setName("newGameItem"); // NOI18N //$NON-NLS-1$
+		newGameItem.setText(Language.getString("newGameItem.text")); //$NON-NLS-1$
+		newGameItem.setName("newGameItem"); //$NON-NLS-1$
 		fileMenu.add(newGameItem);
 		newGameItem.addActionListener(this);
 
 		loadGameItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-		loadGameItem.setText(Language.getString("loadGameItem.text")); // NOI18N //$NON-NLS-1$
-		loadGameItem.setName("loadGameItem"); // NOI18N //$NON-NLS-1$
+		loadGameItem.setText(Language.getString("loadGameItem.text")); //$NON-NLS-1$
+		loadGameItem.setName("loadGameItem"); //$NON-NLS-1$
 		fileMenu.add(loadGameItem);
 		loadGameItem.addActionListener(this);
 
 		saveGameItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-		saveGameItem.setText(Language.getString("saveGameItem.text")); // NOI18N //$NON-NLS-1$
-		saveGameItem.setName("saveGameItem"); // NOI18N //$NON-NLS-1$
+		saveGameItem.setText(Language.getString("saveGameItem.text")); //$NON-NLS-1$
+		saveGameItem.setName("saveGameItem"); //$NON-NLS-1$
 		fileMenu.add(saveGameItem);
 		saveGameItem.addActionListener(this);
 
 		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
 				.getActionMap(JChessView.class, this);
-		exitMenuItem.setAction(actionMap.get("quit")); // NOI18N //$NON-NLS-1$
-		exitMenuItem.setName("exitMenuItem"); // NOI18N //$NON-NLS-1$
+		exitMenuItem.setAction(actionMap.get("quit")); //$NON-NLS-1$
+		exitMenuItem.setName("exitMenuItem"); //$NON-NLS-1$
 		fileMenu.add(exitMenuItem);
 
 		menuBar.add(fileMenu);
 
-		gameMenu.setText(Language.getString("gameMenu.text")); // NOI18N //$NON-NLS-1$
-		gameMenu.setName("gameMenu"); // NOI18N //$NON-NLS-1$
+		gameMenu.setText(Language.getString("gameMenu.text")); //$NON-NLS-1$
+		gameMenu.setName("gameMenu"); //$NON-NLS-1$
 
 		moveBackItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
-		moveBackItem.setText(Language.getString("moveBackItem.text")); // NOI18N //$NON-NLS-1$
-		moveBackItem.setName("moveBackItem"); // NOI18N //$NON-NLS-1$
+		moveBackItem.setText(Language.getString("moveBackItem.text")); //$NON-NLS-1$
+		moveBackItem.setName("moveBackItem"); //$NON-NLS-1$
 		moveBackItem.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				moveBackItemMouseClicked(evt);
+				// TODO undo
 			}
 		});
 		moveBackItem.addActionListener(new java.awt.event.ActionListener() {
@@ -350,11 +346,11 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		gameMenu.add(moveBackItem);
 
 		moveForwardItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
-		moveForwardItem.setText(Language.getString("moveForwardItem.text")); // NOI18N //$NON-NLS-1$
-		moveForwardItem.setName("moveForwardItem"); // NOI18N //$NON-NLS-1$
+		moveForwardItem.setText(Language.getString("moveForwardItem.text")); //$NON-NLS-1$
+		moveForwardItem.setName("moveForwardItem"); //$NON-NLS-1$
 		moveForwardItem.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				moveForwardItemMouseClicked(evt);
+				// TODO redo
 			}
 		});
 		moveForwardItem.addActionListener(new java.awt.event.ActionListener() {
@@ -371,8 +367,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 		rewindToBegin.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_MASK
 				| java.awt.event.InputEvent.CTRL_MASK));
-		rewindToBegin.setText(Language.getString("rewindToBegin.text")); // NOI18N //$NON-NLS-1$
-		rewindToBegin.setName("rewindToBegin"); // NOI18N //$NON-NLS-1$
+		rewindToBegin.setText(Language.getString("rewindToBegin.text")); //$NON-NLS-1$
+		rewindToBegin.setName("rewindToBegin"); //$NON-NLS-1$
 		rewindToBegin.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				rewindToBeginActionPerformed(evt);
@@ -382,8 +378,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 		rewindToEnd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.SHIFT_MASK
 				| java.awt.event.InputEvent.CTRL_MASK));
-		rewindToEnd.setText(Language.getString("rewindToEnd.text")); // NOI18N //$NON-NLS-1$
-		rewindToEnd.setName("rewindToEnd"); // NOI18N //$NON-NLS-1$
+		rewindToEnd.setText(Language.getString("rewindToEnd.text")); //$NON-NLS-1$
+		rewindToEnd.setName("rewindToEnd"); //$NON-NLS-1$
 		rewindToEnd.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
@@ -398,26 +394,26 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 		menuBar.add(gameMenu);
 
-		optionsMenu.setText(Language.getString("optionsMenu.text")); // NOI18N //$NON-NLS-1$
-		optionsMenu.setName("optionsMenu"); // NOI18N //$NON-NLS-1$
+		optionsMenu.setText(Language.getString("optionsMenu.text")); //$NON-NLS-1$
+		optionsMenu.setName("optionsMenu"); //$NON-NLS-1$
 
-		themeSettingsMenu.setText(Language.getString("themeSettingsMenu.text")); // NOI18N //$NON-NLS-1$
-		themeSettingsMenu.setName("themeSettingsMenu"); // NOI18N //$NON-NLS-1$
+		themeSettingsMenu.setText(Language.getString("themeSettingsMenu.text")); //$NON-NLS-1$
+		themeSettingsMenu.setName("themeSettingsMenu"); //$NON-NLS-1$
 		optionsMenu.add(themeSettingsMenu);
 		themeSettingsMenu.addActionListener(this);
 
-		languageSettingsMenu.setText(Language.getString("languageSettingMenu.text"));// NOI18N //$NON-NLS-1$
-		languageSettingsMenu.setName("languageSettingsMenu");// NOI18N //$NON-NLS-1$
+		languageSettingsMenu.setText(Language.getString("languageSettingMenu.text")); //$NON-NLS-1$
+		languageSettingsMenu.setName("languageSettingsMenu"); //$NON-NLS-1$
 		optionsMenu.add(languageSettingsMenu);
 		languageSettingsMenu.addActionListener(this);
 
 		menuBar.add(optionsMenu);
 
-		helpMenu.setText(Language.getString("helpMenu.text")); // NOI18N //$NON-NLS-1$
-		helpMenu.setName("helpMenu"); // NOI18N //$NON-NLS-1$
+		helpMenu.setText(Language.getString("helpMenu.text")); //$NON-NLS-1$
+		helpMenu.setName("helpMenu"); //$NON-NLS-1$
 
 		aboutMenuItem.setText(Language.getString("JChessView.60")); //$NON-NLS-1$
-		aboutMenuItem.setName("aboutMenuItem"); // NOI18N //$NON-NLS-1$
+		aboutMenuItem.setName("aboutMenuItem"); //$NON-NLS-1$
 		helpMenu.add(aboutMenuItem);
 		aboutMenuItem.addActionListener(new ActionListener() {
 
@@ -432,17 +428,12 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		});
 
 		menuBar.add(helpMenu);
-
-		statusPanel.setName("statusPanel"); // NOI18N //$NON-NLS-1$
-
-		statusPanelSeparator.setName("statusPanelSeparator"); // NOI18N //$NON-NLS-1$
-
-		statusMessageLabel.setName("statusMessageLabel"); // NOI18N //$NON-NLS-1$
-
+		statusPanel.setName("statusPanel"); //$NON-NLS-1$
+		statusPanelSeparator.setName("statusPanelSeparator"); //$NON-NLS-1$
+		statusMessageLabel.setName("statusMessageLabel"); //$NON-NLS-1$
 		statusAnimationLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		statusAnimationLabel.setName("statusAnimationLabel"); // NOI18N //$NON-NLS-1$
-
-		progressBar.setName("progressBar"); // NOI18N //$NON-NLS-1$
+		statusAnimationLabel.setName("statusAnimationLabel"); //$NON-NLS-1$
+		progressBar.setName("progressBar"); //$NON-NLS-1$
 
 		javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
 		statusPanel.setLayout(statusPanelLayout);
@@ -475,10 +466,9 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		setComponent(mainPanel);
 		setMenuBar(menuBar);
 		setStatusBar(statusPanel);
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
-	private void moveBackItemActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_moveBackItemActionPerformed
-	{
+	private void moveBackItemActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
 			if (gui != null && gui.game != null) {
 				gui.game.undo();
@@ -493,21 +483,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		}
 	}
 
-	private void moveBackItemMouseClicked(java.awt.event.MouseEvent evt)// GEN-FIRST:event_moveBackItemMouseClicked
-	{// GEN-HEADEREND:event_moveBackItemMouseClicked
-		// TODO add your handling code here:
-
-	}// GEN-LAST:event_moveBackItemMouseClicked
-
-	private void moveForwardItemMouseClicked(java.awt.event.MouseEvent evt)// GEN-FIRST:event_moveForwardItemMouseClicked
-	{// GEN-HEADEREND:event_moveForwardItemMouseClicked
-		// TODO add your handling code here:
-
-	}// GEN-LAST:event_moveForwardItemMouseClicked
-
-	private void moveForwardItemActionPerformed(java.awt.event.ActionEvent evt) throws Exception// GEN-FIRST:event_moveForwardItemActionPerformed
-	{// GEN-HEADEREND:event_moveForwardItemActionPerformed
-		// TODO add your handling code here:
+	private void moveForwardItemActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
 		if (gui != null && gui.game != null) {
 			gui.game.redo();
 		} else {
@@ -522,10 +498,9 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				JOptionPane.showMessageDialog(null, exc.getMessage());
 			}
 		}
-	}// GEN-LAST:event_moveForwardItemActionPerformed
+	}
 
-	private void rewindToBeginActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_rewindToBeginActionPerformed
-	{
+	private void rewindToBeginActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
 			Game activeGame = this.getActiveTabGame();
 			if (activeGame.rewindToBegin() == false) {
@@ -536,8 +511,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		}
 	}
 
-	private void rewindToEndActionPerformed(java.awt.event.ActionEvent evt) throws Exception// GEN-FIRST:event_rewindToEndActionPerformed
-	{// GEN-HEADEREND:event_rewindToEndActionPerformed
+	private void rewindToEndActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
 		try {
 			Game activeGame = this.getActiveTabGame();
 			if (!activeGame.rewindToEnd()) {
@@ -548,7 +522,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		} catch (UnsupportedOperationException exc) {
 			JOptionPane.showMessageDialog(null, exc.getMessage());
 		}
-	}// GEN-LAST:event_rewindToEndActionPerformed
+	}
 
 	public void componentResized(ComponentEvent e) {
 		Logging.log("jchessView resized!!;"); //$NON-NLS-1$
@@ -575,5 +549,4 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	public void componentHidden(ComponentEvent e) {
 		throw new UnsupportedOperationException("Not supported yet."); //$NON-NLS-1$
 	}
-
 }

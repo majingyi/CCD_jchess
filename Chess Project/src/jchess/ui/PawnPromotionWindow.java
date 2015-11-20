@@ -23,14 +23,14 @@ import jchess.ui.lang.Language;
 // to already captured piece.
 
 /**
- * Class responsible for promotion of a pawn. When pawn reach the end of the
- * chessboard it can be change to rook, bishop, queen or knight. For what pawn
- * is promoted decides player.
+ * If pawn reach the end of the chessboard it can be promoted to rook, bishop,
+ * queen or knight.
  * 
- * @param parent
- *          Information about the current piece
- * @param color
- *          The player color
+ * This class provides dialog, to let the choose, to which pieces the pawn is
+ * promoted.
+ * 
+ * It is taken into account, which figure the player has already captured.
+ * 
  */
 public class PawnPromotionWindow extends JDialog implements ActionListener {
 
@@ -80,7 +80,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	}
 
 	/**
-	 * Method which is changing a pawn into queen, rook, bishop or knight
+	 * Method which is storing the players decision.
 	 * 
 	 * @param event
 	 *          Capture information about performed action
@@ -99,6 +99,11 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 		this.setVisible(false);
 	}
 
+	/**
+	 * Returns the players decision.
+	 * 
+	 * @return The symbol of the chosen check piece.
+	 */
 	public String getResult() {
 		return result;
 	}
