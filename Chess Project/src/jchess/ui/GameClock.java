@@ -20,8 +20,8 @@ public class GameClock extends JPanel implements IClockListener {
 
 	private static final long	serialVersionUID	= 1748377192145910384L;
 
-	public Clock							clock1						= null;
-	public Clock							clock2						= null;
+	private Clock							clock1						= null;
+	private Clock							clock2						= null;
 	private Clock							runningClock			= null;
 	private Settings					settings					= null;
 	private Game							game							= null;
