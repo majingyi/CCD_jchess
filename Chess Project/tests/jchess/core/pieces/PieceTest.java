@@ -1,4 +1,4 @@
-package core.pieces;
+package jchess.core.pieces;
 import jchess.core.board.Chessboard;
 import jchess.core.board.Square;
 import jchess.core.pieces.IMoveBehavior;

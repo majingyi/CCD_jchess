@@ -1,4 +1,4 @@
-package core.board;
+package jchess.core.board;
 import jchess.core.board.Chessboard;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
