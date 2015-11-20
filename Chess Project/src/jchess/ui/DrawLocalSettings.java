@@ -203,7 +203,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				sett.setTimeLimetSet(true);
 				sett.setTimeForGame((int) val * 60);// set time for game and mult it to
 				// seconds
-				newGUI.gameClock.setTimes(sett.getTimeForGame(), sett.getTimeForGame());
+				newGUI.gameClock.setTime(sett.getTimeForGame());
 				newGUI.gameClock.start();
 			}
 			Logging.log(this.time4Game.getActionCommand());

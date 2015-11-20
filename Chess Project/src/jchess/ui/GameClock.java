@@ -10,48 +10,40 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import jchess.core.util.Clock;
-import jchess.core.util.Logging;
+import jchess.core.util.Constants;
+import jchess.core.util.IClockListener;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
-/**
- * Class to representing the full game time
- * 
- * @param game
- *          The current game
- */
-public class GameClock extends JPanel implements Runnable {
+public class GameClock extends JPanel implements IClockListener {
 
 	private static final long	serialVersionUID	= 1748377192145910384L;
 
-	public Clock							clock1;
-	public Clock							clock2;
-	private Clock							runningClock;
-	private Settings					settings;
-	private Thread						thread;
-	private Game							game;
-	private String						white_clock, black_clock;
-	private BufferedImage			background;
+	public Clock							clock1						= null;
+	public Clock							clock2						= null;
+	private Clock							runningClock			= null;
+	private Settings					settings					= null;
+	private Game							game							= null;
+	private String						white_clock				= null;
+	private String						black_clock				= null;
+	private BufferedImage			background				= null;
 
-	GameClock(Game game) {
+	public GameClock(Game game) {
 		super();
-		this.clock1 = new Clock();// white player clock
-		this.clock2 = new Clock();// black player clock
-		this.runningClock = this.clock1;// running/active clock
 		this.game = game;
-		this.settings = game.settings;
-		this.background = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
-
+		settings = game.settings;
 		int time = this.settings.getTimeForGame();
 
-		this.setTimes(time, time);
-		this.setPlayers(this.settings.playerBlack, this.settings.playerWhite);
+		clock1 = new Clock(time);// white player clock
+		clock2 = new Clock(time);// black player clock
 
-		this.thread = new Thread(this);
-		if (this.settings.isTimeLimitSet()) {
-			thread.start();
-		}
+		clock1.addClockListener(this);
+		clock2.addClockListener(this);
+
+		this.runningClock = this.clock1;// running/active clock
+		this.background = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
+
 		this.drawBackground();
 		this.setDoubleBuffered(true);
 	}
@@ -60,27 +52,20 @@ public class GameClock extends JPanel implements Runnable {
 	 * Method to init game clock
 	 */
 	public void start() {
-		this.thread.start();
+		if (this.settings.isTimeLimitSet()) {
+			clock1.start();
+			clock2.start();
+		}
 	}
 
 	/**
 	 * Method to stop game clock
 	 */
 	public void stop() {
-		this.runningClock = null;
-
-		try {// block this thread
-			this.thread.wait();
-		} catch (java.lang.InterruptedException exc) {
-			Logging.log(Language.getString("GameClock.0"), exc); //$NON-NLS-1$
-		} catch (java.lang.IllegalMonitorStateException exc1) {
-			Logging.log(Language.getString("GameClock.1"), exc1); //$NON-NLS-1$
-		}
+		clock1.stop();
+		clock2.stop();
 	}
 
-	/**
-	 * Method of drawing graphical background of clock
-	 */
 	void drawBackground() {
 		Graphics gr = this.background.getGraphics();
 		Graphics2D g2d = (Graphics2D) gr;
@@ -102,17 +87,11 @@ public class GameClock extends JPanel implements Runnable {
 		g2d.drawString(settings.playerBlack.getName(), 100, 50);
 	}
 
-	/**
-	 * Annotation to superclass Graphics drawing the clock graphics
-	 * 
-	 * @param g
-	 *          Graphics2D Capt object to paint
-	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		white_clock = this.clock1.prepareString();
-		black_clock = this.clock2.prepareString();
+		white_clock = this.clock1.toString();
+		black_clock = this.clock2.toString();
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -139,109 +118,39 @@ public class GameClock extends JPanel implements Runnable {
 		g2d.drawString(black_clock, 90, 80);
 	}
 
-	/**
-	 * Annotation to superclass Graphics updateing clock graphisc
-	 * 
-	 * @param g
-	 *          Graphics2D Capt object to paint
-	 */
 	@Override
 	public void update(Graphics g) {
 		paint(g);
 	}
 
-	/**
-	 * Method of swiching the players clocks
-	 */
 	public void switch_clocks() {
-		/*
-		 * in documentation this method is called 'switch', but it's restricted name
-		 * to switch block (in pascal called "case") - this've to be repaired in
-		 * documentation by Wąsu:P
-		 */
 		if (this.runningClock == this.clock1) {
+			clock1.pause();
+			clock2.resume();
 			this.runningClock = this.clock2;
 		} else {
+			clock2.pause();
+			clock1.resume();
 			this.runningClock = this.clock1;
 		}
 	}
 
-	/**
-	 * Method with is setting the players clocks time
-	 * 
-	 * @param t1
-	 *          Capt the player time
-	 * @param t2
-	 *          Capt the player time
-	 */
-	public void setTimes(int t1, int t2) {
-		/*
-		 * rather in chess game players got the same time 4 game, so why in
-		 * documentation this method've 2 parameters ?
-		 */
-		this.clock1.init(t1);
-		this.clock2.init(t2);
-	}
+	public void timeOver(Clock clock) {
+		String color = Constants.EMPTY_STRING;
 
-	/**
-	 * Method with is setting the players clocks
-	 * 
-	 * @param p1
-	 *          Capt player information
-	 * @param p2
-	 *          Capt player information
-	 */
-	private void setPlayers(Player p1, Player p2) {
-		/*
-		 * in documentation it's called 'setPlayer' but when we've 'setTimes' better
-		 * to use one convention of naming methods - this've to be repaired in
-		 * documentation by Wąsu:P dojdziemy do tego:D:D:D
-		 */
-		if (p1.color == Player.colors.white) {
-			this.clock1.setPlayer(p1);
-			this.clock2.setPlayer(p2);
-		} else {
-			this.clock1.setPlayer(p2);
-			this.clock2.setPlayer(p1);
+		if (clock == clock1) {
+			color = Player.colors.white.toString();
+		} else if (clock == clock2) {
+			color = Player.colors.black.toString();
 		}
-	}
+		// TODO add third player
 
-	/**
-	 * Method with is running the time on clock
-	 */
-	public void run() {
-		while (true) {
-			if (this.runningClock != null) {
-				if (this.runningClock.decrement()) {
-					repaint();
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						Logging.log(Language.getString("GameClock.6"), e); //$NON-NLS-1$
-					}
-					// if(this.game.blockedChessboard)
-					// this.game.blockedChessboard = false;
-				}
-				if (this.runningClock != null && this.runningClock.get_left_time() == 0) {
-					this.timeOver();
-				}
-			}
-		}
-	}
-
-	/**
-	 * Method of checking is the time of the game is not over
-	 */
-	private void timeOver() {
-		String color = new String();
-		if (this.clock1.get_left_time() == 0) {// Check which player win
-			color = this.clock2.getPlayer().color.toString();
-		} else if (this.clock2.get_left_time() == 0) {
-			color = this.clock1.getPlayer().color.toString();
-		} else {// if called in wrong moment
-			Logging.log(Language.getString("GameClock.7")); //$NON-NLS-1$
-		}
 		this.game.endGame(Language.getString("GameClock.8") + color + Language.getString("GameClock.9")); //$NON-NLS-1$ //$NON-NLS-2$
 		this.stop();
+	}
+
+	public void setTime(int timeForGame) {
+		clock1.setTime(timeForGame);
+		clock2.setTime(timeForGame);
 	}
 }
