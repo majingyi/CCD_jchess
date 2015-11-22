@@ -228,32 +228,28 @@ public class Chessboard {
 	}
 
 	public boolean redo(boolean refresh) throws Exception {
-		if (Settings.getGameType() == Settings.gameTypes.local) // redo only for
-		// local game
-		{
-			Move first = this.moves_history.redo();
+		boolean result = false;
+		Move first = this.moves_history.redo();
 
-			Square from = null;
-			Square to = null;
+		Square from = null;
+		Square to = null;
 
-			if (first != null) {
-				from = first.getFrom();
-				to = first.getTo();
+		if (first != null) {
+			from = first.getFrom();
+			to = first.getTo();
 
-				this.move(this.squares[from.pozX][from.pozY], this.squares[to.pozX][to.pozY], true, false);
-				if (first.getPromotedPiece() != null) {
-					Pawn pawn = (Pawn) this.squares[to.pozX][to.pozY].piece;
-					pawn.setSquare(null);
+			this.move(this.squares[from.pozX][from.pozY], this.squares[to.pozX][to.pozY], true, false);
+			if (first.getPromotedPiece() != null) {
+				Pawn pawn = (Pawn) this.squares[to.pozX][to.pozY].piece;
+				pawn.setSquare(null);
 
-					this.squares[to.pozX][to.pozY].piece = first.getPromotedPiece();
-					Piece promoted = this.squares[to.pozX][to.pozY].piece;
-					promoted.setSquare(this.squares[to.pozX][to.pozY]);
-				}
-				return true;
+				this.squares[to.pozX][to.pozY].piece = first.getPromotedPiece();
+				Piece promoted = this.squares[to.pozX][to.pozY].piece;
+				promoted.setSquare(this.squares[to.pozX][to.pozY]);
 			}
-
+			result = true;
 		}
-		return false;
+		return result;
 	}
 
 	public void move(Square begin, Square end) throws Exception {

@@ -22,16 +22,10 @@ public class Settings implements Serializable {
 		newGame, loadGame
 	}
 
-	private static gameModes	gameMode		= null;
-	private static Player			playerWhite	= null;
-	private static Player			playerBlack	= null;
+	private static gameModes	gameMode			= null;
+	private static Player			playerWhite		= null;
+	private static Player			playerBlack		= null;
 
-	// TODO remove
-	public enum gameTypes {
-		local
-	}
-
-	private static gameTypes	gameType			= gameTypes.local;
 	private static boolean		renderLabels	= true;
 
 	// prevent from instantiation
@@ -76,10 +70,6 @@ public class Settings implements Serializable {
 		return timeLimitSet;
 	}
 
-	public static gameTypes getGameType() {
-		return gameType;
-	}
-
 	public static boolean getRenderLabels() {
 		return renderLabels;
 	}
@@ -98,10 +88,6 @@ public class Settings implements Serializable {
 
 	public static gameModes getGameMode() {
 		return gameMode;
-	}
-
-	public static void setGameType(gameTypes local) {
-		gameType = local;
 	}
 
 	public static void setPlayerWhite(Player player) {

@@ -149,7 +149,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		Settings.getPlayerWhite().setType(Player.playerTypes.localUser);
 
 		Settings.setGameMode(Settings.gameModes.loadGame);
-		Settings.setGameType(Settings.gameTypes.local);
 
 		newGUI.newGame();
 		newGUI.blockedChessboard = true;
@@ -328,13 +327,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean undo() throws Exception {
 		boolean status = false;
 
-		if (Settings.getGameType() == Settings.gameTypes.local) {
-			status = chessboard.getChessboard().undo();
-			if (status) {
-				this.switchActive();
-			} else {
-				chessboard.repaint();// repaint for sure
-			}
+		status = chessboard.getChessboard().undo();
+		if (status) {
+			this.switchActive();
+		} else {
+			chessboard.repaint();// repaint for sure
 		}
 		return status;
 	}
@@ -342,12 +339,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean rewindToBegin() throws Exception {
 		boolean result = false;
 
-		if (Settings.getGameType() == Settings.gameTypes.local) {
-			while (chessboard.getChessboard().undo()) {
-				result = true;
-			}
-		} else {
-			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game")); //$NON-NLS-1$
+		while (chessboard.getChessboard().undo()) {
+			result = true;
 		}
 
 		return result;
@@ -356,12 +349,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean rewindToEnd() throws Exception {
 		boolean result = false;
 
-		if (Settings.getGameType() == Settings.gameTypes.local) {
-			while (chessboard.getChessboard().redo()) {
-				result = true;
-			}
-		} else {
-			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game")); //$NON-NLS-1$
+		while (chessboard.getChessboard().redo()) {
+			result = true;
 		}
 
 		return result;
@@ -369,26 +358,18 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	public boolean redo() throws Exception {
 		boolean status = chessboard.getChessboard().redo();
-		if (Settings.getGameType() == Settings.gameTypes.local) {
-			if (status) {
-				this.nextMove();
-			} else {
-				chessboard.repaint();// repaint for sure
-			}
+		if (status) {
+			this.nextMove();
 		} else {
-			throw new UnsupportedOperationException(Language.getString("operation_supported_only_in_local_game")); //$NON-NLS-1$
+			chessboard.repaint();// repaint for sure
 		}
+
 		return status;
 	}
 
 	public void mousePressed(MouseEvent event) {
 		try {
-			if (event.getButton() == MouseEvent.BUTTON3) // right button
-			{
-				this.undo();
-			} else if (event.getButton() == MouseEvent.BUTTON2 && Settings.getGameType() == Settings.gameTypes.local) {
-				this.redo();
-			} else if (event.getButton() == MouseEvent.BUTTON1) // left button
+			if (event.getButton() == MouseEvent.BUTTON1) // left button
 			{
 
 				if (blockedChessboard == false) {
@@ -410,10 +391,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					} else if (chessboard.getChessboard().activeSquare != null && chessboard.getChessboard().activeSquare.piece != null
 							&& chessboard.getChessboard().activeSquare.piece.allMoves().indexOf(sq) != -1) // move
 					{
-						if (Settings.getGameType() == Settings.gameTypes.local) {
-							chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
-						}
-
+						chessboard.getChessboard().move(chessboard.getChessboard().activeSquare, sq);
 						chessboard.getChessboard().unselect();
 
 						// switch player
@@ -483,8 +461,5 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 class ReadGameError extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= -6815308611805061580L;
 }

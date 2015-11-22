@@ -264,16 +264,8 @@ public class Moves extends AbstractTableModel {
 		try {
 			Move last = this.moveBackStack.pop();
 			if (last != null) {
-				if (Settings.getGameType() == Settings.gameTypes.local) // moveForward
-																																// / redo
-																																// available
-																																// only
-																																// for
-																																// local
-																																// game
-				{
-					this.moveForwardStack.push(last);
-				}
+				this.moveForwardStack.push(last);
+
 				if (this.enterBlack) {
 					this.tableModel.setValueAt("", this.tableModel.getRowCount() - 1, 0); //$NON-NLS-1$
 					this.tableModel.removeRow(this.tableModel.getRowCount() - 1);
@@ -299,16 +291,16 @@ public class Moves extends AbstractTableModel {
 	}
 
 	public synchronized Move redo() {
+		Move result = null;
 		try {
-			if (Settings.getGameType() == Settings.gameTypes.local) {
-				Move first = this.moveForwardStack.pop();
-				this.moveBackStack.push(first);
-				return first;
-			}
-			return null;
+			Move first = this.moveForwardStack.pop();
+			this.moveBackStack.push(first);
+			result = first;
 		} catch (java.util.EmptyStackException exc) {
-			return null;
+			Logging.log(exc);
+			result = null;
 		}
+		return result;
 	}
 
 	/**
