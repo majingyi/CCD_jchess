@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import jchess.JChessApp;
 import jchess.core.util.Constants;
 import jchess.core.util.Logging;
+import jchess.core.util.Utils;
 import jchess.ui.lang.Language;
 
 public class ImageFactory {
@@ -30,7 +31,7 @@ public class ImageFactory {
 	 * @throws FileNotFoundException
 	 */
 	public static Icon getIcon(String key) throws FileNotFoundException {
-		String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess";
+		String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess";
 		String imageName = Language.getString(key);
 
 		String imageLink = basePath + Constants.SLASH_STRING + "resources/" + imageName; //$NON-NLS-1$
@@ -47,7 +48,7 @@ public class ImageFactory {
 	 */
 	public static Image getImage(String imagePath) throws FileNotFoundException {
 		Image img = null;
-		String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess";
+		String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess";
 		File file = new File(basePath, imagePath);
 		if (file.exists()) {
 			img = imageCache.get(imagePath);

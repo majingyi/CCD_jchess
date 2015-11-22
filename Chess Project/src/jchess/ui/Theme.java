@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
+import jchess.core.util.Utils;
 
 public class Theme {
 
@@ -51,7 +52,7 @@ public class Theme {
 		boolean result = name != null && name.length() > 0;
 
 		if (result) {
-			String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
+			String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
 			String themePath = "resources/theme/" + name + Constants.SLASH_STRING;
 			File folder = new File(basePath + Constants.SLASH_STRING + themePath);
 			result &= folder.exists();
@@ -79,12 +80,12 @@ public class Theme {
 	}
 
 	public static ImageIcon getNoPreviewImage() throws FileNotFoundException {
-		String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
+		String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
 		return ImageFactory.getImageIcon(basePath + "resources/theme/noPreview.png"); //$NON-NLS-1$
 	}
 
 	public static ImageIcon getThemePreviewImage(String theme) throws FileNotFoundException {
-		String path = GUI.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator + theme
+		String path = Utils.getJarPath() + File.separator + "jchess" + File.separator + "resources" + File.separator + "theme" + File.separator + theme
 				+ "/images/Preview.png";
 		return ImageFactory.getImageIcon(path);
 	}

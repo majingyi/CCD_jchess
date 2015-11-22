@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import jchess.core.util.Logging;
+import jchess.core.util.Utils;
 import jchess.ui.lang.Language;
 
 /**
@@ -24,22 +25,10 @@ public class GUI {
 		this.game = new Game();
 	}
 
-	// TODO Move to Util class - created if not existing
-	public static String getJarPath() {
-		String path = GUI.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-		path = path.replaceAll("[a-zA-Z0-9%!@#$%^&*\\(\\)\\[\\]\\{\\}\\.\\,\\s]+\\.jar", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		int lastSlash = path.lastIndexOf(File.separator);
-		if (path.length() - 1 == lastSlash) {
-			path = path.substring(0, lastSlash);
-		}
-		path = path.replace("%20", " "); //$NON-NLS-1$ //$NON-NLS-2$
-		return path;
-	}
-
 	// TODO move to Settings
 	public static Properties getConfigFile() {
 		Properties confFile = new Properties();
-		File configFile = new File(GUI.getJarPath() + File.separator + "config.txt"); //$NON-NLS-1$
+		File configFile = new File(Utils.getJarPath() + File.separator + "config.txt"); //$NON-NLS-1$
 
 		if (configFile.exists()) {
 			try {
@@ -56,7 +45,7 @@ public class GUI {
 	// TODO move to settings
 	public static void storeConfigFile() {
 		try {
-			File outFile = new File(GUI.getJarPath() + File.separator + "config.txt"); //$NON-NLS-1$
+			File outFile = new File(Utils.getJarPath() + File.separator + "config.txt"); //$NON-NLS-1$
 			configFile.store(new FileOutputStream(outFile), null);
 		} catch (FileNotFoundException e) {
 			Logging.log(Language.getString("GUI.7"), e); //$NON-NLS-1$
