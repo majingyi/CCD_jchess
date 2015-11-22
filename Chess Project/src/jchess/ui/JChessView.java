@@ -34,7 +34,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	private static final int					BUSY_ANIMATION_RATE		= 30;
 
 	// TODO check member necessary
-	private static GUI								gui										= null;
+	private static GameTab						gui										= null;
 	private javax.swing.JMenu					gameMenu							= null;
 	private javax.swing.JTabbedPane		gamesPane							= null;
 	private javax.swing.JMenuItem			loadGameItem					= null;
@@ -67,8 +67,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	private PawnPromotionWindow				promotionBox					= null;
 	public JDialog										newGameFrame					= null;
 
-	public Game addNewTab(String title) throws Exception {
-		Game newGUI = new Game();
+	public GameTab addNewTab(String title) throws Exception {
+		GameTab newGUI = new GameTab();
 		this.gamesPane.addTab(title, newGUI);
 		return newGUI;
 	}
@@ -88,8 +88,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				int retVal = fc.showSaveDialog(this.gamesPane);
 				if (retVal == JFileChooser.APPROVE_OPTION) {
 					File selFile = fc.getSelectedFile();
-					Game tempGUI = (Game) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
-					if (!selFile.exists()) {
+					GameTab tempGUI = (GameTab) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
+					if (selFile.exists() == false) {
 						try {
 							selFile.createNewFile();
 						} catch (java.io.IOException exc) {
@@ -119,7 +119,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				File file = fc.getSelectedFile();
 				if (file.exists() && file.canRead()) {
 					try {
-						Game.loadGame(file);
+						GameTab.loadGame(file);
 					} catch (Exception e) {
 						Logging.log(e);
 					}
@@ -470,10 +470,10 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	private void moveBackItemActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
-			if (gui != null && gui.game != null) {
-				gui.game.undo();
+			if (gui != null) {
+				gui.undo();
 			} else {
-				Game activeGame = this.getActiveTabGame();
+				GameTab activeGame = this.getActiveTabGame();
 				if (activeGame.undo() == false) {
 					JOptionPane.showMessageDialog(null, Language.getString("JChessView.67")); //$NON-NLS-1$
 				}
@@ -484,12 +484,12 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	}
 
 	private void moveForwardItemActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
-		if (gui != null && gui.game != null) {
-			gui.game.redo();
+		if (gui != null) {
+			gui.redo();
 		} else {
 			try {
-				Game activeGame = this.getActiveTabGame();
-				if (!activeGame.redo()) {
+				GameTab activeGame = this.getActiveTabGame();
+				if (activeGame.redo() == false) {
 					JOptionPane.showMessageDialog(null, "W pamieci brak ruchow do przodu!"); //$NON-NLS-1$
 				}
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
@@ -502,7 +502,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	private void rewindToBeginActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
-			Game activeGame = this.getActiveTabGame();
+			GameTab activeGame = this.getActiveTabGame();
 			if (activeGame.rewindToBegin() == false) {
 				JOptionPane.showMessageDialog(null, "Undo to game start failed."); //$NON-NLS-1$
 			}
@@ -513,8 +513,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	private void rewindToEndActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
 		try {
-			Game activeGame = this.getActiveTabGame();
-			if (!activeGame.rewindToEnd()) {
+			GameTab activeGame = this.getActiveTabGame();
+			if (activeGame.rewindToEnd() == false) {
 				JOptionPane.showMessageDialog(null, "W pamieci brak ruchow wstecz!"); //$NON-NLS-1$
 			}
 		} catch (ArrayIndexOutOfBoundsException exc) {
@@ -529,8 +529,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		throw new UnsupportedOperationException("Not supported yet."); //$NON-NLS-1$
 	}
 
-	public Game getActiveTabGame() throws ArrayIndexOutOfBoundsException {
-		Game activeGame = (Game) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
+	public GameTab getActiveTabGame() throws ArrayIndexOutOfBoundsException {
+		GameTab activeGame = (GameTab) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
 		return activeGame;
 	}
 

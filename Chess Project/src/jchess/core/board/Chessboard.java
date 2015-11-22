@@ -14,7 +14,7 @@ import jchess.core.util.Move;
 import jchess.core.util.Moves;
 import jchess.core.util.Moves.castling;
 import jchess.core.util.Player;
-import jchess.ui.ChessboardUI;
+import jchess.ui.GameTab;
 import jchess.ui.lang.Language;
 
 /**
@@ -28,7 +28,7 @@ public class Chessboard {
 	public static final int	top									= 0;
 	public static final int	bottom							= 7;
 
-	private ChessboardUI		uiChessboard				= null;
+	private GameTab					gameUI							= null;
 
 	// squares of chessboard
 	public Square						squares[][]					= null;
@@ -44,8 +44,8 @@ public class Chessboard {
 	public Pawn							twoSquareMovedPawn2	= null;
 	private Moves						moves_history				= null;
 
-	public Chessboard(ChessboardUI ui, Moves movesHistory) {
-		uiChessboard = ui;
+	public Chessboard(GameTab ui, Moves movesHistory) {
+		gameUI = ui;
 		moves_history = movesHistory;
 
 		initChessBoard();
@@ -204,7 +204,7 @@ public class Chessboard {
 		this.setActive_y_square(sq.pozY + 1);
 
 		Logging.log("active_x: " + this.getActive_x_square() + " active_y: " + this.getActive_y_square());// 4tests //$NON-NLS-1$ //$NON-NLS-2$
-		uiChessboard.repaint();
+		gameUI.getChessboardUI().repaint();
 	}
 
 	/**
@@ -215,7 +215,7 @@ public class Chessboard {
 		this.setActive_y_square(0);
 		this.activeSquare = null;
 
-		uiChessboard.repaint();
+		gameUI.getChessboardUI().repaint();
 	}
 
 	public boolean redo() throws Exception {
@@ -331,7 +331,7 @@ public class Chessboard {
 
 		if (refresh) {
 			this.unselect();// unselect square
-			uiChessboard.repaint();
+			gameUI.getChessboardUI().repaint();
 		}
 
 		if (clearForwardHistory) {
@@ -408,7 +408,7 @@ public class Chessboard {
 
 				if (refresh) {
 					this.unselect();// unselect square
-					uiChessboard.repaint();
+					gameUI.getChessboardUI().repaint();
 				}
 
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
@@ -421,10 +421,6 @@ public class Chessboard {
 		} else {
 			return false;
 		}
-	}
-
-	public ChessboardUI getChessboardUI() {
-		return uiChessboard;
 	}
 
 	/**
@@ -475,5 +471,42 @@ public class Chessboard {
 
 	public void setActive_y_square(int active_y_square) {
 		this.active_y_square = active_y_square;
+	}
+
+	/**
+	 * This method tries to perform a move. If it passes, the move is executed. IF not this method does not fail, but return false.
+	 * 
+	 * @param beginX
+	 *          from which X (on chessboard) move starts
+	 * @param beginY
+	 *          from which Y (on chessboard) move starts
+	 * @param endX
+	 *          to which X (on chessboard) move go
+	 * @param endY
+	 *          to which Y (on chessboard) move go
+	 * @throws Exception
+	 * */
+	public boolean tryMove(int beginX, int beginY, int endX, int endY) throws Exception {
+		try {
+			select(squares[beginX][beginY]);
+			if (activeSquare.piece.allMoves().indexOf(squares[endX][endY]) != -1) // move
+			{
+				move(squares[beginX][beginY], squares[endX][endY]);
+			} else {
+				Logging.log(Language.getString("Game.29")); //$NON-NLS-1$
+				return false;
+			}
+			unselect();
+			gameUI.nextMove();
+
+			return true;
+
+		} catch (StringIndexOutOfBoundsException exc) {
+			return false;
+		} catch (ArrayIndexOutOfBoundsException exc) {
+			return false;
+		} catch (NullPointerException exc) {
+			return false;
+		}
 	}
 }

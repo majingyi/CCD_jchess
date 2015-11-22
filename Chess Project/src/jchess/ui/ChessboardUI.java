@@ -31,33 +31,33 @@ import jchess.ui.lang.Language;
  */
 public class ChessboardUI extends JPanel {
 
-	private static final long	serialVersionUID	= -1717218347823342830L;
+	private static final long	serialVersionUID			= -1717218347823342830L;
 
-	public static final int		top								= 0;
-	public static final int		bottom						= 7;
+	public static final int		top										= 0;
+	public static final int		bottom								= 7;
 
-	private Chessboard				board							= null;
+	private Chessboard				board									= null;
 
 	// image of chessboard
-	private static Image			boardBackgroundImage							= null;
+	private static Image			boardBackgroundImage	= null;
 	// image of highlighted square
-	private static Image			org_sel_square		= null;
+	private static Image			org_sel_square				= null;
 	// image of highlighted square
-	private static Image			sel_square				= org_sel_square;
+	private static Image			sel_square						= org_sel_square;
 	// image of square where piece can go
-	private static Image			org_able_square		= null;
+	private static Image			org_able_square				= null;
 	// image of square where piece can go
-	private static Image			able_square				= org_able_square;
+	private static Image			able_square						= org_able_square;
 
-	private Image							upDownLabel				= null;
-	private Image							LeftRightLabel		= null;
-	private Point							topLeft						= new Point(0, 0);
-	private float							square_height			= 0;
+	private Image							upDownLabel						= null;
+	private Image							LeftRightLabel				= null;
+	private Point							topLeft								= new Point(0, 0);
+	private float							square_height					= 0;
 
-	public static final int		img_widht					= 480;
-	public static final int		img_height				= img_widht;
+	public static final int		img_widht							= 480;
+	public static final int		img_height						= img_widht;
 
-	private ArrayList<Square>	moves							= null;
+	private ArrayList<Square>	moves									= null;
 
 	/**
 	 * Chessboard class constructor
@@ -68,8 +68,8 @@ public class ChessboardUI extends JPanel {
 	 *          reference to Moves class object for this chessboard
 	 * @throws FileNotFoundException
 	 */
-	public ChessboardUI(Moves moves_history) throws FileNotFoundException {
-		board = new Chessboard(this, moves_history);
+	public ChessboardUI(GameTab gt, Moves moves_history) throws FileNotFoundException {
+		board = new Chessboard(gt, moves_history);
 		board.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
@@ -162,10 +162,10 @@ public class ChessboardUI extends JPanel {
 	 */
 	public void draw() {
 		this.getGraphics().drawImage(boardBackgroundImage, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);// draw
-																																																	// an
-																																																	// Image
-																																																	// of
-																																																	// chessboard
+		// an
+		// Image
+		// of
+		// chessboard
 		this.drawLabels();
 		this.repaint();
 	}/*--endOf-draw--*/
@@ -203,7 +203,8 @@ public class ChessboardUI extends JPanel {
 			g2d.drawImage(this.LeftRightLabel, 0, 0, null);
 			g2d.drawImage(this.LeftRightLabel, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.x, 0, null);
 		}
-		g2d.drawImage(boardBackgroundImage, topLeftPoint.x, topLeftPoint.y, null);// draw an
+		g2d.drawImage(boardBackgroundImage, topLeftPoint.x, topLeftPoint.y, null);// draw
+																																							// an
 		// Image of
 		// chessboard
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares

@@ -7,7 +7,7 @@ import jchess.core.board.Square;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
-import jchess.ui.Game;
+import jchess.ui.GameTab;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -78,8 +78,8 @@ public class PawnTest {
 		Settings.setWhitePlayersName("Hans");
 		Settings.setBlackPlayersName("Wurst");
 
-		Game game = new Game();
-		Chessboard board = game.chessboard.getChessboard();
+		GameTab game = new GameTab();
+		Chessboard board = game.getChessboard();
 
 		board.setPieces(Constants.EMPTY_STRING, game.getWhitePlayer(), game.getBlackPlayer());
 
