@@ -39,7 +39,7 @@ public class ChessboardUI extends JPanel {
 	private Chessboard				board							= null;
 
 	// image of chessboard
-	private static Image			image							= null;
+	private static Image			boardBackgroundImage							= null;
 	// image of highlighted square
 	private static Image			org_sel_square		= null;
 	// image of highlighted square
@@ -81,6 +81,8 @@ public class ChessboardUI extends JPanel {
 
 		org_sel_square = Theme.getImage("sel_square.png");
 		org_able_square = Theme.getImage("able_square.png");
+
+		boardBackgroundImage = Theme.getImage("chessboard.png");
 
 	}/*--endOf-Chessboard--*/
 
@@ -145,9 +147,9 @@ public class ChessboardUI extends JPanel {
 
 	int get_height(boolean includeLabels) {
 		if (Settings.getRenderLabels()) {
-			return ChessboardUI.image.getHeight(null) + upDownLabel.getHeight(null);
+			return ChessboardUI.boardBackgroundImage.getHeight(null) + upDownLabel.getHeight(null);
 		}
-		return ChessboardUI.image.getHeight(null);
+		return ChessboardUI.boardBackgroundImage.getHeight(null);
 	}/*--endOf-get_height--*/
 
 	public int get_square_height() {
@@ -159,7 +161,7 @@ public class ChessboardUI extends JPanel {
 	 * Method to draw Chessboard and their elements (pieces etc.)
 	 */
 	public void draw() {
-		this.getGraphics().drawImage(image, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);// draw
+		this.getGraphics().drawImage(boardBackgroundImage, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);// draw
 																																																	// an
 																																																	// Image
 																																																	// of
@@ -197,11 +199,11 @@ public class ChessboardUI extends JPanel {
 				this.drawLabels();
 			}
 			g2d.drawImage(this.upDownLabel, 0, 0, null);
-			g2d.drawImage(this.upDownLabel, 0, ChessboardUI.image.getHeight(null) + topLeftPoint.y, null);
+			g2d.drawImage(this.upDownLabel, 0, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.y, null);
 			g2d.drawImage(this.LeftRightLabel, 0, 0, null);
-			g2d.drawImage(this.LeftRightLabel, ChessboardUI.image.getHeight(null) + topLeftPoint.x, 0, null);
+			g2d.drawImage(this.LeftRightLabel, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.x, 0, null);
 		}
-		g2d.drawImage(image, topLeftPoint.x, topLeftPoint.y, null);// draw an
+		g2d.drawImage(boardBackgroundImage, topLeftPoint.x, topLeftPoint.y, null);// draw an
 		// Image of
 		// chessboard
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
@@ -273,7 +275,7 @@ public class ChessboardUI extends JPanel {
 		Graphics g = resized.createGraphics();
 		g.drawImage(Theme.getImage("chessboard.png"), 0, 0, height, height, null); //$NON-NLS-1$
 		g.dispose();
-		image = resized.getScaledInstance(height, height, 0);
+		boardBackgroundImage = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
 		if (Settings.getRenderLabels()) {
 			height += 2 * (this.upDownLabel.getHeight(null));

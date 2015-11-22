@@ -105,15 +105,15 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				return;
 			}
 
+			Settings.setWhitePlayersName(firstName.getText());
+			Settings.setBlackPlayersName(secondName.getText());
+
 			Game newGUI = null;
 			try {
 				newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText());
 			} catch (Exception e2) {
 				Logging.log(e2);
 			}
-
-			Settings.setWhitePlayersName(firstName.getText());
-			Settings.setBlackPlayersName(secondName.getText());
 
 			if (this.timeGame.isSelected()) // if timeGame is checked
 			{
