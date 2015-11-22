@@ -105,8 +105,13 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				return;
 			}
 
-			Settings.setWhitePlayersName(firstName.getText());
-			Settings.setBlackPlayersName(secondName.getText());
+			try {
+				Settings.setWhitePlayersName(firstName.getText());
+				Settings.setBlackPlayersName(secondName.getText());
+			} catch (Exception exc) {
+				// TODO show to user
+				Logging.log(exc);
+			}
 
 			GameTab newGUI = null;
 			try {

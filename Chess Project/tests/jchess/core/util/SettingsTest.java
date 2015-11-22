@@ -110,16 +110,64 @@ public class SettingsTest {
 		}
 	}
 
-	// @Test
-	// public void testSetWhitePlayersName() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testSetBlackPlayersName() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
+	@Test
+	public void testSetWhitePlayersName() throws Exception {
+		Assert.assertEquals(null, Settings.getWhitePlayersName());
+
+		Settings.setWhitePlayersName("Hans Wurst");
+		Assert.assertEquals("Hans Wurst", Settings.getWhitePlayersName());
+
+		Settings.setWhitePlayersName("trallala");
+		Assert.assertEquals("trallala", Settings.getWhitePlayersName());
+
+		boolean exception = false;
+		try {
+			Settings.setWhitePlayersName(null);
+		} catch (Exception e) {
+			exception = true;
+			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
+		}
+		Assert.assertEquals(true, exception);
+
+		exception = false;
+		try {
+			Settings.setWhitePlayersName("");
+		} catch (Exception e) {
+			exception = true;
+			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
+		}
+		Assert.assertEquals(true, exception);
+	}
+
+	@Test
+	public void testSetBlackPlayersName() throws Exception {
+		Assert.assertEquals(null, Settings.getBlackPlayersName());
+
+		Settings.setBlackPlayersName("Hans Wurst");
+		Assert.assertEquals("Hans Wurst", Settings.getBlackPlayersName());
+
+		Settings.setBlackPlayersName("trallala");
+		Assert.assertEquals("trallala", Settings.getBlackPlayersName());
+
+		boolean exception = false;
+		try {
+			Settings.setBlackPlayersName(null);
+		} catch (Exception e) {
+			exception = true;
+			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
+		}
+		Assert.assertEquals(true, exception);
+
+		exception = false;
+		try {
+			Settings.setBlackPlayersName("");
+		} catch (Exception e) {
+			exception = true;
+			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
+		}
+		Assert.assertEquals(true, exception);
+	}
+
 	// @Test
 	// public void testGetBlackPlayersName() throws Exception {
 	// throw new RuntimeException("not yet implemented");

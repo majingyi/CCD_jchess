@@ -84,12 +84,20 @@ public class Settings implements Serializable {
 		return timeLimitSet;
 	}
 
-	public static void setWhitePlayersName(String name) {
-		whitePlayersName = name;
+	public static void setWhitePlayersName(String name) throws Exception {
+		if ((name != null) && (name.length() > 0)) {
+			whitePlayersName = name;
+		} else {
+			throw new Exception("Players name is not allowed to be empty string.");
+		}
 	}
 
-	public static void setBlackPlayersName(String name) {
-		blackPlayersName = name;
+	public static void setBlackPlayersName(String name) throws Exception {
+		if ((name != null) && (name.length() > 0)) {
+			blackPlayersName = name;
+		} else {
+			throw new Exception("Players name is not allowed to be empty string.");
+		}
 	}
 
 	public static String getBlackPlayersName() {
