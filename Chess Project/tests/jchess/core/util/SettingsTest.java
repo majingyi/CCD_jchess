@@ -1,12 +1,34 @@
 package jchess.core.util;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class SettingsTest {
 
-	// @Test
-	// public void testGetTimeForGame() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
+	@Test
+	public void testGetTimeForGame() throws Exception {
+		try {
+			Assert.assertEquals(0, Settings.getTimeForGame());
+
+			Settings.setTimeForGame(10);
+			Assert.assertEquals(10, Settings.getTimeForGame());
+
+			Settings.setTimeForGame((int) 10.0);
+			Assert.assertEquals(10, Settings.getTimeForGame());
+
+			boolean exception = false;
+			try {
+				Settings.setTimeForGame(-1);
+			} catch (Exception e) {
+				exception = true;
+				Assert.assertEquals("Time limit needs to be greater or equal than 0.", e.getMessage());
+			}
+			Assert.assertEquals(true, exception);
+		} finally {
+			Settings.setTimeForGame(0);
+		}
+	}
+
 	// @Test
 	// public void testSetLocale() throws Exception {
 	// throw new RuntimeException("not yet implemented");

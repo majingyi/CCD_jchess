@@ -66,8 +66,12 @@ public class Settings implements Serializable {
 		timeLimitSet = timeLimit;
 	}
 
-	public static void setTimeForGame(int limit) {
-		timeForGame = limit;
+	public static void setTimeForGame(int limit) throws Exception {
+		if (limit >= 0) {
+			timeForGame = limit;
+		} else {
+			throw new Exception("Time limit needs to be greater or equal than 0.");
+		}
 	}
 
 	public static boolean isTimeLimitSet() {

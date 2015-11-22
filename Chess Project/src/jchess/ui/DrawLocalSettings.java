@@ -122,9 +122,12 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 																																			// game
 				Integer val = new Integer(value);
 				Settings.setTimeLimetSet(true);
-				Settings.setTimeForGame((int) val * 60);// set time for game and mult it
-																								// to
-
+				try {
+					Settings.setTimeForGame((int) val * 60);
+				} catch (Exception e1) {
+					Logging.log(e1);// Should never happen, because user can only chose
+													// between correct values. IGNORE Exception
+				}
 			}
 			Logging.log(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
