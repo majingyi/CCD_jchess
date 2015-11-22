@@ -20,7 +20,6 @@ import jchess.core.board.Square;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
-import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
 /**
@@ -102,10 +101,9 @@ public class ChessboardUI extends JPanel {
 			Logging.log(Language.getString("ChessboardUI.2")); //$NON-NLS-1$
 			return null;
 		}
-		if (Settings.getRenderLabels()) {
-			x -= this.upDownLabel.getHeight(null);
-			y -= this.upDownLabel.getHeight(null);
-		}
+		x -= this.upDownLabel.getHeight(null);
+		y -= this.upDownLabel.getHeight(null);
+
 		double square_x = x / square_height;// count which field in X was
 		// clicked
 		double square_y = y / square_height;// count which field in Y was
@@ -119,8 +117,7 @@ public class ChessboardUI extends JPanel {
 		{
 			square_y = (int) square_y + 1;// parse to integer and increment
 		}
-		// Square newActiveSquare =
-		// this.squares[(int)square_x-1][(int)square_y-1];//4test
+
 		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		Square result;
 		try {
@@ -142,14 +139,11 @@ public class ChessboardUI extends JPanel {
 
 	public int get_widht(boolean includeLables) {
 		return this.getHeight();
-	}/*--endOf-get_widht--*/
+	}
 
 	int get_height(boolean includeLabels) {
-		if (Settings.getRenderLabels()) {
-			return ChessboardUI.boardBackgroundImage.getHeight(null) + upDownLabel.getHeight(null);
-		}
-		return ChessboardUI.boardBackgroundImage.getHeight(null);
-	}/*--endOf-get_height--*/
+		return ChessboardUI.boardBackgroundImage.getHeight(null) + upDownLabel.getHeight(null);
+	}
 
 	public int get_square_height() {
 		int result = (int) this.square_height;
@@ -178,10 +172,7 @@ public class ChessboardUI extends JPanel {
 	}
 
 	public Point getTopLeftPoint() {
-		if (Settings.getRenderLabels()) {
-			return new Point(this.topLeft.x + this.upDownLabel.getHeight(null), this.topLeft.y + this.upDownLabel.getHeight(null));
-		}
-		return this.topLeft;
+		return new Point(this.topLeft.x + this.upDownLabel.getHeight(null), this.topLeft.y + this.upDownLabel.getHeight(null));
 	}
 
 	@Override
@@ -189,19 +180,17 @@ public class ChessboardUI extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Point topLeftPoint = this.getTopLeftPoint();
-		if (Settings.getRenderLabels()) {
-			if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) // if renderLabels
-			// and (0,0), than
-			// draw it! (for
-			// first run)
-			{
-				this.drawLabels();
-			}
-			g2d.drawImage(this.upDownLabel, 0, 0, null);
-			g2d.drawImage(this.upDownLabel, 0, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.y, null);
-			g2d.drawImage(this.LeftRightLabel, 0, 0, null);
-			g2d.drawImage(this.LeftRightLabel, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.x, 0, null);
+		if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) // if renderLabels
+		// and (0,0), than
+		// draw it! (for
+		// first run)
+		{
+			this.drawLabels();
 		}
+		g2d.drawImage(this.upDownLabel, 0, 0, null);
+		g2d.drawImage(this.upDownLabel, 0, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.y, null);
+		g2d.drawImage(this.LeftRightLabel, 0, 0, null);
+		g2d.drawImage(this.LeftRightLabel, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.x, 0, null);
 		g2d.drawImage(boardBackgroundImage, topLeftPoint.x, topLeftPoint.y, null);// draw
 																																							// an
 		// Image of
@@ -277,9 +266,7 @@ public class ChessboardUI extends JPanel {
 		g.dispose();
 		boardBackgroundImage = resized.getScaledInstance(height, height, 0);
 		this.square_height = (float) (height / 8);
-		if (Settings.getRenderLabels()) {
-			height += 2 * (this.upDownLabel.getHeight(null));
-		}
+		height += 2 * (this.upDownLabel.getHeight(null));
 		this.setSize(height, height);
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
@@ -316,9 +303,7 @@ public class ChessboardUI extends JPanel {
 		uDL2D.setColor(Color.black);
 		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 		int addX = (square_height / 2);
-		if (Settings.getRenderLabels()) {
-			addX += labelHeight;
-		}
+		addX += labelHeight;
 
 		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		int j = 1;

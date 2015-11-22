@@ -289,7 +289,6 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 		Settings.setBlackPlayersName(blackName);
 		Settings.setWhitePlayersName(whiteName);
-		Settings.setGameMode(Settings.gameModes.loadGame);
 
 		newGUI.newGame();
 		moveHistory.setMoves(tempStr);

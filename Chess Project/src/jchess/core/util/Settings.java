@@ -30,13 +30,6 @@ public class Settings implements Serializable {
 
 	private static boolean			timeLimitSet			= false;
 
-	// TODO check
-	public enum gameModes {
-		newGame, loadGame
-	}
-
-	private static gameModes		gameMode					= null;
-	private static boolean			renderLabels			= true;
 	private static String				whitePlayersName	= null;
 	private static String				blackPlayersName	= null;
 
@@ -89,18 +82,6 @@ public class Settings implements Serializable {
 
 	public static boolean isTimeLimitSet() {
 		return timeLimitSet;
-	}
-
-	public static boolean getRenderLabels() {
-		return renderLabels;
-	}
-
-	public static void setGameMode(gameModes gMode) {
-		gameMode = gMode;
-	}
-
-	public static gameModes getGameMode() {
-		return gameMode;
 	}
 
 	public static void setWhitePlayersName(String name) {
