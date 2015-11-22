@@ -76,7 +76,7 @@ public abstract class Piece {
 	}
 
 	public void setSquare(Square square) throws Exception {
-		if (Chessboard.isValidSquare(square)) {
+		if (square == null || Chessboard.isValidSquare(square)) {
 			this.square = square;
 			moveBehavior.setSquare(this.square);
 		} else {
