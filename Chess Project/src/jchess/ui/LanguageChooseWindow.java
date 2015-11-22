@@ -81,7 +81,7 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 				Settings.setLocale(Locale.GERMANY);
 			}
 
-			GUI.configFile.setProperty("Language", Settings.getLocale().toString()); //$NON-NLS-1$
+			Settings.setProperty("Language", Settings.getLocale().toString()); //$NON-NLS-1$
 
 			this.setVisible(false);
 		}

@@ -3,7 +3,7 @@ package jchess;
 import java.io.FileNotFoundException;
 
 import jchess.core.util.Logging;
-import jchess.ui.GUI;
+import jchess.core.util.Settings;
 import jchess.ui.JChessView;
 
 import org.jdesktop.application.Application;
@@ -51,7 +51,7 @@ public class JChessApp extends SingleFrameApplication {
 
 	@Override
 	protected void shutdown() {
-		GUI.storeConfigFile();
+		Settings.storeConfigFile();
 		super.shutdown();
 	}
 }

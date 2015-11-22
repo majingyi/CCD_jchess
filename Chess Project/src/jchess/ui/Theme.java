@@ -10,13 +10,13 @@ import javax.swing.ImageIcon;
 
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
+import jchess.core.util.Settings;
 import jchess.core.util.Utils;
 
 public class Theme {
 
-	private final static String	DEFAULT_THEME	= "default";								//$NON-NLS-1$
+	public final static String	DEFAULT_THEME	= "default";								//$NON-NLS-1$
 
-	private static String				activeTheme		= DEFAULT_THEME;
 	private static List<String>	themeList			= new ArrayList<String>();
 	private static String[]			themeImages		= null;
 
@@ -44,7 +44,7 @@ public class Theme {
 	}
 
 	public static Image getImage(String imageName) throws FileNotFoundException {
-		String imagePath = "resources/theme/" + activeTheme + "/images/" + imageName; //$NON-NLS-1$ //$NON-NLS-2$
+		String imagePath = "resources/theme/" + Settings.getActiveTheme() + "/images/" + imageName; //$NON-NLS-1$ //$NON-NLS-2$
 		return ImageFactory.getImage(imagePath);
 	}
 
@@ -67,8 +67,8 @@ public class Theme {
 
 	public static void setActiveTheme(String theme) throws Exception {
 		if (themeIsValid(theme)) {
-			if (activeTheme.equals(theme) == false) {
-				activeTheme = theme;
+			if (Settings.getActiveTheme().equals(theme) == false) {
+				Settings.setActiveTheme(theme);
 			}
 		} else {
 			throw new Exception("The theme '" + theme + "' is invalid.");
@@ -91,6 +91,6 @@ public class Theme {
 	}
 
 	public static String getActiveTheme() {
-		return activeTheme;
+		return Settings.getActiveTheme();
 	}
 }
