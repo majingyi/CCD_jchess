@@ -1,11 +1,9 @@
-package jchess.ui;
+package jchess.core.util;
 
 import javax.swing.JOptionPane;
 
 import jchess.core.board.Chessboard;
-import jchess.core.util.Constants;
-import jchess.core.util.Logging;
-import jchess.core.util.Player;
+import jchess.ui.GameTab;
 
 /**
  * Class responsible for the starts of new games, loading games, saving it, and

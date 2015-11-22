@@ -23,6 +23,7 @@ import jchess.core.board.Chessboard;
 import jchess.core.board.Square;
 import jchess.core.pieces.King;
 import jchess.core.util.Constants;
+import jchess.core.util.Game;
 import jchess.core.util.Logging;
 import jchess.core.util.Moves;
 import jchess.core.util.Player;

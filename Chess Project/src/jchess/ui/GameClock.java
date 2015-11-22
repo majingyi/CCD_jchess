@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import jchess.core.util.Clock;
 import jchess.core.util.Constants;
+import jchess.core.util.Game;
 import jchess.core.util.IClockListener;
 import jchess.core.util.Player;
 import jchess.core.util.Settings;
