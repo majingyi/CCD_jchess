@@ -416,7 +416,7 @@ public class Moves extends AbstractTableModel {
 			{
 				int[] values = new int[4];
 				if (locMove.equals("O-O-O")) { //$NON-NLS-1$
-					if (this.gameTab.getActivePlayer().color == Player.colors.black) // if
+					if (this.gameTab.getActivePlayer().getColor() == Player.colors.black) // if
 					// black
 					// turn
 					{
@@ -428,7 +428,7 @@ public class Moves extends AbstractTableModel {
 					}
 				} else if (locMove.equals("O-O")) // if short castling //$NON-NLS-1$
 				{
-					if (this.gameTab.getActivePlayer().color == Player.colors.black) // if
+					if (this.gameTab.getActivePlayer().getColor() == Player.colors.black) // if
 					// black
 					// turn
 					{
@@ -466,7 +466,7 @@ public class Moves extends AbstractTableModel {
 																																		// ASCII
 				for (int i = 0; i < squares.length && !pieceFound; i++) {
 					for (int j = 0; j < squares[i].length && !pieceFound; j++) {
-						if (squares[i][j].piece == null || this.gameTab.getActivePlayer().color != squares[i][j].piece.player.color) {
+						if (squares[i][j].piece == null || this.gameTab.getActivePlayer().getColor() != squares[i][j].piece.player.getColor()) {
 							continue;
 						}
 						ArrayList<Square> pieceMoves = squares[i][j].piece.allMoves();

@@ -20,7 +20,7 @@ public class RookMoveBehavior extends MoveBehavior {
 			if (this.checkPiece(this.square.pozX, i)) {// if on this square isn't
 																									// piece
 
-				if (this.player.color == Player.colors.white) {// white
+				if (this.player.getColor() == Player.colors.white) {// white
 
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][i])) {
 						list.add(chessboard.squares[this.square.pozX][i]);
@@ -46,7 +46,7 @@ public class RookMoveBehavior extends MoveBehavior {
 			if (this.checkPiece(this.square.pozX, i)) {// if on this sqhuare isn't
 																									// piece
 
-				if (this.player.color == Player.colors.white) {// white
+				if (this.player.getColor() == Player.colors.white) {// white
 
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][i])) {
 						list.add(chessboard.squares[this.square.pozX][i]);
@@ -71,7 +71,7 @@ public class RookMoveBehavior extends MoveBehavior {
 			if (this.checkPiece(i, this.square.pozY)) {// if on this sqhuare isn't
 																									// piece
 
-				if (this.player.color == Player.colors.white) {// white
+				if (this.player.getColor() == Player.colors.white) {// white
 
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[i][this.square.pozY])) {
 						list.add(chessboard.squares[i][this.square.pozY]);
@@ -96,7 +96,7 @@ public class RookMoveBehavior extends MoveBehavior {
 			if (this.checkPiece(i, this.square.pozY)) {// if on this sqhuare isn't
 																									// piece
 
-				if (this.player.color == Player.colors.white) {// white
+				if (this.player.getColor() == Player.colors.white) {// white
 
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[i][this.square.pozY])) {
 						list.add(chessboard.squares[i][this.square.pozY]);

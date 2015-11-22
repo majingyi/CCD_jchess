@@ -255,7 +255,7 @@ public class ChessboardUI extends JPanel {
 			int y = (sq.pozY * height) + topLeft.y;
 
 			if (g != null) {
-				Image tempImage = Theme.getImageForPiece(piece.player.color, piece.getSymbol());
+				Image tempImage = Theme.getImageForPiece(piece.player.getColor(), piece.getSymbol());
 				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

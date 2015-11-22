@@ -8,14 +8,14 @@ import jchess.ui.ChessboardUI;
 
 public class Move {
 
-	protected Square		from									= null;
-	protected Square		to										= null;
-	protected Piece			movedPiece						= null;
-	protected Piece			takenPiece						= null;
-	protected Piece			promotedTo						= null;
-	protected boolean		wasEnPassant					= false;
-	protected castling	castlingMove					= castling.none;
-	protected boolean		wasPawnTwoFieldsMove	= false;
+	private Square		from									= null;
+	private Square		to										= null;
+	private Piece			movedPiece						= null;
+	private Piece			takenPiece						= null;
+	private Piece			promotedTo						= null;
+	private boolean		wasEnPassant					= false;
+	private castling	castlingMove					= castling.none;
+	private boolean		wasPawnTwoFieldsMove	= false;
 
 	public Move(Square from, Square to, Piece movedPiece, Piece takenPiece, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
 		this.from = from;

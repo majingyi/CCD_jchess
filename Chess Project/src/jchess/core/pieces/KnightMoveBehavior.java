@@ -22,7 +22,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY + 1;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -40,7 +40,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY + 2;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -58,7 +58,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY + 2;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -76,7 +76,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY + 1;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -94,7 +94,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY - 1;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -112,7 +112,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY - 2;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -130,7 +130,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY - 2;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);
@@ -148,7 +148,7 @@ public class KnightMoveBehavior extends MoveBehavior {
 		newY = this.square.pozY - 1;
 
 		if ((Chessboard.isout(newX, newY) == false) && checkPiece(newX, newY)) {
-			if (this.player.color == Player.colors.white) // white
+			if (this.player.getColor() == Player.colors.white) // white
 			{
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[newX][newY])) {
 					list.add(chessboard.squares[newX][newY]);

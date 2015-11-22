@@ -20,7 +20,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 		int first = this.square.pozY - 1;// number where to move
 		int second = this.square.pozY - 2;// number where to move (only in first
 		// move)
-		if (this.player.goDown) {// check if player "go" down or up
+		if (this.player.isGoDown()) {// check if player "go" down or up
 			first = this.square.pozY + 1;// if yes, change value
 			second = this.square.pozY + 2;// if yes, change value
 		}
@@ -30,7 +30,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 		sq = chessboard.squares[this.square.pozX][first];
 		if (sq.piece == null) {// if next is free
 			// list.add(sq);//add
-			if (this.player.color == Player.colors.white) {// white
+			if (this.player.getColor() == Player.colors.white) {// white
 
 				if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
 					list.add(chessboard.squares[this.square.pozX][first]);
@@ -46,7 +46,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				sq1 = chessboard.squares[this.square.pozX][second];
 				if (sq1.piece == null) {
 					// list.add(sq1);//only in first move
-					if (this.player.color == Player.colors.white) {// white
+					if (this.player.getColor() == Player.colors.white) {// white
 
 						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
 							list.add(chessboard.squares[this.square.pozX][second]);
@@ -70,7 +70,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 			if (sq.piece != null) {// check if can hit left
 				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {
 					// list.add(sq);
-					if (this.player.color == Player.colors.white) {// white
+					if (this.player.getColor() == Player.colors.white) {// white
 
 						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
 							list.add(chessboard.squares[this.square.pozX - 1][first]);
@@ -94,7 +94,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
-					if (this.player.color == Player.colors.white) {// white
+					if (this.player.getColor() == Player.colors.white) {// white
 
 						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
 							list.add(chessboard.squares[this.square.pozX - 1][first]);
@@ -118,7 +118,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 			if (sq.piece != null) {// check if can hit right
 				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {
 					// list.add(sq);
-					if (this.player.color == Player.colors.white) { // white
+					if (this.player.getColor() == Player.colors.white) { // white
 
 						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
 							list.add(chessboard.squares[this.square.pozX + 1][first]);
@@ -142,7 +142,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
-					if (this.player.color == Player.colors.white) {// white
+					if (this.player.getColor() == Player.colors.white) {// white
 
 						if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
 							list.add(chessboard.squares[this.square.pozX + 1][first]);
@@ -169,6 +169,6 @@ public class PawnMoveBehavior extends MoveBehavior {
 	 * @return true, if pawn is allowed to move two squares at once.
 	 */
 	protected boolean isDoubleMoveAllowed() {
-		return (player.goDown && this.square.pozY == 1) || (!player.goDown && this.square.pozY == 6);
+		return (player.isGoDown() && this.square.pozY == 1) || (!player.isGoDown() && this.square.pozY == 6);
 	}
 }

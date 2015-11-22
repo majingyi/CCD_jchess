@@ -19,7 +19,7 @@ public class BishopMoveBehavior extends MoveBehavior {
 		{
 			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
-				if (this.player.color == Player.colors.white) // white
+				if (this.player.getColor() == Player.colors.white) // white
 				{
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
@@ -43,7 +43,7 @@ public class BishopMoveBehavior extends MoveBehavior {
 		{
 			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
-				if (this.player.color == Player.colors.white) // white
+				if (this.player.getColor() == Player.colors.white) // white
 				{
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
@@ -67,7 +67,7 @@ public class BishopMoveBehavior extends MoveBehavior {
 		{
 			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
-				if (this.player.color == Player.colors.white) // white
+				if (this.player.getColor() == Player.colors.white) // white
 				{
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
@@ -91,7 +91,7 @@ public class BishopMoveBehavior extends MoveBehavior {
 		{
 			if (this.checkPiece(h, i)) // if on this square isn't piece
 			{
-				if (this.player.color == Player.colors.white) // white
+				if (this.player.getColor() == Player.colors.white) // white
 				{
 					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);

@@ -74,10 +74,10 @@ public class Chessboard {
 	 */
 	public void setPieces(String places, Player plWhite, Player plBlack) throws Exception {
 
-		if ((plWhite.color == plBlack.color) == false) {
+		if ((plWhite.getColor() == plBlack.getColor()) == false) {
 			if (places.equals(Constants.EMPTY_STRING)) // if newGame
 			{
-				this.setPieces4NewGame(false, plWhite, plBlack);
+				this.setPieces4NewGame(plWhite, plBlack);
 			}
 		} else {
 			throw new Exception(Language.getString("Chessboard.0")); //$NON-NLS-1$
@@ -114,18 +114,13 @@ public class Chessboard {
 		this.move(begin, end, refresh, true);
 	}
 
-	private void setPieces4NewGame(boolean upsideDown, Player plWhite, Player plBlack) throws Exception {
+	private void setPieces4NewGame(Player plWhite, Player plBlack) throws Exception {
 
 		Player player = plBlack;
 		Player player1 = plWhite;
-		if (upsideDown) // if white on Top
-		{
-			player = plWhite;
-			player1 = plBlack;
-		}
-		this.setFigures4NewGame(0, player, upsideDown);
+		this.setFigures4NewGame(0, player);
 		this.setPawns4NewGame(1, player);
-		this.setFigures4NewGame(7, player1, upsideDown);
+		this.setFigures4NewGame(7, player1);
 		this.setPawns4NewGame(6, player1);
 	}
 
@@ -140,13 +135,13 @@ public class Chessboard {
 	 *          if true white pieces will be on top of chessboard
 	 * @throws Exception
 	 * */
-	private void setFigures4NewGame(int i, Player player, boolean upsideDown) throws Exception {
+	private void setFigures4NewGame(int i, Player player) throws Exception {
 
 		if (i != 0 && i != 7) {
 			Logging.logError(Language.getString("Chessboard.2")); //$NON-NLS-1$
 			return;
 		} else if (i == 0) {
-			player.goDown = true;
+			player.setGoDown(true);
 		}
 
 		this.squares[0][i].setPiece(new Rook(this, player));
@@ -156,20 +151,17 @@ public class Chessboard {
 		this.squares[2][i].setPiece(new Bishop(this, player));
 		this.squares[5][i].setPiece(new Bishop(this, player));
 
-		if (upsideDown) {
-			this.squares[4][i].setPiece(new Queen(this, player));
-			if (player.color == Player.colors.white) {
-				this.squares[3][i].setPiece(kingWhite = new King(this, player));
-			} else {
-				this.squares[3][i].setPiece(kingBlack = new King(this, player));
-			}
+		this.squares[4][i].setPiece(new Queen(this, player));
+		if (player.getColor() == Player.colors.white) {
+			this.squares[3][i].setPiece(kingWhite = new King(this, player));
 		} else {
-			this.squares[3][i].setPiece(new Queen(this, player));
-			if (player.color == Player.colors.white) {
-				this.squares[4][i].setPiece(kingWhite = new King(this, player));
-			} else {
-				this.squares[4][i].setPiece(kingBlack = new King(this, player));
-			}
+			this.squares[3][i].setPiece(kingBlack = new King(this, player));
+		}
+		this.squares[3][i].setPiece(new Queen(this, player));
+		if (player.getColor() == Player.colors.white) {
+			this.squares[4][i].setPiece(kingWhite = new King(this, player));
+		} else {
+			this.squares[4][i].setPiece(kingBlack = new King(this, player));
 		}
 	}
 
@@ -319,7 +311,7 @@ public class Chessboard {
 			// Pawn
 			{
 				if (clearForwardHistory) {
-					String newPiece = JChessApp.jcv.showPawnPromotionBox(end.piece.player.color);
+					String newPiece = JChessApp.jcv.showPawnPromotionBox(end.piece.player.getColor());
 					Pawn pawn = (Pawn) end.piece;
 					pawn.promote(newPiece);
 					promotedPiece = end.piece;

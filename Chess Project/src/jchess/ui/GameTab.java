@@ -141,7 +141,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 					switch (king.isCheckmatedOrStalemated()) {
 						case 1:
-							game.endGame("Checkmate! " + king.player.color.toString() + " player lose!"); //$NON-NLS-1$ //$NON-NLS-2$
+							game.endGame("Checkmate! " + king.player.getColor().toString() + " player lose!"); //$NON-NLS-1$ //$NON-NLS-2$
 							break;
 						case 2:
 							game.endGame(Language.getString("Game.35")); //$NON-NLS-1$
@@ -189,7 +189,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		Calendar cal = Calendar.getInstance();
 		String str = new String(""); //$NON-NLS-1$
 		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				+ "\"]\n" + "[White \"" + game.getWhitePlayer().name + "\"]\n[Black \"" + game.getBlackPlayer().name + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ "\"]\n" + "[White \"" + game.getWhitePlayer().getName() + "\"]\n[Black \"" + game.getBlackPlayer().getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		str += info;
 		str += moveHistory.getMovesInString();
 		try {
@@ -282,8 +282,8 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		Player playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
 		Player playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
 
-		playerBlack.name = blackName;
-		playerWhite.name = whiteName;
+		playerBlack.setName(blackName);
+		playerWhite.setName(whiteName);
 
 		game.setWhitePlayer(playerWhite);
 		game.setBlackPlayer(playerBlack);
@@ -384,7 +384,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 */
 	public void nextMove() {
 		switchActive();
-		Logging.log("next move, active player: " + game.getActivePlayer().name + ", color: " + game.getActivePlayer().color.name()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		Logging.log("next move, active player: " + game.getActivePlayer().getName() + ", color: " + game.getActivePlayer().getColor().name()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public Chessboard getChessboard() {

@@ -10,9 +10,9 @@ public class Player implements Serializable {
 
 	private static final long	serialVersionUID	= 8990270306651014243L;
 
-	public String							name							= null;
-	public colors							color							= null;
-	public boolean						goDown						= false;
+	private String						name							= null;
+	private colors						color							= null;
+	private boolean						goDown						= false;
 
 	public enum colors {
 		white, black, gray
@@ -23,7 +23,7 @@ public class Player implements Serializable {
 
 	public Player(String name, colors color) {
 		this.name = name;
-		this.color = color;
+		this.setColor(color);
 	}
 
 	/**
@@ -43,5 +43,21 @@ public class Player implements Serializable {
 	 */
 	public String getName() {
 		return this.name;
+	}
+
+	public colors getColor() {
+		return color;
+	}
+
+	public void setColor(colors color) {
+		this.color = color;
+	}
+
+	public boolean isGoDown() {
+		return goDown;
+	}
+
+	public void setGoDown(boolean goDown) {
+		this.goDown = goDown;
 	}
 }
