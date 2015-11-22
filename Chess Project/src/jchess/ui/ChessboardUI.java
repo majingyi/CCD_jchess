@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.Square;
+import jchess.core.pieces.King;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
 import jchess.core.util.Moves;
@@ -318,16 +319,11 @@ public class ChessboardUI extends JPanel {
 		}
 
 		String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-		if (Settings.isUpsideDown() == false) {
-			for (int i = 1; i <= letters.length; i++) {
-				uDL2D.drawString(letters[i - 1], (square_height * (i - 1)) + addX, 10 + (labelHeight / 3));
-			}
-		} else {
-			int j = 1;
-			for (int i = letters.length; i > 0; i--, j++) {
-				uDL2D.drawString(letters[i - 1], (square_height * (j - 1)) + addX, 10 + (labelHeight / 3));
-			}
+		int j = 1;
+		for (int i = letters.length; i > 0; i--, j++) {
+			uDL2D.drawString(letters[i - 1], (square_height * (j - 1)) + addX, 10 + (labelHeight / 3));
 		}
+
 		uDL2D.dispose();
 		this.upDownLabel = uDL;
 
@@ -340,16 +336,11 @@ public class ChessboardUI extends JPanel {
 		uDL2D.setColor(Color.black);
 		uDL2D.setFont(new Font("Arial", Font.BOLD, 12)); //$NON-NLS-1$
 
-		if (Settings.isUpsideDown()) {
-			for (int i = 1; i <= 8; i++) {
-				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
-			}
-		} else {
-			int j = 1;
-			for (int i = 8; i > 0; i--, j++) {
-				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
-			}
+		j = 1;
+		for (int i = 8; i > 0; i--, j++) {
+			uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
 		}
+
 		uDL2D.dispose();
 		this.LeftRightLabel = uDL;
 	}
@@ -368,5 +359,13 @@ public class ChessboardUI extends JPanel {
 
 	public Chessboard getChessboard() {
 		return board;
+	}
+
+	public King getWhiteKing() {
+		return board.getWhiteKing();
+	}
+
+	public King getBlackKing() {
+		return board.getBlackKing();
 	}
 }

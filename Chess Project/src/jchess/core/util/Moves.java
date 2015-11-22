@@ -150,26 +150,12 @@ public class Moves extends AbstractTableModel {
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {
 		String locMove = new String(begin.piece.getSymbolForMoveHistory());
 
-		if (Settings.isUpsideDown()) {
-			locMove += Character.toString((char) ((ChessboardUI.bottom - begin.pozX) + 97));// add
-			// letter
-			// of
-			// Square
-			// from
-			// which
-			// move
-			// was
-			// made
-			locMove += Integer.toString(begin.pozY + 1);// add number of Square from
-																									// which move was made
-		} else {
-			locMove += Character.toString((char) (begin.pozX + 97));// add letter of
-																															// Square from
-																															// which move was
-																															// made
-			locMove += Integer.toString(8 - begin.pozY);// add number of Square from
-																									// which move was made
-		}
+		locMove += Character.toString((char) (begin.pozX + 97));// add letter of
+																														// Square from
+																														// which move was
+																														// made
+		locMove += Integer.toString(8 - begin.pozY);// add number of Square from
+																								// which move was made
 
 		if (end.piece != null) {
 			locMove += "x";// take down opponent piece //$NON-NLS-1$
@@ -177,25 +163,11 @@ public class Moves extends AbstractTableModel {
 			locMove += "-";// normal move //$NON-NLS-1$
 		}
 
-		if (Settings.isUpsideDown()) {
-			locMove += Character.toString((char) ((ChessboardUI.bottom - end.pozX) + 97));// add
-			// letter
-			// of
-			// Square
-			// to
-			// which
-			// move
-			// was
-			// made
-			locMove += Integer.toString(end.pozY + 1);// add number of Square to which
-																								// move was made
-		} else {
-			locMove += Character.toString((char) (end.pozX + 97));// add letter of
-																														// Square to which
-																														// move was made
-			locMove += Integer.toString(8 - end.pozY);// add number of Square to which
-																								// move was made
-		}
+		locMove += Character.toString((char) (end.pozX + 97));// add letter of
+																													// Square to which
+																													// move was made
+		locMove += Integer.toString(8 - end.pozY);// add number of Square to which
+																							// move was made
 
 		if (begin.piece.getSymbol() == Pawn.SYMBOL && begin.pozX - end.pozX != 0 && end.piece == null) {
 			locMove += "(e.p)";// pawn take down opponent en passant //$NON-NLS-1$

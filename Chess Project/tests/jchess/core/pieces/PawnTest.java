@@ -6,6 +6,7 @@ import jchess.core.board.Chessboard;
 import jchess.core.board.Square;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
+import jchess.core.util.Settings;
 import jchess.ui.Game;
 
 import org.junit.Assert;
@@ -73,13 +74,14 @@ public class PawnTest {
 
 	@Test
 	public void testAllMoves() throws Exception {
+
+		Settings.setWhitePlayersName("Hans");
+		Settings.setBlackPlayersName("Wurst");
+
 		Game game = new Game();
 		Chessboard board = game.chessboard.getChessboard();
 
-		Player white = new Player("hans", Player.colors.white);
-		Player black = new Player("wurst", Player.colors.black);
-
-		board.setPieces(Constants.EMPTY_STRING, white, black);
+		board.setPieces(Constants.EMPTY_STRING, game.getWhitePlayer(), game.getBlackPlayer());
 
 		// first move
 		Pawn p = (Pawn) board.squares[1][1].piece;

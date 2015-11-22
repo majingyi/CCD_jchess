@@ -16,17 +16,16 @@ public class Settings implements Serializable {
 	private static int				timeForGame				= 0;
 
 	private static boolean		timeLimitSet			= false;
-	private static boolean		upsideDown				= false;
 
+	// TODO check
 	public enum gameModes {
 		newGame, loadGame
 	}
 
-	private static gameModes	gameMode			= null;
-	private static Player			playerWhite		= null;
-	private static Player			playerBlack		= null;
-
-	private static boolean		renderLabels	= true;
+	private static gameModes	gameMode					= null;
+	private static boolean		renderLabels			= true;
+	private static String			whitePlayersName	= null;
+	private static String			blackPlayersName	= null;
 
 	// prevent from instantiation
 	private Settings() {
@@ -50,14 +49,6 @@ public class Settings implements Serializable {
 		return locale;
 	}
 
-	public static boolean isUpsideDown() {
-		return upsideDown;
-	}
-
-	public static void setUpsideDown(boolean uDown) {
-		upsideDown = uDown;
-	}
-
 	public static void setTimeLimetSet(boolean timeLimit) {
 		timeLimitSet = timeLimit;
 	}
@@ -74,14 +65,6 @@ public class Settings implements Serializable {
 		return renderLabels;
 	}
 
-	public static Player getPlayerWhite() {
-		return playerWhite;
-	}
-
-	public static Player getPlayerBlack() {
-		return playerBlack;
-	}
-
 	public static void setGameMode(gameModes gMode) {
 		gameMode = gMode;
 	}
@@ -90,11 +73,20 @@ public class Settings implements Serializable {
 		return gameMode;
 	}
 
-	public static void setPlayerWhite(Player player) {
-		playerWhite = player;
+	public static void setWhitePlayersName(String name) {
+		whitePlayersName = name;
 	}
 
-	public static void setPlayerBlack(Player player) {
-		playerBlack = player;
+	public static void setBlackPlayersName(String name) {
+		blackPlayersName = name;
 	}
+
+	public static String getBlackPlayersName() {
+		return blackPlayersName;
+	}
+
+	public static String getWhitePlayersName() {
+		return whitePlayersName;
+	}
+
 }

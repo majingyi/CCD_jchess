@@ -19,6 +19,7 @@ public class Player implements Serializable {
 
 	public colors	color;
 
+	// TODO drop ki
 	public enum playerTypes {
 		localUser, computer
 	}

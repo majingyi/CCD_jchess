@@ -14,7 +14,6 @@ import jchess.core.util.Move;
 import jchess.core.util.Moves;
 import jchess.core.util.Moves.castling;
 import jchess.core.util.Player;
-import jchess.core.util.Settings;
 import jchess.ui.ChessboardUI;
 import jchess.ui.lang.Language;
 
@@ -78,11 +77,7 @@ public class Chessboard {
 		if ((plWhite.color == plBlack.color) == false) {
 			if (places.equals(Constants.EMPTY_STRING)) // if newGame
 			{
-				if (Settings.isUpsideDown()) {
-					this.setPieces4NewGame(true, plWhite, plBlack);
-				} else {
-					this.setPieces4NewGame(false, plWhite, plBlack);
-				}
+				this.setPieces4NewGame(false, plWhite, plBlack);
 			}
 		} else {
 			throw new Exception(Language.getString("Chessboard.0")); //$NON-NLS-1$

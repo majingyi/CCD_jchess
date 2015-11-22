@@ -32,7 +32,7 @@ import jchess.ui.lang.Language;
  * for ending it. This class is also responsible for appoing player with have a
  * move at the moment
  * 
- * TODO move the UI stuff to GUI
+ * TODO move the UI stuff to GUIand Move to core
  */
 public class Game extends JPanel implements MouseListener, ComponentListener {
 
@@ -44,12 +44,18 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public GameClock					gameClock					= null;
 	public Moves							moves							= null;
 
+	private static Player			playerWhite				= null;
+	private static Player			playerBlack				= null;
+
+	// TODO add player gray
+
 	public Game() throws Exception {
 		this.setLayout(null);
+
 		this.moves = new Moves(this);
 
-		Settings.setPlayerWhite(new Player(Constants.EMPTY_STRING, Player.colors.white));
-		Settings.setPlayerBlack(new Player(Constants.EMPTY_STRING, Player.colors.black));
+		playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
+		playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
 
 		chessboard = new ChessboardUI(this.moves);
 		chessboard.setVisible(true);
@@ -57,7 +63,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		chessboard.addMouseListener(this);
 		chessboard.setLocation(new Point(0, 0));
 		this.add(chessboard);
-		// this.chessboard.
+
 		gameClock = new GameClock(this);
 		gameClock.setSize(new Dimension(200, 100));
 		gameClock.setLocation(new Point(500, 0));
@@ -93,7 +99,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		Calendar cal = Calendar.getInstance();
 		String str = new String(""); //$NON-NLS-1$
 		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				+ "\"]\n" + "[White \"" + Settings.getPlayerWhite().name + "\"]\n[Black \"" + Settings.getPlayerBlack().name + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ "\"]\n" + "[White \"" + playerWhite.name + "\"]\n[Black \"" + playerBlack.name + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		str += info;
 		str += this.moves.getMovesInString();
 		try {
@@ -140,14 +146,14 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 		Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
 
-		Settings.setPlayerWhite(new Player(Constants.EMPTY_STRING, Player.colors.white));
-		Settings.setPlayerBlack(new Player(Constants.EMPTY_STRING, Player.colors.black));
+		playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
+		playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
 
-		Settings.getPlayerBlack().name = blackName;
-		Settings.getPlayerWhite().name = whiteName;
-		Settings.getPlayerBlack().setType(Player.playerTypes.localUser);
-		Settings.getPlayerWhite().setType(Player.playerTypes.localUser);
+		playerBlack.name = blackName;
+		playerWhite.name = whiteName;
 
+		Settings.setBlackPlayersName(blackName);
+		Settings.setWhitePlayersName(whiteName);
 		Settings.setGameMode(Settings.gameModes.loadGame);
 
 		newGUI.newGame();
@@ -219,9 +225,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * 
 	 */
 	public void newGame() throws Exception {
-		chessboard.getChessboard().setPieces(Constants.EMPTY_STRING, Settings.getPlayerWhite(), Settings.getPlayerBlack());
+		chessboard.getChessboard().setPieces(Constants.EMPTY_STRING, playerWhite, playerBlack);
 
-		activePlayer = Settings.getPlayerWhite();
+		activePlayer = playerWhite;
 		if (activePlayer.playerType != Player.playerTypes.localUser) {
 			this.blockedChessboard = true;
 		}
@@ -249,13 +255,13 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	/**
-	 * Method to swich active players after move
+	 * Method to switch active players after move
 	 */
 	public void switchActive() {
-		if (activePlayer == Settings.getPlayerWhite()) {
-			activePlayer = Settings.getPlayerBlack();
+		if (activePlayer == playerWhite) {
+			activePlayer = playerBlack;
 		} else {
-			activePlayer = Settings.getPlayerWhite();
+			activePlayer = playerWhite;
 		}
 
 		this.gameClock.switch_clocks();
@@ -399,10 +405,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 						// checkmate or stalemate
 						King king;
-						if (this.activePlayer == Settings.getPlayerWhite()) {
-							king = chessboard.getChessboard().getWhiteKing();
+						if (this.activePlayer == playerWhite) {
+							king = chessboard.getWhiteKing();
 						} else {
-							king = chessboard.getChessboard().getBlackKing();
+							king = chessboard.getBlackKing();
 						}
 
 						switch (king.isCheckmatedOrStalemated()) {
@@ -456,6 +462,14 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	public void componentHidden(ComponentEvent e) {
+	}
+
+	public Player getWhitePlayer() {
+		return playerWhite;
+	}
+
+	public Player getBlackPlayer() {
+		return playerBlack;
 	}
 }
 

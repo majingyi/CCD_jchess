@@ -82,9 +82,9 @@ public class GameClock extends JPanel implements IClockListener {
 		g2d.drawRect(5, 60, 170, 30);
 		g2d.drawLine(85, 30, 85, 90);
 		font = new Font("Serif", Font.ITALIC, 16); //$NON-NLS-1$
-		g2d.drawString(Settings.getPlayerWhite().getName(), 10, 50);
+		g2d.drawString(Settings.getWhitePlayersName(), 10, 50);
 		g2d.setColor(Color.WHITE);
-		g2d.drawString(Settings.getPlayerBlack().getName(), 100, 50);
+		g2d.drawString(Settings.getBlackPlayersName(), 100, 50);
 	}
 
 	@Override
@@ -109,9 +109,9 @@ public class GameClock extends JPanel implements IClockListener {
 		font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setFont(font);
-		g.drawString(Settings.getPlayerWhite().getName(), 10, 50);
+		g.drawString(Settings.getWhitePlayersName(), 10, 50);
 		g.setColor(Color.WHITE);
-		g.drawString(Settings.getPlayerWhite().getName(), 100, 50);
+		g.drawString(Settings.getBlackPlayersName(), 100, 50);
 		g2d.setFont(font);
 		g.setColor(Color.BLACK);
 		g2d.drawString(white_clock, 10, 80);
