@@ -26,7 +26,7 @@ import jchess.ui.lang.Language;
  * @param gameTab
  *          The current game
  */
-public class Moves extends AbstractTableModel {
+public class MoveHistory extends AbstractTableModel {
 
 	private static final long		serialVersionUID	= -5573231695823099101L;
 
@@ -46,7 +46,7 @@ public class Moves extends AbstractTableModel {
 		none, shortCastling, longCastling
 	}
 
-	public Moves(GameTab gameTab) {
+	public MoveHistory(GameTab gameTab) {
 		super();
 		this.tableModel = new MyDefaultTableModel();
 		this.table = new JTable(this.tableModel);
@@ -404,7 +404,7 @@ public class Moves extends AbstractTableModel {
 		}
 		for (String locMove : tempArray) // test if moves are written correctly
 		{
-			if (!Moves.isMoveCorrect(locMove.trim())) // if not
+			if (!MoveHistory.isMoveCorrect(locMove.trim())) // if not
 			{
 				JOptionPane.showMessageDialog(this.gameTab, Language.getString("invalid_file_to_load") + move); //$NON-NLS-1$
 				return;// show message and finish reading game

@@ -11,8 +11,8 @@ import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Logging;
 import jchess.core.util.Move;
-import jchess.core.util.Moves;
-import jchess.core.util.Moves.castling;
+import jchess.core.util.MoveHistory;
+import jchess.core.util.MoveHistory.castling;
 import jchess.core.util.Player;
 import jchess.ui.GameTab;
 import jchess.ui.lang.Language;
@@ -42,9 +42,9 @@ public class Chessboard {
 
 	public Pawn							twoSquareMovedPawn	= null;
 	public Pawn							twoSquareMovedPawn2	= null;
-	private Moves						moves_history				= null;
+	private MoveHistory						moves_history				= null;
 
-	public Chessboard(GameTab ui, Moves movesHistory) {
+	public Chessboard(GameTab ui, MoveHistory movesHistory) {
 		gameUI = ui;
 		moves_history = movesHistory;
 
@@ -255,7 +255,7 @@ public class Chessboard {
 	 * @throws Exception
 	 * */
 	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) throws Exception {
-		castling wasCastling = Moves.castling.none;
+		castling wasCastling = MoveHistory.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
 		if (end.piece != null) {
@@ -279,10 +279,10 @@ public class Chessboard {
 
 			if (begin.pozX + 2 == end.pozX) {
 				move(squares[7][begin.pozY], squares[end.pozX - 1][begin.pozY], false, false);
-				wasCastling = Moves.castling.shortCastling;
+				wasCastling = MoveHistory.castling.shortCastling;
 			} else if (begin.pozX - 2 == end.pozX) {
 				move(squares[0][begin.pozY], squares[end.pozX + 1][begin.pozY], false, false);
-				wasCastling = Moves.castling.longCastling;
+				wasCastling = MoveHistory.castling.longCastling;
 			}
 		} else if (end.piece.getSymbol() == Rook.SYMBOL) {
 			if (((Rook) end.piece).wasMotion == false) {

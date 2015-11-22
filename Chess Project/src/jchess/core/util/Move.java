@@ -3,7 +3,7 @@ package jchess.core.util;
 import jchess.core.board.Square;
 import jchess.core.pieces.Pawn;
 import jchess.core.pieces.Piece;
-import jchess.core.util.Moves.castling;
+import jchess.core.util.MoveHistory.castling;
 import jchess.ui.ChessboardUI;
 
 public class Move {
