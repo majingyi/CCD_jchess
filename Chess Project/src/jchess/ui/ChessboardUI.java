@@ -20,7 +20,6 @@ import jchess.core.board.Square;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
-import jchess.core.util.MoveHistory;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
@@ -68,7 +67,7 @@ public class ChessboardUI extends JPanel {
 	 *          reference to Moves class object for this chessboard
 	 * @throws FileNotFoundException
 	 */
-	public ChessboardUI(GameTab gt, MoveHistory moves_history) throws FileNotFoundException {
+	public ChessboardUI(GameTab gt, MoveHistoryUI moves_history) throws FileNotFoundException {
 		board = new Chessboard(gt, moves_history);
 		board.activeSquare = null;
 		this.square_height = img_height / 8;// we need to devide to know height

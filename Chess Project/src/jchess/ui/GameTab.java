@@ -25,7 +25,6 @@ import jchess.core.pieces.King;
 import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Logging;
-import jchess.core.util.MoveHistory;
 import jchess.core.util.Player;
 import jchess.core.util.ReadGameError;
 import jchess.core.util.Settings;
@@ -38,17 +37,17 @@ import jchess.ui.lang.Language;
  */
 public class GameTab extends JPanel implements MouseListener, ComponentListener {
 
-	private static final long	serialVersionUID	= 2028583024625710742L;
+	private static final long			serialVersionUID	= 2028583024625710742L;
 
-	private GameClock					gameClock					= null;
-	private static Game				game							= null;
-	private ChessboardUI			chessboard				= null;
-	private static MoveHistory			moveHistory				= null;
+	private GameClock							gameClock					= null;
+	private static Game						game							= null;
+	private ChessboardUI					chessboard				= null;
+	private static MoveHistoryUI	moveHistory				= null;
 
 	public GameTab() throws Exception {
 		this.setLayout(null);
 
-		moveHistory = new MoveHistory(this);
+		moveHistory = new MoveHistoryUI(this);
 
 		chessboard = new ChessboardUI(this, moveHistory);
 		chessboard.setVisible(true);

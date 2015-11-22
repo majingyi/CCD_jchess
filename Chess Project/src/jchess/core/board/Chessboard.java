@@ -15,6 +15,7 @@ import jchess.core.util.MoveHistory;
 import jchess.core.util.MoveHistory.castling;
 import jchess.core.util.Player;
 import jchess.ui.GameTab;
+import jchess.ui.MoveHistoryUI;
 import jchess.ui.lang.Language;
 
 /**
@@ -42,9 +43,9 @@ public class Chessboard {
 
 	public Pawn							twoSquareMovedPawn	= null;
 	public Pawn							twoSquareMovedPawn2	= null;
-	private MoveHistory						moves_history				= null;
+	private MoveHistoryUI		moves_history				= null;
 
-	public Chessboard(GameTab ui, MoveHistory movesHistory) {
+	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) {
 		gameUI = ui;
 		moves_history = movesHistory;
 
