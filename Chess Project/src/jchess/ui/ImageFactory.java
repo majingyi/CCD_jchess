@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -31,12 +30,11 @@ public class ImageFactory {
 	 * @throws FileNotFoundException
 	 */
 	public static Icon getIcon(String key) throws FileNotFoundException {
-		ResourceBundle bundle = ResourceBundle.getBundle("jchess.ui.lang.main"); //$NON-NLS-1$
-		String imageName = bundle.getString(key);
+		String basePath = GUI.getJarPath() + Constants.SLASH_STRING + "jchess";
+		String imageName = Language.getString(key);
 
-		String imageLink = "resources/" + imageName; //$NON-NLS-1$
-		URL url = JChessApp.class.getResource(imageLink);
-		return getImageIcon(url.getFile());
+		String imageLink = basePath + Constants.SLASH_STRING + "resources/" + imageName; //$NON-NLS-1$
+		return getImageIcon(imageLink);
 	}
 
 	/**
