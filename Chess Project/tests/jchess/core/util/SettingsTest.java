@@ -167,35 +167,4 @@ public class SettingsTest {
 		}
 		Assert.assertEquals(true, exception);
 	}
-
-	// @Test
-	// public void testGetBlackPlayersName() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testGetWhitePlayersName() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testStoreConfigFile() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testSetProperty() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testGetActiveTheme() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testSetActiveTheme() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-
 }
