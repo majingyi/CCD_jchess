@@ -1,5 +1,9 @@
 package jchess.core.util;
 
+import java.util.Locale;
+
+import jchess.ui.lang.Language;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -29,16 +33,37 @@ public class SettingsTest {
 		}
 	}
 
-	// @Test
-	// public void testSetLocale() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testGetLocale() throws Exception {
-	// throw new RuntimeException("not yet implemented");
-	// }
-	//
+	@Test
+	public void testSetLocale() throws Exception {
+		try {
+			Assert.assertEquals("error moving piece: ", Language.getString("Chessboard.1"));
+			Settings.setLocale(Locale.GERMANY);
+			Assert.assertEquals("Fehler beim Setzen der Figur: ", Language.getString("Chessboard.1"));
+
+			boolean exception = false;
+			try {
+				Settings.setLocale(Locale.CANADA);
+			} catch (Exception e) {
+				exception = true;
+				Assert.assertEquals("Locale en_CA not supported.", e.getMessage());
+			}
+			Assert.assertEquals(true, exception);
+		} finally {
+			Settings.setLocale(Locale.US);
+		}
+	}
+
+	@Test
+	public void testGetLocale() throws Exception {
+		try {
+			Assert.assertEquals(Locale.US, Settings.getLocale());
+			Settings.setLocale(Locale.GERMANY);
+			Assert.assertEquals(Locale.GERMANY, Settings.getLocale());
+		} finally {
+			Settings.setLocale(Locale.US);
+		}
+	}
+
 	// @Test
 	// public void testSetTimeLimetSet() throws Exception {
 	// throw new RuntimeException("not yet implemented");

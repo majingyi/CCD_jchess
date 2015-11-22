@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -33,16 +35,23 @@ public class Settings implements Serializable {
 		newGame, loadGame
 	}
 
-	private static gameModes	gameMode					= null;
-	private static boolean		renderLabels			= true;
-	private static String			whitePlayersName	= null;
-	private static String			blackPlayersName	= null;
+	private static gameModes		gameMode					= null;
+	private static boolean			renderLabels			= true;
+	private static String				whitePlayersName	= null;
+	private static String				blackPlayersName	= null;
 
-	private static Properties	properties				= null;
+	private static Properties		properties				= null;
+
+	private static List<Locale>	supportedLocales	= null;
 
 	// prevent from instantiation
 	private Settings() {
+	}
 
+	static {
+		supportedLocales = new ArrayList<Locale>();
+		supportedLocales.add(Locale.US);
+		supportedLocales.add(Locale.GERMANY);
 	}
 
 	/**
@@ -54,8 +63,12 @@ public class Settings implements Serializable {
 		return timeForGame;
 	}
 
-	public static void setLocale(Locale localization) {
-		locale = localization;
+	public static void setLocale(Locale localization) throws Exception {
+		if (supportedLocales.contains(localization)) {
+			locale = localization;
+		} else {
+			throw new Exception("Locale " + localization + " not supported.");
+		}
 	}
 
 	public static Locale getLocale() {

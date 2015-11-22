@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JRadioButton;
 
+import jchess.core.util.Logging;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
@@ -74,16 +75,21 @@ public class LanguageChooseWindow extends JDialog implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent evt) {
-		if (evt.getSource() == this.okButton) {
-			if (this.englishButton.isSelected()) {
-				Settings.setLocale(Locale.US);
-			} else if (this.germanButton.isSelected()) {
-				Settings.setLocale(Locale.GERMANY);
+		try {
+			if (evt.getSource() == this.okButton) {
+				if (this.englishButton.isSelected()) {
+					Settings.setLocale(Locale.US);
+				} else if (this.germanButton.isSelected()) {
+					Settings.setLocale(Locale.GERMANY);
+				}
+
+				Settings.setProperty("Language", Settings.getLocale().toString()); //$NON-NLS-1$
+
+				this.setVisible(false);
 			}
-
-			Settings.setProperty("Language", Settings.getLocale().toString()); //$NON-NLS-1$
-
-			this.setVisible(false);
+		} catch (Exception e) {// Should never happen, since the use can only chose
+														// between valid options. IGNORE exception
+			Logging.log(e);
 		}
 	}
 }
