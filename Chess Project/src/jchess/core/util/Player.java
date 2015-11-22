@@ -5,27 +5,18 @@ import java.io.Serializable;
 /**
  * Class representing the player in the game
  * 
- * TODO drop up and dwon, not applicable for three player chess
  */
 public class Player implements Serializable {
 
 	private static final long	serialVersionUID	= 8990270306651014243L;
 
 	public String							name							= null;
+	public colors							color							= null;
+	public boolean						goDown						= false;
 
 	public enum colors {
 		white, black, gray
 	}
-
-	public colors	color;
-
-	// TODO drop ki
-	public enum playerTypes {
-		localUser, computer
-	}
-
-	public playerTypes	playerType;
-	public boolean			goDown;
 
 	public Player() {
 	}
@@ -33,7 +24,6 @@ public class Player implements Serializable {
 	public Player(String name, colors color) {
 		this.name = name;
 		this.color = color;
-		this.goDown = false;
 	}
 
 	/**
@@ -53,15 +43,5 @@ public class Player implements Serializable {
 	 */
 	public String getName() {
 		return this.name;
-	}
-
-	/**
-	 * Method setting the players type
-	 * 
-	 * @param type
-	 *          type of player - enumerate
-	 */
-	public void setType(playerTypes type) {
-		this.playerType = type;
 	}
 }
