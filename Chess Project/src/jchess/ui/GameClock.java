@@ -21,8 +21,6 @@ public class GameClock extends JPanel implements IClockListener {
 
 	private static final long	serialVersionUID	= 1748377192145910384L;
 
-	private Clock							clock1						= null;
-	private Clock							clock2						= null;
 	private Clock							runningClock			= null;
 	private Game							game							= null;
 	private String						white_clock				= null;
@@ -32,15 +30,8 @@ public class GameClock extends JPanel implements IClockListener {
 	public GameClock(Game game) throws Exception {
 		super();
 		this.game = game;
-		int time = Settings.getTimeForGame();
 
-		clock1 = new Clock(time);// white player clock
-		clock2 = new Clock(time);// black player clock
-
-		clock1.addClockListener(this);
-		clock2.addClockListener(this);
-
-		this.runningClock = this.clock1;// running/active clock
+		this.runningClock = game.getClockForPlayer(1);// running/active clock
 		this.background = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
 
 		this.drawBackground();
@@ -54,8 +45,7 @@ public class GameClock extends JPanel implements IClockListener {
 	 */
 	public void start() throws Exception {
 		if (Settings.isTimeLimitSet()) {
-			clock1.start();
-			clock2.start();
+			game.getClockForPlayer(1).start();
 		}
 	}
 
@@ -63,8 +53,7 @@ public class GameClock extends JPanel implements IClockListener {
 	 * Method to stop game clock
 	 */
 	public void stop() {
-		clock1.stop();
-		clock2.stop();
+		game.stopPlayerClocks();
 	}
 
 	void drawBackground() {
@@ -91,8 +80,8 @@ public class GameClock extends JPanel implements IClockListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		white_clock = this.clock1.toString();
-		black_clock = this.clock2.toString();
+		white_clock = game.getClockForPlayer(1).toString();
+		black_clock = game.getClockForPlayer(2).toString();
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(this.background, 0, 0, this);
@@ -127,24 +116,12 @@ public class GameClock extends JPanel implements IClockListener {
 		paint(g);
 	}
 
-	public void switch_clocks() {
-		if (this.runningClock == this.clock1) {
-			clock1.pause();
-			clock2.resume();
-			this.runningClock = this.clock2;
-		} else {
-			clock2.pause();
-			clock1.resume();
-			this.runningClock = this.clock1;
-		}
-	}
-
 	public void timeOver(Clock clock) {
 		String color = Constants.EMPTY_STRING;
 
-		if (clock == clock1) {
+		if (clock == game.getClockForPlayer(1)) {
 			color = Player.colors.white.toString();
-		} else if (clock == clock2) {
+		} else if (clock == game.getClockForPlayer(2)) {
 			color = Player.colors.black.toString();
 		}
 		// TODO add third player
@@ -154,7 +131,6 @@ public class GameClock extends JPanel implements IClockListener {
 	}
 
 	public void setTime(int timeForGame) {
-		clock1.setTime(timeForGame);
-		clock2.setTime(timeForGame);
+		game.setTimeForPlayerClocks(timeForGame);
 	}
 }

@@ -375,7 +375,6 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 */
 	public void switchActive() {
 		game.switchActive();
-		this.gameClock.switch_clocks();
 	}
 
 	/**

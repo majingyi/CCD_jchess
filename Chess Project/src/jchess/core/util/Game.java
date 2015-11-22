@@ -1,5 +1,8 @@
 package jchess.core.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import jchess.core.board.Chessboard;
@@ -16,19 +19,23 @@ public class Game {
 
 	private Player			activePlayer	= null;
 	private Chessboard	chessboard		= null;
-	private GameTab			gameGui				= null;
 
 	// TODO add player gray
 	private Player			playerWhite		= null;
 	private Player			playerBlack		= null;
+
+	private List<Clock>	playerClocks	= new ArrayList<Clock>();
+	private int					runningClock	= 1;
 
 	public Game(Chessboard board, GameTab gui) throws Exception {
 
 		playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
 		playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
 
+		playerClocks.add(new Clock(Settings.getTimeForGame()));
+		playerClocks.add(new Clock(Settings.getTimeForGame()));
+
 		chessboard = board;
-		gameGui = gui;
 	}
 
 	/**
@@ -63,6 +70,8 @@ public class Game {
 		} else {
 			activePlayer = playerWhite;
 		}
+
+		switch_clocks();
 	}
 
 	/**
@@ -92,5 +101,36 @@ public class Game {
 
 	public Chessboard getChessboard() {
 		return chessboard;
+	}
+
+	public Clock getClockForPlayer(int player) {
+		return playerClocks.get(player - 1);
+	}
+
+	public void stopPlayerClocks() {
+		for (Clock clock : playerClocks) {
+			clock.stop();
+		}
+	}
+
+	public void switch_clocks() {
+		runningClock++;
+		if (runningClock > playerClocks.size()) {
+			runningClock = 1;
+		}
+
+		for (int i = 0; i < playerClocks.size(); i++) {
+			if (i == (runningClock - 1)) {// is next clock
+				playerClocks.get(i).resume();
+			} else {
+				playerClocks.get(i).pause();
+			}
+		}
+	}
+
+	public void setTimeForPlayerClocks(int timeForGame) {
+		for (Clock clock : playerClocks) {
+			clock.setTime(timeForGame);
+		}
 	}
 }
