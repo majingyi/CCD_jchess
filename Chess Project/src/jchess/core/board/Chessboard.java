@@ -1,6 +1,8 @@
 package jchess.core.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import jchess.JChessApp;
@@ -34,7 +36,6 @@ public class Chessboard {
 
 	private GameTab										gameUI							= null;
 
-	// squares of chessboard
 	private ChessboardField						fields[][]					= null;
 	private ChessboardField						activeField					= null;
 
@@ -118,9 +119,9 @@ public class Chessboard {
 
 		Player player = plWhite;
 		Player player1 = plBlack;
-		this.setFigures4NewGame(0, player);
+		this.setPieces4NewGame(0, player);
 		this.setPawns4NewGame(1, player);
-		this.setFigures4NewGame(7, player1);
+		this.setPieces4NewGame(7, player1);
 		this.setPawns4NewGame(6, player1);
 	}
 
@@ -134,8 +135,9 @@ public class Chessboard {
 	 * @param upsideDown
 	 *          if true white pieces will be on top of chessboard
 	 * @throws Exception
+	 * @deprecated we will implement one method for setting all pieces
 	 * */
-	private void setFigures4NewGame(int i, Player player) throws Exception {
+	private void setPieces4NewGame(int i, Player player) throws Exception {
 
 		if (i != 0 && i != 7) {
 			Logging.logError(Language.getString("Chessboard.2")); //$NON-NLS-1$
@@ -172,6 +174,7 @@ public class Chessboard {
 	 * @param player
 	 *          player which is owner of pawns
 	 * @throws Exception
+	 * @deprecated
 	 * */
 	private void setPawns4NewGame(int i, Player player) throws Exception {
 		if (i != 1 && i != 6) {
@@ -504,6 +507,7 @@ public class Chessboard {
 		return activeField;
 	}
 
+	@Deprecated
 	public ChessboardField[][] getFields() {
 		return fields;
 	}
@@ -518,5 +522,121 @@ public class Chessboard {
 
 	public void move(ChessboardField begin, ChessboardField end) throws Exception {
 		move(begin, end, true);
+	}
+
+	/**
+	 * Calculates all vertical fields starting with field.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getVerticalFields(ChessboardField field) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates vertical fields, which are a maximum of allowed moves away.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param maxAllowedMoves the maximum allowed number of moves.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getVerticalFields(ChessboardField field, int maxAllowedMoves) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates all horizontal fields starting with field.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getHorizontalFields(ChessboardField field) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates horizontal fields, which are a maximum of allowed moves away.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param maxAllowedMoves the maximum allowed number of moves.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getHorizontalFields(ChessboardField field, int maxAllowedMoves) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates all straight fields starting with field.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getStraightFields(ChessboardField field) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates straight fields, which are a maximum of allowed moves away.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param maxAllowedMoves the maximum allowed number of moves.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates all diagonal fields starting with field.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getDiagonalFields(ChessboardField field) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates diagonal fields, which are a maximum of allowed moves away.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param maxAllowedMoves the maximum allowed number of moves.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates diagonal fields, which are exactly distance fields away.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param distance the distance, the wanted fields are away.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getDiagonalFieldsExact(ChessboardField field, int distance) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
+	}
+
+	/**
+	 * Calculates straight fields, which are exactly distance fields away.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param distance the distance, the wanted fields are away.
+	 * @return the list of all vertical fields. Never null.
+	 */
+	public List<ChessboardField> getStraightFieldsExact(ChessboardField field, int distance) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;
 	}
 }
