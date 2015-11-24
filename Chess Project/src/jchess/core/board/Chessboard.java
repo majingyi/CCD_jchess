@@ -112,10 +112,6 @@ public class Chessboard {
 		this.move(fromSQ, toSQ, true);
 	}
 
-	public void move(Square begin, Square end, boolean refresh) throws Exception {
-		this.move(begin, end, refresh, true);
-	}
-
 	private void setPieces4NewGame(Player plWhite, Player plBlack) throws Exception {
 		m_KingsMap.clear();
 
@@ -227,7 +223,7 @@ public class Chessboard {
 			from = first.getFrom();
 			to = first.getTo();
 
-			this.move(this.getFields()[from.pozX][from.pozY], this.getFields()[to.pozX][to.pozY], true, false);
+			this.move(this.getFields()[from.pozX][from.pozY], this.getFields()[to.pozX][to.pozY], false);
 			if (first.getPromotedPiece() != null) {
 				Pawn pawn = (Pawn) this.getFields()[to.pozX][to.pozY].getPiece();
 				pawn.setSquare(null);
@@ -241,10 +237,6 @@ public class Chessboard {
 		return result;
 	}
 
-	public void move(Square begin, Square end) throws Exception {
-		move(begin, end, true);
-	}
-
 	/**
 	 * Method move piece from square to square
 	 * 
@@ -256,7 +248,7 @@ public class Chessboard {
 	 *          chessboard, default: true
 	 * @throws Exception
 	 * */
-	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) throws Exception {
+	private void move(Square begin, Square end, boolean clearForwardHistory) throws Exception {
 		castling wasCastling = MoveHistory.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
@@ -278,10 +270,10 @@ public class Chessboard {
 			}
 
 			if (begin.pozX + 2 == end.pozX) {
-				move(getFields()[7][begin.pozY], getFields()[end.pozX - 1][begin.pozY], false, false);
+				move(getFields()[7][begin.pozY], getFields()[end.pozX - 1][begin.pozY], false);
 				wasCastling = MoveHistory.castling.shortCastling;
 			} else if (begin.pozX - 2 == end.pozX) {
-				move(getFields()[0][begin.pozY], getFields()[end.pozX + 1][begin.pozY], false, false);
+				move(getFields()[0][begin.pozY], getFields()[end.pozX + 1][begin.pozY], false);
 				wasCastling = MoveHistory.castling.longCastling;
 			}
 		} else if (end.getPiece().getSymbol() == Rook.SYMBOL) {
@@ -321,10 +313,8 @@ public class Chessboard {
 			setTwoSquareMovedPawn(null); // erase last saved move (for En passant)
 		}
 
-		if (refresh) {
-			this.unselect();// unselect square
-			gameUI.getChessboardUI().repaint();
-		}
+		this.unselect();// unselect square
+		gameUI.getChessboardUI().repaint();
 
 		if (clearForwardHistory) {
 			this.moves_history.clearMoveForwardStack();
@@ -334,13 +324,9 @@ public class Chessboard {
 		}
 	}
 
-	public boolean undo() throws Exception {
-		return undo(true);
-	}
-
-	public synchronized boolean undo(boolean refresh) throws Exception // undo
-																																			// last
-																																			// move
+	public synchronized boolean undo() throws Exception // undo
+																											// last
+																											// move
 	{
 		Move last = this.moves_history.undo();
 
@@ -398,10 +384,8 @@ public class Chessboard {
 					this.getFields()[end.pozX][end.pozY].setPiece(null);
 				}
 
-				if (refresh) {
-					this.unselect();// unselect square
-					gameUI.getChessboardUI().repaint();
-				}
+				this.unselect();// unselect square
+				gameUI.getChessboardUI().repaint();
 
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 				return false;
@@ -423,6 +407,7 @@ public class Chessboard {
 	 * @param y
 	 *          y position on chessboard
 	 * @return true if parameters are out of bounds (array)
+	 * @deprecated will not be need due to graph implementation
 	 * */
 	public static boolean isout(int x, int y) {
 		if (x < 0 || x > 7 || y < 0 || y > 7) {
@@ -436,6 +421,7 @@ public class Chessboard {
 	 * 
 	 * @param sq
 	 * @return
+	 * @deprecated will not be need due to graph implementation
 	 */
 	public static boolean isValidSquare(ChessboardField field) {
 		boolean result = false;
@@ -449,18 +435,22 @@ public class Chessboard {
 		return m_KingsMap.get(color);
 	}
 
+	@Deprecated
 	public int getActive_x_square() {
 		return active_x_square;
 	}
 
+	@Deprecated
 	public void setActive_x_square(int active_x_square) {
 		this.active_x_square = active_x_square;
 	}
 
+	@Deprecated
 	public int getActive_y_square() {
 		return active_y_square;
 	}
 
+	@Deprecated
 	public void setActive_y_square(int active_y_square) {
 		this.active_y_square = active_y_square;
 	}
@@ -483,7 +473,7 @@ public class Chessboard {
 			select(getFields()[beginX][beginY]);
 			if (activeSquare.getPiece().allMoves().indexOf(getFields()[endX][endY]) != -1) // move
 			{
-				move(getFields()[beginX][beginY], getFields()[endX][endY]);
+				move(getFields()[beginX][beginY], getFields()[endX][endY], true);
 			} else {
 				Logging.log(Language.getString("Game.29")); //$NON-NLS-1$
 				return false;
@@ -520,5 +510,9 @@ public class Chessboard {
 
 	public void setTwoSquareMovedPawn(Pawn twoSquareMovedPawn) {
 		this.twoSquareMovedPawn = twoSquareMovedPawn;
+	}
+
+	public void move(Square begin, Square end) throws Exception {
+		move(begin, end, true);
 	}
 }
