@@ -30,7 +30,7 @@ public abstract class MoveBehavior implements IMoveBehavior {
 		}
 		Piece piece = m_Chessboard.getFields()[x][y].getPiece();
 		if (piece == null || // if this sqhuare is empty
-				piece.player != this.m_Player) // or piece is another player
+				piece.getPlayer() != this.m_Player) // or piece is another player
 		{
 			return true;
 		}
@@ -51,7 +51,7 @@ public abstract class MoveBehavior implements IMoveBehavior {
 		if (sq.getPiece() == null) {
 			return false;
 		}
-		if (this.m_Player != sq.getPiece().player) {
+		if (this.m_Player != sq.getPiece().getPlayer()) {
 			return true;
 		}
 		return false;

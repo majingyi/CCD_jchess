@@ -111,11 +111,11 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 				Square sq = chessboard.getSquare(x, y);
 				if ((sq == null || sq.getPiece() == null && chessboard.getChessboard().getActiveField() == null)
-						|| (this.chessboard.getChessboard().getActiveField() == null && sq.getPiece() != null && sq.getPiece().player != game.getActivePlayer())) {
+						|| (this.chessboard.getChessboard().getActiveField() == null && sq.getPiece() != null && sq.getPiece().getPlayer() != game.getActivePlayer())) {
 					return;
 				}
 
-				if (sq.getPiece() != null && sq.getPiece().player == game.getActivePlayer() && sq != chessboard.getChessboard().getActiveField()) {
+				if (sq.getPiece() != null && sq.getPiece().getPlayer() == game.getActivePlayer() && sq != chessboard.getChessboard().getActiveField()) {
 					chessboard.getChessboard().unselect();
 					chessboard.getChessboard().select(sq);
 				} else if (chessboard.getChessboard().getActiveField() == sq) // unselect
@@ -140,7 +140,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 					switch (king.isCheckmatedOrStalemated()) {
 						case 1:
-							game.endGame("Checkmate! " + king.player.getColor().toString() + " player lose!"); //$NON-NLS-1$ //$NON-NLS-2$
+							game.endGame("Checkmate! " + king.getPlayer().getColor().toString() + " player lose!"); //$NON-NLS-1$ //$NON-NLS-2$
 							break;
 						case 2:
 							game.endGame(Language.getString("Game.35")); //$NON-NLS-1$

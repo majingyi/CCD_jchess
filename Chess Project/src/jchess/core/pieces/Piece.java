@@ -21,17 +21,18 @@ public abstract class Piece {
 
 	// TODO this class shall not draw itself, checkBoardUI is responsible for this
 
-	public Chessboard					chessboard		= null;
-	protected ChessboardField	field					= null;
-	public Player							player				= null;
-	private String						symbol				= Constants.EMPTY_STRING;
+	private Chessboard			m_Chessboard	= null;
+	private ChessboardField	m_Field				= null;
+	private Player					m_Player			= null;
+	private String					m_Symbol			= Constants.EMPTY_STRING;
 
-	protected IMoveBehavior		moveBehavior	= null;
+	protected IMoveBehavior	moveBehavior	= null;
 
-	public Piece(Chessboard chessboard, Player player, String symbol) throws Exception {
-		this.chessboard = chessboard;
-		this.player = player;
+	public Piece(Chessboard chessboard, Player player, String symbol, ChessboardField field) throws Exception {
+		this.m_Chessboard = chessboard;
+		this.setPlayer(player);
 		setSymbol(symbol);
+		m_Field = field;
 		this.moveBehavior = createMoveBehavior();
 	}
 
@@ -62,24 +63,24 @@ public abstract class Piece {
 	}
 
 	public String getSymbol() {
-		return this.symbol;
+		return this.m_Symbol;
 	}
 
 	public void setSymbol(String symbol) throws Exception {
 		if (symbol != null && symbol.length() > 0) {
-			this.symbol = symbol;
+			this.m_Symbol = symbol;
 		} else
 			throw new Exception(Language.getString("Piece.0")); //$NON-NLS-1$
 	}
 
 	public ChessboardField getField() {
-		return field;
+		return m_Field;
 	}
 
 	public void setSquare(ChessboardField square) throws Exception {
 		if (square == null || Chessboard.isValidSquare(square)) {
-			this.field = square;
-			moveBehavior.setChessboardField(this.field);
+			this.m_Field = square;
+			moveBehavior.setChessboardField(this.m_Field);
 		} else {
 			throw new Exception(Language.getString("Piece.1")); //$NON-NLS-1$
 		}
@@ -100,13 +101,25 @@ public abstract class Piece {
 
 	public String getSymbolForMoveHistory() {
 		String result = null;
-		if (symbol != null && symbol.length() > 0) {
-			if (symbol.startsWith("K") && symbol.length() > 1) { //$NON-NLS-1$
-				result = symbol.substring(0, 2);
+		if (m_Symbol != null && m_Symbol.length() > 0) {
+			if (m_Symbol.startsWith("K") && m_Symbol.length() > 1) { //$NON-NLS-1$
+				result = m_Symbol.substring(0, 2);
 			} else {
-				result = symbol.substring(0, 1);
+				result = m_Symbol.substring(0, 1);
 			}
 		}
 		return result;
+	}
+
+	public Player getPlayer() {
+		return m_Player;
+	}
+
+	public void setPlayer(Player m_Player) {
+		this.m_Player = m_Player;
+	}
+
+	public Chessboard getChessboard() {
+		return m_Chessboard;
 	}
 }

@@ -155,7 +155,7 @@ public class PawnTest {
 	private Pawn createPawn() throws Exception {
 		Player pl = new Player();
 		Chessboard board = new Chessboard(null, null);
-		Pawn p = new Pawn(board, pl);
+		Pawn p = new Pawn(board, pl, null);
 		return p;
 	}
 }

@@ -1,6 +1,7 @@
 package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.util.Player;
 
 /**
@@ -15,12 +16,12 @@ public class Rook extends Piece {
 
 	public boolean							wasMotion	= false;
 
-	public Rook(Chessboard chessboard, Player player) throws Exception {
-		super(chessboard, player, SYMBOL);
+	public Rook(Chessboard chessboard, Player player, ChessboardField field) throws Exception {
+		super(chessboard, player, SYMBOL, field);
 	}
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new RookMoveBehavior(player, chessboard, field);
+		return new RookMoveBehavior(getPlayer(), getChessboard(), getField());
 	}
 }

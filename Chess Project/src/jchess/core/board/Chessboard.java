@@ -46,19 +46,19 @@ public class Chessboard {
 	private MoveHistoryUI							moves_history				= null;
 	private Map<Player.colors, King>	m_KingsMap					= new HashMap<Player.colors, King>();
 
-	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) {
+	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		gameUI = ui;
 		moves_history = movesHistory;
 
 		initChessBoard();
 	}
 
-	private void initChessBoard() {
+	private void initChessBoard() throws Exception {
 		squares = new Square[8][8];
 
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
-				getFields()[i][y] = new Square(i, y, null);
+				getFields()[i][y] = new Square(i, y, null, this);
 			}
 		}
 	}
@@ -147,23 +147,23 @@ public class Chessboard {
 			player.setGoDown(true);
 		}
 
-		this.getFields()[0][i].setPiece(new Rook(this, player));
-		this.getFields()[7][i].setPiece(new Rook(this, player));
-		this.getFields()[1][i].setPiece(new Knight(this, player));
-		this.getFields()[6][i].setPiece(new Knight(this, player));
-		this.getFields()[2][i].setPiece(new Bishop(this, player));
-		this.getFields()[5][i].setPiece(new Bishop(this, player));
+		this.getFields()[0][i].setPiece(new Rook(this, player, this.getFields()[0][i]));
+		this.getFields()[7][i].setPiece(new Rook(this, player, this.getFields()[7][i]));
+		this.getFields()[1][i].setPiece(new Knight(this, player, this.getFields()[1][i]));
+		this.getFields()[6][i].setPiece(new Knight(this, player, this.getFields()[6][i]));
+		this.getFields()[2][i].setPiece(new Bishop(this, player, this.getFields()[2][i]));
+		this.getFields()[5][i].setPiece(new Bishop(this, player, this.getFields()[5][i]));
 
 		if (player.getColor() == Player.colors.white) {
-			King kingWhite = new King(this, player);
+			King kingWhite = new King(this, player, this.getFields()[3][i]);
 			m_KingsMap.put(Player.colors.white, kingWhite);
 			this.getFields()[3][i].setPiece(kingWhite);
-			this.getFields()[4][i].setPiece(new Queen(this, player));
+			this.getFields()[4][i].setPiece(new Queen(this, player, this.getFields()[4][i]));
 		} else {
-			King kingBlack = new King(this, player);
+			King kingBlack = new King(this, player, this.getFields()[3][i]);
 			m_KingsMap.put(Player.colors.black, kingBlack);
 			this.getFields()[3][i].setPiece(kingBlack);
-			this.getFields()[4][i].setPiece(new Queen(this, player));
+			this.getFields()[4][i].setPiece(new Queen(this, player, this.getFields()[4][i]));
 		}
 	}
 
@@ -182,7 +182,7 @@ public class Chessboard {
 			return;
 		}
 		for (int x = 0; x < 8; x++) {
-			this.getFields()[x][i].setPiece(new Pawn(this, player));
+			this.getFields()[x][i].setPiece(new Pawn(this, player, this.getFields()[x][i]));
 		}
 	}
 
@@ -311,7 +311,7 @@ public class Chessboard {
 			// Pawn
 			{
 				if (clearForwardHistory) {
-					String newPiece = JChessApp.jcv.showPawnPromotionBox(end.getPiece().player.getColor());
+					String newPiece = JChessApp.jcv.showPawnPromotionBox(end.getPiece().getPlayer().getColor());
 					Pawn pawn = (Pawn) end.getPiece();
 					pawn.promote(newPiece);
 					promotedPiece = end.getPiece();

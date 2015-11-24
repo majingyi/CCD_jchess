@@ -109,7 +109,6 @@ public class MoveHistory {
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 			return null;
 		}
-
 	}
 
 	public synchronized Move redo() {
@@ -306,7 +305,7 @@ public class MoveHistory {
 				// ASCII
 				for (int i = 0; i < squares.length && (pieceFound == false); i++) {
 					for (int j = 0; j < squares[i].length && (pieceFound == false); j++) {
-						if (squares[i][j].getPiece() == null || activePlayer.getColor() != squares[i][j].getPiece().player.getColor()) {
+						if (squares[i][j].getPiece() == null || activePlayer.getColor() != squares[i][j].getPiece().getPlayer().getColor()) {
 							continue;
 						}
 						ArrayList<ChessboardField> pieceMoves = squares[i][j].getPiece().allMoves();

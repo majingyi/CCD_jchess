@@ -9,8 +9,8 @@ import jchess.core.util.Player;
 
 public class PawnMoveBehavior extends MoveBehavior {
 
-	public PawnMoveBehavior(Player player, Chessboard m_Chessboard, ChessboardField field) {
-		super(player, m_Chessboard, field);
+	public PawnMoveBehavior(Player player, Chessboard chessboard, ChessboardField field) {
+		super(player, chessboard, field);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 			// capture
 			sq = m_Chessboard.getFields()[this.m_Field.pozX - 1][first];
 			if (sq.getPiece() != null) {// check if can hit left
-				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {
+				if (this.m_Player != sq.getPiece().getPlayer() && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {
 					// list.add(sq);
 					if (this.m_Player.getColor() == Player.colors.white) {// white
 
@@ -93,12 +93,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 
 			// En passant
 			sq = m_Chessboard.getFields()[this.m_Field.pozX - 1][this.m_Field.pozY];
-			if (sq.getPiece() != null && this.m_Chessboard.getTwoSquareMovedPawn() != null && sq == this.m_Chessboard.getTwoSquareMovedPawn().field) {// check
+			if (sq.getPiece() != null && this.m_Chessboard.getTwoSquareMovedPawn() != null && sq == this.m_Chessboard.getTwoSquareMovedPawn().getField()) {// check
 				// if
 				// can
 				// hit
 				// left
-				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {// unnecessary
+				if (this.m_Player != sq.getPiece().getPlayer() && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
 					if (this.m_Player.getColor() == Player.colors.white) {// white
@@ -125,7 +125,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 			// capture
 			sq = m_Chessboard.getFields()[this.m_Field.pozX + 1][first];
 			if (sq.getPiece() != null) {// check if can hit right
-				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {
+				if (this.m_Player != sq.getPiece().getPlayer() && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {
 					// list.add(sq);
 					if (this.m_Player.getColor() == Player.colors.white) { // white
 
@@ -145,12 +145,12 @@ public class PawnMoveBehavior extends MoveBehavior {
 
 			// En passant
 			sq = m_Chessboard.getFields()[this.m_Field.pozX + 1][this.m_Field.pozY];
-			if (sq.getPiece() != null && this.m_Chessboard.getTwoSquareMovedPawn() != null && sq == this.m_Chessboard.getTwoSquareMovedPawn().field) {// check
+			if (sq.getPiece() != null && this.m_Chessboard.getTwoSquareMovedPawn() != null && sq == this.m_Chessboard.getTwoSquareMovedPawn().getField()) {// check
 				// if
 				// can
 				// hit
 				// left
-				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {// unnecessary
+				if (this.m_Player != sq.getPiece().getPlayer() && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
 					if (this.m_Player.getColor() == Player.colors.white) {// white

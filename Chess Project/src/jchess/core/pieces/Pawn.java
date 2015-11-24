@@ -1,6 +1,7 @@
 package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.util.Player;
 import jchess.ui.lang.Language;
 
@@ -18,8 +19,8 @@ public class Pawn extends Piece {
 
 	public static final String	SYMBOL	= "Pawn"; //$NON-NLS-1$
 
-	public Pawn(Chessboard chessboard, Player player) throws Exception {
-		super(chessboard, player, SYMBOL);
+	public Pawn(Chessboard chessboard, Player player, ChessboardField field) throws Exception {
+		super(chessboard, player, SYMBOL, field);
 	}
 
 	/**
@@ -33,25 +34,25 @@ public class Pawn extends Piece {
 	 */
 	public void promote(String newPiece) throws Exception {
 		if (newPiece.equals(Queen.SYMBOL)) {
-			setMoveBehavior(new QueenMoveBehavior(player, chessboard, field));
+			setMoveBehavior(new QueenMoveBehavior(getPlayer(), getChessboard(), getField()));
 			setSymbol(Queen.SYMBOL);
 		} else if (newPiece.equals(Rook.SYMBOL)) {
-			setMoveBehavior(new RookMoveBehavior(player, chessboard, field));
+			setMoveBehavior(new RookMoveBehavior(getPlayer(), getChessboard(), getField()));
 			setSymbol(Rook.SYMBOL);
 		} else if (newPiece.equals(Bishop.SYMBOL)) {
-			setMoveBehavior(new BishopMoveBehavior(player, chessboard, field));
+			setMoveBehavior(new BishopMoveBehavior(getPlayer(), getChessboard(), getField()));
 			setSymbol(Bishop.SYMBOL);
 		} else if (newPiece.equals(King.SYMBOL)) {
 			throw new Exception(Language.getString("Pawn.1")); //$NON-NLS-1$
 		} else // knight
 		{
-			setMoveBehavior(new KnightMoveBehavior(player, chessboard, field));
+			setMoveBehavior(new KnightMoveBehavior(getPlayer(), getChessboard(), getField()));
 			setSymbol(Knight.SYMBOL);
 		}
 	}
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new PawnMoveBehavior(player, chessboard, field);
+		return new PawnMoveBehavior(getPlayer(), getChessboard(), getField());
 	}
 }

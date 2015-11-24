@@ -1,6 +1,7 @@
 package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
 import jchess.core.util.Player;
 import junit.framework.Assert;
@@ -11,20 +12,20 @@ public class PieceTest {
 
 	private class TestPiece extends Piece {
 
-		public TestPiece(Chessboard chessboard, Player player) throws Exception {
-			super(chessboard, player, "TestPiece");
+		public TestPiece(Chessboard chessboard, Player player, ChessboardField field) throws Exception {
+			super(chessboard, player, "TestPiece", field);
 		}
 
 		@Override
 		public IMoveBehavior createMoveBehavior() {
-			return new PawnMoveBehavior(player, chessboard, null);
+			return new PawnMoveBehavior(getPlayer(), getChessboard(), getField());
 		}
 	}
 
 	@Test
 	public void testSetGetSymbol() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
+		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
 		Assert.assertEquals("T", p.getSymbolForMoveHistory());
 
 		p.setSymbol("K");
@@ -49,14 +50,14 @@ public class PieceTest {
 	@Test
 	public void testGetSquare() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
+		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
 
 		Assert.assertEquals(null, p.getField());
 
 		// setSquare outside the board left
 		boolean exception = false;
 		try {
-			p.setSquare(new Square(8, 0, null));
+			p.setSquare(new Square(8, 0, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -66,7 +67,7 @@ public class PieceTest {
 		// setSquare outside the board right
 		exception = false;
 		try {
-			p.setSquare(new Square(-1, 0, null));
+			p.setSquare(new Square(-1, 0, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -76,7 +77,7 @@ public class PieceTest {
 		// setSquare outside the board top
 		exception = false;
 		try {
-			p.setSquare(new Square(0, -1, null));
+			p.setSquare(new Square(0, -1, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -86,7 +87,7 @@ public class PieceTest {
 		// setSquare outside the board bottom
 		exception = false;
 		try {
-			p.setSquare(new Square(0, 8, null));
+			p.setSquare(new Square(0, 8, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -94,7 +95,7 @@ public class PieceTest {
 		Assert.assertTrue(exception);
 
 		// set valid square
-		p.setSquare(new Square(3, 5, null));
+		p.setSquare(new Square(3, 5, null, board));
 		Square sq = (Square) p.getField();
 		Assert.assertNotNull(sq);
 		Assert.assertEquals(5, sq.pozY);
@@ -104,7 +105,7 @@ public class PieceTest {
 	@Test
 	public void testGetSymbolForMoveHistory() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
+		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
 		Assert.assertEquals("T", p.getSymbolForMoveHistory());
 
 		p.setSymbol("K");

@@ -66,9 +66,9 @@ public class ChessboardUI extends JPanel {
 	 *          reference to Settings class object for this chessboard
 	 * @param moves_history
 	 *          reference to Moves class object for this chessboard
-	 * @throws FileNotFoundException
+	 * @throws Exception 
 	 */
-	public ChessboardUI(GameTab gt, MoveHistoryUI moves_history) throws FileNotFoundException {
+	public ChessboardUI(GameTab gt, MoveHistoryUI moves_history) throws Exception {
 		board = new Chessboard(gt, moves_history);
 		board.setActiveField(null);
 		this.square_height = img_height / 8;// we need to devide to know height
@@ -249,7 +249,7 @@ public class ChessboardUI extends JPanel {
 			int y = (sq.pozY * height) + topLeft.y;
 
 			if (g != null) {
-				Image tempImage = Theme.getImageForPiece(piece.player.getColor(), piece.getSymbol());
+				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
 				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
