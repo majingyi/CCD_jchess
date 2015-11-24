@@ -35,8 +35,8 @@ public class Chessboard {
 	private GameTab										gameUI							= null;
 
 	// squares of chessboard
-	private Square										squares[][]					= null;
-	private Square										activeSquare				= null;
+	private ChessboardField						fields[][]					= null;
+	private ChessboardField						activeField					= null;
 
 	private int												active_x_square			= -1;
 	private int												active_y_square			= -1;
@@ -54,7 +54,7 @@ public class Chessboard {
 	}
 
 	private void initChessBoard() throws Exception {
-		squares = new Square[8][8];
+		fields = new Square[8][8];
 
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
@@ -98,10 +98,11 @@ public class Chessboard {
 	 * @param yTo
 	 *          to which y move piece
 	 * @throws Exception
+	 * 
 	 */
 	public void move(int xFrom, int yFrom, int xTo, int yTo) throws Exception {
-		Square fromSQ = null;
-		Square toSQ = null;
+		ChessboardField fromSQ = null;
+		ChessboardField toSQ = null;
 		try {
 			fromSQ = this.getFields()[xFrom][yFrom];
 			toSQ = this.getFields()[xTo][yTo];
@@ -188,8 +189,9 @@ public class Chessboard {
 	 * @param sq
 	 *          square to select (when clicked))
 	 */
-	public void select(Square sq) {
-		this.activeSquare = sq;
+	public void select(ChessboardField field) {
+		Square sq = (Square) field;
+		this.activeField = (Square) sq;
 		this.setActive_x_square(sq.pozX + 1);
 		this.setActive_y_square(sq.pozY + 1);
 
@@ -203,7 +205,7 @@ public class Chessboard {
 	public void unselect() {
 		this.setActive_x_square(0);
 		this.setActive_y_square(0);
-		this.activeSquare = null;
+		this.activeField = null;
 
 		gameUI.getChessboardUI().repaint();
 	}
@@ -226,11 +228,11 @@ public class Chessboard {
 			this.move(this.getFields()[from.pozX][from.pozY], this.getFields()[to.pozX][to.pozY], false);
 			if (first.getPromotedPiece() != null) {
 				Pawn pawn = (Pawn) this.getFields()[to.pozX][to.pozY].getPiece();
-				pawn.setSquare(null);
+				pawn.setField(null);
 
 				this.getFields()[to.pozX][to.pozY].setPiece(first.getPromotedPiece());
 				Piece promoted = this.getFields()[to.pozX][to.pozY].getPiece();
-				promoted.setSquare(this.getFields()[to.pozX][to.pozY]);
+				promoted.setField(this.getFields()[to.pozX][to.pozY]);
 			}
 			result = true;
 		}
@@ -248,18 +250,20 @@ public class Chessboard {
 	 *          chessboard, default: true
 	 * @throws Exception
 	 * */
-	private void move(Square begin, Square end, boolean clearForwardHistory) throws Exception {
+	private void move(ChessboardField start, ChessboardField target, boolean clearForwardHistory) throws Exception {
+		Square begin = (Square) start;
+		Square end = (Square) target;
 		castling wasCastling = MoveHistory.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
 		if (end.getPiece() != null) {
-			end.getPiece().setSquare(null);
+			end.getPiece().setField(null);
 		}
 
-		Square tempBegin = new Square(begin);// 4 moves history
-		Square tempEnd = new Square(end); // 4 moves history
+		Square tempBegin = new Square((Square) begin);// 4 moves history
+		Square tempEnd = new Square((Square) end); // 4 moves history
 
-		begin.getPiece().setSquare(end);// set square of piece to ending
+		begin.getPiece().setField(end);// set square of piece to ending
 		end.setPiece(begin.getPiece());// for ending square set piece from beginin
 		// square
 		begin.setPiece(null);// make null piece for begining square
@@ -337,7 +341,7 @@ public class Chessboard {
 				Piece moved = last.getMovedPiece();
 				this.getFields()[begin.pozX][begin.pozY].setPiece(moved);
 
-				moved.setSquare(this.getFields()[begin.pozX][begin.pozY]);
+				moved.setField(this.getFields()[begin.pozX][begin.pozY]);
 
 				Piece taken = last.getTakenPiece();
 				if (last.getCastlingMove() != castling.none) {
@@ -345,12 +349,12 @@ public class Chessboard {
 					if (last.getCastlingMove() == castling.shortCastling) {
 						rook = this.getFields()[end.pozX - 1][end.pozY].getPiece();
 						this.getFields()[7][begin.pozY].setPiece(rook);
-						rook.setSquare(this.getFields()[7][begin.pozY]);
+						rook.setField(this.getFields()[7][begin.pozY]);
 						this.getFields()[end.pozX - 1][end.pozY].setPiece(null);
 					} else {
 						rook = this.getFields()[end.pozX + 1][end.pozY].getPiece();
 						this.getFields()[0][begin.pozY].setPiece(rook);
-						rook.setSquare(this.getFields()[0][begin.pozY]);
+						rook.setField(this.getFields()[0][begin.pozY]);
 						this.getFields()[end.pozX + 1][end.pozY].setPiece(null);
 					}
 					((King) moved).wasMotion = false;
@@ -360,11 +364,11 @@ public class Chessboard {
 				} else if (moved.getSymbol() == Pawn.SYMBOL && last.wasEnPassant()) {
 					Pawn pawn = (Pawn) last.getTakenPiece();
 					this.getFields()[end.pozX][begin.pozY].setPiece(pawn);
-					pawn.setSquare(this.getFields()[end.pozX][begin.pozY]);
+					pawn.setField(this.getFields()[end.pozX][begin.pozY]);
 
 				} else if (moved.getSymbol() == Pawn.SYMBOL && last.getPromotedPiece() != null) {
 					Piece promoted = this.getFields()[end.pozX][end.pozY].getPiece();
-					promoted.setSquare(null);
+					promoted.setField(null);
 					this.getFields()[end.pozX][end.pozY].setPiece(null);
 				}
 
@@ -379,7 +383,7 @@ public class Chessboard {
 
 				if (taken != null && !last.wasEnPassant()) {
 					this.getFields()[end.pozX][end.pozY].setPiece(taken);
-					taken.setSquare(this.getFields()[end.pozX][end.pozY]);
+					taken.setField(this.getFields()[end.pozX][end.pozY]);
 				} else {
 					this.getFields()[end.pozX][end.pozY].setPiece(null);
 				}
@@ -471,7 +475,7 @@ public class Chessboard {
 	public boolean tryMove(int beginX, int beginY, int endX, int endY) throws Exception {
 		try {
 			select(getFields()[beginX][beginY]);
-			if (activeSquare.getPiece().allMoves().indexOf(getFields()[endX][endY]) != -1) // move
+			if (activeField.getPiece().allMoves().indexOf(getFields()[endX][endY]) != -1) // move
 			{
 				move(getFields()[beginX][beginY], getFields()[endX][endY], true);
 			} else {
@@ -492,16 +496,16 @@ public class Chessboard {
 		}
 	}
 
-	public void setActiveField(Square field) {
-		activeSquare = field;
+	public void setActiveField(ChessboardField field) {
+		activeField = field;
 	}
 
-	public Square getActiveField() {
-		return activeSquare;
+	public ChessboardField getActiveField() {
+		return activeField;
 	}
 
-	public Square[][] getFields() {
-		return squares;
+	public ChessboardField[][] getFields() {
+		return fields;
 	}
 
 	public Pawn getTwoSquareMovedPawn() {
@@ -512,7 +516,7 @@ public class Chessboard {
 		this.twoSquareMovedPawn = twoSquareMovedPawn;
 	}
 
-	public void move(Square begin, Square end) throws Exception {
+	public void move(ChessboardField begin, ChessboardField end) throws Exception {
 		move(begin, end, true);
 	}
 }

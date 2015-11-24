@@ -546,7 +546,7 @@ public class King extends Piece {
 	 * @return bool true if king is save, else returns false
 	 * @throws Exception 
 	 */
-	public boolean willBeSafeWhenMoveOtherPiece(Square sqIsHere, Square sqWillBeThere) throws Exception // long
+	public boolean willBeSafeWhenMoveOtherPiece(ChessboardField sqIsHere, ChessboardField sqWillBeThere) throws Exception // long
 	// name
 	// ;)
 	{

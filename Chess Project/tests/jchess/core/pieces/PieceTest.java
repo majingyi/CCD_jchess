@@ -57,7 +57,7 @@ public class PieceTest {
 		// setSquare outside the board left
 		boolean exception = false;
 		try {
-			p.setSquare(new Square(8, 0, null, board));
+			p.setField(new Square(8, 0, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -67,7 +67,7 @@ public class PieceTest {
 		// setSquare outside the board right
 		exception = false;
 		try {
-			p.setSquare(new Square(-1, 0, null, board));
+			p.setField(new Square(-1, 0, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -77,7 +77,7 @@ public class PieceTest {
 		// setSquare outside the board top
 		exception = false;
 		try {
-			p.setSquare(new Square(0, -1, null, board));
+			p.setField(new Square(0, -1, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -87,7 +87,7 @@ public class PieceTest {
 		// setSquare outside the board bottom
 		exception = false;
 		try {
-			p.setSquare(new Square(0, 8, null, board));
+			p.setField(new Square(0, 8, null, board));
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -95,7 +95,7 @@ public class PieceTest {
 		Assert.assertTrue(exception);
 
 		// set valid square
-		p.setSquare(new Square(3, 5, null, board));
+		p.setField(new Square(3, 5, null, board));
 		Square sq = (Square) p.getField();
 		Assert.assertNotNull(sq);
 		Assert.assertEquals(5, sq.pozY);

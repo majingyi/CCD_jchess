@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 
 import jchess.JChessApp;
 import jchess.core.board.Chessboard;
-import jchess.core.board.Square;
+import jchess.core.board.ChessboardField;
 import jchess.core.pieces.King;
 import jchess.core.util.Constants;
 import jchess.core.util.Game;
@@ -109,7 +109,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 				int x = event.getX();// get X position of mouse
 				int y = event.getY();// get Y position of mouse
 
-				Square sq = chessboard.getSquare(x, y);
+				ChessboardField sq = chessboard.getSquare(x, y);
 				if ((sq == null || sq.getPiece() == null && chessboard.getChessboard().getActiveField() == null)
 						|| (this.chessboard.getChessboard().getActiveField() == null && sq.getPiece() != null && sq.getPiece().getPlayer() != game.getActivePlayer())) {
 					return;

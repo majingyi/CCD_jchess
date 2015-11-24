@@ -47,7 +47,7 @@ public abstract class MoveBehavior implements IMoveBehavior {
 	 * @return true if owner(player) is different
 	 * */
 	protected boolean otherOwner(int x, int y) {
-		Square sq = m_Chessboard.getFields()[x][y];
+		ChessboardField sq = m_Chessboard.getFields()[x][y];
 		if (sq.getPiece() == null) {
 			return false;
 		}

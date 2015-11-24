@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.Square;
 import jchess.core.util.Player;
 
 public class KingMoveBehavior extends MoveBehavior {
@@ -18,8 +17,8 @@ public class KingMoveBehavior extends MoveBehavior {
 
 	public ArrayList<ChessboardField> allMoves() {
 		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
-		Square sq;
-		Square sq1;
+		ChessboardField sq;
+		ChessboardField sq1;
 		for (int i = this.m_Field.pozX - 1; i <= this.m_Field.pozX + 1; i++) {
 			for (int y = this.m_Field.pozY - 1; y <= this.m_Field.pozY + 1; y++) {
 				if (Chessboard.isout(i, y) == false) {// out of bounds protection

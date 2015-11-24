@@ -299,7 +299,7 @@ public class MoveHistory {
 			int yTo = 9;
 			boolean pieceFound = false;
 			if (locMove.length() <= 3) {
-				Square[][] squares = chessboard.getFields();
+				ChessboardField[][] squares = chessboard.getFields();
 				xTo = locMove.charAt(from) - 97;// from ASCII
 				yTo = ChessboardUI.bottom - (locMove.charAt(from + 1) - 49);// from
 				// ASCII

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.Square;
 import jchess.core.util.Player;
 
 public class PawnMoveBehavior extends MoveBehavior {
@@ -16,8 +15,8 @@ public class PawnMoveBehavior extends MoveBehavior {
 	@Override
 	public ArrayList<ChessboardField> allMoves() throws Exception {
 		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
-		Square sq;
-		Square sq1;
+		ChessboardField sq;
+		ChessboardField sq1;
 		int first = this.m_Field.pozY - 1;// number where to move
 		int second = this.m_Field.pozY - 2;// number where to move (only in first
 		// move)

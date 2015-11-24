@@ -95,7 +95,7 @@ public class ChessboardUI extends JPanel {
 	 *          y position on chessboard
 	 * @return reference to searched square
 	 */
-	public Square getSquare(int x, int y) {
+	public ChessboardField getSquare(int x, int y) {
 		if ((x > this.get_height()) || (y > this.get_widht())) // test if click
 		// is out of
 		// chessboard
@@ -121,7 +121,7 @@ public class ChessboardUI extends JPanel {
 		}
 
 		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		Square result;
+		ChessboardField result;
 		try {
 			result = board.getFields()[(int) square_x - 1][(int) square_y - 1];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
@@ -222,7 +222,7 @@ public class ChessboardUI extends JPanel {
 																																														// of
 																																														// selected
 			// square
-			Square tmpSquare = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)];
+			ChessboardField tmpSquare = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)];
 			if (tmpSquare.getPiece() != null) {
 				try {
 					this.moves = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)].getPiece().allMoves();

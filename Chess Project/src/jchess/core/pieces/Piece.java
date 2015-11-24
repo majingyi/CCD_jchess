@@ -77,7 +77,7 @@ public abstract class Piece {
 		return m_Field;
 	}
 
-	public void setSquare(ChessboardField square) throws Exception {
+	public void setField(ChessboardField square) throws Exception {
 		if (square == null || Chessboard.isValidSquare(square)) {
 			this.m_Field = square;
 			moveBehavior.setChessboardField(this.m_Field);
