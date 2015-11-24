@@ -16,6 +16,11 @@ public class ChessboardField {
 
 	public void setPiece(Piece piece) throws Exception {
 		m_Piece = piece;
-		m_Piece.setSquare(this);
+		/*
+		 * If piece is moved from this field, m_Piece can be null; This is allowed.
+		 */
+		if (m_Piece != null) {// TODO move to move method, should not be done here
+			m_Piece.setSquare(this);
+		}
 	}
 }

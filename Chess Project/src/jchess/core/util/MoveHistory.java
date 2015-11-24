@@ -16,8 +16,6 @@ import jchess.ui.lang.Language;
  * by player are correct. All moves which was taken by current player are saving
  * as List of Strings The history of moves is printing in a table
  * 
- * @param gameTab
- *          The current game
  */
 public class MoveHistory {
 

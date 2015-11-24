@@ -99,7 +99,6 @@ public class PieceTest {
 		Assert.assertNotNull(sq);
 		Assert.assertEquals(5, sq.pozY);
 		Assert.assertEquals(3, sq.pozX);
-
 	}
 
 	@Test
