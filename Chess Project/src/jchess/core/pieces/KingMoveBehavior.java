@@ -3,6 +3,7 @@ package jchess.core.pieces;
 import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
 import jchess.core.util.Player;
 
@@ -10,20 +11,20 @@ public class KingMoveBehavior extends MoveBehavior {
 
 	private King	king	= null;
 
-	public KingMoveBehavior(Player player, Chessboard chessboard, Square square, King king) {
-		super(player, chessboard, square);
+	public KingMoveBehavior(Player player, Chessboard chessboard, ChessboardField field, King king) {
+		super(player, chessboard, field);
 		this.king = king;
 	}
 
-	public ArrayList<Square> allMoves() {
-		ArrayList<Square> list = new ArrayList<Square>();
+	public ArrayList<ChessboardField> allMoves() {
+		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
 		Square sq;
 		Square sq1;
-		for (int i = this.square.pozX - 1; i <= this.square.pozX + 1; i++) {
-			for (int y = this.square.pozY - 1; y <= this.square.pozY + 1; y++) {
+		for (int i = this.m_Field.pozX - 1; i <= this.m_Field.pozX + 1; i++) {
+			for (int y = this.m_Field.pozY - 1; y <= this.m_Field.pozY + 1; y++) {
 				if (Chessboard.isout(i, y) == false) {// out of bounds protection
-					sq = this.chessboard.squares[i][y];
-					if (this.square == sq) {// if we're checking square on which is King
+					sq = this.m_Chessboard.getFields()[i][y];
+					if (this.m_Field == sq) {// if we're checking square on which is King
 						continue;
 					}
 					if (this.checkPiece(i, y)) {// if square is empty
@@ -38,19 +39,20 @@ public class KingMoveBehavior extends MoveBehavior {
 		if (!king.wasMotion && !king.isChecked()) {// check if king was not moved
 																								// before
 
-			if (chessboard.squares[0][this.square.pozY].piece != null && chessboard.squares[0][this.square.pozY].piece.getSymbol() == Rook.SYMBOL) {
+			if (m_Chessboard.getFields()[0][this.m_Field.pozY].getPiece() != null
+					&& m_Chessboard.getFields()[0][this.m_Field.pozY].getPiece().getSymbol() == Rook.SYMBOL) {
 				boolean canCastling = true;
 
-				Rook rook = (Rook) chessboard.squares[0][this.square.pozY].piece;
+				Rook rook = (Rook) m_Chessboard.getFields()[0][this.m_Field.pozY].getPiece();
 				if (!rook.wasMotion) {
-					for (int i = this.square.pozX - 1; i > 0; i--) {// go left
-						if (chessboard.squares[i][this.square.pozY].piece != null) {
+					for (int i = this.m_Field.pozX - 1; i > 0; i--) {// go left
+						if (m_Chessboard.getFields()[i][this.m_Field.pozY].getPiece() != null) {
 							canCastling = false;
 							break;
 						}
 					}
-					sq = this.chessboard.squares[this.square.pozX - 2][this.square.pozY];
-					sq1 = this.chessboard.squares[this.square.pozX - 1][this.square.pozY];
+					sq = this.m_Chessboard.getFields()[this.m_Field.pozX - 2][this.m_Field.pozY];
+					sq1 = this.m_Chessboard.getFields()[this.m_Field.pozX - 1][this.m_Field.pozY];
 					if (canCastling && king.isSafe(sq) && king.isSafe(sq1)) { // can do
 																																		// castling
 																																		// when none
@@ -61,22 +63,23 @@ public class KingMoveBehavior extends MoveBehavior {
 					}
 				}
 			}
-			if (chessboard.squares[7][this.square.pozY].piece != null && chessboard.squares[7][this.square.pozY].piece.getSymbol() == Rook.SYMBOL) {
+			if (m_Chessboard.getFields()[7][this.m_Field.pozY].getPiece() != null
+					&& m_Chessboard.getFields()[7][this.m_Field.pozY].getPiece().getSymbol() == Rook.SYMBOL) {
 				boolean canCastling = true;
-				Rook rook = (Rook) chessboard.squares[7][this.square.pozY].piece;
+				Rook rook = (Rook) m_Chessboard.getFields()[7][this.m_Field.pozY].getPiece();
 				if (!rook.wasMotion) {// if king was not moves before and is not checked
-					for (int i = this.square.pozX + 1; i < 7; i++) {// go right
-						if (chessboard.squares[i][this.square.pozY].piece != null) {// if
-																																				// square
-																																				// is
-																																				// not
-																																				// empty
+					for (int i = this.m_Field.pozX + 1; i < 7; i++) {// go right
+						if (m_Chessboard.getFields()[i][this.m_Field.pozY].getPiece() != null) {// if
+							// square
+							// is
+							// not
+							// empty
 							canCastling = false;// cannot castling
 							break; // exit
 						}
 					}
-					sq = this.chessboard.squares[this.square.pozX + 2][this.square.pozY];
-					sq1 = this.chessboard.squares[this.square.pozX + 1][this.square.pozY];
+					sq = this.m_Chessboard.getFields()[this.m_Field.pozX + 2][this.m_Field.pozY];
+					sq1 = this.m_Chessboard.getFields()[this.m_Field.pozX + 1][this.m_Field.pozY];
 					if (canCastling && king.isSafe(sq) && king.isSafe(sq1)) {// can do
 																																		// castling
 																																		// when none

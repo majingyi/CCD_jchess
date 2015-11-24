@@ -51,7 +51,7 @@ public class PieceTest {
 		Chessboard board = new Chessboard(null, null);
 		Piece p = new TestPiece(board, new Player("hans", Player.colors.white));
 
-		Assert.assertEquals(null, p.getSquare());
+		Assert.assertEquals(null, p.getField());
 
 		// setSquare outside the board left
 		boolean exception = false;
@@ -95,11 +95,10 @@ public class PieceTest {
 
 		// set valid square
 		p.setSquare(new Square(3, 5, null));
-		Square sq = p.getSquare();
+		Square sq = (Square) p.getField();
 		Assert.assertNotNull(sq);
 		Assert.assertEquals(5, sq.pozY);
 		Assert.assertEquals(3, sq.pozX);
-
 	}
 
 	@Test

@@ -3,154 +3,167 @@ package jchess.core.pieces;
 import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
 import jchess.core.util.Player;
 
 public class PawnMoveBehavior extends MoveBehavior {
 
-	public PawnMoveBehavior(Player player, Chessboard chessboard, Square square) {
-		super(player, chessboard, square);
+	public PawnMoveBehavior(Player player, Chessboard m_Chessboard, ChessboardField field) {
+		super(player, m_Chessboard, field);
 	}
 
 	@Override
-	public ArrayList<Square> allMoves() {
-		ArrayList<Square> list = new ArrayList<Square>();
+	public ArrayList<ChessboardField> allMoves() throws Exception {
+		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
 		Square sq;
 		Square sq1;
-		int first = this.square.pozY - 1;// number where to move
-		int second = this.square.pozY - 2;// number where to move (only in first
+		int first = this.m_Field.pozY - 1;// number where to move
+		int second = this.m_Field.pozY - 2;// number where to move (only in first
 		// move)
-		if (this.player.isGoDown()) {// check if player "go" down or up
-			first = this.square.pozY + 1;// if yes, change value
-			second = this.square.pozY + 2;// if yes, change value
+		if (this.m_Player.isGoDown()) {// check if player "go" down or up
+			first = this.m_Field.pozY + 1;// if yes, change value
+			second = this.m_Field.pozY + 2;// if yes, change value
 		}
 		if (Chessboard.isout(first, first)) {// out of bounds protection
 			return list;// return empty list
 		}
-		sq = chessboard.squares[this.square.pozX][first];
-		if (sq.piece == null) {// if next is free
+		sq = m_Chessboard.getFields()[this.m_Field.pozX][first];
+		if (sq.getPiece() == null) {// if next is free
 			// list.add(sq);//add
-			if (this.player.getColor() == Player.colors.white) {// white
+			if (this.m_Player.getColor() == Player.colors.white) {// white
 
-				if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
-					list.add(chessboard.squares[this.square.pozX][first]);
+				if (this.m_Chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.m_Field,
+						m_Chessboard.getFields()[this.m_Field.pozX][first])) {
+					list.add(m_Chessboard.getFields()[this.m_Field.pozX][first]);
 				}
 			} else {// or black
 
-				if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][first])) {
-					list.add(chessboard.squares[this.square.pozX][first]);
+				if (this.m_Chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.m_Field,
+						m_Chessboard.getFields()[this.m_Field.pozX][first])) {
+					list.add(m_Chessboard.getFields()[this.m_Field.pozX][first]);
 				}
 			}
 
 			if (isDoubleMoveAllowed()) {
-				sq1 = chessboard.squares[this.square.pozX][second];
-				if (sq1.piece == null) {
+				sq1 = m_Chessboard.getFields()[this.m_Field.pozX][second];
+				if (sq1.getPiece() == null) {
 					// list.add(sq1);//only in first move
-					if (this.player.getColor() == Player.colors.white) {// white
+					if (this.m_Player.getColor() == Player.colors.white) {// white
 
-						if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
-							list.add(chessboard.squares[this.square.pozX][second]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX][second])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX][second]);
 						}
 					} else {// or black
 
-						if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX][second])) {
-							list.add(chessboard.squares[this.square.pozX][second]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX][second])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX][second]);
 						}
 					}
 				}
 			}
 		}
-		if (Chessboard.isout(this.square.pozX - 1, this.square.pozY) == false) // out
-																																						// of
+		if (Chessboard.isout(this.m_Field.pozX - 1, this.m_Field.pozY) == false) // out
+																																							// of
 		// bounds
 		// protection
 		{
 			// capture
-			sq = chessboard.squares[this.square.pozX - 1][first];
-			if (sq.piece != null) {// check if can hit left
-				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {
+			sq = m_Chessboard.getFields()[this.m_Field.pozX - 1][first];
+			if (sq.getPiece() != null) {// check if can hit left
+				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {
 					// list.add(sq);
-					if (this.player.getColor() == Player.colors.white) {// white
+					if (this.m_Player.getColor() == Player.colors.white) {// white
 
-						if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
-							list.add(chessboard.squares[this.square.pozX - 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX - 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX - 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
-							list.add(chessboard.squares[this.square.pozX - 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX - 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX - 1][first]);
 						}
 					}
 				}
 			}
 
 			// En passant
-			sq = chessboard.squares[this.square.pozX - 1][this.square.pozY];
-			if (sq.piece != null && this.chessboard.twoSquareMovedPawn != null && sq == this.chessboard.twoSquareMovedPawn.square) {// check
+			sq = m_Chessboard.getFields()[this.m_Field.pozX - 1][this.m_Field.pozY];
+			if (sq.getPiece() != null && this.m_Chessboard.getTwoSquareMovedPawn() != null && sq == this.m_Chessboard.getTwoSquareMovedPawn().field) {// check
 				// if
 				// can
 				// hit
 				// left
-				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {// unnecessary
+				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
-					if (this.player.getColor() == Player.colors.white) {// white
+					if (this.m_Player.getColor() == Player.colors.white) {// white
 
-						if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
-							list.add(chessboard.squares[this.square.pozX - 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX - 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX - 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX - 1][first])) {
-							list.add(chessboard.squares[this.square.pozX - 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX - 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX - 1][first]);
 						}
 					}
 				}
 			}
 		}
-		if (Chessboard.isout(this.square.pozX + 1, this.square.pozY) == false) {// out
-																																						// of
+		if (Chessboard.isout(this.m_Field.pozX + 1, this.m_Field.pozY) == false) {// out
+			// of
 			// bounds
 			// protection
 
 			// capture
-			sq = chessboard.squares[this.square.pozX + 1][first];
-			if (sq.piece != null) {// check if can hit right
-				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {
+			sq = m_Chessboard.getFields()[this.m_Field.pozX + 1][first];
+			if (sq.getPiece() != null) {// check if can hit right
+				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {
 					// list.add(sq);
-					if (this.player.getColor() == Player.colors.white) { // white
+					if (this.m_Player.getColor() == Player.colors.white) { // white
 
-						if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
-							list.add(chessboard.squares[this.square.pozX + 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX + 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX + 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
-							list.add(chessboard.squares[this.square.pozX + 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX + 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX + 1][first]);
 						}
 					}
 				}
 			}
 
 			// En passant
-			sq = chessboard.squares[this.square.pozX + 1][this.square.pozY];
-			if (sq.piece != null && this.chessboard.twoSquareMovedPawn != null && sq == this.chessboard.twoSquareMovedPawn.square) {// check
+			sq = m_Chessboard.getFields()[this.m_Field.pozX + 1][this.m_Field.pozY];
+			if (sq.getPiece() != null && this.m_Chessboard.getTwoSquareMovedPawn() != null && sq == this.m_Chessboard.getTwoSquareMovedPawn().field) {// check
 				// if
 				// can
 				// hit
 				// left
-				if (this.player != sq.piece.player && (sq.piece.getSymbol() == King.SYMBOL) == false) {// unnecessary
+				if (this.m_Player != sq.getPiece().player && (sq.getPiece().getSymbol() == King.SYMBOL) == false) {// unnecessary
 
 					// list.add(sq);
-					if (this.player.getColor() == Player.colors.white) {// white
+					if (this.m_Player.getColor() == Player.colors.white) {// white
 
-						if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
-							list.add(chessboard.squares[this.square.pozX + 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX + 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX + 1][first]);
 						}
 					} else {// or black
 
-						if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[this.square.pozX + 1][first])) {
-							list.add(chessboard.squares[this.square.pozX + 1][first]);
+						if (this.m_Chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.m_Field,
+								m_Chessboard.getFields()[this.m_Field.pozX + 1][first])) {
+							list.add(m_Chessboard.getFields()[this.m_Field.pozX + 1][first]);
 						}
 					}
 				}
@@ -162,13 +175,13 @@ public class PawnMoveBehavior extends MoveBehavior {
 
 	/**
 	 * 
-	 * Check if pawn is allowed to move to squares at once.
+	 * Check if pawn is allowed to move to getFields() at once.
 	 * 
 	 * Normally this is allowed for the first time of the current pawn only.
 	 * 
-	 * @return true, if pawn is allowed to move two squares at once.
+	 * @return true, if pawn is allowed to move two getFields() at once.
 	 */
 	protected boolean isDoubleMoveAllowed() {
-		return (player.isGoDown() && this.square.pozY == 1) || (!player.isGoDown() && this.square.pozY == 6);
+		return (m_Player.isGoDown() && this.m_Field.pozY == 1) || (!m_Player.isGoDown() && this.m_Field.pozY == 6);
 	}
 }

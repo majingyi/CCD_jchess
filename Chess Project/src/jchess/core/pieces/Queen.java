@@ -10,7 +10,7 @@ import jchess.core.util.Player;
  */
 public class Queen extends Piece {
 
-	public static final String	SYMBOL	= "Queen"; //$NON-NLS-1$
+	public static final String	SYMBOL	= "Queen";	//$NON-NLS-1$
 
 	public Queen(Chessboard chessboard, Player player) throws Exception {
 		super(chessboard, player, SYMBOL);
@@ -18,6 +18,6 @@ public class Queen extends Piece {
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new QueenMoveBehavior(player, chessboard, square);
+		return new QueenMoveBehavior(player, chessboard, field);
 	}
 }
