@@ -2,12 +2,15 @@ package jchess.core.board;
 
 import jchess.core.pieces.Piece;
 
-public class ChessboardField {
+public abstract class ChessboardField {
 
-	private Piece	m_Piece	= null;
+	private Piece				m_Piece				= null;
+	private String			m_Identifier	= null;
+	private Chessboard	m_Board				= null;
 
-	public ChessboardField(Piece piece) {
-		m_Piece = piece;
+	public ChessboardField(String identifier, Chessboard board) {
+		m_Identifier = identifier;
+		setChessBoard(board);
 	}
 
 	public Piece getPiece() {
@@ -16,11 +19,17 @@ public class ChessboardField {
 
 	public void setPiece(Piece piece) throws Exception {
 		m_Piece = piece;
-		/*
-		 * If piece is moved from this field, m_Piece can be null; This is allowed.
-		 */
-		if (m_Piece != null) {// TODO move to move method, should not be done here
-			m_Piece.setSquare(this);
-		}
+	}
+
+	public String getIdentifier() {
+		return m_Identifier;
+	}
+
+	public Chessboard getChessBoard() {
+		return m_Board;
+	}
+
+	public void setChessBoard(Chessboard m_Board) {
+		this.m_Board = m_Board;
 	}
 }
