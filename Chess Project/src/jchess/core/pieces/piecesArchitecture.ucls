@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="jchess.core.pieces.Queen" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/Queen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1805" y="516"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="jchess.core.pieces.Knight" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/Knight.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="326" y="305"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="jchess.core.pieces.PawnMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/PawnMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="173" y="1004"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="jchess.core.pieces.BishopMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/BishopMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1488" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="jchess.core.pieces.King" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/King.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="397" y="666"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="jchess.core.pieces.Piece" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/Piece.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1122" y="681"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="jchess.core.pieces.IMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/IMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="879" y="1278"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="jchess.core.pieces.Rook" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/Rook.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1194" y="166"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="jchess.core.pieces.Bishop" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/Bishop.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1509" y="300"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="jchess.core.pieces.KingMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/KingMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="849" y="991"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="jchess.core.pieces.QueenMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/QueenMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1816" y="987"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="jchess.core.pieces.KnightMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/KnightMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="504" y="1000"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="jchess.core.pieces.RookMoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/RookMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1168" y="990"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="jchess.core.pieces.MoveBehavior" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/MoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1395" y="1228"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="jchess.core.pieces.Pawn" project="Chess Project" 
+    file="/Chess Project/src/jchess/core/pieces/Pawn.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="807" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="20">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="26">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <generalization id="27">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="29">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="30" name="moveBehavior"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <dependency id="36">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="37">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="38" name="king"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="40">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="42">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="43">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="45">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="46">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <dependency id="48">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <dependency id="53">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="55">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <dependency id="57">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <generalization id="58">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <dependency id="59">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <dependency id="61">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <realization id="62">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <dependency id="63">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <dependency id="65">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <dependency id="67">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="68">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
