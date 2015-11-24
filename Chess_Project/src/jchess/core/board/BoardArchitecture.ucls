@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="jchess.core.board.ChessboardField" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/board/ChessboardField.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="jchess.core.board.ChessboardField" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/board/ChessboardField.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="213" y="193"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="jchess.core.board.Chessboard" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/board/Chessboard.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="jchess.core.board.Chessboard" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/board/Chessboard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="903" y="408"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="jchess.core.board.Square" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/board/Square.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="jchess.core.board.Square" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/board/Square.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="304" y="493"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="jchess.core.board.Hexagon" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/board/Hexagon.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="jchess.core.board.Hexagon" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/board/Hexagon.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="167" x="445" y="66"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

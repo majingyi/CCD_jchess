@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="jchess.core.pieces.Queen" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/Queen.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="jchess.core.pieces.Queen" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Queen.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1805" y="516"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="jchess.core.pieces.Knight" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/Knight.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="jchess.core.pieces.Knight" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Knight.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="326" y="305"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="jchess.core.pieces.PawnMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/PawnMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="jchess.core.pieces.PawnMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/PawnMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="173" y="1004"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="jchess.core.pieces.BishopMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/BishopMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="jchess.core.pieces.BishopMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/BishopMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1488" y="986"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="jchess.core.pieces.King" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/King.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="jchess.core.pieces.King" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/King.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="397" y="666"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="jchess.core.pieces.Piece" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/Piece.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="jchess.core.pieces.Piece" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Piece.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1122" y="681"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="jchess.core.pieces.IMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/IMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="7" language="java" name="jchess.core.pieces.IMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/IMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="879" y="1278"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="jchess.core.pieces.Rook" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/Rook.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="jchess.core.pieces.Rook" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Rook.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1194" y="166"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="jchess.core.pieces.Bishop" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/Bishop.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="jchess.core.pieces.Bishop" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Bishop.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1509" y="300"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="jchess.core.pieces.KingMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/KingMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="jchess.core.pieces.KingMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/KingMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="849" y="991"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -91,8 +91,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="jchess.core.pieces.QueenMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/QueenMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="jchess.core.pieces.QueenMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/QueenMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1816" y="987"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -100,8 +100,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="jchess.core.pieces.KnightMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/KnightMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="12" language="java" name="jchess.core.pieces.KnightMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/KnightMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="504" y="1000"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -109,8 +109,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="jchess.core.pieces.RookMoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/RookMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="jchess.core.pieces.RookMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/RookMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1168" y="990"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -118,8 +118,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="jchess.core.pieces.MoveBehavior" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/MoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="14" language="java" name="jchess.core.pieces.MoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/MoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1395" y="1228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -127,8 +127,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="jchess.core.pieces.Pawn" project="Chess Project" 
-    file="/Chess Project/src/jchess/core/pieces/Pawn.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="15" language="java" name="jchess.core.pieces.Pawn" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Pawn.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="807" y="320"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
