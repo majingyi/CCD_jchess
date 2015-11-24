@@ -37,8 +37,9 @@ public class MoveHistory {
 		this.moves.add(move);// add new move (O-O or O-O-O)
 	}
 
-	public String addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece, GameTab gameTab) {
-		String locMove = new String(begin.piece.getSymbolForMoveHistory());
+	public String addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece, GameTab gameTab)
+			throws Exception {
+		String locMove = new String(begin.getPiece().getSymbolForMoveHistory());
 
 		locMove += Character.toString((char) (begin.pozX + 97));// add letter of
 																														// Square from
@@ -47,7 +48,7 @@ public class MoveHistory {
 		locMove += Integer.toString(8 - begin.pozY);// add number of Square from
 																								// which move was made
 
-		if (end.piece != null) {
+		if (end.getPiece() != null) {
 			locMove += "x";// take down opponent piece //$NON-NLS-1$
 		} else {
 			locMove += "-";// normal move //$NON-NLS-1$
@@ -59,7 +60,7 @@ public class MoveHistory {
 		locMove += Integer.toString(8 - end.pozY);// add number of Square to which
 																							// move was made
 
-		if (begin.piece.getSymbol() == Pawn.SYMBOL && begin.pozX - end.pozX != 0 && end.piece == null) {
+		if (begin.getPiece().getSymbol() == Pawn.SYMBOL && begin.pozX - end.pozX != 0 && end.getPiece() == null) {
 			locMove += "(e.p)";// pawn take down opponent en passant //$NON-NLS-1$
 			wasEnPassant = true;
 		}
@@ -79,7 +80,7 @@ public class MoveHistory {
 		}
 
 		if (registerInHistory) {
-			this.moveBackStack.add(new Move(new Square(begin), new Square(end), begin.piece, end.piece, castlingMove, wasEnPassant, promotedPiece));
+			this.moveBackStack.add(new Move(new Square(begin), new Square(end), begin.getPiece(), end.getPiece(), castlingMove, wasEnPassant, promotedPiece));
 		}
 
 		return locMove;
@@ -300,21 +301,22 @@ public class MoveHistory {
 			int yTo = 9;
 			boolean pieceFound = false;
 			if (locMove.length() <= 3) {
-				Square[][] squares = chessboard.squares;
+				Square[][] squares = chessboard.getFields();
 				xTo = locMove.charAt(from) - 97;// from ASCII
 				yTo = ChessboardUI.bottom - (locMove.charAt(from + 1) - 49);// from
 				// ASCII
 				for (int i = 0; i < squares.length && (pieceFound == false); i++) {
 					for (int j = 0; j < squares[i].length && (pieceFound == false); j++) {
-						if (squares[i][j].piece == null || activePlayer.getColor() != squares[i][j].piece.player.getColor()) {
+						if (squares[i][j].getPiece() == null || activePlayer.getColor() != squares[i][j].getPiece().player.getColor()) {
 							continue;
 						}
-						ArrayList<Square> pieceMoves = squares[i][j].piece.allMoves();
+						ArrayList<Square> pieceMoves = squares[i][j].getPiece().allMoves();
 						for (Object square : pieceMoves) {
 							Square currSquare = (Square) square;
 							if (currSquare.pozX == xTo && currSquare.pozY == yTo) {
-								xFrom = squares[i][j].piece.getSquare().pozX;
-								yFrom = squares[i][j].piece.getSquare().pozY;
+								Square sq = (Square) squares[i][j].getPiece().getField();
+								xFrom = sq.pozX;
+								yFrom = sq.pozY;
 								pieceFound = true;
 							}
 						}
@@ -331,7 +333,7 @@ public class MoveHistory {
 			canMove = chessboard.tryMove(xFrom, yFrom, xTo, yTo);
 			if (canMove == false) // if move is illegal
 			{
-				chessboard.activeSquare = null;
+				chessboard.setActiveField(null);
 				throw new Exception(Language.getString("illegal_move_on") + locMove); //$NON-NLS-1$
 			}
 		}

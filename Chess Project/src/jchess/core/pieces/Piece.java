@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
@@ -20,12 +21,12 @@ public abstract class Piece {
 
 	// TODO this class shall not draw itself, checkBoardUI is responsible for this
 
-	public Chessboard				chessboard		= null;
-	protected Square				square				= null;
-	public Player						player				= null;
-	private String					symbol				= Constants.EMPTY_STRING;
+	public Chessboard					chessboard		= null;
+	protected ChessboardField	field					= null;
+	public Player							player				= null;
+	private String						symbol				= Constants.EMPTY_STRING;
 
-	protected IMoveBehavior	moveBehavior	= null;
+	protected IMoveBehavior		moveBehavior	= null;
 
 	public Piece(Chessboard chessboard, Player player, String symbol) throws Exception {
 		this.chessboard = chessboard;
@@ -56,7 +57,7 @@ public abstract class Piece {
 		return false;// if not, piece cannot move
 	}
 
-	public ArrayList<Square> allMoves() {
+	public ArrayList<Square> allMoves() throws Exception {
 		return moveBehavior.allMoves();
 	}
 
@@ -71,14 +72,14 @@ public abstract class Piece {
 			throw new Exception(Language.getString("Piece.0")); //$NON-NLS-1$
 	}
 
-	public Square getSquare() {
-		return square;
+	public ChessboardField getField() {
+		return field;
 	}
 
-	public void setSquare(Square square) throws Exception {
+	public void setSquare(ChessboardField square) throws Exception {
 		if (square == null || Chessboard.isValidSquare(square)) {
-			this.square = square;
-			moveBehavior.setSquare(this.square);
+			this.field = square;
+			moveBehavior.setChessboardField(this.field);
 		} else {
 			throw new Exception(Language.getString("Piece.1")); //$NON-NLS-1$
 		}

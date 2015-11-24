@@ -16,6 +16,6 @@ public class Knight extends Piece {
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new KnightMoveBehavior(player, chessboard, square);
+		return new KnightMoveBehavior(player, chessboard, field);
 	}
 }

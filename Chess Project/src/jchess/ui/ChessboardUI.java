@@ -68,7 +68,7 @@ public class ChessboardUI extends JPanel {
 	 */
 	public ChessboardUI(GameTab gt, MoveHistoryUI moves_history) throws FileNotFoundException {
 		board = new Chessboard(gt, moves_history);
-		board.activeSquare = null;
+		board.setActiveField(null);
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
 		board.setActive_x_square(0);
@@ -121,7 +121,7 @@ public class ChessboardUI extends JPanel {
 		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		Square result;
 		try {
-			result = board.squares[(int) square_x - 1][(int) square_y - 1];
+			result = board.getFields()[(int) square_x - 1][(int) square_y - 1];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 			Logging.log(Language.getString("ChessboardUI.6"), exc); //$NON-NLS-1$
 			return null;
@@ -198,16 +198,16 @@ public class ChessboardUI extends JPanel {
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
 		{
 			for (int y = 0; y < 8; y++) {
-				if (board.squares[i][y].piece != null) {
+				if (board.getFields()[i][y].getPiece() != null) {
 					try {
-						drawPieceImage(g, board.squares[i][y].piece);
+						drawPieceImage(g, board.getFields()[i][y].getPiece());
 					} catch (FileNotFoundException e) {
 						Logging.log(e);
 						// TODO tell user
 					}
 				}
 			}
-		}// --endOf--drawPiecesOnSquares
+		}
 		if ((board.getActive_x_square() != 0) && (board.getActive_y_square() != 0)) // if
 		// some
 		// square
@@ -220,9 +220,13 @@ public class ChessboardUI extends JPanel {
 																																														// of
 																																														// selected
 			// square
-			Square tmpSquare = board.squares[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)];
-			if (tmpSquare.piece != null) {
-				this.moves = board.squares[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)].piece.allMoves();
+			Square tmpSquare = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)];
+			if (tmpSquare.getPiece() != null) {
+				try {
+					this.moves = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)].getPiece().allMoves();
+				} catch (Exception e) {
+					Logging.log(e);
+				}
 			}
 
 			for (Iterator<Square> it = moves.iterator(); moves != null && it.hasNext();) {
@@ -238,7 +242,7 @@ public class ChessboardUI extends JPanel {
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			Point topLeft = getTopLeftPoint();
 			int height = get_square_height();
-			Square sq = piece.getSquare();
+			Square sq = (Square) piece.getField();
 			int x = (sq.pozX * height) + topLeft.x;
 			int y = (sq.pozY * height) + topLeft.y;
 

@@ -21,6 +21,6 @@ public class Rook extends Piece {
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new RookMoveBehavior(player, chessboard, square);
+		return new RookMoveBehavior(player, chessboard, field);
 	}
 }

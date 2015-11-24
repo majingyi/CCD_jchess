@@ -33,25 +33,25 @@ public class Pawn extends Piece {
 	 */
 	public void promote(String newPiece) throws Exception {
 		if (newPiece.equals(Queen.SYMBOL)) {
-			setMoveBehavior(new QueenMoveBehavior(player, chessboard, square));
+			setMoveBehavior(new QueenMoveBehavior(player, chessboard, field));
 			setSymbol(Queen.SYMBOL);
 		} else if (newPiece.equals(Rook.SYMBOL)) {
-			setMoveBehavior(new RookMoveBehavior(player, chessboard, square));
+			setMoveBehavior(new RookMoveBehavior(player, chessboard, field));
 			setSymbol(Rook.SYMBOL);
 		} else if (newPiece.equals(Bishop.SYMBOL)) {
-			setMoveBehavior(new BishopMoveBehavior(player, chessboard, square));
+			setMoveBehavior(new BishopMoveBehavior(player, chessboard, field));
 			setSymbol(Bishop.SYMBOL);
 		} else if (newPiece.equals(King.SYMBOL)) {
 			throw new Exception(Language.getString("Pawn.1")); //$NON-NLS-1$
 		} else // knight
 		{
-			setMoveBehavior(new KnightMoveBehavior(player, chessboard, square));
+			setMoveBehavior(new KnightMoveBehavior(player, chessboard, field));
 			setSymbol(Knight.SYMBOL);
 		}
 	}
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new PawnMoveBehavior(player, chessboard, square);
+		return new PawnMoveBehavior(player, chessboard, field);
 	}
 }

@@ -16,6 +16,6 @@ public class Bishop extends Piece {
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new BishopMoveBehavior(player, chessboard, square);
+		return new BishopMoveBehavior(player, chessboard, getField());
 	}
 }

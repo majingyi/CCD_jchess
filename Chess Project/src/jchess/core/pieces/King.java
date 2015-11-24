@@ -8,6 +8,7 @@ package jchess.core.pieces;
  * over.
  */
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
 import jchess.core.util.Player;
 
@@ -29,20 +30,21 @@ public class King extends Piece {
 	 * @return bool true if king is not save, else returns false
 	 */
 	public boolean isChecked() {
-		return isSafe(this.square) == false;
+		return isSafe(field) == false;
 	}
 
 	/**
 	 * Method to check is the king is checked or stalemated
 	 * 
 	 * @return int 0 if nothing, 1 if checkmate, else returns 2
+	 * @throws Exception 
 	 */
-	public int isCheckmatedOrStalemated() {
+	public int isCheckmatedOrStalemated() throws Exception {
 		if (this.allMoves().size() == 0) {
 			for (int i = 0; i < 8; ++i) {
 				for (int j = 0; j < 8; ++j) {
-					if (chessboard.squares[i][j].piece != null && chessboard.squares[i][j].piece.player == this.player
-							&& chessboard.squares[i][j].piece.allMoves().size() != 0) {
+					if (chessboard.getFields()[i][j].getPiece() != null && chessboard.getFields()[i][j].getPiece().player == this.player
+							&& chessboard.getFields()[i][j].getPiece().allMoves().size() != 0) {
 						return 0;
 					}
 				}
@@ -63,25 +65,27 @@ public class King extends Piece {
 	 * 
 	 * @return bool true if king is save, else returns false
 	 */
-	public boolean isSafe(Square s) // A bit confusing code.
+	public boolean isSafe(ChessboardField cbf) // A bit confusing code.
 	{
+		Square field = (Square) cbf;
 		// Rook & Queen
-		for (int i = s.pozY + 1; i <= 7; ++i) // up
+		for (int i = field.pozY + 1; i <= 7; ++i) // up
 		{
-			if (this.chessboard.squares[s.pozX][i].piece == null || this.chessboard.squares[s.pozX][i].piece == this) // if
-																																																								// on
-																																																								// this
-																																																								// sqhuare
-																																																								// isn't
-																																																								// piece
+			if (this.chessboard.getFields()[field.pozX][i].getPiece() == null || this.chessboard.getFields()[field.pozX][i].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[s.pozX][i].piece.player != this.player) // if
-																																									// isn't
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[field.pozX][i].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[s.pozX][i].piece.getSymbol() == Rook.SYMBOL || this.chessboard.squares[s.pozX][i].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[field.pozX][i].getPiece().getSymbol() == Rook.SYMBOL
+						|| this.chessboard.getFields()[field.pozX][i].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -91,22 +95,23 @@ public class King extends Piece {
 			}
 		}
 
-		for (int i = s.pozY - 1; i >= 0; --i) // down
+		for (int i = field.pozY - 1; i >= 0; --i) // down
 		{
-			if (this.chessboard.squares[s.pozX][i].piece == null || this.chessboard.squares[s.pozX][i].piece == this) // if
-																																																								// on
-																																																								// this
-																																																								// sqhuare
-																																																								// isn't
-																																																								// piece
+			if (this.chessboard.getFields()[field.pozX][i].getPiece() == null || this.chessboard.getFields()[field.pozX][i].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[s.pozX][i].piece.player != this.player) // if
-																																									// isn't
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[field.pozX][i].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[s.pozX][i].piece.getSymbol() == Rook.SYMBOL || this.chessboard.squares[s.pozX][i].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[field.pozX][i].getPiece().getSymbol() == Rook.SYMBOL
+						|| this.chessboard.getFields()[field.pozX][i].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -116,22 +121,23 @@ public class King extends Piece {
 			}
 		}
 
-		for (int i = s.pozX - 1; i >= 0; --i) // left
+		for (int i = field.pozX - 1; i >= 0; --i) // left
 		{
-			if (this.chessboard.squares[i][s.pozY].piece == null || this.chessboard.squares[i][s.pozY].piece == this) // if
-																																																								// on
-																																																								// this
-																																																								// sqhuare
-																																																								// isn't
-																																																								// piece
+			if (this.chessboard.getFields()[i][field.pozY].getPiece() == null || this.chessboard.getFields()[i][field.pozY].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[i][s.pozY].piece.player != this.player) // if
-																																									// isn't
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[i][field.pozY].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[i][s.pozY].piece.getSymbol() == Rook.SYMBOL || this.chessboard.squares[i][s.pozY].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[i][field.pozY].getPiece().getSymbol() == Rook.SYMBOL
+						|| this.chessboard.getFields()[i][field.pozY].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -141,22 +147,23 @@ public class King extends Piece {
 			}
 		}
 
-		for (int i = s.pozX + 1; i <= 7; ++i) // right
+		for (int i = field.pozX + 1; i <= 7; ++i) // right
 		{
-			if (this.chessboard.squares[i][s.pozY].piece == null || this.chessboard.squares[i][s.pozY].piece == this) // if
-																																																								// on
-																																																								// this
-																																																								// sqhuare
-																																																								// isn't
-																																																								// piece
+			if (this.chessboard.getFields()[i][field.pozY].getPiece() == null || this.chessboard.getFields()[i][field.pozY].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[i][s.pozY].piece.player != this.player) // if
-																																									// isn't
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[i][field.pozY].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[i][s.pozY].piece.getSymbol() == Rook.SYMBOL || this.chessboard.squares[i][s.pozY].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[i][field.pozY].getPiece().getSymbol() == Rook.SYMBOL
+						|| this.chessboard.getFields()[i][field.pozY].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -167,22 +174,23 @@ public class King extends Piece {
 		}
 
 		// Bishop & Queen
-		for (int h = s.pozX - 1, i = s.pozY + 1; Chessboard.isout(h, i) == false; --h, ++i) // left-up
+		for (int h = field.pozX - 1, i = field.pozY + 1; Chessboard.isout(h, i) == false; --h, ++i) // left-up
 		{
-			if (this.chessboard.squares[h][i].piece == null || this.chessboard.squares[h][i].piece == this) // if
-																																																			// on
-																																																			// this
-																																																			// sqhuare
-																																																			// isn't
-																																																			// piece
+			if (this.chessboard.getFields()[h][i].getPiece() == null || this.chessboard.getFields()[h][i].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[h][i].piece.player != this.player) // if
-																																						// isn't
-																																						// our
-																																						// piece
+			} else if (this.chessboard.getFields()[h][i].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[h][i].piece.getSymbol() == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[h][i].getPiece().getSymbol() == Bishop.SYMBOL
+						|| this.chessboard.getFields()[h][i].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -192,22 +200,23 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.pozX - 1, i = s.pozY - 1; Chessboard.isout(h, i) == false; --h, --i) // left-down
+		for (int h = field.pozX - 1, i = field.pozY - 1; Chessboard.isout(h, i) == false; --h, --i) // left-down
 		{
-			if (this.chessboard.squares[h][i].piece == null || this.chessboard.squares[h][i].piece == this) // if
-																																																			// on
-																																																			// this
-																																																			// sqhuare
-																																																			// isn't
-																																																			// piece
+			if (this.chessboard.getFields()[h][i].getPiece() == null || this.chessboard.getFields()[h][i].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[h][i].piece.player != this.player) // if
-																																						// isn't
-																																						// our
-																																						// piece
+			} else if (this.chessboard.getFields()[h][i].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[h][i].piece.getSymbol() == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[h][i].getPiece().getSymbol() == Bishop.SYMBOL
+						|| this.chessboard.getFields()[h][i].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -217,22 +226,23 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.pozX + 1, i = s.pozY + 1; Chessboard.isout(h, i) == false; ++h, ++i) // right-up
+		for (int h = field.pozX + 1, i = field.pozY + 1; Chessboard.isout(h, i) == false; ++h, ++i) // right-up
 		{
-			if (this.chessboard.squares[h][i].piece == null || this.chessboard.squares[h][i].piece == this) // if
-																																																			// on
-																																																			// this
-																																																			// sqhuare
-																																																			// isn't
-																																																			// piece
+			if (this.chessboard.getFields()[h][i].getPiece() == null || this.chessboard.getFields()[h][i].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[h][i].piece.player != this.player) // if
-																																						// isn't
-																																						// our
-																																						// piece
+			} else if (this.chessboard.getFields()[h][i].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[h][i].piece.getSymbol() == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[h][i].getPiece().getSymbol() == Bishop.SYMBOL
+						|| this.chessboard.getFields()[h][i].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -242,22 +252,23 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.pozX + 1, i = s.pozY - 1; Chessboard.isout(h, i) == false; ++h, --i) // right-down
+		for (int h = field.pozX + 1, i = field.pozY - 1; Chessboard.isout(h, i) == false; ++h, --i) // right-down
 		{
-			if (this.chessboard.squares[h][i].piece == null || this.chessboard.squares[h][i].piece == this) // if
-																																																			// on
-																																																			// this
-																																																			// sqhuare
-																																																			// isn't
-																																																			// piece
+			if (this.chessboard.getFields()[h][i].getPiece() == null || this.chessboard.getFields()[h][i].getPiece() == this) // if
+			// on
+			// this
+			// sqhuare
+			// isn't
+			// piece
 			{
 				continue;
-			} else if (this.chessboard.squares[h][i].piece.player != this.player) // if
-																																						// isn't
-																																						// our
-																																						// piece
+			} else if (this.chessboard.getFields()[h][i].getPiece().player != this.player) // if
+			// isn't
+			// our
+			// piece
 			{
-				if (this.chessboard.squares[h][i].piece.getSymbol() == Bishop.SYMBOL || this.chessboard.squares[h][i].piece.getSymbol() == Queen.SYMBOL) {
+				if (this.chessboard.getFields()[h][i].getPiece().getSymbol() == Bishop.SYMBOL
+						|| this.chessboard.getFields()[h][i].getPiece().getSymbol() == Queen.SYMBOL) {
 					return false;
 				} else {
 					break;
@@ -271,153 +282,161 @@ public class King extends Piece {
 		int newX, newY;
 
 		// 1
-		newX = s.pozX - 2;
-		newY = s.pozY + 1;
+		newX = field.pozX - 2;
+		newY = field.pozY + 1;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 2
-		newX = s.pozX - 1;
-		newY = s.pozY + 2;
+		newX = field.pozX - 1;
+		newY = field.pozY + 2;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 3
-		newX = s.pozX + 1;
-		newY = s.pozY + 2;
+		newX = field.pozX + 1;
+		newY = field.pozY + 2;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 4
-		newX = s.pozX + 2;
-		newY = s.pozY + 1;
+		newX = field.pozX + 2;
+		newY = field.pozY + 1;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 5
-		newX = s.pozX + 2;
-		newY = s.pozY - 1;
+		newX = field.pozX + 2;
+		newY = field.pozY - 1;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 6
-		newX = s.pozX + 1;
-		newY = s.pozY - 2;
+		newX = field.pozX + 1;
+		newY = field.pozY - 2;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 7
-		newX = s.pozX - 1;
-		newY = s.pozY - 2;
+		newX = field.pozX - 1;
+		newY = field.pozY - 2;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
 
 		// 8
-		newX = s.pozX - 2;
-		newY = s.pozY - 1;
+		newX = field.pozX - 2;
+		newY = field.pozY - 1;
 
 		if (Chessboard.isout(newX, newY) == false) {
-			if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																															// sqhuare isn't
-																															// piece
+			if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																			// this
+			// sqhuare isn't
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																									// is
-																																									// our
-																																									// piece
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+			// is
+			// our
+			// piece
 			{
-			} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Knight.SYMBOL) {
+			} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Knight.SYMBOL) {
 				return false;
 			}
 		}
@@ -429,75 +448,78 @@ public class King extends Piece {
 		} else {
 			otherKing = chessboard.getWhiteKing();
 		}
-
-		if (s.pozX <= otherKing.square.pozX + 1 && s.pozX >= otherKing.square.pozX - 1 && s.pozY <= otherKing.square.pozY + 1
-				&& s.pozY >= otherKing.square.pozY - 1) {
+		Square sq = (Square) otherKing.field;
+		if (field.pozX <= sq.pozX + 1 && field.pozX >= sq.pozX - 1 && field.pozY <= sq.pozY + 1 && field.pozY >= sq.pozY - 1) {
 			return false;
 		}
 
 		// Pawn
 		if (this.player.isGoDown()) // check if player "go" down or up
 		{
-			newX = s.pozX - 1;
-			newY = s.pozY + 1;
+			newX = field.pozX - 1;
+			newY = field.pozY + 1;
 			if (Chessboard.isout(newX, newY) == false) {
-				if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																																// sqhuare isn't
-																																// piece
+				if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																				// this
+				// sqhuare isn't
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																										// is
-																																										// our
-																																										// piece
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+				// is
+				// our
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Pawn.SYMBOL) {
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Pawn.SYMBOL) {
 					return false;
 				}
 			}
-			newX = s.pozX + 1;
+			newX = field.pozX + 1;
 			if (Chessboard.isout(newX, newY) == false) {
-				if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																																// sqhuare isn't
-																																// piece
+				if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																				// this
+				// sqhuare isn't
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																										// is
-																																										// our
-																																										// piece
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+				// is
+				// our
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Pawn.SYMBOL) {
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Pawn.SYMBOL) {
 					return false;
 				}
 			}
 		} else {
-			newX = s.pozX - 1;
-			newY = s.pozY - 1;
+			newX = field.pozX - 1;
+			newY = field.pozY - 1;
 			if (Chessboard.isout(newX, newY) == false) {
-				if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																																// sqhuare isn't
-																																// piece
+				if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																				// this
+				// sqhuare isn't
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																										// is
-																																										// our
-																																										// piece
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+				// is
+				// our
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Pawn.SYMBOL) {
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Pawn.SYMBOL) {
 					return false;
 				}
 			}
-			newX = s.pozX + 1;
+			newX = field.pozX + 1;
 			if (Chessboard.isout(newX, newY) == false) {
-				if (this.chessboard.squares[newX][newY].piece == null) // if on this
-																																// sqhuare isn't
-																																// piece
+				if (this.chessboard.getFields()[newX][newY].getPiece() == null) // if on
+																																				// this
+				// sqhuare isn't
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.player == this.player) // if
-																																										// is
-																																										// our
-																																										// piece
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().player == this.player) // if
+				// is
+				// our
+				// piece
 				{
-				} else if (this.chessboard.squares[newX][newY].piece.getSymbol() == Pawn.SYMBOL) {
+				} else if (this.chessboard.getFields()[newX][newY].getPiece().getSymbol() == Pawn.SYMBOL) {
 					return false;
 				}
 			}
@@ -510,25 +532,26 @@ public class King extends Piece {
 	 * Method to check will the king be safe when move
 	 * 
 	 * @return bool true if king is save, else returns false
+	 * @throws Exception 
 	 */
-	public boolean willBeSafeWhenMoveOtherPiece(Square sqIsHere, Square sqWillBeThere) // long
-																																											// name
-																																											// ;)
+	public boolean willBeSafeWhenMoveOtherPiece(Square sqIsHere, Square sqWillBeThere) throws Exception // long
+	// name
+	// ;)
 	{
-		Piece tmp = sqWillBeThere.piece;
-		sqWillBeThere.piece = sqIsHere.piece; // move without redraw
-		sqIsHere.piece = null;
+		Piece tmp = sqWillBeThere.getPiece();
+		sqWillBeThere.setPiece(sqIsHere.getPiece()); // move without redraw
+		sqIsHere.setPiece(null);
 
-		boolean ret = isSafe(this.square);
+		boolean ret = isSafe(this.field);
 
-		sqIsHere.piece = sqWillBeThere.piece;
-		sqWillBeThere.piece = tmp;
+		sqIsHere.setPiece(sqWillBeThere.getPiece());
+		sqWillBeThere.setPiece(tmp);
 
 		return ret;
 	}
 
 	@Override
 	public IMoveBehavior createMoveBehavior() {
-		return new KingMoveBehavior(player, chessboard, square, this);
+		return new KingMoveBehavior(player, chessboard, field, this);
 	}
 }

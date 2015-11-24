@@ -1,19 +1,20 @@
 package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
+import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
 import jchess.core.util.Player;
 
 public abstract class MoveBehavior implements IMoveBehavior {
 
-	protected Player			player			= null;
-	protected Chessboard	chessboard	= null;
-	protected Square			square			= null;
+	protected Player			m_Player			= null;
+	protected Chessboard	m_Chessboard	= null;
+	protected Square			m_Field				= null;
 
-	public MoveBehavior(Player player, Chessboard chessboard, Square square) {
-		this.player = player;
-		this.chessboard = chessboard;
-		this.square = square;
+	public MoveBehavior(Player player, Chessboard chessboard, ChessboardField field) {
+		this.m_Player = player;
+		this.m_Chessboard = chessboard;
+		this.m_Field = (Square) field;
 	}
 
 	/**
@@ -24,12 +25,12 @@ public abstract class MoveBehavior implements IMoveBehavior {
 	 * @return true if can move, false otherwise
 	 * */
 	protected boolean checkPiece(int x, int y) {
-		if (chessboard.squares[x][y].piece != null && chessboard.squares[x][y].piece.getSymbol() == King.SYMBOL) {
+		if (m_Chessboard.getFields()[x][y].getPiece() != null && m_Chessboard.getFields()[x][y].getPiece().getSymbol() == King.SYMBOL) {
 			return false;
 		}
-		Piece piece = chessboard.squares[x][y].piece;
+		Piece piece = m_Chessboard.getFields()[x][y].getPiece();
 		if (piece == null || // if this sqhuare is empty
-				piece.player != this.player) // or piece is another player
+				piece.player != this.m_Player) // or piece is another player
 		{
 			return true;
 		}
@@ -46,17 +47,17 @@ public abstract class MoveBehavior implements IMoveBehavior {
 	 * @return true if owner(player) is different
 	 * */
 	protected boolean otherOwner(int x, int y) {
-		Square sq = chessboard.squares[x][y];
-		if (sq.piece == null) {
+		Square sq = m_Chessboard.getFields()[x][y];
+		if (sq.getPiece() == null) {
 			return false;
 		}
-		if (this.player != sq.piece.player) {
+		if (this.m_Player != sq.getPiece().player) {
 			return true;
 		}
 		return false;
 	}
 
-	public void setSquare(Square square) {
-		this.square = square;
+	public void setChessboardField(ChessboardField square) {
+		this.m_Field = (Square) square;
 	}
 }
