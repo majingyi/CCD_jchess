@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.9" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
-  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="jchess.core.pieces.Queen" project="Chess Project" 
     file="/Chess Project/src/jchess/core/pieces/Queen.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1805" y="516"/>    
@@ -141,204 +141,216 @@
     <end type="TARGET" refId="8"/>  
   </dependency>  
   <dependency id="17">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="18">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
-  <dependency id="18">    
+  <dependency id="19">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <dependency id="19">    
+  <dependency id="20">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="20">    
+  <dependency id="21">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="21">    
+  <dependency id="22">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="22">    
+  <dependency id="23">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="9"/>  
   </dependency>  
-  <generalization id="23">    
+  <generalization id="24">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <dependency id="24">    
+  <dependency id="25">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <dependency id="25">    
+  <dependency id="26">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="26">    
+  <dependency id="27">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
-  <generalization id="27">    
+  <generalization id="28">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <generalization id="28">    
+  <generalization id="29">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <association id="29">    
+  <association id="30">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="30" name="moveBehavior"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
+      <attribute id="31" name="moveBehavior"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="32">    
+  <dependency id="33">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="33">    
+  <dependency id="34">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="34">    
+  <dependency id="35">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <generalization id="35">    
+  <generalization id="36">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <dependency id="36">    
+  <dependency id="37">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <association id="37">    
+  <association id="38">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="38" name="king"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
+      <attribute id="39" name="king"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="40">    
+  <dependency id="41">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="41">    
+  <dependency id="42">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
-  <dependency id="42">    
+  <dependency id="43">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
-  <dependency id="43">    
+  <dependency id="44">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <dependency id="44">    
+  <dependency id="45">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
-  <dependency id="45">    
+  <dependency id="46">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="47">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="46">    
+  <dependency id="48">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <generalization id="47">    
+  <generalization id="49">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <dependency id="48">    
+  <dependency id="50">    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="49">    
+  <dependency id="51">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <dependency id="50">    
+  <dependency id="52">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="9"/>  
   </dependency>  
-  <generalization id="51">    
+  <generalization id="53">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <generalization id="52">    
+  <generalization id="54">    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <dependency id="53">    
+  <dependency id="55">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <dependency id="54">    
+  <dependency id="56">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="55">    
+  <dependency id="57">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <generalization id="56">    
+  <generalization id="58">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <dependency id="57">    
+  <dependency id="59">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <generalization id="58">    
+  <generalization id="60">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <dependency id="59">    
+  <dependency id="61">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <generalization id="60">    
+  <generalization id="62">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <dependency id="61">    
+  <dependency id="63">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <realization id="62">    
+  <realization id="64">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="7"/>  
   </realization>  
-  <dependency id="63">    
+  <dependency id="65">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <generalization id="64">    
+  <generalization id="66">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <dependency id="65">    
+  <dependency id="67">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
-  <generalization id="66">    
+  <generalization id="68">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <dependency id="67">    
+  <dependency id="69">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <dependency id="68">    
+  <dependency id="70">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="71">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="5"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
