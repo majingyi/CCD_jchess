@@ -133,9 +133,9 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 					// checkmate or stalemate
 					King king;
 					if (game.getActivePlayer() == game.getWhitePlayer()) {
-						king = chessboard.getWhiteKing();
+						king = chessboard.getKingForColor(Player.colors.white);
 					} else {
-						king = chessboard.getBlackKing();
+						king = chessboard.getKingForColor(Player.colors.black);
 					}
 
 					switch (king.isCheckmatedOrStalemated()) {

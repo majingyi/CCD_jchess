@@ -21,12 +21,12 @@ public class BishopMoveBehavior extends MoveBehavior {
 			{
 				if (this.player.getColor() == Player.colors.white) // white
 				{
-					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				} else // or black
 				{
-					if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				}
@@ -45,12 +45,12 @@ public class BishopMoveBehavior extends MoveBehavior {
 			{
 				if (this.player.getColor() == Player.colors.white) // white
 				{
-					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				} else // or black
 				{
-					if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				}
@@ -69,12 +69,12 @@ public class BishopMoveBehavior extends MoveBehavior {
 			{
 				if (this.player.getColor() == Player.colors.white) // white
 				{
-					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				} else // or black
 				{
-					if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				}
@@ -93,12 +93,12 @@ public class BishopMoveBehavior extends MoveBehavior {
 			{
 				if (this.player.getColor() == Player.colors.white) // white
 				{
-					if (this.chessboard.getWhiteKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.white).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				} else // or black
 				{
-					if (this.chessboard.getBlackKing().willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
+					if (this.chessboard.getKingForColor(Player.colors.black).willBeSafeWhenMoveOtherPiece(this.square, chessboard.squares[h][i])) {
 						list.add(chessboard.squares[h][i]);
 					}
 				}

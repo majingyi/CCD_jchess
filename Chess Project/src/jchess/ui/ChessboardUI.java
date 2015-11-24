@@ -20,6 +20,7 @@ import jchess.core.board.Square;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
+import jchess.core.util.Player.colors;
 import jchess.ui.lang.Language;
 
 /**
@@ -348,11 +349,7 @@ public class ChessboardUI extends JPanel {
 		return board;
 	}
 
-	public King getWhiteKing() {
-		return board.getWhiteKing();
-	}
-
-	public King getBlackKing() {
-		return board.getBlackKing();
+	public King getKingForColor(colors color) {
+		return board.getKingForColor(color);
 	}
 }

@@ -1,5 +1,8 @@
 package jchess.core.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jchess.JChessApp;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
@@ -26,24 +29,22 @@ import jchess.ui.lang.Language;
 
 public class Chessboard {
 
-	public static final int	top									= 0;
-	public static final int	bottom							= 7;
+	public static final int						top									= 0;
+	public static final int						bottom							= 7;
 
-	private GameTab					gameUI							= null;
+	private GameTab										gameUI							= null;
 
 	// squares of chessboard
-	public Square						squares[][]					= null;
-	public Square						activeSquare				= null;
+	public Square											squares[][]					= null;
+	public Square											activeSquare				= null;
 
-	private int							active_x_square			= -1;
-	private int							active_y_square			= -1;
+	private int												active_x_square			= -1;
+	private int												active_y_square			= -1;
 
-	private King						kingWhite						= null;
-	private King						kingBlack						= null;
-
-	public Pawn							twoSquareMovedPawn	= null;
-	public Pawn							twoSquareMovedPawn2	= null;
-	private MoveHistoryUI		moves_history				= null;
+	public Pawn												twoSquareMovedPawn	= null;
+	public Pawn												twoSquareMovedPawn2	= null;
+	private MoveHistoryUI							moves_history				= null;
+	private Map<Player.colors, King>	m_KingsMap					= new HashMap<Player.colors, King>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) {
 		gameUI = ui;
@@ -153,16 +154,23 @@ public class Chessboard {
 		this.squares[5][i].setPiece(new Bishop(this, player));
 
 		this.squares[4][i].setPiece(new Queen(this, player));
+
+		King kingWhite = new King(this, player);
+		m_KingsMap.put(Player.colors.white, kingWhite);
+
+		King kingBlack = new King(this, player);
+		m_KingsMap.put(Player.colors.black, kingBlack);
+
 		if (player.getColor() == Player.colors.white) {
-			this.squares[3][i].setPiece(kingWhite = new King(this, player));
+			this.squares[3][i].setPiece(kingWhite);
 		} else {
-			this.squares[3][i].setPiece(kingBlack = new King(this, player));
+			this.squares[3][i].setPiece(kingBlack);
 		}
 		this.squares[3][i].setPiece(new Queen(this, player));
 		if (player.getColor() == Player.colors.white) {
-			this.squares[4][i].setPiece(kingWhite = new King(this, player));
+			this.squares[4][i].setPiece(kingWhite);
 		} else {
-			this.squares[4][i].setPiece(kingBlack = new King(this, player));
+			this.squares[4][i].setPiece(kingBlack);
 		}
 	}
 
@@ -442,12 +450,8 @@ public class Chessboard {
 		return isout(sq.pozX, sq.pozY) == false;
 	}
 
-	public King getWhiteKing() {
-		return kingWhite;
-	}
-
-	public King getBlackKing() {
-		return kingBlack;
+	public King getKingForColor(Player.colors color) {
+		return m_KingsMap.get(color);
 	}
 
 	public int getActive_x_square() {

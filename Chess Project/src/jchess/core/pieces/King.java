@@ -424,10 +424,10 @@ public class King extends Piece {
 
 		// King
 		King otherKing;
-		if (this == chessboard.getWhiteKing()) {
-			otherKing = chessboard.getBlackKing();
+		if (this == chessboard.getKingForColor(Player.colors.white)) {
+			otherKing = chessboard.getKingForColor(Player.colors.black);
 		} else {
-			otherKing = chessboard.getWhiteKing();
+			otherKing = chessboard.getKingForColor(Player.colors.white);
 		}
 
 		if (s.pozX <= otherKing.square.pozX + 1 && s.pozX >= otherKing.square.pozX - 1 && s.pozY <= otherKing.square.pozY + 1
