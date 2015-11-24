@@ -2,10 +2,10 @@
 <project name="chess-compile-test-coverage" default="all" basedir=".">
  
      <!-- properties -->
-     <property name="libs.dir" value="Chess Project/lib" />
-     <property name="src.dir" value="Chess Project/src" />
-     <property name="test.dir" value="Chess Project/tests" />
-     <property name="target.dir" value="Chess Project/bin" />
+     <property name="libs.dir" value="Chess_Project/lib" />
+     <property name="src.dir" value="Chess_Project/src" />
+     <property name="test.dir" value="Chess_Project/tests" />
+     <property name="target.dir" value="Chess_Project/bin" />
      <property name="classes.dir" value="${target.dir}/classes" />
      <property name="testclasses.dir" value="${target.dir}/testclasses" />
      <property name="junit.reports.dir" value="${target.dir}/junit" />
