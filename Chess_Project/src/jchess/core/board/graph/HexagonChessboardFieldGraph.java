@@ -16,4 +16,13 @@ public abstract class HexagonChessboardFieldGraph {
 	public GraphNode getNode(String identifier) {
 		return m_NodeMap.get(identifier);
 	}
+
+	/**
+	 * Adds a node to this graph.
+	 * 
+	 * @param node
+	 */
+	public void addNode(GraphNode node) {
+		m_NodeMap.put(node.getIdentifier(), node);
+	}
 }
