@@ -1,5 +1,6 @@
 package jchess.core.board.graph;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,5 +25,16 @@ public abstract class HexagonChessboardFieldGraph {
 	 */
 	public void addNode(GraphNode node) {
 		m_NodeMap.put(node.getIdentifier(), node);
+	}
+
+	/**
+	 * Get all nodes of this graph.
+	 * 
+	 * This is at least needed for testing.
+	 * 
+	 * @return a collection with all nodes of the graph.
+	 */
+	public Collection<GraphNode> getAllNodes() {
+		return m_NodeMap.values();
 	}
 }

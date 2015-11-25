@@ -5,7 +5,7 @@ public abstract class GraphEdge {
 	private GraphNode	m_Node1	= null;
 	private GraphNode	m_Node2	= null;
 
-	enum EdgeType {
+	public enum EdgeType {
 		diagonal, straight
 	}
 

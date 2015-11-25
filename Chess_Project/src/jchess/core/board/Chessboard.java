@@ -649,4 +649,5 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	public boolean isBlocked(ChessboardField start, ChessboardField target) {
 		return false; // TODO
 	}
+
 }

@@ -3,6 +3,7 @@ package jchess.core.board;
 import java.util.ArrayList;
 import java.util.List;
 
+import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.GraphNode;
 import jchess.core.pieces.Piece;
 
@@ -33,26 +34,45 @@ public abstract class ChessboardField extends GraphNode {
 		this.m_Board = m_Board;
 	}
 
-	public List<ChessboardField> getDiagonalNeighbors() {
+	public List<ChessboardField> getDiagonalNeighbors() throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-
-		// TODO
+		List<GraphEdge> edges = getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge.getEdgeType() == GraphEdge.EdgeType.diagonal) {
+				GraphNode node = edge.getOtherNode(this);
+				if (node instanceof ChessboardField) {
+					result.add((ChessboardField) node);
+				}
+			}
+		}
 
 		return result;
 	}
 
-	public List<ChessboardField> getStraightNeighbors() {
+	public List<ChessboardField> getStraightNeighbors() throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-
-		// TODO
+		List<GraphEdge> edges = getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge.getEdgeType() == GraphEdge.EdgeType.straight) {
+				GraphNode node = edge.getOtherNode(this);
+				if (node instanceof ChessboardField) {
+					result.add((ChessboardField) node);
+				}
+			}
+		}
 
 		return result;
 	}
 
-	public List<ChessboardField> getAllNeighbors() {
+	public List<ChessboardField> getAllNeighbors() throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-
-		// TODO
+		List<GraphEdge> edges = getEdges();
+		for (GraphEdge edge : edges) {
+			GraphNode node = edge.getOtherNode(this);
+			if (node instanceof ChessboardField) {
+				result.add((ChessboardField) node);
+			}
+		}
 
 		return result;
 	}
