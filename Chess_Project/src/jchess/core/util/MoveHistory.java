@@ -331,7 +331,7 @@ public class MoveHistory {
 			canMove = chessboard.tryMove(xFrom, yFrom, xTo, yTo);
 			if (canMove == false) // if move is illegal
 			{
-				chessboard.setActiveField(null);
+				chessboard.unselect();
 				throw new Exception(Language.getString("illegal_move_on") + locMove); //$NON-NLS-1$
 			}
 		}

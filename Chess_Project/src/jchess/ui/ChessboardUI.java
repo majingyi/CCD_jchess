@@ -70,7 +70,7 @@ public class ChessboardUI extends JPanel {
 	 */
 	public ChessboardUI(GameTab gt, MoveHistoryUI moves_history) throws Exception {
 		board = new Chessboard(gt, moves_history);
-		board.setActiveField(null);
+		board.unselect();
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
 		board.setActive_x_square(0);

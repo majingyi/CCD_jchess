@@ -99,6 +99,7 @@ public class Chessboard {
 	 * @param yTo
 	 *          to which y move piece
 	 * @throws Exception
+	 * @deprecated
 	 * 
 	 */
 	public void move(int xFrom, int yFrom, int xTo, int yTo) throws Exception {
@@ -214,10 +215,6 @@ public class Chessboard {
 	}
 
 	public boolean redo() throws Exception {
-		return redo(true);
-	}
-
-	public boolean redo(boolean refresh) throws Exception {
 		boolean result = false;
 		Move first = this.moves_history.redo();
 
@@ -474,6 +471,7 @@ public class Chessboard {
 	 * @param endY
 	 *          to which Y (on chessboard) move go
 	 * @throws Exception
+	 * @deprecated
 	 * */
 	public boolean tryMove(int beginX, int beginY, int endX, int endY) throws Exception {
 		try {
@@ -497,10 +495,6 @@ public class Chessboard {
 		} catch (NullPointerException exc) {
 			return false;
 		}
-	}
-
-	public void setActiveField(ChessboardField field) {
-		activeField = field;
 	}
 
 	public ChessboardField getActiveField() {
@@ -638,5 +632,19 @@ public class Chessboard {
 	public List<ChessboardField> getStraightFieldsExact(ChessboardField field, int distance) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		return result;
+	}
+
+	/**
+	 * Checks, if a piece can move for start to target. Start and target need to be neighbors, and the edge 
+	 * between them is not allowed to be blocked.
+	 * 
+	 * Straight edges are never blocked. Diagonal edges are blocked, if both neighbor fields are occupied.
+	 * 
+	 * @param start
+	 * @param target
+	 * @return if the corresponding edge is blocked
+	 */
+	public boolean isBlocked(ChessboardField start, ChessboardField target) {
+		return false;
 	}
 }
