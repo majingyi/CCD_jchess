@@ -211,7 +211,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		this.setActive_y_square(0);
 		this.activeField = null;
 
-		gameUI.getChessboardUI().repaint();
+		if (gameUI.getChessboardUI() != null) {
+			gameUI.getChessboardUI().repaint();
+		}
 	}
 
 	public boolean redo() throws Exception {

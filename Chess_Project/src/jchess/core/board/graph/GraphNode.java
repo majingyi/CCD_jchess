@@ -1,10 +1,12 @@
 package jchess.core.board.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GraphNode {
 
-	// TODO add edges
-
-	private String	m_Identifier	= null;
+	private String					m_Identifier	= null;
+	private List<GraphEdge>	m_Edges				= new ArrayList<GraphEdge>();
 
 	public GraphNode(String identifier) {
 		m_Identifier = identifier;
@@ -12,5 +14,13 @@ public class GraphNode {
 
 	public String getIdentifier() {
 		return m_Identifier;
+	}
+
+	public void addEdge(GraphEdge edge) {
+		m_Edges.add(edge);
+	}
+
+	public List<GraphEdge> getEdges() {
+		return m_Edges;
 	}
 }
