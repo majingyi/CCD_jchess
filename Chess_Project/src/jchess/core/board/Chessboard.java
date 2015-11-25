@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import jchess.JChessApp;
+import jchess.core.board.graph.HexagonChessFieldGraphInitializer;
+import jchess.core.board.graph.HexagonChessboardFieldGraph;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -23,13 +25,7 @@ import jchess.ui.GameTab;
 import jchess.ui.MoveHistoryUI;
 import jchess.ui.lang.Language;
 
-/**
- * Class to represent chessboard. Chessboard is made from squares. It is setting
- * the squers of chessboard and sets the pieces(pawns) witch the owner is
- * current player on it.
- */
-
-public class Chessboard {
+public class Chessboard extends HexagonChessboardFieldGraph {
 
 	public static final int						top									= 0;
 	public static final int						bottom							= 7;
@@ -54,7 +50,11 @@ public class Chessboard {
 		initChessBoard();
 	}
 
-	private void initChessBoard() throws Exception {
+	private void initChessBoard() throws Exception {// TODO write new graph
+																									// initialiser
+
+		HexagonChessFieldGraphInitializer.initialise(this);
+
 		fields = new Square[8][8];
 
 		for (int i = 0; i < 8; i++) {// create object for each square
@@ -526,7 +526,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getVerticalFields(ChessboardField field) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -538,7 +538,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getVerticalFields(ChessboardField field, int maxAllowedMoves) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -549,7 +549,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getHorizontalFields(ChessboardField field) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -561,7 +561,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getHorizontalFields(ChessboardField field, int maxAllowedMoves) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -572,7 +572,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getStraightFields(ChessboardField field) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -584,7 +584,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -595,7 +595,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getDiagonalFields(ChessboardField field) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -607,7 +607,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -619,7 +619,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getDiagonalFieldsExact(ChessboardField field, int distance) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -631,7 +631,7 @@ public class Chessboard {
 	 */
 	public List<ChessboardField> getStraightFieldsExact(ChessboardField field, int distance) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;
+		return result;// TODO
 	}
 
 	/**
@@ -645,6 +645,6 @@ public class Chessboard {
 	 * @return if the corresponding edge is blocked
 	 */
 	public boolean isBlocked(ChessboardField start, ChessboardField target) {
-		return false;
+		return false; // TODO
 	}
 }
