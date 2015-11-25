@@ -65,6 +65,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 *          reference to black player
 	 * @throws Exception
 	 */
+	@Deprecated
 	public void setPieces(String places, Player plWhite, Player plBlack) throws Exception {
 
 		if ((plWhite.getColor() == plBlack.getColor()) == false) {
