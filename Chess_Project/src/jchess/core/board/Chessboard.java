@@ -521,53 +521,10 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
-	 * Calculates all vertical fields starting with field.
-	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @return the list of all vertical fields. Never null.
-	 */
-	public List<ChessboardField> getVerticalFields(ChessboardField field) {
-		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
-	}
-
-	/**
-	 * Calculates vertical fields, which are a maximum of allowed moves away.
-	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @param maxAllowedMoves the maximum allowed number of moves.
-	 * @return the list of all vertical fields. Never null.
-	 */
-	public List<ChessboardField> getVerticalFields(ChessboardField field, int maxAllowedMoves) {
-		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
-	}
-
-	/**
-	 * Calculates all horizontal fields starting with field.
-	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @return the list of all vertical fields. Never null.
-	 */
-	public List<ChessboardField> getHorizontalFields(ChessboardField field) {
-		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
-	}
-
-	/**
-	 * Calculates horizontal fields, which are a maximum of allowed moves away.
-	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @param maxAllowedMoves the maximum allowed number of moves.
-	 * @return the list of all vertical fields. Never null.
-	 */
-	public List<ChessboardField> getHorizontalFields(ChessboardField field, int maxAllowedMoves) {
-		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
-	}
-
-	/**
 	 * Calculates all straight fields starting with field.
+	 * 
+	 * This method is returning fields only, which can be reached be an check piece. 
+	 * If a field is blocked, calculation stops.
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @return the list of all vertical fields. Never null.
@@ -579,6 +536,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 	/**
 	 * Calculates straight fields, which are a maximum of allowed moves away.
+	 * 
+	 * This method is returning fields only, which can be reached be an check piece. 
+	 * If a field is blocked, calculation stops.
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
@@ -592,6 +552,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	/**
 	 * Calculates all diagonal fields starting with field.
 	 * 
+	 * This method is returning fields only, which can be reached be an check piece. 
+	 * If a field is blocked, calculation stops.
+	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @return the list of all vertical fields. Never null.
 	 */
@@ -602,6 +565,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 	/**
 	 * Calculates diagonal fields, which are a maximum of allowed moves away.
+	 * 
+	 * This method is returning fields only, which can be reached be an check piece. 
+	 * If a field is blocked, calculation stops.
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
@@ -615,6 +581,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	/**
 	 * Calculates diagonal fields, which are exactly distance fields away.
 	 * 
+	 * This method does not care about blocked fields
+	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param distance the distance, the wanted fields are away.
 	 * @return the list of all vertical fields. Never null.
@@ -627,6 +595,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	/**
 	 * Calculates straight fields, which are exactly distance fields away.
 	 * 
+	 * This method does not care about blocked fields.
+	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param distance the distance, the wanted fields are away.
 	 * @return the list of all vertical fields. Never null.
@@ -637,8 +607,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
-	 * Checks, if a piece can move for start to target. Start and target need to be neighbors, and the edge 
-	 * between them is not allowed to be blocked.
+	 * Checks, if a piece can not move for start to target. 
 	 * 
 	 * Straight edges are never blocked. Diagonal edges are blocked, if both neighbor fields are occupied.
 	 * 
@@ -649,5 +618,4 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	public boolean isBlocked(ChessboardField start, ChessboardField target) {
 		return false; // TODO
 	}
-
 }
