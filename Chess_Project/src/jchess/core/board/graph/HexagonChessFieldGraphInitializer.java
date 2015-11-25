@@ -50,6 +50,12 @@ public class HexagonChessFieldGraphInitializer {
 		 */
 		connectDiagonalEdges(fields);
 
+		/*
+		 * Add pieces for the player
+		 */
+
+		// TODO
+
 	}
 
 	private static void connectDiagonalEdges(ChessboardField[][] fields) {
