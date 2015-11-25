@@ -50,18 +50,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		initChessBoard();
 	}
 
-	private void initChessBoard() throws Exception {// TODO write new graph
-																									// initialiser
-
+	private void initChessBoard() throws Exception {
 		HexagonChessFieldGraphInitializer.initialise(this);
-
-		fields = new Square[8][8];
-
-		for (int i = 0; i < 8; i++) {// create object for each square
-			for (int y = 0; y < 8; y++) {
-				getFields()[i][y] = new Square(i, y, null, this);
-			}
-		}
 	}
 
 	/**
