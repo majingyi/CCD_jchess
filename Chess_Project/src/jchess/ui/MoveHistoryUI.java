@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import jchess.core.board.Square;
+import jchess.core.board.ChessboardField;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Constants;
 import jchess.core.util.Move;
@@ -158,7 +158,8 @@ public class MoveHistoryUI extends AbstractTableModel {
 		}
 	}
 
-	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) throws Exception {
+	public void addMove(ChessboardField begin, ChessboardField end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece)
+			throws Exception {
 		String locMove = history.addMove(begin, end, registerInHistory, castlingMove, wasEnPassant, promotedPiece, gameTab);
 
 		if (castlingMove == castling.shortCastling) {

@@ -2,7 +2,7 @@ package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.Square;
+import jchess.core.board.Hexagon;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
 import junit.framework.Assert;
@@ -61,37 +61,7 @@ public class PieceTest {
 		// setSquare outside the board left
 		boolean exception = false;
 		try {
-			p.setField(new Square(8, 0, null, board), board);
-		} catch (Exception e) {
-			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
-			exception = true;
-		}
-		Assert.assertTrue(exception);
-
-		// setSquare outside the board right
-		exception = false;
-		try {
-			p.setField(new Square(-1, 0, null, board), board);
-		} catch (Exception e) {
-			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
-			exception = true;
-		}
-		Assert.assertTrue(exception);
-
-		// setSquare outside the board top
-		exception = false;
-		try {
-			p.setField(new Square(0, -1, null, board), board);
-		} catch (Exception e) {
-			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
-			exception = true;
-		}
-		Assert.assertTrue(exception);
-
-		// setSquare outside the board bottom
-		exception = false;
-		try {
-			p.setField(new Square(0, 8, null, board), board);
+			p.setField(new Hexagon("A1", board), board);
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;

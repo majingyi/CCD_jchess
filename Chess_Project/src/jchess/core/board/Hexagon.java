@@ -6,4 +6,10 @@ public class Hexagon extends ChessboardField {
 		super(identifier, chessboard);
 	}
 
+	@Override
+	public ChessboardField copy() {
+		Hexagon copy = new Hexagon(getIdentifier(), getChessBoard());
+		copy.setPiece(getPiece());
+		return copy;
+	}
 }

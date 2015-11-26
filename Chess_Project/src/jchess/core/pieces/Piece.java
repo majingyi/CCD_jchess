@@ -1,11 +1,9 @@
 package jchess.core.pieces;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.Square;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
 import jchess.ui.lang.Language;
@@ -41,21 +39,13 @@ public abstract class Piece {
 	/**
 	 * method check if Piece can move to given square
 	 * 
-	 * @param square
-	 *          square where piece want to move (Square object)
+	 * @param field
+	 *          field where piece want to move (Square object)
 	 * @param allmoves
 	 *          all moves which can piece do
 	 * */
-	protected boolean canMove(Square square, ArrayList<Square> allmoves) {
-		// throw new UnsupportedOperationException("Not supported yet.");
-		ArrayList<Square> moves = allmoves;
-		for (Iterator<Square> it = moves.iterator(); it.hasNext();) {
-			Square sq = (Square) it.next();// get next from iterator
-			if (sq == square) {// if adress is the same
-				return true; // piece canMove
-			}
-		}
-		return false;// if not, piece cannot move
+	protected boolean canMove(ChessboardField field, ArrayList<ChessboardField> allmoves) {
+		return allmoves.contains(field);
 	}
 
 	public ArrayList<ChessboardField> allMoves() throws Exception {

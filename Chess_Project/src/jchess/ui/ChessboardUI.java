@@ -11,18 +11,13 @@ import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JPanel;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.Square;
 import jchess.core.pieces.King;
-import jchess.core.pieces.Piece;
-import jchess.core.util.Logging;
 import jchess.core.util.Player.colors;
-import jchess.ui.lang.Language;
 
 /**
  * Class to represent chessboard. Chessboard is made from squares. It is setting
@@ -71,10 +66,9 @@ public class ChessboardUI extends JPanel {
 	public ChessboardUI(GameTab gt, MoveHistoryUI moves_history) throws Exception {
 		board = new Chessboard(gt, moves_history);
 		board.unselect();
+
 		this.square_height = img_height / 8;// we need to devide to know height
 		// of field
-		board.setActive_x_square(0);
-		board.setActive_y_square(0);
 
 		this.setDoubleBuffered(true);
 		this.drawLabels((int) this.square_height);
@@ -85,51 +79,6 @@ public class ChessboardUI extends JPanel {
 		boardBackgroundImage = Theme.getImage("chessboard.png");
 
 	}/*--endOf-Chessboard--*/
-
-	/**
-	 * method to get reference to square from given x and y integeres
-	 * 
-	 * @param x
-	 *          x position on chessboard
-	 * @param y
-	 *          y position on chessboard
-	 * @return reference to searched square
-	 */
-	public ChessboardField getSquare(int x, int y) {
-		if ((x > this.get_height()) || (y > this.get_widht())) // test if click
-		// is out of
-		// chessboard
-		{
-			Logging.log(Language.getString("ChessboardUI.2")); //$NON-NLS-1$
-			return null;
-		}
-		x -= this.upDownLabel.getHeight(null);
-		y -= this.upDownLabel.getHeight(null);
-
-		double square_x = x / square_height;// count which field in X was
-		// clicked
-		double square_y = y / square_height;// count which field in Y was
-		// clicked
-
-		if (square_x > (int) square_x) // if X is more than X parsed to Integer
-		{
-			square_x = (int) square_x + 1;// parse to integer and increment
-		}
-		if (square_y > (int) square_y) // if X is more than X parsed to Integer
-		{
-			square_y = (int) square_y + 1;// parse to integer and increment
-		}
-
-		Logging.log("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		ChessboardField result;
-		try {
-			result = board.getFields()[(int) square_x - 1][(int) square_y - 1];
-		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-			Logging.log(Language.getString("ChessboardUI.6"), exc); //$NON-NLS-1$
-			return null;
-		}
-		return result;
-	}
 
 	public int get_widht() {
 		return this.get_widht(false);
@@ -194,76 +143,92 @@ public class ChessboardUI extends JPanel {
 		g2d.drawImage(this.LeftRightLabel, 0, 0, null);
 		g2d.drawImage(this.LeftRightLabel, ChessboardUI.boardBackgroundImage.getHeight(null) + topLeftPoint.x, 0, null);
 		g2d.drawImage(boardBackgroundImage, topLeftPoint.x, topLeftPoint.y, null);// draw
-																																							// an
-		// Image of
-		// chessboard
-		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
-		{
-			for (int y = 0; y < 8; y++) {
-				if (board.getFields()[i][y].getPiece() != null) {
-					try {
-						drawPieceImage(g, board.getFields()[i][y].getPiece());
-					} catch (FileNotFoundException e) {
-						Logging.log(e);
-						// TODO tell user
-					}
-				}
-			}
-		}
-		if ((board.getActive_x_square() != 0) && (board.getActive_y_square() != 0)) // if
-		// some
-		// square
-		// is
-		// active
-		{
-			g2d.drawImage(sel_square, ((board.getActive_x_square() - 1) * (int) square_height) + topLeftPoint.x,
-					((board.getActive_y_square() - 1) * (int) square_height) + topLeftPoint.y, null);// draw
-																																														// image
-																																														// of
-																																														// selected
-			// square
-			ChessboardField tmpSquare = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)];
-			if (tmpSquare.getPiece() != null) {
-				try {
-					this.moves = board.getFields()[(int) (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() - 1)].getPiece().allMoves();
-				} catch (Exception e) {
-					Logging.log(e);
-				}
-			}
 
-			for (Iterator<ChessboardField> it = moves.iterator(); moves != null && it.hasNext();) {
-				Square sq = (Square) it.next();
-				g2d.drawImage(able_square, (sq.pozX * (int) square_height) + topLeftPoint.x, (sq.pozY * (int) square_height) + topLeftPoint.y, null);
-			}
-		}
+		// TODO drwing of pieces
+		// an
+		// // Image of
+		// // chessboard
+		// for (int i = 0; i < 8; i++) // drawPiecesOnSquares
+		// {
+		// for (int y = 0; y < 8; y++) {
+		// if (board.getFields()[i][y].getPiece() != null) {
+		// try {
+		// drawPieceImage(g, board.getFields()[i][y].getPiece());
+		// } catch (FileNotFoundException e) {
+		// Logging.log(e);
+		// // TODO tell user
+		// }
+		// }
+		// }
+		// }
+		// if ((board.getActive_x_square() != 0) && (board.getActive_y_square() !=
+		// 0)) // if
+		// // some
+		// // square
+		// // is
+		// // active
+		// {
+		// g2d.drawImage(sel_square, ((board.getActive_x_square() - 1) * (int)
+		// square_height) + topLeftPoint.x,
+		// ((board.getActive_y_square() - 1) * (int) square_height) +
+		// topLeftPoint.y, null);// draw
+		// // image
+		// // of
+		// // selected
+		// // square
+		// ChessboardField tmpSquare = board.getFields()[(int)
+		// (board.getActive_x_square() - 1)][(int) (board.getActive_y_square() -
+		// 1)];
+		// if (tmpSquare.getPiece() != null) {
+		// try {
+		// this.moves = board.getFields()[(int) (board.getActive_x_square() -
+		// 1)][(int) (board.getActive_y_square() - 1)].getPiece().allMoves();
+		// } catch (Exception e) {
+		// Logging.log(e);
+		// }
+		// }
+		//
+		// for (Iterator<ChessboardField> it = moves.iterator(); moves != null &&
+		// it.hasNext();) {
+		// Square sq = (Square) it.next();
+		// g2d.drawImage(able_square, (sq.pozX * (int) square_height) +
+		// topLeftPoint.x, (sq.pozY * (int) square_height) + topLeftPoint.y, null);
+		// }
+		// }
 	}/*--endOf-paint--*/
 
-	private void drawPieceImage(Graphics g, Piece piece) throws FileNotFoundException {
-		try {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = getTopLeftPoint();
-			int height = get_square_height();
-			Square sq = (Square) piece.getField();
-			int x = (sq.pozX * height) + topLeft.x;
-			int y = (sq.pozY * height) + topLeft.y;
-
-			if (g != null) {
-				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
-				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, height, height, null);
-				imageGr.dispose();
-				Image img = resized.getScaledInstance(height, height, 0);
-				g2d.drawImage(img, x, y, null);
-			} else {
-				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
-			}
-		} catch (java.lang.NullPointerException exc) {
-			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
-		}
-	}
+	// private void drawPieceImage(Graphics g, Piece piece) throws
+	// FileNotFoundException {
+	// try {
+	// Graphics2D g2d = (Graphics2D) g;
+	// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	// RenderingHints.VALUE_ANTIALIAS_ON);
+	// Point topLeft = getTopLeftPoint();
+	// int height = get_square_height();
+	// ChessboardField sq = (ChessboardField) piece.getField();
+	//
+	// int x = 1;
+	// int y = 1;
+	//
+	// if (g != null) {
+	// Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(),
+	// piece.getSymbol());
+	// BufferedImage resized = new BufferedImage(height, height,
+	// BufferedImage.TYPE_INT_ARGB_PRE);
+	// Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+	// imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	// RenderingHints.VALUE_ANTIALIAS_ON);
+	// imageGr.drawImage(tempImage, 0, 0, height, height, null);
+	// imageGr.dispose();
+	// Image img = resized.getScaledInstance(height, height, 0);
+	// g2d.drawImage(img, x, y, null);
+	// } else {
+	//				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
+	// }
+	// } catch (java.lang.NullPointerException exc) {
+	//			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
+	// }
+	// }
 
 	public void resizeChessboard(int height) throws FileNotFoundException {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
@@ -356,5 +321,10 @@ public class ChessboardUI extends JPanel {
 
 	public King getKingForColor(colors color) {
 		return board.getKingForColor(color);
+	}
+
+	public ChessboardField getField(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

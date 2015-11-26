@@ -110,22 +110,22 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 				int x = event.getX();// get X position of mouse
 				int y = event.getY();// get Y position of mouse
 
-				ChessboardField sq = chessboard.getSquare(x, y);
-				if ((sq == null || sq.getPiece() == null && chessboard.getChessboard().getActiveField() == null)
-						|| (this.chessboard.getChessboard().getActiveField() == null && sq.getPiece() != null && sq.getPiece().getPlayer() != game.getActivePlayer())) {
+				ChessboardField field = chessboard.getField(x, y);
+				if ((field == null || field.getPiece() == null && chessboard.getChessboard().getActiveField() == null)
+						|| (this.chessboard.getChessboard().getActiveField() == null && field.getPiece() != null && field.getPiece().getPlayer() != game.getActivePlayer())) {
 					return;
 				}
 
-				if (sq.getPiece() != null && sq.getPiece().getPlayer() == game.getActivePlayer() && sq != chessboard.getChessboard().getActiveField()) {
+				if (field.getPiece() != null && field.getPiece().getPlayer() == game.getActivePlayer() && field != chessboard.getChessboard().getActiveField()) {
 					chessboard.getChessboard().unselect();
-					chessboard.getChessboard().select(sq);
-				} else if (chessboard.getChessboard().getActiveField() == sq) // unselect
+					chessboard.getChessboard().select(field);
+				} else if (chessboard.getChessboard().getActiveField() == field) // unselect
 				{
 					chessboard.getChessboard().unselect();
 				} else if (chessboard.getChessboard().getActiveField() != null && chessboard.getChessboard().getActiveField().getPiece() != null
-						&& chessboard.getChessboard().getActiveField().getPiece().allMoves().indexOf(sq) != -1) // move
+						&& chessboard.getChessboard().getActiveField().getPiece().allMoves().indexOf(field) != -1) // move
 				{
-					chessboard.getChessboard().move(chessboard.getChessboard().getActiveField(), sq);
+					chessboard.getChessboard().move(chessboard.getChessboard().getActiveField(), field);
 					chessboard.getChessboard().unselect();
 
 					// switch player

@@ -22,7 +22,7 @@ public abstract class ChessboardField extends GraphNode {
 		return m_Piece;
 	}
 
-	public void setPiece(Piece piece) throws Exception {
+	public void setPiece(Piece piece) {
 		m_Piece = piece;
 	}
 
@@ -76,4 +76,11 @@ public abstract class ChessboardField extends GraphNode {
 
 		return result;
 	}
+
+	/**
+	 * Returns a copy of the current chessboard field instance.
+	 * 
+	 * @return
+	 */
+	public abstract ChessboardField copy();
 }

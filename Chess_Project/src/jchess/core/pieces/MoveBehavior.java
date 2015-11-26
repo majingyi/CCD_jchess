@@ -16,46 +16,6 @@ public abstract class MoveBehavior implements IMoveBehavior {
 		this.m_Field = field;
 	}
 
-	/**
-	 * @param x
-	 *          y position on chessboard
-	 * @param y
-	 *          y position on chessboard
-	 * @return true if can move, false otherwise
-	 * */
-	protected boolean checkPiece(int x, int y) {
-		if (m_Chessboard.getFields()[x][y].getPiece() != null && m_Chessboard.getFields()[x][y].getPiece().getSymbol() == King.SYMBOL) {
-			return false;
-		}
-		Piece piece = m_Chessboard.getFields()[x][y].getPiece();
-		if (piece == null || // if this sqhuare is empty
-				piece.getPlayer() != this.m_Player) // or piece is another player
-		{
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Method check if piece has other owner than calling piece
-	 * 
-	 * @param x
-	 *          x position on chessboard
-	 * @param y
-	 *          y position on chessboard
-	 * @return true if owner(player) is different
-	 * */
-	protected boolean otherOwner(int x, int y) {
-		ChessboardField sq = m_Chessboard.getFields()[x][y];
-		if (sq.getPiece() == null) {
-			return false;
-		}
-		if (this.m_Player != sq.getPiece().getPlayer()) {
-			return true;
-		}
-		return false;
-	}
-
 	public void setChessboardField(ChessboardField field) {
 		this.m_Field = field;
 	}
