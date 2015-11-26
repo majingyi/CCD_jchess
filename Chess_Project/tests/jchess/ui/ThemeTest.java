@@ -25,7 +25,7 @@ public class ThemeTest {
 
 		boolean exception = false;
 		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.gray, Pawn.SYMBOL));
+			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Pawn.SYMBOL));
 		} catch (FileNotFoundException e) {
 			exception = true;
 		}
@@ -36,7 +36,7 @@ public class ThemeTest {
 
 		exception = false;
 		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.gray, Rook.SYMBOL));
+			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Rook.SYMBOL));
 		} catch (FileNotFoundException e) {
 			exception = true;
 		}
@@ -47,7 +47,7 @@ public class ThemeTest {
 
 		exception = false;
 		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.gray, Bishop.SYMBOL));
+			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Bishop.SYMBOL));
 		} catch (FileNotFoundException e) {
 			exception = true;
 		}
@@ -58,7 +58,7 @@ public class ThemeTest {
 
 		exception = false;
 		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.gray, Knight.SYMBOL));
+			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Knight.SYMBOL));
 		} catch (FileNotFoundException e) {
 			exception = true;
 		}
@@ -69,7 +69,7 @@ public class ThemeTest {
 
 		exception = false;
 		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.gray, King.SYMBOL));
+			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, King.SYMBOL));
 		} catch (FileNotFoundException e) {
 			exception = true;
 		}
@@ -80,7 +80,7 @@ public class ThemeTest {
 
 		exception = false;
 		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.gray, Queen.SYMBOL));
+			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Queen.SYMBOL));
 		} catch (FileNotFoundException e) {
 			exception = true;
 		}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
+import jchess.core.util.Game;
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -20,6 +21,7 @@ public class HexagonChessFieldGraphInitializerTest {
 	@Test
 	public void testInitialise() throws Exception {
 		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
 
 		// check number of nodes
 		Assert.assertEquals(126, board.getAllNodes().size());

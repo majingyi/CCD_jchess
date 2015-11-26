@@ -3,11 +3,13 @@ package jchess.core.board.graph;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.Hexagon;
+import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
+import jchess.core.util.Player;
 
 public class HexagonChessFieldGraphInitializer {
 
-	public static void initialise(Chessboard chessboard) {
+	public static void initialise(Chessboard chessboard, Player white, Player black, Player red) throws Exception {
 
 		ChessboardField[][] fields = new ChessboardField[13][13];
 
@@ -54,7 +56,13 @@ public class HexagonChessFieldGraphInitializer {
 		 * Add pieces for the player
 		 */
 
-		// TODO
+		// white on top
+		ChessboardField a1 = (ChessboardField) chessboard.getNode("A1");
+		a1.setPiece(new Rook(chessboard, white, a1));
+
+		// black to the left
+
+		// red to the right
 
 	}
 
