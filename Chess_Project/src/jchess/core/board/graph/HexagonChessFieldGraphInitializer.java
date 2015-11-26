@@ -1,5 +1,7 @@
 package jchess.core.board.graph;
 
+import java.util.Map;
+
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.Hexagon;
@@ -12,10 +14,15 @@ import jchess.core.pieces.Queen;
 import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
+import jchess.core.util.Player.colors;
 
 public class HexagonChessFieldGraphInitializer {
 
-	public static void initialise(Chessboard chessboard, Player white, Player black, Player red) throws Exception {
+	public static void initialise(Chessboard chessboard, Map<colors, Player> player) throws Exception {
+
+		Player white = player.get(colors.white);
+		Player black = player.get(colors.black);
+		Player red = player.get(colors.red);
 
 		ChessboardField[][] fields = new ChessboardField[13][13];
 

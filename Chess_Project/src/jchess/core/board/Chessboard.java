@@ -21,6 +21,7 @@ import jchess.core.util.Move;
 import jchess.core.util.MoveHistory;
 import jchess.core.util.MoveHistory.castling;
 import jchess.core.util.Player;
+import jchess.core.util.Player.colors;
 import jchess.ui.GameTab;
 import jchess.ui.MoveHistoryUI;
 import jchess.ui.lang.Language;
@@ -48,8 +49,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		moves_history = movesHistory;
 	}
 
-	public void initChessBoard(Player white, Player black, Player red) throws Exception {
-		HexagonChessFieldGraphInitializer.initialise(this, white, black, red);
+	public void initChessBoard(Map<colors, Player> player) throws Exception {
+		HexagonChessFieldGraphInitializer.initialise(this, player);
 	}
 
 	/**

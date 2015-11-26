@@ -26,6 +26,7 @@ import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Logging;
 import jchess.core.util.Player;
+import jchess.core.util.Player.colors;
 import jchess.core.util.ReadGameError;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
@@ -132,10 +133,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 					// checkmate or stalemate
 					King king;
-					if (game.getActivePlayer() == game.getWhitePlayer()) {
-						king = chessboard.getKingForColor(Player.colors.white);
+					if (game.getActivePlayer().getColor() == colors.white) {
+						king = chessboard.getKingForColor(colors.white);
 					} else {
-						king = chessboard.getKingForColor(Player.colors.black);
+						king = chessboard.getKingForColor(colors.black);
 					}
 
 					switch (king.isCheckmatedOrStalemated()) {
@@ -188,7 +189,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		Calendar cal = Calendar.getInstance();
 		String str = new String(""); //$NON-NLS-1$
 		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				+ "\"]\n" + "[White \"" + game.getWhitePlayer().getName() + "\"]\n[Black \"" + game.getBlackPlayer().getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ "\"]\n" + "[White \"" + game.getPlayer(colors.white).getName() + "\"]\n[Black \"" + game.getPlayer(colors.black).getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		str += info;
 		str += moveHistory.getMovesInString();
 		try {
@@ -284,8 +285,8 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		playerBlack.setName(blackName);
 		playerWhite.setName(whiteName);
 
-		game.setWhitePlayer(playerWhite);
-		game.setBlackPlayer(playerBlack);
+		game.setPlayer(colors.white, playerWhite);
+		game.setPlayer(colors.black, playerBlack);
 
 		Settings.setBlackPlayersName(blackName);
 		Settings.setWhitePlayersName(whiteName);
@@ -357,7 +358,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 * 
 	 */
 	public void newGame() throws Exception {
-		game.newGame();
+		game.startNewGame();
 
 		GameTab activeGame = JChessApp.jcv.getActiveTabGame();
 		if (activeGame != null && JChessApp.jcv.getNumberOfOpenedTabs() == 0) {
@@ -371,15 +372,17 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 	/**
 	 * Method to switch active players after move
+	 * @throws Exception 
 	 */
-	public void switchActive() {
+	public void switchActive() throws Exception {
 		game.switchActive();
 	}
 
 	/**
 	 * Method to go to next move (checks if game is local/network etc.)
+	 * @throws Exception 
 	 */
-	public void nextMove() {
+	public void nextMove() throws Exception {
 		switchActive();
 		Logging.log("next move, active player: " + game.getActivePlayer().getName() + ", color: " + game.getActivePlayer().getColor().name()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
@@ -394,13 +397,5 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 	public Component getChessboardUI() {
 		return chessboard;
-	}
-
-	public Player getWhitePlayer() {
-		return game.getWhitePlayer();
-	}
-
-	public Player getBlackPlayer() {
-		return game.getBlackPlayer();
 	}
 }

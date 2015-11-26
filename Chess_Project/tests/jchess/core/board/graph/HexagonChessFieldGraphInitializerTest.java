@@ -30,7 +30,8 @@ public class HexagonChessFieldGraphInitializerTest {
 	@Test
 	public void testInitialise() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		new Game(board, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
 
 		// check number of nodes
 		Assert.assertEquals(126, board.getAllNodes().size());
@@ -89,7 +90,8 @@ public class HexagonChessFieldGraphInitializerTest {
 	@Test
 	public void testInitialBoardSetup() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		new Game(board, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
 
 		// Test white pieces
 		checkPiece(board, "A1", Player.colors.white, Rook.class);

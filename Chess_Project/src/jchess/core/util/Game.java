@@ -1,44 +1,43 @@
 package jchess.core.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
 import jchess.core.board.Chessboard;
+import jchess.core.util.Player.colors;
 import jchess.ui.GameTab;
 
 /**
  * Class responsible for the starts of new games, loading games, saving it, and
- * for ending it. This class is also responsible for appoing player with have a
- * move at the moment
+ * for ending it. 
  * 
- * TODO move the UI stuff to GUIand Move to core
+ * 
  */
 public class Game {
 
-	private Player			activePlayer	= null;
-	private Chessboard	chessboard		= null;
+	private Clock													activeClock		= null;
+	private Player												activePlayer	= null;
+	private Chessboard										chessboard		= null;
 
-	private Player			playerWhite		= null;
-	private Player			playerBlack		= null;
-	private Player			playerRed			= null;
-
-	private List<Clock>	playerClocks	= new ArrayList<Clock>();
-	private int					runningClock	= 1;
+	private LinkedHashMap<colors, Player>	player				= new LinkedHashMap<Player.colors, Player>();
+	private LinkedHashMap<colors, Clock>	playerClocks	= new LinkedHashMap<Player.colors, Clock>();
 
 	public Game(Chessboard board, GameTab gui) throws Exception {
 
-		playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
-		playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
-		playerRed = new Player(Constants.EMPTY_STRING, Player.colors.red);
+		// do not change order, it is the turn order of the players
+		player.put(colors.white, new Player(Constants.EMPTY_STRING, Player.colors.white));
+		player.put(colors.red, new Player(Constants.EMPTY_STRING, Player.colors.red));
+		player.put(colors.black, new Player(Constants.EMPTY_STRING, Player.colors.black));
 
-		playerClocks.add(new Clock(Settings.getTimeForGame()));
-		playerClocks.add(new Clock(Settings.getTimeForGame()));
-		playerClocks.add(new Clock(Settings.getTimeForGame()));
+		// do not change order, it is the turn order of the players
+		playerClocks.put(colors.white, new Clock(Settings.getTimeForGame()));
+		playerClocks.put(colors.red, new Clock(Settings.getTimeForGame()));
+		playerClocks.put(colors.black, new Clock(Settings.getTimeForGame()));
 
 		chessboard = board;
-		chessboard.initChessBoard(playerWhite, playerBlack, playerRed);
 	}
 
 	/**
@@ -47,9 +46,12 @@ public class Game {
 	 * @throws Exception
 	 * 
 	 */
-	public void newGame() throws Exception {
-		chessboard.setPieces(Constants.EMPTY_STRING, playerWhite, playerBlack);
-		activePlayer = playerWhite;
+	public void startNewGame() throws Exception {
+		chessboard.initChessBoard(player);
+
+		// white is first player
+		activePlayer = player.get(colors.white);
+		activeClock = playerClocks.get(colors.white);
 	}
 
 	/**
@@ -66,12 +68,21 @@ public class Game {
 
 	/**
 	 * Method to switch active players after move
+	 * @throws Exception 
 	 */
-	public void switchActive() {
-		if (activePlayer == playerWhite) {
-			activePlayer = playerBlack;
-		} else {
-			activePlayer = playerWhite;
+	public void switchActive() throws Exception {
+		Iterator<Entry<colors, Player>> iter = player.entrySet().iterator();
+		while (iter.hasNext()) {
+			Entry<colors, Player> entry = iter.next();
+			if (entry.getValue() == activePlayer) {
+				Entry<colors, Player> nextEntry = null;
+				if (iter.hasNext()) {
+					nextEntry = iter.next();
+				} else {// next is first one
+					nextEntry = player.entrySet().iterator().next();
+				}
+				activePlayer = nextEntry.getValue();
+			}
 		}
 
 		switch_clocks();
@@ -86,54 +97,58 @@ public class Game {
 		return this.activePlayer;
 	}
 
-	public Player getWhitePlayer() {
-		return playerWhite;
-	}
-
-	public Player getBlackPlayer() {
-		return playerBlack;
-	}
-
-	public void setWhitePlayer(Player playerWhite) {
-		this.playerWhite = playerWhite;
-	}
-
-	public void setBlackPlayer(Player playerBlack) {
-		this.playerBlack = playerBlack;
-	}
-
 	public Chessboard getChessboard() {
 		return chessboard;
 	}
 
-	public Clock getClockForPlayer(int player) {
-		return playerClocks.get(player - 1);
+	public Clock getClockForPlayer(colors color) {
+		return playerClocks.get(color);
 	}
 
 	public void stopPlayerClocks() {
-		for (Clock clock : playerClocks) {
+		for (Clock clock : playerClocks.values()) {
 			clock.stop();
 		}
 	}
 
-	public void switch_clocks() {
-		runningClock++;
-		if (runningClock > playerClocks.size()) {
-			runningClock = 1;
-		}
+	private void switch_clocks() throws Exception {
+		activeClock.pause();
+		Iterator<Entry<colors, Clock>> iter = playerClocks.entrySet().iterator();
+		while (iter.hasNext()) {
+			Entry<colors, Clock> entry = iter.next();
+			if (entry.getValue() == activeClock) {
+				Entry<colors, Clock> nextEntry = null;
+				if (iter.hasNext()) {
+					nextEntry = iter.next();
+				} else {// next is first one
+					nextEntry = playerClocks.entrySet().iterator().next();
+				}
+				activeClock = nextEntry.getValue();
 
-		for (int i = 0; i < playerClocks.size(); i++) {
-			if (i == (runningClock - 1)) {// is next clock
-				playerClocks.get(i).resume();
-			} else {
-				playerClocks.get(i).pause();
+				if (activeClock.isStarted() == false) {
+					activeClock.start();
+				} else {
+					activeClock.resume();
+				}
 			}
 		}
 	}
 
 	public void setTimeForPlayerClocks(int timeForGame) {
-		for (Clock clock : playerClocks) {
+		for (Clock clock : playerClocks.values()) {
 			clock.setTime(timeForGame);
 		}
+	}
+
+	public Player getPlayer(colors color) {
+		return player.get(color);
+	}
+
+	public void setPlayer(colors color, Player newPlayer) {
+		player.put(color, newPlayer);
+	}
+
+	public Clock getActiveClock() {
+		return activeClock;
 	}
 }

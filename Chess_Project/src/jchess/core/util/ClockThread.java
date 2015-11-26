@@ -57,7 +57,12 @@ public class ClockThread extends Thread {
 		stop = true;
 	}
 
+	/**
+	 * Thread is considered running, if it is started, alive and not paused.
+	 * 
+	 * @return
+	 */
 	public boolean isRunning() {
-		return isRunning && isAlive();
+		return isRunning && isAlive() && (pause == false);
 	}
 }

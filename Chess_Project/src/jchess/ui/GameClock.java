@@ -14,6 +14,7 @@ import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.IClockListener;
 import jchess.core.util.Player;
+import jchess.core.util.Player.colors;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
@@ -21,7 +22,6 @@ public class GameClock extends JPanel implements IClockListener {
 
 	private static final long	serialVersionUID	= 1748377192145910384L;
 
-	private Clock							runningClock			= null;
 	private Game							game							= null;
 	private String						white_clock				= null;
 	private String						black_clock				= null;
@@ -30,8 +30,6 @@ public class GameClock extends JPanel implements IClockListener {
 	public GameClock(Game game) throws Exception {
 		super();
 		this.game = game;
-
-		this.runningClock = game.getClockForPlayer(1);// running/active clock
 		this.background = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
 
 		this.drawBackground();
@@ -45,7 +43,7 @@ public class GameClock extends JPanel implements IClockListener {
 	 */
 	public void start() throws Exception {
 		if (Settings.isTimeLimitSet()) {
-			game.getClockForPlayer(1).start();
+			game.getClockForPlayer(colors.white).start();
 		}
 	}
 
@@ -80,8 +78,9 @@ public class GameClock extends JPanel implements IClockListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		white_clock = game.getClockForPlayer(1).toString();
-		black_clock = game.getClockForPlayer(2).toString();
+		white_clock = game.getClockForPlayer(colors.white).toString();
+		// TODO add third clock (red)
+		black_clock = game.getClockForPlayer(colors.black).toString();
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(this.background, 0, 0, this);
@@ -102,9 +101,6 @@ public class GameClock extends JPanel implements IClockListener {
 		font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
 		g2d.drawImage(this.background, 0, 0, this);
 		g2d.setFont(font);
-		// g.drawString(Settings.getWhitePlayersName(), 10, 50);
-		// g.setColor(Color.WHITE);
-		// g.drawString(Settings.getBlackPlayersName(), 100, 50);
 		g2d.setFont(font);
 		g.setColor(Color.BLACK);
 		g2d.drawString(white_clock, 10, 80);
@@ -119,9 +115,9 @@ public class GameClock extends JPanel implements IClockListener {
 	public void timeOver(Clock clock) {
 		String color = Constants.EMPTY_STRING;
 
-		if (clock == game.getClockForPlayer(1)) {
+		if (clock == game.getClockForPlayer(colors.white)) {
 			color = Player.colors.white.toString();
-		} else if (clock == game.getClockForPlayer(2)) {
+		} else if (clock == game.getClockForPlayer(colors.black)) {
 			color = Player.colors.black.toString();
 		}
 		// TODO add third player

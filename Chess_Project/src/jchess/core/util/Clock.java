@@ -8,6 +8,7 @@ public class Clock {
 	private int										currentSeconds	= 0;
 	private List<IClockListener>	listeners				= new ArrayList<IClockListener>();
 	private ClockThread						clockThread			= null;
+	private boolean								started					= false;
 
 	public Clock(int time) throws Exception {
 		if (time < 0) {
@@ -40,6 +41,7 @@ public class Clock {
 		if (clockThread == null) {
 			clockThread = new ClockThread(currentSeconds, listeners, this);
 			clockThread.start();
+			started = true;
 		} else {
 			throw new Exception("Clock Thread is already running.");
 		}
@@ -49,6 +51,7 @@ public class Clock {
 		if (clockThread != null) {
 			clockThread.stopClock();
 			clockThread = null;
+			started = false;
 		}
 	}
 
@@ -82,7 +85,10 @@ public class Clock {
 	}
 
 	public boolean isClockRunning() {
-		boolean result = (clockThread != null) && (clockThread.isRunning());
-		return result;
+		return (clockThread != null) && (clockThread.isRunning());
+	}
+
+	public boolean isStarted() {
+		return started;
 	}
 }

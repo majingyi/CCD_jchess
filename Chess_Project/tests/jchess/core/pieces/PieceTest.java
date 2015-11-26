@@ -51,7 +51,8 @@ public class PieceTest {
 	@Test
 	public void testGetSquare() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		new Game(board, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
 
 		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
 
