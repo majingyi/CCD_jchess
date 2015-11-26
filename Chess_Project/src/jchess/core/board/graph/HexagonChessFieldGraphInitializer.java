@@ -3,7 +3,12 @@ package jchess.core.board.graph;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.Hexagon;
+import jchess.core.pieces.Bishop;
+import jchess.core.pieces.King;
+import jchess.core.pieces.Knight;
+import jchess.core.pieces.Pawn;
 import jchess.core.pieces.Piece;
+import jchess.core.pieces.Queen;
 import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
@@ -59,11 +64,48 @@ public class HexagonChessFieldGraphInitializer {
 
 		// white on top
 		addPiece(chessboard, new Rook(chessboard, white, null), "A1");
+		addPiece(chessboard, new Knight(chessboard, white, null), "A2");
+		addPiece(chessboard, new Bishop(chessboard, white, null), "A3");
+		addPiece(chessboard, new Queen(chessboard, white, null), "A4");
+		addPiece(chessboard, new King(chessboard, white, null), "A5");
+		addPiece(chessboard, new Bishop(chessboard, white, null), "A6");
+		addPiece(chessboard, new Knight(chessboard, white, null), "A7");
+		addPiece(chessboard, new Rook(chessboard, white, null), "A8");
+
+		String[] pawnFields = new String[] { "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9" };
+		for (String pawnField : pawnFields) {
+			addPiece(chessboard, new Pawn(chessboard, white, null), pawnField);
+		}
 
 		// black to the left
+		addPiece(chessboard, new Rook(chessboard, black, null), "F1");
+		addPiece(chessboard, new Knight(chessboard, black, null), "G2");
+		addPiece(chessboard, new Bishop(chessboard, black, null), "H3");
+		addPiece(chessboard, new Queen(chessboard, black, null), "I4");
+		addPiece(chessboard, new King(chessboard, black, null), "J5");
+		addPiece(chessboard, new Bishop(chessboard, black, null), "K6");
+		addPiece(chessboard, new Knight(chessboard, black, null), "L7");
+		addPiece(chessboard, new Rook(chessboard, black, null), "M8");
+
+		pawnFields = new String[] { "E1", "F2", "G3", "H4", "I5", "J6", "K7", "L8", "M9" };
+		for (String pawnField : pawnFields) {
+			addPiece(chessboard, new Pawn(chessboard, black, null), pawnField);
+		}
 
 		// red to the right
+		addPiece(chessboard, new Rook(chessboard, red, null), "F13");
+		addPiece(chessboard, new Knight(chessboard, red, null), "G13");
+		addPiece(chessboard, new Bishop(chessboard, red, null), "H13");
+		addPiece(chessboard, new Queen(chessboard, red, null), "I13");
+		addPiece(chessboard, new King(chessboard, red, null), "J13");
+		addPiece(chessboard, new Bishop(chessboard, red, null), "K13");
+		addPiece(chessboard, new Knight(chessboard, red, null), "L13");
+		addPiece(chessboard, new Rook(chessboard, red, null), "M13");
 
+		pawnFields = new String[] { "E12", "F12", "G12", "H12", "I12", "J12", "K12", "L12", "M12" };
+		for (String pawnField : pawnFields) {
+			addPiece(chessboard, new Pawn(chessboard, red, null), pawnField);
+		}
 	}
 
 	private static void addPiece(Chessboard chessboard, Piece piece, String fieldIdentifier) throws Exception {
