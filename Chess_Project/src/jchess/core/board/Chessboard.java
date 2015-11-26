@@ -46,12 +46,10 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		gameUI = ui;
 		moves_history = movesHistory;
-
-		initChessBoard();
 	}
 
-	private void initChessBoard() throws Exception {
-		HexagonChessFieldGraphInitializer.initialise(this);
+	public void initChessBoard(Player white, Player black, Player red) throws Exception {
+		HexagonChessFieldGraphInitializer.initialise(this, white, black, red);
 	}
 
 	/**
