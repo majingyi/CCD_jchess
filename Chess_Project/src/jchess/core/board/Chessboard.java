@@ -219,11 +219,11 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 			this.move(this.getFields()[from.pozX][from.pozY], this.getFields()[to.pozX][to.pozY], false);
 			if (first.getPromotedPiece() != null) {
 				Pawn pawn = (Pawn) this.getFields()[to.pozX][to.pozY].getPiece();
-				pawn.setField(null);
+				pawn.setField(null, this);
 
 				this.getFields()[to.pozX][to.pozY].setPiece(first.getPromotedPiece());
 				Piece promoted = this.getFields()[to.pozX][to.pozY].getPiece();
-				promoted.setField(this.getFields()[to.pozX][to.pozY]);
+				promoted.setField(this.getFields()[to.pozX][to.pozY], this);
 			}
 			result = true;
 		}
@@ -248,13 +248,13 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
 		if (end.getPiece() != null) {
-			end.getPiece().setField(null);
+			end.getPiece().setField(null, this);
 		}
 
 		Square tempBegin = new Square((Square) begin);// 4 moves history
 		Square tempEnd = new Square((Square) end); // 4 moves history
 
-		begin.getPiece().setField(end);// set square of piece to ending
+		begin.getPiece().setField(end, this);// set square of piece to ending
 		end.setPiece(begin.getPiece());// for ending square set piece from beginin
 		// square
 		begin.setPiece(null);// make null piece for begining square
@@ -332,7 +332,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				Piece moved = last.getMovedPiece();
 				this.getFields()[begin.pozX][begin.pozY].setPiece(moved);
 
-				moved.setField(this.getFields()[begin.pozX][begin.pozY]);
+				moved.setField(this.getFields()[begin.pozX][begin.pozY], this);
 
 				Piece taken = last.getTakenPiece();
 				if (last.getCastlingMove() != castling.none) {
@@ -340,12 +340,12 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 					if (last.getCastlingMove() == castling.shortCastling) {
 						rook = this.getFields()[end.pozX - 1][end.pozY].getPiece();
 						this.getFields()[7][begin.pozY].setPiece(rook);
-						rook.setField(this.getFields()[7][begin.pozY]);
+						rook.setField(this.getFields()[7][begin.pozY], this);
 						this.getFields()[end.pozX - 1][end.pozY].setPiece(null);
 					} else {
 						rook = this.getFields()[end.pozX + 1][end.pozY].getPiece();
 						this.getFields()[0][begin.pozY].setPiece(rook);
-						rook.setField(this.getFields()[0][begin.pozY]);
+						rook.setField(this.getFields()[0][begin.pozY], this);
 						this.getFields()[end.pozX + 1][end.pozY].setPiece(null);
 					}
 					((King) moved).wasMotion = false;
@@ -355,11 +355,11 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				} else if (moved.getSymbol() == Pawn.SYMBOL && last.wasEnPassant()) {
 					Pawn pawn = (Pawn) last.getTakenPiece();
 					this.getFields()[end.pozX][begin.pozY].setPiece(pawn);
-					pawn.setField(this.getFields()[end.pozX][begin.pozY]);
+					pawn.setField(this.getFields()[end.pozX][begin.pozY], this);
 
 				} else if (moved.getSymbol() == Pawn.SYMBOL && last.getPromotedPiece() != null) {
 					Piece promoted = this.getFields()[end.pozX][end.pozY].getPiece();
-					promoted.setField(null);
+					promoted.setField(null, this);
 					this.getFields()[end.pozX][end.pozY].setPiece(null);
 				}
 
@@ -374,7 +374,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 				if (taken != null && !last.wasEnPassant()) {
 					this.getFields()[end.pozX][end.pozY].setPiece(taken);
-					taken.setField(this.getFields()[end.pozX][end.pozY]);
+					taken.setField(this.getFields()[end.pozX][end.pozY], this);
 				} else {
 					this.getFields()[end.pozX][end.pozY].setPiece(null);
 				}
@@ -606,5 +606,16 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 */
 	private boolean isBlocked(ChessboardField start, ChessboardField target) {
 		return false; // TODO
+	}
+
+	/**
+	 * Checks if the given field belongs to the given board.
+	 * 
+	 * @param board
+	 * @param field
+	 * @return true if the given field belongs to the given board.
+	 */
+	public static boolean isValidField(Chessboard board, ChessboardField field) {
+		return board.getNode(field.getIdentifier()) == field;
 	}
 }

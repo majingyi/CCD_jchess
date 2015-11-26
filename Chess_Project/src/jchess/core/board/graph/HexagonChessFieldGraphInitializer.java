@@ -3,6 +3,7 @@ package jchess.core.board.graph;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.Hexagon;
+import jchess.core.pieces.Piece;
 import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
@@ -57,13 +58,18 @@ public class HexagonChessFieldGraphInitializer {
 		 */
 
 		// white on top
-		ChessboardField a1 = (ChessboardField) chessboard.getNode("A1");
-		a1.setPiece(new Rook(chessboard, white, a1));
+		addPiece(chessboard, new Rook(chessboard, white, null), "A1");
 
 		// black to the left
 
 		// red to the right
 
+	}
+
+	private static void addPiece(Chessboard chessboard, Piece piece, String fieldIdentifier) throws Exception {
+		ChessboardField field = (ChessboardField) chessboard.getNode(fieldIdentifier);
+		piece.setField(field, chessboard);
+		field.setPiece(piece);
 	}
 
 	private static void connectDiagonalEdges(ChessboardField[][] fields) {

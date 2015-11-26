@@ -77,9 +77,9 @@ public abstract class Piece {
 		return m_Field;
 	}
 
-	public void setField(ChessboardField square) throws Exception {
-		if (square == null || Chessboard.isValidSquare(square)) {
-			this.m_Field = square;
+	public void setField(ChessboardField field, Chessboard board) throws Exception {
+		if (field == null || Chessboard.isValidField(board, field)) {
+			this.m_Field = field;
 			moveBehavior.setChessboardField(this.m_Field);
 		} else {
 			throw new Exception(Language.getString("Piece.1")); //$NON-NLS-1$

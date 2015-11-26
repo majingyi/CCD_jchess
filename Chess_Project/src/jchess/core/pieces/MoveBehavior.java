@@ -2,7 +2,6 @@ package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.Square;
 import jchess.core.util.Player;
 
 public abstract class MoveBehavior implements IMoveBehavior {
@@ -57,7 +56,7 @@ public abstract class MoveBehavior implements IMoveBehavior {
 		return false;
 	}
 
-	public void setChessboardField(ChessboardField square) {
-		this.m_Field = (Square) square;
+	public void setChessboardField(ChessboardField field) {
+		this.m_Field = field;
 	}
 }

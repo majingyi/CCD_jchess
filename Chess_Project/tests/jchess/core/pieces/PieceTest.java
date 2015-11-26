@@ -3,6 +3,7 @@ package jchess.core.pieces;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.Square;
+import jchess.core.util.Game;
 import jchess.core.util.Player;
 import junit.framework.Assert;
 
@@ -50,6 +51,8 @@ public class PieceTest {
 	@Test
 	public void testGetSquare() throws Exception {
 		Chessboard board = new Chessboard(null, null);
+		new Game(board, null);
+
 		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
 
 		Assert.assertEquals(null, p.getField());
@@ -57,7 +60,7 @@ public class PieceTest {
 		// setSquare outside the board left
 		boolean exception = false;
 		try {
-			p.setField(new Square(8, 0, null, board));
+			p.setField(new Square(8, 0, null, board), board);
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -67,7 +70,7 @@ public class PieceTest {
 		// setSquare outside the board right
 		exception = false;
 		try {
-			p.setField(new Square(-1, 0, null, board));
+			p.setField(new Square(-1, 0, null, board), board);
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -77,7 +80,7 @@ public class PieceTest {
 		// setSquare outside the board top
 		exception = false;
 		try {
-			p.setField(new Square(0, -1, null, board));
+			p.setField(new Square(0, -1, null, board), board);
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -87,7 +90,7 @@ public class PieceTest {
 		// setSquare outside the board bottom
 		exception = false;
 		try {
-			p.setField(new Square(0, 8, null, board));
+			p.setField(new Square(0, 8, null, board), board);
 		} catch (Exception e) {
 			Assert.assertEquals("Given square is outside the board borders.", e.getMessage());
 			exception = true;
@@ -95,11 +98,10 @@ public class PieceTest {
 		Assert.assertTrue(exception);
 
 		// set valid square
-		p.setField(new Square(3, 5, null, board));
-		Square sq = (Square) p.getField();
-		Assert.assertNotNull(sq);
-		Assert.assertEquals(5, sq.pozY);
-		Assert.assertEquals(3, sq.pozX);
+		p.setField((ChessboardField) board.getNode("M8"), board);
+		ChessboardField field = p.getField();
+		Assert.assertNotNull(field);
+		Assert.assertEquals("M8", p.getField().getIdentifier());
 	}
 
 	@Test
