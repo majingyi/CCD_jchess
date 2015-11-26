@@ -4,7 +4,16 @@ import java.util.List;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
+import jchess.core.pieces.Bishop;
+import jchess.core.pieces.King;
+import jchess.core.pieces.Knight;
+import jchess.core.pieces.Pawn;
+import jchess.core.pieces.Piece;
+import jchess.core.pieces.Queen;
+import jchess.core.pieces.Rook;
 import jchess.core.util.Game;
+import jchess.core.util.Player;
+import jchess.core.util.Player.colors;
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -21,7 +30,7 @@ public class HexagonChessFieldGraphInitializerTest {
 	@Test
 	public void testInitialise() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		Game game = new Game(board, null);
+		new Game(board, null);
 
 		// check number of nodes
 		Assert.assertEquals(126, board.getAllNodes().size());
@@ -75,5 +84,78 @@ public class HexagonChessFieldGraphInitializerTest {
 		for (String id : straight) {
 			Assert.assertTrue(id, neighbors.contains(board.getNode(id)));
 		}
+	}
+
+	@Test
+	public void testInitialBoardSetup() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		new Game(board, null);
+
+		// Test white pieces
+		checkPiece(board, "A1", Player.colors.white, Rook.class);
+		checkPiece(board, "A2", Player.colors.white, Knight.class);
+		checkPiece(board, "A3", Player.colors.white, Bishop.class);
+		checkPiece(board, "A4", Player.colors.white, Queen.class);
+		checkPiece(board, "A5", Player.colors.white, King.class);
+		checkPiece(board, "A6", Player.colors.white, Bishop.class);
+		checkPiece(board, "A7", Player.colors.white, Knight.class);
+		checkPiece(board, "A8", Player.colors.white, Rook.class);
+
+		checkPiece(board, "B1", Player.colors.white, Pawn.class);
+		checkPiece(board, "B2", Player.colors.white, Pawn.class);
+		checkPiece(board, "B3", Player.colors.white, Pawn.class);
+		checkPiece(board, "B4", Player.colors.white, Pawn.class);
+		checkPiece(board, "B5", Player.colors.white, Pawn.class);
+		checkPiece(board, "B6", Player.colors.white, Pawn.class);
+		checkPiece(board, "B7", Player.colors.white, Pawn.class);
+		checkPiece(board, "B8", Player.colors.white, Pawn.class);
+		checkPiece(board, "B9", Player.colors.white, Pawn.class);
+
+		// Test black pieces
+		checkPiece(board, "F1", Player.colors.black, Rook.class);
+		checkPiece(board, "G2", Player.colors.black, Knight.class);
+		checkPiece(board, "H3", Player.colors.black, Bishop.class);
+		checkPiece(board, "I4", Player.colors.black, Queen.class);
+		checkPiece(board, "J5", Player.colors.black, King.class);
+		checkPiece(board, "K6", Player.colors.black, Bishop.class);
+		checkPiece(board, "L7", Player.colors.black, Knight.class);
+		checkPiece(board, "M8", Player.colors.black, Rook.class);
+
+		checkPiece(board, "E1", Player.colors.black, Pawn.class);
+		checkPiece(board, "F2", Player.colors.black, Pawn.class);
+		checkPiece(board, "G3", Player.colors.black, Pawn.class);
+		checkPiece(board, "H4", Player.colors.black, Pawn.class);
+		checkPiece(board, "I5", Player.colors.black, Pawn.class);
+		checkPiece(board, "J6", Player.colors.black, Pawn.class);
+		checkPiece(board, "K7", Player.colors.black, Pawn.class);
+		checkPiece(board, "L8", Player.colors.black, Pawn.class);
+		checkPiece(board, "M9", Player.colors.black, Pawn.class);
+
+		// Test red pieces
+		checkPiece(board, "F13", Player.colors.red, Rook.class);
+		checkPiece(board, "G13", Player.colors.red, Knight.class);
+		checkPiece(board, "H13", Player.colors.red, Bishop.class);
+		checkPiece(board, "I13", Player.colors.red, Queen.class);
+		checkPiece(board, "J13", Player.colors.red, King.class);
+		checkPiece(board, "K13", Player.colors.red, Bishop.class);
+		checkPiece(board, "L13", Player.colors.red, Knight.class);
+		checkPiece(board, "M13", Player.colors.red, Rook.class);
+
+		checkPiece(board, "E12", Player.colors.red, Pawn.class);
+		checkPiece(board, "F12", Player.colors.red, Pawn.class);
+		checkPiece(board, "G12", Player.colors.red, Pawn.class);
+		checkPiece(board, "H12", Player.colors.red, Pawn.class);
+		checkPiece(board, "I12", Player.colors.red, Pawn.class);
+		checkPiece(board, "J12", Player.colors.red, Pawn.class);
+		checkPiece(board, "K12", Player.colors.red, Pawn.class);
+		checkPiece(board, "L12", Player.colors.red, Pawn.class);
+		checkPiece(board, "M12", Player.colors.red, Pawn.class);
+
+	}
+
+	private void checkPiece(Chessboard board, String identifier, colors color, Class<? extends Piece> clazz) {
+		Piece piece = ((ChessboardField) board.getNode(identifier)).getPiece();
+		Assert.assertEquals(color, piece.getPlayer().getColor());
+		Assert.assertEquals(piece.getClass(), clazz);
 	}
 }
