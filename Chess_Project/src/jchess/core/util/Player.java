@@ -15,7 +15,7 @@ public class Player implements Serializable {
 	private boolean						goDown						= false;
 
 	public enum colors {
-		white, black, gray
+		white, black, red
 	}
 
 	public Player() {
