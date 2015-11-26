@@ -25,6 +25,7 @@ public class Theme {
 		themeList.add("hunter"); //$NON-NLS-1$
 		themeList.add("matlak"); //$NON-NLS-1$
 
+		// TODO add red players images
 		themeImages = new String[] { "able_square.png", "add-tab-icon.png", "Bishop-B.png", "Bishop-W.png", "chessboard.png", "clicked-add-tab-icon.png",
 			"King-B.png", "King-W.png", "Knight-B.png", "Knight-W.png", "Pawn-B.png", "Pawn-W.png", "Preview.png", "Queen-B.png", "Queen-W.png", "Rook-B.png",
 			"Rook-W.png", "sel_square.png" };
@@ -37,8 +38,8 @@ public class Theme {
 			imageName = imageName + "-W.png"; //$NON-NLS-1$
 		} else if (color == Player.colors.black) {
 			imageName = imageName + "-B.png"; //$NON-NLS-1$
-		} else if (color == Player.colors.gray) {
-			imageName = imageName + "-G.png"; //$NON-NLS-1$
+		} else if (color == Player.colors.red) {
+			imageName = imageName + "-R.png"; //$NON-NLS-1$
 		}
 		return getImage(imageName);
 	}

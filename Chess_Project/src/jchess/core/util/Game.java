@@ -20,9 +20,9 @@ public class Game {
 	private Player			activePlayer	= null;
 	private Chessboard	chessboard		= null;
 
-	// TODO add player gray
 	private Player			playerWhite		= null;
 	private Player			playerBlack		= null;
+	private Player			playerRed			= null;
 
 	private List<Clock>	playerClocks	= new ArrayList<Clock>();
 	private int					runningClock	= 1;
@@ -31,11 +31,14 @@ public class Game {
 
 		playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
 		playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
+		playerRed = new Player(Constants.EMPTY_STRING, Player.colors.red);
 
+		playerClocks.add(new Clock(Settings.getTimeForGame()));
 		playerClocks.add(new Clock(Settings.getTimeForGame()));
 		playerClocks.add(new Clock(Settings.getTimeForGame()));
 
 		chessboard = board;
+		chessboard.initChessBoard(playerWhite, playerBlack, playerRed);
 	}
 
 	/**
