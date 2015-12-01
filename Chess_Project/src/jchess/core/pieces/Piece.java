@@ -14,11 +14,6 @@ import jchess.ui.lang.Language;
  */
 public abstract class Piece {
 
-	// TODO Piece class is not allowed to have image, this needs to be moved to
-	// scheme
-
-	// TODO this class shall not draw itself, checkBoardUI is responsible for this
-
 	private Chessboard			m_Chessboard	= null;
 	private ChessboardField	m_Field				= null;
 	private Player					m_Player			= null;
