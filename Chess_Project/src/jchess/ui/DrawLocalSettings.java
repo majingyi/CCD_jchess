@@ -1,6 +1,5 @@
 package jchess.ui;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,24 +32,18 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 
 	private static final long		serialVersionUID	= -3054704162643076714L;
 
-	private JDialog							parent;
-	private JFrame							localPanel;
-	private JTextField					firstName;
-	private JTextField					secondName;
-	private JLabel							firstNameLab;
-	private JLabel							secondNameLab;
+	private JDialog							parent						= null;
+	private JTextField					firstName					= null;
+	private JTextField					secondName				= null;
+	private JLabel							firstNameLab			= null;
+	private JLabel							secondNameLab			= null;
 
-	private GridBagLayout				gbl;
-	private GridBagConstraints	gbc;
-	private Container						cont;
-	private JSeparator					sep;
-	private JButton							okButton;
-	private JCheckBox						timeGame;
-	private JComboBox<String>		time4Game;
-	private String							colors[]					= { Language.getString("white"), Language.getString("black") };			//$NON-NLS-1$ //$NON-NLS-2$
+	private GridBagLayout				gbl								= null;
+	private GridBagConstraints	gbc								= null;
+	private JButton							okButton					= null;
+	private JCheckBox						timeGame					= null;
+	private JComboBox<String>		time4Game					= null;
 	private String							times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };	//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
-
-																																																											;
 
 	/**
 	 * Method witch is checking correction of edit tables
@@ -65,7 +57,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			JTextField temp = new JTextField();
 			if (target == this.firstName) {
 				temp = this.firstName;
-			} else if (target == this.secondName) {
+			} else {
 				temp = this.secondName;
 			}
 
@@ -157,7 +149,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.parent = parent;
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
-		this.sep = new JSeparator();
+		new JSeparator();
 		this.okButton = new JButton(Language.getString(Language.getString("DrawLocalSettings.24"))); //$NON-NLS-1$
 
 		this.firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
