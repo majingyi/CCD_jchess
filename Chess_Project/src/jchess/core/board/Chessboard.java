@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jchess.core.board.graph.DiagonalEdge;
 import jchess.core.board.graph.DirectedGraphEdge;
 import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.HexagonChessFieldGraphInitializer;
@@ -174,8 +175,10 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				this.unselect();
 				m_GameUI.getChessboardUI().repaint();
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
+				Logging.log(exc);
 				return false;
 			} catch (java.lang.NullPointerException exc) {
+				Logging.log(exc);
 				return false;
 			}
 
@@ -258,6 +261,16 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		for (GraphEdge edge : edges) {
 			if (edge instanceof StraightEdge) {
 				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+
+				/*
+				 * The next field can be moved to if:
+				 * 
+				 * - We did not specify color, than we want simply have all fields.
+				 * 
+				 * - There is no piece on this field.
+				 * 
+				 * - The piece on this field is an opponents piece
+				 */
 				if (activePlayersColor == null || boardField.getPiece() == null || boardField.getPiece().getPlayer().getColor() != activePlayersColor) {
 					result.add(boardField);
 				}
@@ -279,14 +292,31 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		ChessboardField next = field.getNextField(edge.getDirection(), edge.getEdgeType());
 
 		if (next != null) {
-			if (color == null || next.getPiece() == null || next.getPiece().getPlayer().getColor() != color) {
+			/*
+			 * Diagonal edge can be blocked, if both fields left and right from that
+			 * edge is occupied by an piece, regardless which color.
+			 * 
+			 * Straight edges are never blocked.
+			 */
+			boolean edgeBlocked = isBlocked(field, next);
+
+			/*
+			 * The next field can be moved to if:
+			 * 
+			 * - We did not specify color, than we want simply have all fields.
+			 * 
+			 * - There is no piece on this field.
+			 * 
+			 * - The piece on this field is an opponents piece
+			 */
+			if ((edgeBlocked == false) && (color == null || next.getPiece() == null || next.getPiece().getPlayer().getColor() != color)) {
 				result.add(next);
 			}
 
 			/*
 			 * If there is a piece on this field, we can not move on.
 			 */
-			if (next.getPiece() == null) {
+			if ((edgeBlocked == false) && (next.getPiece() == null)) {
 				result.addAll(getNodesInSpecificDirection(next, edge, color));
 			}
 		}
@@ -302,6 +332,14 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 			if (next != null) {
 				/*
+				 * Diagonal edge can be blocked, if both fields left and right from that
+				 * edge is occupied by an piece, regardless which color.
+				 * 
+				 * Straight edges are never blocked.
+				 */
+				boolean edgeBlocked = isBlocked(field, next);
+
+				/*
 				 * The next field can be moved to if:
 				 * 
 				 * - We did not specify color, than we want simply have all fields.
@@ -310,14 +348,14 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				 * 
 				 * - The piece on this field is an opponents piece
 				 */
-				if (color == null || next.getPiece() == null || next.getPiece().getPlayer().getColor() != color) {
+				if ((edgeBlocked == false) && (color == null || next.getPiece() == null || next.getPiece().getPlayer().getColor() != color)) {
 					result.add(next);
 				}
 
 				/*
 				 * If there is a piece on this field, we can not move on.
 				 */
-				if (next.getPiece() == null) {
+				if ((edgeBlocked == false) && (next.getPiece() == null)) {
 					result.addAll(getNodesInSpecificDirection(next, edge, maxDepth - 1, color));
 				}
 			}
@@ -344,6 +382,15 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		for (GraphEdge edge : edges) {
 			if (edge instanceof StraightEdge) {
 				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+				/*
+				 * The next field can be moved to if:
+				 * 
+				 * - We did not specify color, than we want simply have all fields.
+				 * 
+				 * - There is no piece on this field.
+				 * 
+				 * - The piece on this field is an opponents piece
+				 */
 				if (activePlayersColor == null || boardField.getPiece() == null || boardField.getPiece().getPlayer().getColor() != activePlayersColor) {
 					result.add(boardField);
 				}
@@ -368,10 +415,42 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @return the list of all diagonal fields which are not blocked. Never null.
+	 * @throws Exception 
 	 */
-	public List<ChessboardField> getDiagonalFields(ChessboardField field, Player.colors activePlayersColor) {
+	public List<ChessboardField> getDiagonalFields(ChessboardField field, Player.colors activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
+
+		List<GraphEdge> edges = field.getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge instanceof DiagonalEdge) {
+				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+
+				/*
+				 * The next field can be moved to if:
+				 * 
+				 * - We did not specify color, than we want simply have all fields.
+				 * 
+				 * - There is no piece on this field.
+				 * 
+				 * - The piece on this field is an opponents piece
+				 * 
+				 * AND the edge is not blocked.
+				 */
+				if ((isBlocked(field, boardField) == false)
+						&& (activePlayersColor == null || boardField.getPiece() == null || boardField.getPiece().getPlayer().getColor() != activePlayersColor)) {
+					result.add(boardField);
+				}
+
+				/*
+				 * If there is a piece on this field, we can not move on.
+				 */
+				if ((isBlocked(field, boardField) == false) && (boardField.getPiece() == null)) {
+					result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, activePlayersColor));
+				}
+			}
+		}
+
+		return result;
 	}
 
 	/**
@@ -383,10 +462,42 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
 	 * @return the list of all diagonal fields which are not blocked or out of range. Never null.
+	 * @throws Exception 
 	 */
-	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) {
+	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
+
+		List<GraphEdge> edges = field.getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge instanceof DiagonalEdge) {
+				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+
+				/*
+				 * The next field can be moved to if:
+				 * 
+				 * - We did not specify color, than we want simply have all fields.
+				 * 
+				 * - There is no piece on this field.
+				 * 
+				 * - The piece on this field is an opponents piece
+				 * 
+				 * AND the edge is not blocked.
+				 */
+				if ((isBlocked(field, boardField) == false)
+						&& (activePlayersColor == null || boardField.getPiece() == null || boardField.getPiece().getPlayer().getColor() != activePlayersColor)) {
+					result.add(boardField);
+				}
+
+				/*
+				 * If there is a piece on this field, we can not move on.
+				 */
+				if ((isBlocked(field, boardField) == false) && (boardField.getPiece() == null)) {
+					result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, maxAllowedMoves - 1, activePlayersColor));
+				}
+			}
+		}
+
+		return result;
 	}
 
 	/**
@@ -440,9 +551,48 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param start
 	 * @param target
 	 * @return true if the corresponding edge is blocked
+	 * @throws Exception 
 	 */
-	private boolean isBlocked(ChessboardField start, ChessboardField target) {
-		return false; // TODO
+	private boolean isBlocked(ChessboardField start, ChessboardField target) throws Exception {
+		boolean result = true;
+
+		List<GraphEdge> edges = start.getEdges();
+
+		for (GraphEdge edge : edges) {
+			if (edge.getOtherNode(start) == target) {
+				if (edge instanceof DiagonalEdge) {
+					/*
+					 * The two nodes, connected to both of the start and target node are
+					 * the two node right and left from the edge.
+					 */
+					List<ChessboardField> neighborsA = start.getStraightNeighbors();
+					List<ChessboardField> neighborsB = target.getStraightNeighbors();
+
+					List<ChessboardField> inBothLists = new ArrayList<ChessboardField>();
+
+					for (ChessboardField node : neighborsA) {
+						if (neighborsB.contains(node)) {
+							inBothLists.add(node);
+						}
+					}
+
+					if (inBothLists.size() == 2) {
+						for (ChessboardField node : inBothLists) {
+							result &= node.getPiece() != null;
+						}
+					}
+				} else {
+					/*
+					 * A Straight Edge is never blocked.
+					 */
+					result = false;
+				}
+
+				break;
+			}
+		}
+
+		return result;
 	}
 
 	/**
