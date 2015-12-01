@@ -21,14 +21,16 @@ import jchess.core.util.Logging;
 import jchess.core.util.Player;
 import jchess.ui.lang.Language;
 
+import org.jdesktop.application.Application;
 import org.jdesktop.application.FrameView;
-import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
 /**
  * The application's main view.
  */
 public class JChessView extends FrameView implements ActionListener, ComponentListener {
+
+	private static JChessView					m_Instance						= null;
 
 	private static final int					MESSAGE_TIMEOUT				= 5000;
 	private static final int					BUSY_ANIMATION_RATE		= 30;
@@ -166,8 +168,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		helpMenu.setText(Language.getString("helpMenu.text")); //$NON-NLS-1$
 	}
 
-	public JChessView(SingleFrameApplication app) throws FileNotFoundException {
-		super(app);
+	public JChessView(Application application) throws FileNotFoundException {
+		super(application);
 
 		initComponents();
 		// status bar initialization - message timeout, idle icon and busy
@@ -554,5 +556,16 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	public void componentHidden(ComponentEvent e) {
 		throw new UnsupportedOperationException("Not supported yet."); //$NON-NLS-1$
+	}
+
+	public static JChessView getInstance() {
+		if (m_Instance == null) {
+			try {
+				m_Instance = new JChessView(JChessApp.getInstance());
+			} catch (FileNotFoundException e) {
+				Logging.log(e);
+			}
+		}
+		return m_Instance;
 	}
 }

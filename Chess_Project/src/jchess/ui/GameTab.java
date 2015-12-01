@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import jchess.JChessApp;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.pieces.King;
@@ -280,7 +279,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 			return;
 		}
 
-		GameTab newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
+		GameTab newGUI = JChessView.getInstance().addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
 
 		Player playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
 		Player playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
@@ -363,8 +362,8 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	public void newGame() throws Exception {
 		game.startNewGame();
 
-		GameTab activeGame = JChessApp.jcv.getActiveTabGame();
-		if (activeGame != null && JChessApp.jcv.getNumberOfOpenedTabs() == 0) {
+		GameTab activeGame = JChessView.getInstance().getActiveTabGame();
+		if (activeGame != null && JChessView.getInstance().getNumberOfOpenedTabs() == 0) {
 			activeGame.chessboard.resizeChessboard(activeGame.chessboard.get_height(false));
 			activeGame.chessboard.repaint();
 			activeGame.repaint();

@@ -1,7 +1,5 @@
 package jchess;
 
-import java.io.FileNotFoundException;
-
 import jchess.core.util.Logging;
 import jchess.core.util.Settings;
 import jchess.ui.JChessView;
@@ -13,7 +11,6 @@ import org.jdesktop.application.SingleFrameApplication;
  * The main class of the application.
  */
 public class JChessApp extends SingleFrameApplication {
-	public static JChessView	jcv;
 
 	/**
 	 * At startup create and show the main frame of the application.
@@ -24,12 +21,8 @@ public class JChessApp extends SingleFrameApplication {
 		// initialize logging
 		Logging.initLogger();
 
-		try {
-			jcv = new JChessView(this);
-			show(jcv);
-		} catch (FileNotFoundException e) {
-			Logging.log(e);
-		}
+		// open view
+		show(JChessView.getInstance());
 	}
 
 	@Override

@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 
-import jchess.JChessApp;
 import jchess.core.util.Logging;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
@@ -77,7 +76,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 
 			GameTab newGUI = null;
 			try {
-				newGUI = JChessApp.jcv.addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText());
+				newGUI = JChessView.getInstance().addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText());
 			} catch (Exception e2) {
 				Logging.log(e2);
 			}
