@@ -14,7 +14,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 
@@ -120,7 +119,6 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 		this.parent = parent;
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
-		new JSeparator();
 		this.okButton = new JButton(Language.getString(Language.getString("DrawLocalSettings.24"))); //$NON-NLS-1$
 
 		this.firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
