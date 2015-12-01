@@ -1,5 +1,6 @@
 package jchess.core.board.graph;
 
+import jchess.core.board.graph.DirectedGraphEdge.direction;
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class GraphEdgeTest {
 		GraphNode first = new GraphNode("H2");
 		GraphNode second = new GraphNode("F5");
 		GraphNode third = new GraphNode("F5");
-		DiagonalEdge edge = new DiagonalEdge(first, second);
+		DiagonalEdge edge = new DiagonalEdge(first, second, direction.left);
 
 		Assert.assertEquals(first, edge.getOtherNode(second));
 		Assert.assertEquals(second, edge.getOtherNode(first));
@@ -37,10 +38,10 @@ public class GraphEdgeTest {
 
 	@Test
 	public void testGetEdgeType() throws Exception {
-		DiagonalEdge edge = new DiagonalEdge(new GraphNode("H2"), new GraphNode("F5"));
+		DiagonalEdge edge = new DiagonalEdge(new GraphNode("H2"), new GraphNode("F5"), direction.left);
 		Assert.assertEquals(GraphEdge.EdgeType.diagonal, edge.getEdgeType());
 
-		StraightEdge edqe1 = new StraightEdge(new GraphNode("H2"), new GraphNode("F5"));
+		StraightEdge edqe1 = new StraightEdge(new GraphNode("H2"), new GraphNode("F5"), direction.left);
 		Assert.assertEquals(GraphEdge.EdgeType.straight, edqe1.getEdgeType());
 	}
 }

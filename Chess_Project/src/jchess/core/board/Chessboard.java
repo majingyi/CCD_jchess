@@ -256,7 +256,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 */
 	public List<ChessboardField> getStraightFields(ChessboardField field, Player.colors activePlayersColor) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
+
+		return result;
 	}
 
 	/**

@@ -1,9 +1,9 @@
 package jchess.core.board.graph;
 
-public class StraightEdge extends GraphEdge {
+public class StraightEdge extends DirectedGraphEdge {
 
-	public StraightEdge(GraphNode node1, GraphNode node2) {
-		super(node1, node2);
+	public StraightEdge(GraphNode node1, GraphNode node2, direction dir) {
+		super(node1, node2, dir);
 	}
 
 	@Override
