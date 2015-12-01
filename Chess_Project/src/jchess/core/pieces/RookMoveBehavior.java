@@ -13,7 +13,19 @@ public class RookMoveBehavior extends MoveBehavior {
 	}
 
 	public ArrayList<ChessboardField> allMoves() throws Exception {
-		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
+		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
+		
+		//adding all straight fields
+		for (ChessboardField straightField : this.m_Chessboard.getStraightFields(this.m_Field, this.m_Player.getColor())) {
+			
+			if (this.m_Chessboard.getKingForColor(this.m_Player.getColor()).willBeSafeWhenMoveOtherPiece(this.m_Field,straightField)) {
+				allMoves.add(straightField);
+			}
+			else {
+				continue;
+			}
+		}
+		
 
 		// for (int i = this.m_Field.pozY + 1; i <= 7; ++i) {// up
 		//
@@ -132,6 +144,6 @@ public class RookMoveBehavior extends MoveBehavior {
 		// }
 		// }
 
-		return list;
+		return allMoves;
 	}
 }

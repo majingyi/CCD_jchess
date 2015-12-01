@@ -13,7 +13,18 @@ public class BishopMoveBehavior extends MoveBehavior {
 	}
 
 	public ArrayList<ChessboardField> allMoves() throws Exception {
-		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
+		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
+		
+		//adding all diagonal fields
+		for (ChessboardField diagonalField : this.m_Chessboard.getDiagonalFields(this.m_Field, this.m_Player.getColor())) {
+			
+			if (this.m_Chessboard.getKingForColor(this.m_Player.getColor()).willBeSafeWhenMoveOtherPiece(this.m_Field,diagonalField)) {
+				allMoves.add(diagonalField);
+			}
+			else {
+				continue;
+			}
+		}
 
 		// for (int h = this.m_Field.pozX - 1, i = this.m_Field.pozY + 1;
 		// Chessboard.isout(h, i) == false; --h, ++i) // left-up
@@ -131,6 +142,6 @@ public class BishopMoveBehavior extends MoveBehavior {
 		// }
 		// }
 
-		return list;
+		return allMoves;
 	}
 }
