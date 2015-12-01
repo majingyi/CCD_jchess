@@ -212,9 +212,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		boolean result = true;
 
 		select(begin);
-		if (m_ActiveField.getPiece().allMoves().contains(end)) // it is allowed
-																														// field
-		{
+		if (m_ActiveField.getPiece().allMoves().contains(end)) {
 			move(begin, end, true);
 		} else {
 			Logging.log(Language.getString("Game.29"));
@@ -253,42 +251,75 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all straight fields which are not blocked. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getStraightFields(ChessboardField field, Player.colors activePlayersColor) throws Exception {
+	public List<ChessboardField> getStraightFields(ChessboardField field, colors activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		List<GraphEdge> edges = field.getEdges();
 		for (GraphEdge edge : edges) {
 			if (edge instanceof StraightEdge) {
 				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
-				result.add(boardField);
-				result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge));
+				if (activePlayersColor == null || boardField.getPiece() == null || boardField.getPiece().getPlayer().getColor() != activePlayersColor) {
+					result.add(boardField);
+				}
+
+				/*
+				 * If there is a piece on this field, we can not move on.
+				 */
+				if (boardField.getPiece() == null) {
+					result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, activePlayersColor));
+				}
 			}
 		}
 
 		return result;
 	}
 
-	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge) throws Exception {
+	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, colors color) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		ChessboardField next = field.getNextField(edge.getDirection(), edge.getEdgeType());
 
 		if (next != null) {
-			result.add(next);
-			result.addAll(getNodesInSpecificDirection(field, edge));
+			if (color == null || next.getPiece() == null || next.getPiece().getPlayer().getColor() != color) {
+				result.add(next);
+			}
+
+			/*
+			 * If there is a piece on this field, we can not move on.
+			 */
+			if (next.getPiece() == null) {
+				result.addAll(getNodesInSpecificDirection(next, edge, color));
+			}
 		}
 
 		return result;
 	}
 
-	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, int maxDepth) throws Exception {
+	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, int maxDepth, colors color) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		if (maxDepth > 0) {
 			ChessboardField next = field.getNextField(edge.getDirection(), edge.getEdgeType());
 
 			if (next != null) {
-				result.add(next);
-				result.addAll(getNodesInSpecificDirection(field, edge, maxDepth - 1));
+				/*
+				 * The next field can be moved to if:
+				 * 
+				 * - We did not specify color, than we want simply have all fields.
+				 * 
+				 * - There is no piece on this field.
+				 * 
+				 * - The piece on this field is an opponents piece
+				 */
+				if (color == null || next.getPiece() == null || next.getPiece().getPlayer().getColor() != color) {
+					result.add(next);
+				}
+
+				/*
+				 * If there is a piece on this field, we can not move on.
+				 */
+				if (next.getPiece() == null) {
+					result.addAll(getNodesInSpecificDirection(next, edge, maxDepth - 1, color));
+				}
 			}
 		}
 
@@ -313,10 +344,18 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		for (GraphEdge edge : edges) {
 			if (edge instanceof StraightEdge) {
 				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
-				result.add(boardField);
-				result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, maxAllowedMoves - 1));
+				if (activePlayersColor == null || boardField.getPiece() == null || boardField.getPiece().getPlayer().getColor() != activePlayersColor) {
+					result.add(boardField);
+				}
+
+				/*
+				 * If there is a piece on this field, we can not move on.
+				 */
+				if (boardField.getPiece() == null) {
+					result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, maxAllowedMoves - 1, activePlayersColor));
+				}
 			}
-		}// TODO handle blocked fields
+		}
 
 		return result;
 	}
@@ -415,5 +454,15 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 */
 	public static boolean isValidField(Chessboard board, ChessboardField field) {
 		return board.getNode(field.getIdentifier()) == field;
+	}
+
+	/**
+	 * Return the chessboard field identified with the given identifier.
+	 * 
+	 * @param identifier
+	 * @return the chessboard field identified with the given identifier or null;
+	 */
+	public ChessboardField getField(String identifier) {
+		return (ChessboardField) getNode(identifier);
 	}
 }

@@ -1,5 +1,7 @@
 package jchess.core.board;
 
+import java.util.List;
+
 import jchess.core.pieces.King;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
@@ -66,5 +68,66 @@ public class ChessboardTest {
 
 		Assert.assertFalse(Chessboard.isValidField(board, new Hexagon("A1", board)));
 		Assert.assertTrue(Chessboard.isValidField(board, (Hexagon) board.getNode("A1")));
+	}
+
+	@Test
+	public void testGetStraightFields() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		ChessboardField g7 = board.getField("G7");
+		List<ChessboardField> fields = board.getStraightFields(g7, null);
+		String[] expectedFields = new String[] { "B7", "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "B2", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11",
+				"L12", "G3", "G4", "G5", "G6", "G8", "G9", "G10", "G11", "G12" };
+		Assert.assertEquals(28, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		ChessboardField m13 = board.getField("M13");
+		fields = board.getStraightFields(m13, null);
+		expectedFields = new String[] { "M12", "L12", "L13" };
+		Assert.assertEquals(3, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		g7 = board.getField("G7");
+		fields = board.getStraightFields(g7, colors.white);
+		expectedFields = new String[] { "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11", "L12", "G3", "G4", "G5",
+				"G6", "G8", "G9", "G10", "G11", "G12" };
+		Assert.assertEquals(26, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		m13 = board.getField("M13");
+		fields = board.getStraightFields(m13, colors.red);
+		expectedFields = new String[] {};
+		Assert.assertEquals(0, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+	}
+
+	@Test
+	public void testGetStraightFieldsWithMaxDepth() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		ChessboardField g7 = board.getField("G7");
+		List<ChessboardField> fields = board.getStraightFields(g7, 2, null);
+		String[] expectedFields = new String[] { "E7", "F7", "H7", "I7", "E5", "F6", "H8", "I9", "G5", "G6", "G8", "G9" };
+		Assert.assertEquals(12, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		g7 = board.getField("G7");
+		fields = board.getStraightFields(g7, 1, null);
+		expectedFields = new String[] { "F7", "H7", "F6", "H8", "G6", "G8" };
+		Assert.assertEquals(6, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+	}
+
+	private void checkFieldsInList(List<ChessboardField> fields, String[] expectedFields, Chessboard board) {
+		Assert.assertEquals(fields.size(), expectedFields.length);
+		for (String expectedField : expectedFields) {
+			ChessboardField field = board.getField(expectedField);
+			Assert.assertTrue(fields.contains(field));
+		}
 	}
 }
