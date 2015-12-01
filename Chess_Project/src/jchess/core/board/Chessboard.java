@@ -424,7 +424,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param diagonalOffset the offset in one of two diagonal direction (forward). For classic knight - 1.
 	 * @return the list of all such fields. Never null.
 	 */
-	public List<ChessboardField> geJumptStraightPlusDiagonalFields(ChessboardField field, Player.colors activePlayersColor, int straightOffset, int diagonalOffset) {
+	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, Player.colors activePlayersColor, int straightOffset, int diagonalOffset) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		return result;// TODO
 	}
