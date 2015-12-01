@@ -87,6 +87,7 @@ public class MoveHistory {
 			Move last = this.moveBackStack.get(this.moveBackStack.size() - 1);
 			return last;
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
+			Logging.log(exc);
 			return null;
 		}
 	}
@@ -96,6 +97,7 @@ public class MoveHistory {
 			Move next = this.moveForwardStack.get(this.moveForwardStack.size() - 1);
 			return next;
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
+			Logging.log(exc);
 			return null;
 		}
 	}
@@ -169,6 +171,7 @@ public class MoveHistory {
 				}
 			}
 		} catch (java.lang.StringIndexOutOfBoundsException exc) {
+			Logging.log(exc);
 			return false;
 		}
 
