@@ -123,57 +123,14 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 			}
 
 			// TODO castling
-			// if (begin.pozX + 2 == end.pozX) {
-			// move(getFields()[7][begin.pozY], getFields()[end.pozX - 1][begin.pozY],
-			// false);
-			// wasCastling = MoveHistory.castling.shortCastling;
-			// } else if (begin.pozX - 2 == end.pozX) {
-			// move(getFields()[0][begin.pozY], getFields()[end.pozX + 1][begin.pozY],
-			// false);
-			// wasCastling = MoveHistory.castling.longCastling;
-			// }
 		} else if (end.getPiece().getSymbol() == Rook.SYMBOL) {
-			if (((Rook) end.getPiece()).wasMotion == false) {
-				((Rook) end.getPiece()).wasMotion = true;
-			}
+			((Rook) end.getPiece()).wasMotion = true;
 		} else if (end.getPiece().getSymbol() == Pawn.SYMBOL) {
-			if (getTwoSquareMovedPawn() != null && end == getTwoSquareMovedPawn().getField()) // en
-			// passant
-			{
-				tempEnd.setPiece(end.getPiece()); // ugly
-				end.setPiece(null);
-				wasEnPassant = true;
-			}
-
-			// TODO two square
-			// if (begin.pozY - end.pozY == 2 || end.pozY - begin.pozY == 2) // moved
-			// // two
-			// // square
-			// {
-			// setTwoSquareMovedPawn((Pawn) end.getPiece());
-			// } else {
-			// setTwoSquareMovedPawn(null); // erase last saved move (for En
-			// // passant)
-			// }
-			ChessboardField field = end.getPiece().getField();
-			// TODO pawn promotion
-			// if (((Square) field).pozY == 0 || ((Square) field).pozY == 7) //
-			// promote
-			// // Pawn
-			// {
-			// if (clearForwardHistory) {
-			// String newPiece =
-			// JChessApp.jcv.showPawnPromotionBox(end.getPiece().getPlayer().getColor());
-			// Pawn pawn = (Pawn) end.getPiece();
-			// pawn.promote(newPiece);
-			// promotedPiece = end.getPiece();
-			// }
-			// }
-		} else if (end.getPiece().getSymbol() == Pawn.SYMBOL == false) {
-			setTwoSquareMovedPawn(null); // erase last saved move (for En passant)
+			// TODO handle promotion
+			// TODO handle en passant
 		}
 
-		this.unselect();// unselect square
+		this.unselect();
 		gameUI.getChessboardUI().repaint();
 
 		if (clearForwardHistory) {
@@ -184,10 +141,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		}
 	}
 
-	public synchronized boolean undo() throws Exception // undo
-																											// last
-																											// move
-	{
+	public synchronized boolean undo() throws Exception {
 		Move last = this.moves_history.undo();
 
 		if (last != null && last.getFrom() != null) {
@@ -196,59 +150,31 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 			try {
 				Piece moved = last.getMovedPiece();
 				begin.setPiece(moved);
-
 				moved.setField(begin, this);
-
 				Piece taken = last.getTakenPiece();
 				if (last.getCastlingMove() != castling.none) {
 					Piece rook = null;
-					// TODO castling
-					// if (last.getCastlingMove() == castling.shortCastling) {
-					// rook = end.getPiece();
-					// this.getFields()[7][begin.pozY].setPiece(rook);
-					// rook.setField(this.getFields()[7][begin.pozY], this);
-					// this.getFields()[end.pozX - 1][end.pozY].setPiece(null);
-					// } else {
-					// rook = this.getFields()[end.pozX + 1][end.pozY].getPiece();
-					// this.getFields()[0][begin.pozY].setPiece(rook);
-					// rook.setField(this.getFields()[0][begin.pozY], this);
-					// this.getFields()[end.pozX + 1][end.pozY].setPiece(null);
-					// }
+					// TODO undo castling
 					((King) moved).wasMotion = false;
 					((Rook) rook).wasMotion = false;
 				} else if (moved.getSymbol() == Rook.SYMBOL) {
-					((Rook) moved).wasMotion = false;
+					((Rook) moved).wasMotion = false;// TODO might be incorrect, if Rook
+																						// was moved before
 				} else if (moved.getSymbol() == Pawn.SYMBOL && last.wasEnPassant()) {
 					// TODO enpassant
-					// Pawn pawn = (Pawn) last.getTakenPiece();
-					// this.getFields()[end.pozX][begin.pozY].setPiece(pawn);
-					// pawn.setField(this.getFields()[end.pozX][begin.pozY], this);
-
 				} else if (moved.getSymbol() == Pawn.SYMBOL && last.getPromotedPiece() != null) {
 					Piece promoted = end.getPiece();
 					promoted.setField(null, this);
 					end.setPiece(null);
 				}
 
-				// check one more move back for en passant
-				Move oneMoveEarlier = this.moves_history.getLastMoveFromHistory();
-				if (oneMoveEarlier != null && oneMoveEarlier.wasPawnTwoFieldsMove()) {
-					Piece canBeTakenEnPassant = oneMoveEarlier.getTo().getPiece();
-					if (canBeTakenEnPassant.getSymbol() == Pawn.SYMBOL) {
-						this.setTwoSquareMovedPawn((Pawn) canBeTakenEnPassant);
-					}
-				}
-
-				if (taken != null && !last.wasEnPassant()) {
+				if (taken != null) {
 					end.setPiece(taken);
 					taken.setField(end, this);
-				} else {
-					end.setPiece(null);
 				}
 
-				this.unselect();// unselect square
+				this.unselect();
 				gameUI.getChessboardUI().repaint();
-
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 				return false;
 			} catch (java.lang.NullPointerException exc) {
