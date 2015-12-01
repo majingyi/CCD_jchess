@@ -479,6 +479,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				}
 			}
 		} catch (Exception exc) {
+			Logging.log(exc);
 			JOptionPane.showMessageDialog(null, exc.getMessage());
 		}
 	}
@@ -493,8 +494,10 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 					JOptionPane.showMessageDialog(null, "W pamieci brak ruchow do przodu!"); //$NON-NLS-1$
 				}
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
+				Logging.log(exc);
 				JOptionPane.showMessageDialog(null, "Brak aktywnej karty!"); //$NON-NLS-1$
 			} catch (UnsupportedOperationException exc) {
+				Logging.log(exc);
 				JOptionPane.showMessageDialog(null, exc.getMessage());
 			}
 		}
@@ -507,6 +510,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				JOptionPane.showMessageDialog(null, "Undo to game start failed."); //$NON-NLS-1$
 			}
 		} catch (Exception exc) {
+			Logging.log(exc);
 			JOptionPane.showMessageDialog(null, exc.getMessage());
 		}
 	}
@@ -518,8 +522,10 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				JOptionPane.showMessageDialog(null, "W pamieci brak ruchow wstecz!"); //$NON-NLS-1$
 			}
 		} catch (ArrayIndexOutOfBoundsException exc) {
+			Logging.log(exc);
 			JOptionPane.showMessageDialog(null, "Brak aktywnej karty!"); //$NON-NLS-1$
 		} catch (UnsupportedOperationException exc) {
+			Logging.log(exc);
 			JOptionPane.showMessageDialog(null, exc.getMessage());
 		}
 	}

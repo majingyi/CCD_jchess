@@ -10,6 +10,7 @@ import javax.swing.table.AbstractTableModel;
 import jchess.core.board.ChessboardField;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Constants;
+import jchess.core.util.Logging;
 import jchess.core.util.Move;
 import jchess.core.util.MoveHistory;
 import jchess.core.util.MoveHistory.castling;
@@ -91,6 +92,7 @@ public class MoveHistoryUI extends AbstractTableModel {
 																																													// down
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
+			Logging.log(exc);
 			if (this.rowsNum > 0) {
 				this.rowsNum--;
 				addMove2Table(str);
@@ -151,9 +153,11 @@ public class MoveHistoryUI extends AbstractTableModel {
 			}
 			return last;
 		} catch (java.util.EmptyStackException exc) {
+			Logging.log(exc);
 			history.setEnterBlack(false);
 			return null;
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
+			Logging.log(exc);
 			return null;
 		}
 	}

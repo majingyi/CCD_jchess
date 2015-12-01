@@ -4,6 +4,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import jchess.core.util.Constants;
+import jchess.core.util.Logging;
 import jchess.core.util.Settings;
 
 public class Language {
@@ -18,6 +19,7 @@ public class Language {
 			ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME + Constants.UNDER_SCORE_STRING + lang);
 			return bundle.getString(key);
 		} catch (MissingResourceException e) {
+			Logging.log(e);
 			return '!' + key + '!';
 		}
 	}
