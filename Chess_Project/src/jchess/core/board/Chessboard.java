@@ -191,6 +191,14 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		return m_KingsMap.get(color);
 	}
 
+	public void addKing(King king) throws Exception {
+		if (m_KingsMap.containsKey(king.getPlayer().getColor()) == false) {
+			m_KingsMap.put(king.getPlayer().getColor(), king);
+		} else {
+			throw new Exception("King with color " + king.getPlayer().getColor() + " is already existing on this borad.");
+		}
+	}
+
 	/**
 	 * 
 	 * This method tries to perform a move. If it passes, the move is executed. IF not this method does not fail, but return false.
@@ -326,7 +334,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	/**
 	 * Calculates fields with straight and diagonal offset at a same time.
 	 * 
-	 * This method implement "jumping", so it does not care about blocked fields on the way, only goal fields can be blocked.
+	 * This method implement "jumping", so it does not care about blocked fields on the way.
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param straightOffset the offset in any straight direction. For classic knight - 1.
