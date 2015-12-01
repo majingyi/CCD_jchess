@@ -119,6 +119,10 @@ public class HexagonChessFieldGraphInitializer {
 		ChessboardField field = (ChessboardField) chessboard.getNode(fieldIdentifier);
 		piece.setField(field, chessboard);
 		field.setPiece(piece);
+
+		if (piece instanceof King) {
+			chessboard.addKing((King) piece);
+		}
 	}
 
 	private static void connectDiagonalEdges(ChessboardField[][] fields) {
