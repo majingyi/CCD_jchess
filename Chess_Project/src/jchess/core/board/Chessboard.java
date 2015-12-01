@@ -23,17 +23,17 @@ import jchess.ui.lang.Language;
 
 public class Chessboard extends HexagonChessboardFieldGraph {
 
-	public static final int				top						= 0;
-	public static final int				bottom					= 7;
+	public static final int						top									= 0;
+	public static final int						bottom							= 7;
 
-	private GameTab						gameUI					= null;
+	private GameTab										gameUI							= null;
 
-	private ChessboardField				activeField				= null;
+	private ChessboardField						activeField					= null;
 
-	private Pawn						twoSquareMovedPawn		= null;
+	private Pawn											twoSquareMovedPawn	= null;
 
-	private MoveHistoryUI				moves_history			= null;
-	private Map<Player.colors, King>	m_KingsMap				= new HashMap<Player.colors, King>();
+	private MoveHistoryUI							moves_history				= null;
+	private Map<Player.colors, King>	m_KingsMap					= new HashMap<Player.colors, King>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		gameUI = ui;
@@ -399,7 +399,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		return result;// TODO
 	}
-	
+
 	/**
 	 * Calculates diagonal fields, which are exactly distance fields away.
 	 * 
@@ -428,7 +428,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		return result;// TODO
 	}
-	
+
 	/**
 	 * Checks, if a piece can not move for start to target. 
 	 * 
