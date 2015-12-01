@@ -49,7 +49,7 @@ public class PieceTest {
 	}
 
 	@Test
-	public void testGetSquare() throws Exception {
+	public void testGetField() throws Exception {
 		Chessboard board = new Chessboard(null, null);
 		Game game = new Game(board, null);
 		game.startNewGame();
