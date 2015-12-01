@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jchess.core.board.graph.DirectedGraphEdge;
+import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.HexagonChessFieldGraphInitializer;
 import jchess.core.board.graph.HexagonChessboardFieldGraph;
+import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Pawn;
 import jchess.core.pieces.Piece;
@@ -23,21 +26,16 @@ import jchess.ui.lang.Language;
 
 public class Chessboard extends HexagonChessboardFieldGraph {
 
-	public static final int						top									= 0;
-	public static final int						bottom							= 7;
+	private GameTab										m_GameUI							= null;
+	private ChessboardField						m_ActiveField					= null;
+	private Pawn											m_TwoSquareMovedPawn	= null;
 
-	private GameTab										gameUI							= null;
-
-	private ChessboardField						activeField					= null;
-
-	private Pawn											twoSquareMovedPawn	= null;
-
-	private MoveHistoryUI							moves_history				= null;
-	private Map<Player.colors, King>	m_KingsMap					= new HashMap<Player.colors, King>();
+	private MoveHistoryUI							m_Moves_history				= null;
+	private Map<Player.colors, King>	m_KingsMap						= new HashMap<Player.colors, King>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
-		gameUI = ui;
-		moves_history = movesHistory;
+		m_GameUI = ui;
+		m_Moves_history = movesHistory;
 	}
 
 	public void initChessBoard(Map<colors, Player> player) throws Exception {
@@ -51,23 +49,23 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 *          square to select (when clicked))
 	 */
 	public void select(ChessboardField field) {
-		this.activeField = field;
-		gameUI.getChessboardUI().repaint();
+		this.m_ActiveField = field;
+		m_GameUI.getChessboardUI().repaint();
 	}
 
 	/**
 	 * Method set variables active_x_square & active_y_square to 0 values.
 	 */
 	public void unselect() {
-		this.activeField = null;
-		if (gameUI.getChessboardUI() != null) {
-			gameUI.getChessboardUI().repaint();
+		this.m_ActiveField = null;
+		if (m_GameUI.getChessboardUI() != null) {
+			m_GameUI.getChessboardUI().repaint();
 		}
 	}
 
 	public boolean redo() throws Exception {
 		boolean result = false;
-		Move first = this.moves_history.redo();
+		Move first = this.m_Moves_history.redo();
 
 		ChessboardField from = null;
 		ChessboardField to = null;
@@ -131,18 +129,18 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		}
 
 		this.unselect();
-		gameUI.getChessboardUI().repaint();
+		m_GameUI.getChessboardUI().repaint();
 
 		if (clearForwardHistory) {
-			this.moves_history.clearMoveForwardStack();
-			this.moves_history.addMove(tempBegin, tempEnd, true, wasCastling, wasEnPassant, promotedPiece);
+			this.m_Moves_history.clearMoveForwardStack();
+			this.m_Moves_history.addMove(tempBegin, tempEnd, true, wasCastling, wasEnPassant, promotedPiece);
 		} else {
-			this.moves_history.addMove(tempBegin, tempEnd, false, wasCastling, wasEnPassant, promotedPiece);
+			this.m_Moves_history.addMove(tempBegin, tempEnd, false, wasCastling, wasEnPassant, promotedPiece);
 		}
 	}
 
 	public synchronized boolean undo() throws Exception {
-		Move last = this.moves_history.undo();
+		Move last = this.m_Moves_history.undo();
 
 		if (last != null && last.getFrom() != null) {
 			ChessboardField begin = last.getFrom();
@@ -174,7 +172,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				}
 
 				this.unselect();
-				gameUI.getChessboardUI().repaint();
+				m_GameUI.getChessboardUI().repaint();
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 				return false;
 			} catch (java.lang.NullPointerException exc) {
@@ -214,8 +212,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		boolean result = true;
 
 		select(begin);
-		if (activeField.getPiece().allMoves().contains(end)) // it is allowed
-																													// field
+		if (m_ActiveField.getPiece().allMoves().contains(end)) // it is allowed
+																														// field
 		{
 			move(begin, end, true);
 		} else {
@@ -223,22 +221,22 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 			return false;
 		}
 		unselect();
-		gameUI.nextMove();
+		m_GameUI.nextMove();
 		result = true;
 
 		return result;
 	}
 
 	public ChessboardField getActiveField() {
-		return activeField;
+		return m_ActiveField;
 	}
 
 	public Pawn getTwoSquareMovedPawn() {
-		return twoSquareMovedPawn;
+		return m_TwoSquareMovedPawn;
 	}
 
 	public void setTwoSquareMovedPawn(Pawn twoSquareMovedPawn) {
-		this.twoSquareMovedPawn = twoSquareMovedPawn;
+		this.m_TwoSquareMovedPawn = twoSquareMovedPawn;
 	}
 
 	public void move(ChessboardField begin, ChessboardField end) throws Exception {
@@ -253,9 +251,46 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @return the list of all straight fields which are not blocked. Never null.
+	 * @throws Exception 
 	 */
-	public List<ChessboardField> getStraightFields(ChessboardField field, Player.colors activePlayersColor) {
+	public List<ChessboardField> getStraightFields(ChessboardField field, Player.colors activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
+
+		List<GraphEdge> edges = field.getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge instanceof StraightEdge) {
+				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+				result.add(boardField);
+				result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge));
+			}
+		}
+
+		return result;
+	}
+
+	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge) throws Exception {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		ChessboardField next = field.getNextField(edge.getDirection(), edge.getEdgeType());
+
+		if (next != null) {
+			result.add(next);
+			result.addAll(getNodesInSpecificDirection(field, edge));
+		}
+
+		return result;
+	}
+
+	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, int maxDepth) throws Exception {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+
+		if (maxDepth > 0) {
+			ChessboardField next = field.getNextField(edge.getDirection(), edge.getEdgeType());
+
+			if (next != null) {
+				result.add(next);
+				result.addAll(getNodesInSpecificDirection(field, edge, maxDepth - 1));
+			}
+		}
 
 		return result;
 	}
@@ -269,10 +304,21 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
 	 * @return the list of all straight fields which are not blocked or out of range. Never null.
+	 * @throws Exception 
 	 */
-	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) {
+	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
+
+		List<GraphEdge> edges = field.getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge instanceof StraightEdge) {
+				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+				result.add(boardField);
+				result.addAll(getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, maxAllowedMoves - 1));
+			}
+		}// TODO handle blocked fields
+
+		return result;
 	}
 
 	/**

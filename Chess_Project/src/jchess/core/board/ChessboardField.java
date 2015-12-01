@@ -3,7 +3,10 @@ package jchess.core.board;
 import java.util.ArrayList;
 import java.util.List;
 
+import jchess.core.board.graph.DirectedGraphEdge;
+import jchess.core.board.graph.DirectedGraphEdge.direction;
 import jchess.core.board.graph.GraphEdge;
+import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.board.graph.GraphNode;
 import jchess.core.pieces.Piece;
 
@@ -83,4 +86,21 @@ public abstract class ChessboardField extends GraphNode {
 	 * @return
 	 */
 	public abstract ChessboardField copy();
+
+	public ChessboardField getNextField(direction direction, EdgeType edgeType) throws Exception {
+		ChessboardField result = null;
+
+		for (GraphEdge edge : getEdges()) {
+			if (edge instanceof DirectedGraphEdge) {
+				if (edge.getEdgeType() == edgeType) {
+					if (((DirectedGraphEdge) edge).getDirection() == direction) {
+						result = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+						break;
+					}
+				}
+			}
+		}
+
+		return result;
+	}
 }

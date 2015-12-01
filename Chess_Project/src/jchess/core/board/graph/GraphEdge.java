@@ -1,5 +1,6 @@
 package jchess.core.board.graph;
 
+
 public abstract class GraphEdge {
 
 	private GraphNode	m_Node1	= null;
@@ -32,4 +33,5 @@ public abstract class GraphEdge {
 	 * @return the edge type
 	 */
 	public abstract EdgeType getEdgeType();
+
 }
