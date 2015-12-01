@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 
 import javax.swing.JOptionPane;
@@ -181,27 +182,27 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		FileWriter fileW = null;
 		try {
 			fileW = new FileWriter(file);
+			Calendar cal = Calendar.getInstance();
+			String str = new String(""); //$NON-NLS-1$
+			String info = new String(
+					"[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							+ "\"]\n" + "[White \"" + game.getPlayer(colors.white).getName() + "\"]\n[Black \"" + game.getPlayer(colors.black).getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			str += info;
+			str += moveHistory.getMovesInString();
+			fileW.write(str);
+			JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly")); //$NON-NLS-1$
 		} catch (java.io.IOException exc) {
 			Logging.log(Language.getString("Game.0"), exc); //$NON-NLS-1$
 			JOptionPane.showMessageDialog(this, Language.getString("Game.1") + ": " + exc); //$NON-NLS-1$ //$NON-NLS-2$
 			return;
+		} finally {
+			try {
+				fileW.flush();
+				fileW.close();
+			} catch (IOException e) {
+				Logging.log(e);
+			}
 		}
-		Calendar cal = Calendar.getInstance();
-		String str = new String(""); //$NON-NLS-1$
-		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				+ "\"]\n" + "[White \"" + game.getPlayer(colors.white).getName() + "\"]\n[Black \"" + game.getPlayer(colors.black).getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		str += info;
-		str += moveHistory.getMovesInString();
-		try {
-			fileW.write(str);
-			fileW.flush();
-			fileW.close();
-		} catch (java.io.IOException exc) {
-			Logging.log(Language.getString("Game.11"), exc); //$NON-NLS-1$
-			JOptionPane.showMessageDialog(this, Language.getString(Language.getString("Game.12")) + ": " + exc); //$NON-NLS-1$ //$NON-NLS-2$
-			return;
-		}
-		JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly")); //$NON-NLS-1$
 	}
 
 	public boolean undo() throws Exception {
