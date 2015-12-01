@@ -187,23 +187,6 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		}
 	}
 
-	/**
-	 * Method is useful for out of bounds protection
-	 * 
-	 * @param x
-	 *          x position on chessboard
-	 * @param y
-	 *          y position on chessboard
-	 * @return true if parameters are out of bounds (array)
-	 * @deprecated will not be need due to graph implementation
-	 * */
-	public static boolean isout(int x, int y) {
-		if (x < 0 || x > 7 || y < 0 || y > 7) {
-			return true;
-		}
-		return false;
-	}
-
 	public King getKingForColor(Player.colors color) {
 		return m_KingsMap.get(color);
 	}
