@@ -22,69 +22,27 @@ public class ThemeTest {
 	public void testGetImageForPiece() throws Exception {
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Pawn.SYMBOL));
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Pawn.SYMBOL));
-
-		boolean exception = false;
-		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Pawn.SYMBOL));
-		} catch (FileNotFoundException e) {
-			exception = true;
-		}
-		Assert.assertTrue(exception);
+		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Pawn.SYMBOL));
 
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Rook.SYMBOL));
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Rook.SYMBOL));
-
-		exception = false;
-		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Rook.SYMBOL));
-		} catch (FileNotFoundException e) {
-			exception = true;
-		}
-		Assert.assertTrue(exception);
+		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Rook.SYMBOL));
 
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Bishop.SYMBOL));
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Bishop.SYMBOL));
-
-		exception = false;
-		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Bishop.SYMBOL));
-		} catch (FileNotFoundException e) {
-			exception = true;
-		}
-		Assert.assertTrue(exception);
+		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Bishop.SYMBOL));
 
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Knight.SYMBOL));
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Knight.SYMBOL));
-
-		exception = false;
-		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Knight.SYMBOL));
-		} catch (FileNotFoundException e) {
-			exception = true;
-		}
-		Assert.assertTrue(exception);
+		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Knight.SYMBOL));
 
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, King.SYMBOL));
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, King.SYMBOL));
-
-		exception = false;
-		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, King.SYMBOL));
-		} catch (FileNotFoundException e) {
-			exception = true;
-		}
-		Assert.assertTrue(exception);
+		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, King.SYMBOL));
 
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Queen.SYMBOL));
 		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Queen.SYMBOL));
-
-		exception = false;
-		try {
-			Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Queen.SYMBOL));
-		} catch (FileNotFoundException e) {
-			exception = true;
-		}
-		Assert.assertTrue(exception);
+		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Queen.SYMBOL));
 	}
 
 	@Test
