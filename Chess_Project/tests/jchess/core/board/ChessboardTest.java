@@ -147,11 +147,68 @@ public class ChessboardTest {
 		checkFieldsInList(fields, expectedFields, board);
 	}
 
+	@Test
+	public void testGetDiagonalFieldsMaxDepth() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		ChessboardField g7 = board.getField("G7");
+		List<ChessboardField> fields = board.getDiagonalFields(g7, 3, null);
+		String[] expectedFields = new String[] { "D1", "E3", "F5", "H9", "I11", "I5", "H6", "F8", "E9", "D10", "C5", "E6", "I8", "K9", "M10" };
+		Assert.assertEquals(15, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		ChessboardField m13 = board.getField("M13");
+		fields = board.getDiagonalFields(m13, null);
+		expectedFields = new String[] {};
+		Assert.assertEquals(0, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		g7 = board.getField("G7");
+		fields = board.getDiagonalFields(g7, 2, colors.white);
+		expectedFields = new String[] { "E3", "F5", "H9", "I11", "I5", "H6", "F8", "E9", "C5", "E6", "I8", "K9" };
+		Assert.assertEquals(12, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		g7 = board.getField("G7");
+		fields = board.getDiagonalFields(g7, 1, colors.white);
+		expectedFields = new String[] { "F5", "H9", "H6", "F8", "E6", "I8" };
+		Assert.assertEquals(6, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+	}
+
 	private void checkFieldsInList(List<ChessboardField> fields, String[] expectedFields, Chessboard board) {
 		Assert.assertEquals(fields.size(), expectedFields.length);
 		for (String expectedField : expectedFields) {
 			ChessboardField field = board.getField(expectedField);
 			Assert.assertTrue(expectedField, fields.contains(field));
 		}
+	}
+
+	@Test
+	public void testGetStraightFieldsExact() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		ChessboardField g7 = board.getField("G7");
+		List<ChessboardField> fields = board.getStraightFieldsExact(g7, 3);
+		String[] expectedFields = new String[] { "G4", "D4", "J7", "D7", "G10", "J10" };
+		Assert.assertEquals(6, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+	}
+
+	@Test
+	public void testGetDiagonalFieldsExact() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		ChessboardField g7 = board.getField("G7");
+		List<ChessboardField> fields = board.getDiagonalFieldsExact(g7, 3);
+		String[] expectedFields = new String[] { "D1", "M10", "D10", "A4", "J13" };
+		Assert.assertEquals(5, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
 	}
 }
