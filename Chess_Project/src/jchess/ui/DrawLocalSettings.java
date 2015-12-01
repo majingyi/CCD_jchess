@@ -6,8 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -28,7 +26,7 @@ import jchess.ui.lang.Language;
 /**
  * Class responsible for drawing the fold with local game settings
  */
-public class DrawLocalSettings extends JPanel implements ActionListener, TextListener {
+public class DrawLocalSettings extends JPanel implements ActionListener {
 
 	private static final long		serialVersionUID	= -3054704162643076714L;
 
@@ -44,33 +42,6 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	private JCheckBox						timeGame					= null;
 	private JComboBox<String>		time4Game					= null;
 	private String							times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };	//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
-
-	/**
-	 * Method witch is checking correction of edit tables
-	 * 
-	 * @param e
-	 *          Object where is saving this what contents edit tables
-	 */
-	public void textValueChanged(TextEvent e) {
-		Object target = e.getSource();
-		if (target == this.firstName || target == this.secondName) {
-			JTextField temp = new JTextField();
-			if (target == this.firstName) {
-				temp = this.firstName;
-			} else {
-				temp = this.secondName;
-			}
-
-			int len = temp.getText().length();
-			if (len > 8) {
-				try {
-					temp.setText(temp.getText(0, 7));
-				} catch (BadLocationException exc) {
-					Logging.log(Language.getString("DrawLocalSettings.13"), exc); //$NON-NLS-1$
-				}
-			}
-		}
-	}
 
 	/**
 	 * Method responsible for changing the options which can make a player when he
