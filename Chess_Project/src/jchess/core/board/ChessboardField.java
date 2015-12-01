@@ -87,6 +87,15 @@ public abstract class ChessboardField extends GraphNode {
 	 */
 	public abstract ChessboardField copy();
 
+	/**
+	 * 
+	 * Gets the next field in a defined direction and defined edge type. Edge type is diagonal or straight.
+	 * 
+	 * @param direction
+	 * @param edgeType
+	 * @return
+	 * @throws Exception
+	 */
 	public ChessboardField getNextField(direction direction, EdgeType edgeType) throws Exception {
 		ChessboardField result = null;
 
