@@ -18,9 +18,6 @@ public class Player implements Serializable {
 		white, black, red
 	}
 
-	public Player() {
-	}
-
 	public Player(String name, colors color) {
 		this.name = name;
 		this.setColor(color);
