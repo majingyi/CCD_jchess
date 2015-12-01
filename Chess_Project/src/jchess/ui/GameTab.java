@@ -197,8 +197,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 			return;
 		} finally {
 			try {
-				fileW.flush();
-				fileW.close();
+				if (fileW != null) {
+					fileW.flush();
+					fileW.close();
+				}
 			} catch (IOException e) {
 				Logging.log(e);
 			}
