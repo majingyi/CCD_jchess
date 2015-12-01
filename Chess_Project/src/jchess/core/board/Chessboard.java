@@ -23,17 +23,17 @@ import jchess.ui.lang.Language;
 
 public class Chessboard extends HexagonChessboardFieldGraph {
 
-	public static final int						top									= 0;
-	public static final int						bottom							= 7;
+	public static final int				top						= 0;
+	public static final int				bottom					= 7;
 
-	private GameTab										gameUI							= null;
+	private GameTab						gameUI					= null;
 
-	private ChessboardField						activeField					= null;
+	private ChessboardField				activeField				= null;
 
-	private Pawn											twoSquareMovedPawn	= null;
+	private Pawn						twoSquareMovedPawn		= null;
 
-	private MoveHistoryUI							moves_history				= null;
-	private Map<Player.colors, King>	m_KingsMap					= new HashMap<Player.colors, King>();
+	private MoveHistoryUI				moves_history			= null;
+	private Map<Player.colors, King>	m_KingsMap				= new HashMap<Player.colors, King>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		gameUI = ui;
@@ -335,7 +335,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * If a field is blocked, calculation stops.
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @return the list of all vertical fields. Never null.
+	 * @return the list of all straight fields which are not blocked. Never null.
 	 */
 	public List<ChessboardField> getStraightFields(ChessboardField field, Player.colors activePlayersColor) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
@@ -350,7 +350,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
-	 * @return the list of all vertical fields. Never null.
+	 * @return the list of all straight fields which are not blocked or out of range. Never null.
 	 */
 	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
@@ -364,7 +364,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * If a field is blocked, calculation stops.
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @return the list of all vertical fields. Never null.
+	 * @return the list of all diagonal fields which are not blocked. Never null.
 	 */
 	public List<ChessboardField> getDiagonalFields(ChessboardField field, Player.colors activePlayersColor) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
@@ -379,23 +379,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
-	 * @return the list of all vertical fields. Never null.
+	 * @return the list of all diagonal fields which are not blocked or out of range. Never null.
 	 */
 	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) {
-		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
-	}
-
-	/**
-	 * Calculates diagonal fields, which are exactly distance fields away.
-	 * 
-	 * This method does not care about blocked fields
-	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
-	 * @param distance the distance, the wanted fields are away.
-	 * @return the list of all vertical fields. Never null.
-	 */
-	public List<ChessboardField> getDiagonalFieldsExact(ChessboardField field, int distance) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		return result;// TODO
 	}
@@ -407,13 +393,42 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param field a valid chessboard field, which is the starting point for this calculation.
 	 * @param distance the distance, the wanted fields are away.
-	 * @return the list of all vertical fields. Never null.
+	 * @return the list of all straight fields in exact distance. Never null.
 	 */
 	public List<ChessboardField> getStraightFieldsExact(ChessboardField field, int distance) {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		return result;// TODO
 	}
+	
+	/**
+	 * Calculates diagonal fields, which are exactly distance fields away.
+	 * 
+	 * This method does not care about blocked fields
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param distance the distance, the wanted fields are away.
+	 * @return the list of all diagonal fields in exact distance. Never null.
+	 */
+	public List<ChessboardField> getDiagonalFieldsExact(ChessboardField field, int distance) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;// TODO
+	}
 
+	/**
+	 * Calculates fields with straight and diagonal offset at a same time.
+	 * 
+	 * This method implement "jumping", so it does not care about blocked fields on the way, only goal fields can be blocked.
+	 * 
+	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param straightOffset the offset in any straight direction. For classic knight - 1.
+	 * @param diagonalOffset the offset in one of two diagonal direction (forward). For classic knight - 1.
+	 * @return the list of all such fields. Never null.
+	 */
+	public List<ChessboardField> geJumptStraightPlusDiagonalFields(ChessboardField field, Player.colors activePlayersColor, int straightOffset, int diagonalOffset) {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		return result;// TODO
+	}
+	
 	/**
 	 * Checks, if a piece can not move for start to target. 
 	 * 
@@ -421,7 +436,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param start
 	 * @param target
-	 * @return if the corresponding edge is blocked
+	 * @return true if the corresponding edge is blocked
 	 */
 	private boolean isBlocked(ChessboardField start, ChessboardField target) {
 		return false; // TODO
