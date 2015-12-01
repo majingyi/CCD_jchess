@@ -8,15 +8,37 @@ import jchess.core.util.Player;
 
 public class KingMoveBehavior extends MoveBehavior {
 
-	private King	king	= null;
+	private King king = null;
 
 	public KingMoveBehavior(Player player, Chessboard chessboard, ChessboardField field, King king) {
 		super(player, chessboard, field);
 		this.king = king;
 	}
 
-	public ArrayList<ChessboardField> allMoves() {
-		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
+	@Override
+	public ArrayList<ChessboardField> allMoves() throws Exception {
+
+		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
+
+		// adding all straight fields
+		for (ChessboardField straightField : this.m_Chessboard.getStraightFields(this.m_Field, 1, this.m_Player.getColor())) {
+
+			if (this.m_Chessboard.getKingForColor(this.m_Player.getColor()).isSafe(straightField)) {
+				allMoves.add(straightField);
+			} else {
+				continue;
+			}
+		}
+		// adding all diagonal fields
+		for (ChessboardField diagonalField : this.m_Chessboard.getDiagonalFields(this.m_Field, 1, this.m_Player.getColor())) {
+
+			if (this.m_Chessboard.getKingForColor(this.m_Player.getColor()).isSafe(diagonalField)) {
+				allMoves.add(diagonalField);
+			} else {
+				continue;
+			}
+		}
+
 		// ChessboardField sq;
 		// ChessboardField sq1;
 		// for (int i = this.m_Field.pozX - 1; i <= this.m_Field.pozX + 1; i++) {
@@ -99,6 +121,7 @@ public class KingMoveBehavior extends MoveBehavior {
 		// }
 		// }
 		// }
-		return list;
+		return allMoves;
 	}
+
 }

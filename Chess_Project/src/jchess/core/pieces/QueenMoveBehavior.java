@@ -14,7 +14,27 @@ public class QueenMoveBehavior extends MoveBehavior {
 
 	@Override
 	public ArrayList<ChessboardField> allMoves() throws Exception {
-		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
+
+		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
+
+		// adding all straight fields
+		for (ChessboardField straightField : this.m_Chessboard.getStraightFields(this.m_Field, this.m_Player.getColor())) {
+
+			if (this.m_Chessboard.getKingForColor(this.m_Player.getColor()).willBeSafeWhenMoveOtherPiece(this.m_Field, straightField)) {
+				allMoves.add(straightField);
+			} else {
+				continue;
+			}
+		}
+		// adding all diagonal fields
+		for (ChessboardField diagonalField : this.m_Chessboard.getDiagonalFields(this.m_Field, this.m_Player.getColor())) {
+
+			if (this.m_Chessboard.getKingForColor(this.m_Player.getColor()).willBeSafeWhenMoveOtherPiece(this.m_Field, diagonalField)) {
+				allMoves.add(diagonalField);
+			} else {
+				continue;
+			}
+		}
 
 		// for (int i = this.m_Field.pozY + 1; i <= 7; ++i) {// up
 		// if (this.checkPiece(this.m_Field.pozX, i)) {// if on this m_Field isn't
@@ -222,6 +242,6 @@ public class QueenMoveBehavior extends MoveBehavior {
 		// }
 		// }
 
-		return list;
+		return allMoves;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
+import jchess.core.board.graph.DirectedGraphEdge.direction;
+import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.util.Player;
 
 public class PawnMoveBehavior extends MoveBehavior {
@@ -14,7 +16,131 @@ public class PawnMoveBehavior extends MoveBehavior {
 
 	@Override
 	public ArrayList<ChessboardField> allMoves() throws Exception {
-		ArrayList<ChessboardField> list = new ArrayList<ChessboardField>();
+
+		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
+		ChessboardField field;
+		switch (this.m_Player.getColor()) {
+			// for white pawns
+			case white:
+				// ordinary moves
+				// left one move
+				field = this.m_Field.getNextField(direction.leftDown, EdgeType.straight);
+				if (field.getPiece() == null) {
+					allMoves.add(field);
+				}
+				// left double move
+				if (this.isDoubleMoveAllowed() && field.getNextField(direction.leftDown, EdgeType.straight).getPiece() == null) {
+					allMoves.add(field.getNextField(direction.leftDown, EdgeType.straight));
+				}
+				// right one move
+				field = this.m_Field.getNextField(direction.rightDown, EdgeType.straight);
+				if (field.getPiece() == null) {
+					allMoves.add(field);
+				}
+				// right double move
+				if (this.isDoubleMoveAllowed() && field.getNextField(direction.rightDown, EdgeType.straight).getPiece() == null) {
+					allMoves.add(field.getNextField(direction.rightDown, EdgeType.straight));
+				}
+
+				// capture moves
+				// left
+				field = this.m_Field.getNextField(direction.leftDown, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				// middle
+				field = this.m_Field.getNextField(direction.down, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				// right
+				field = this.m_Field.getNextField(direction.rightDown, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				break;
+
+			// for black pawns
+			case black:
+				// ordinary moves
+				// left one move
+				field = this.m_Field.getNextField(direction.rightUp, EdgeType.straight);
+				if (field.getPiece() == null) {
+					allMoves.add(field);
+				}
+				// left double move
+				if (this.isDoubleMoveAllowed() && field.getNextField(direction.rightUp, EdgeType.straight).getPiece() == null) {
+					allMoves.add(field.getNextField(direction.rightUp, EdgeType.straight));
+				}
+				// right one move
+				field = this.m_Field.getNextField(direction.right, EdgeType.straight);
+				if (field.getPiece() == null) {
+					allMoves.add(field);
+				}
+				// right double move
+				if (this.isDoubleMoveAllowed() && field.getNextField(direction.right, EdgeType.straight).getPiece() == null) {
+					allMoves.add(field.getNextField(direction.right, EdgeType.straight));
+				}
+
+				// capture moves
+				// left
+				field = this.m_Field.getNextField(direction.up, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				// middle
+				field = this.m_Field.getNextField(direction.rightUp, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				// right
+				field = this.m_Field.getNextField(direction.rightDown, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				break;
+
+			// for red pawns
+			case red:
+				// ordinary moves
+				// left one move
+				field = this.m_Field.getNextField(direction.left, EdgeType.straight);
+				if (field.getPiece() == null) {
+					allMoves.add(field);
+				}
+				// left double move
+				if (this.isDoubleMoveAllowed() && field.getNextField(direction.left, EdgeType.straight).getPiece() == null) {
+					allMoves.add(field.getNextField(direction.left, EdgeType.straight));
+				}
+				// right one move
+				field = this.m_Field.getNextField(direction.leftUp, EdgeType.straight);
+				if (field.getPiece() == null) {
+					allMoves.add(field);
+				}
+				// right double move
+				if (this.isDoubleMoveAllowed() && field.getNextField(direction.leftUp, EdgeType.straight).getPiece() == null) {
+					allMoves.add(field.getNextField(direction.leftUp, EdgeType.straight));
+				}
+
+				// capture moves
+				// left
+				field = this.m_Field.getNextField(direction.leftDown, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				// middle
+				field = this.m_Field.getNextField(direction.leftUp, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				// right
+				field = this.m_Field.getNextField(direction.up, EdgeType.diagonal);
+				if (field.getPiece() != null) {
+					allMoves.add(field);
+				}
+				break;
+		}
+
 		// ChessboardField sq;
 		// ChessboardField sq1;
 		// int first = this.m_Field.pozY - 1;// number where to move
@@ -191,7 +317,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 		// }
 		// }
 
-		return list;
+		return allMoves;
 	}
 
 	/**
