@@ -25,10 +25,30 @@ public class Theme {
 		themeList.add("hunter"); //$NON-NLS-1$
 		themeList.add("matlak"); //$NON-NLS-1$
 
-		// TODO add red players images
-		themeImages = new String[] { "able_square.png", "add-tab-icon.png", "Bishop-B.png", "Bishop-W.png", "chessboard.png", "clicked-add-tab-icon.png",
-			"King-B.png", "King-W.png", "Knight-B.png", "Knight-W.png", "Pawn-B.png", "Pawn-W.png", "Preview.png", "Queen-B.png", "Queen-W.png", "Rook-B.png",
-			"Rook-W.png", "sel_square.png" };
+		themeImages = new String[] { "able_square.png",
+			"add-tab-icon.png",
+			"chessboard.png",
+			"clicked-add-tab-icon.png",
+			"Preview.png",
+			"sel_square.png",
+			"Bishop-B.png",
+			"Bishop-W.png",
+			"Bishop-R.png",
+			"King-B.png",
+			"King-W.png",
+			"King-R.png",
+			"Knight-B.png",
+			"Knight-W.png",
+			"Knight-R.png",
+			"Pawn-B.png",
+			"Pawn-W.png",
+			"Pawn-R.png",
+			"Queen-B.png",
+			"Queen-W.png",
+			"Queen-R.png",
+			"Rook-B.png",
+			"Rook-W.png",
+			"Rook-R.png" };
 	}
 
 	public static Image getImageForPiece(Player.colors color, String pieceSymbol) throws FileNotFoundException {
