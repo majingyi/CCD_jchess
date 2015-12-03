@@ -111,10 +111,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		ChessboardField tempBegin = begin.copy();
 		ChessboardField tempEnd = end.copy();
 
-		begin.getPiece().setField(end, this);// set square of piece to ending
-		end.setPiece(begin.getPiece());// for ending square set piece from beginin
-		// square
-		begin.setPiece(null);// make null piece for begining square
+		begin.getPiece().setField(end, this);
+		begin.setPiece(null);
+		end.setPiece(begin.getPiece());
 
 		if (end.getPiece().getSymbol().equals(King.SYMBOL)) {
 			if (((King) end.getPiece()).wasMotion == false) {
