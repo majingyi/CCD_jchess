@@ -7,8 +7,8 @@ import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
 import jchess.core.board.graph.DirectedGraphEdge;
+import jchess.core.board.graph.DirectedGraphEdge.direction;
 import jchess.core.board.graph.GraphEdge;
-import jchess.core.board.graph.HexagonChessFieldGraphInitializer;
 import jchess.core.board.graph.HexagonChessboardFieldGraph;
 import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.King;
@@ -609,10 +609,55 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param straightOffset the offset in any straight direction. For classic knight - 1.
 	 * @param diagonalOffset the offset in one of two diagonal direction (forward). For classic knight - 1.
 	 * @return the list of all such fields. Never null.
+	 * @throws Exception 
 	 */
-	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, Player.colors activePlayersColor, int straightOffset, int diagonalOffset) {
+	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, Player.colors activePlayersColor, int straightOffset, int diagonalOffset)
+			throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
-		return result;// TODO
+
+		List<GraphEdge> edges = field.getEdges();
+		for (GraphEdge edge : edges) {
+			if (edge instanceof StraightEdge) {
+				ChessboardField boardField = (ChessboardField) ((DirectedGraphEdge) edge).getEndNode();
+				List<ChessboardField> first = getNodesInSpecificDirection(boardField, (DirectedGraphEdge) edge, straightOffset - 1);
+				if (first.size() == 1) {
+					ChessboardField firstStep = first.get(0);
+
+					switch (((StraightEdge) edge).getDirection()) {
+						case left:
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftDown), diagonalOffset));
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftUp), diagonalOffset));
+							break;
+						case leftDown:
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.down), diagonalOffset));
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftDown), diagonalOffset));
+							break;
+						case leftUp:
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.up), diagonalOffset));
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftUp), diagonalOffset));
+							break;
+						case right:
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightDown), diagonalOffset));
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightUp), diagonalOffset));
+							break;
+						case rightDown:
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.down), diagonalOffset));
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightDown), diagonalOffset));
+							break;
+						case rightUp:
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.up), diagonalOffset));
+							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightUp), diagonalOffset));
+							break;
+						default:
+							break;
+					}
+				} else if (first.size() > 1) {
+					throw new Exception("We should get a maximum of one field here.");
+				}
+			}
+		}
+
+		return result;
 	}
 
 	/**
