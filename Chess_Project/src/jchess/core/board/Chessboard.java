@@ -624,29 +624,29 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 					ChessboardField firstStep = first.get(0);
 
 					switch (((StraightEdge) edge).getDirection()) {
-						case left:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftDown));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftUp));
+						case LEFT:
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.LEFT_DOWN));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.LEFT_UP));
 							break;
-						case leftDown:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.down));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftDown));
+						case LEFT_DOWN:
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.DOWN));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.LEFT_DOWN));
 							break;
-						case leftUp:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.up));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftUp));
+						case LEFT_UP:
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.UP));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.LEFT_UP));
 							break;
-						case right:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightDown));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightUp));
+						case RIGHT:
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.RIGHT_DOWN));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.RIGHT_UP));
 							break;
-						case rightDown:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.down));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightDown));
+						case RIGHT_DOWN:
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.DOWN));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.RIGHT_DOWN));
 							break;
-						case rightUp:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.up));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightUp));
+						case RIGHT_UP:
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.UP));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.RIGHT_UP));
 							break;
 						default:
 							break;

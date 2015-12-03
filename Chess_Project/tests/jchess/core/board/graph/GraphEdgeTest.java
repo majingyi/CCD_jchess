@@ -12,7 +12,7 @@ public class GraphEdgeTest {
 		GraphNode first = new GraphNode("H2");
 		GraphNode second = new GraphNode("F5");
 		GraphNode third = new GraphNode("F5");
-		DiagonalEdge edge = new DiagonalEdge(first, second, EdgeDirection.left);
+		DiagonalEdge edge = new DiagonalEdge(first, second, EdgeDirection.LEFT);
 
 		Assert.assertEquals(first, edge.getOtherNode(second));
 		Assert.assertEquals(second, edge.getOtherNode(first));
@@ -38,10 +38,10 @@ public class GraphEdgeTest {
 
 	@Test
 	public void testGetEdgeType() throws Exception {
-		DiagonalEdge edge = new DiagonalEdge(new GraphNode("H2"), new GraphNode("F5"), EdgeDirection.left);
+		DiagonalEdge edge = new DiagonalEdge(new GraphNode("H2"), new GraphNode("F5"), EdgeDirection.LEFT);
 		Assert.assertEquals(GraphEdge.EdgeType.diagonal, edge.getEdgeType());
 
-		StraightEdge edqe1 = new StraightEdge(new GraphNode("H2"), new GraphNode("F5"), EdgeDirection.left);
+		StraightEdge edqe1 = new StraightEdge(new GraphNode("H2"), new GraphNode("F5"), EdgeDirection.LEFT);
 		Assert.assertEquals(GraphEdge.EdgeType.straight, edqe1.getEdgeType());
 	}
 }
