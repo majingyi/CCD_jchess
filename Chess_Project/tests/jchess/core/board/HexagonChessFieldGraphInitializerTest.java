@@ -1,4 +1,4 @@
-package jchess.core.board.graph;
+package jchess.core.board;
 
 import java.util.List;
 

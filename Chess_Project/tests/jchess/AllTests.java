@@ -1,8 +1,8 @@
 package jchess;
 
 import jchess.core.board.ChessboardTest;
+import jchess.core.board.HexagonChessFieldGraphInitializerTest;
 import jchess.core.board.graph.GraphEdgeTest;
-import jchess.core.board.graph.HexagonChessFieldGraphInitializerTest;
 import jchess.core.pieces.PawnTest;
 import jchess.core.pieces.PieceTest;
 import jchess.core.util.ClockTest;
