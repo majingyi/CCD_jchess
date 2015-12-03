@@ -10,19 +10,13 @@ import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Calendar;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.pieces.King;
-import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Logging;
 import jchess.core.util.Player;
@@ -177,33 +171,35 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 *          address of place where game will be saved
 	 */
 	public void saveGame(File path) {
-		File file = path;
-		FileWriter fileW = null;
-		try {
-			fileW = new FileWriter(file);
-			Calendar cal = Calendar.getInstance();
-			String str = new String(""); //$NON-NLS-1$
-			String info = new String(
-					"[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-							+ "\"]\n" + "[White \"" + game.getPlayer(colors.white).getName() + "\"]\n[Black \"" + game.getPlayer(colors.black).getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			str += info;
-			str += moveHistory.getMovesInString();
-			fileW.write(str);
-			JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly")); //$NON-NLS-1$
-		} catch (java.io.IOException exc) {
-			Logging.log(Language.getString("Game.0"), exc); //$NON-NLS-1$
-			JOptionPane.showMessageDialog(this, Language.getString("Game.1") + ": " + exc); //$NON-NLS-1$ //$NON-NLS-2$
-			return;
-		} finally {
-			try {
-				if (fileW != null) {
-					fileW.flush();
-					fileW.close();
-				}
-			} catch (IOException e) {
-				Logging.log(e);
-			}
-		}
+		// File file = path;
+		// FileWriter fileW = null;
+		// try {
+		// fileW = new FileWriter(file);
+		// Calendar cal = Calendar.getInstance();
+		//			String str = new String(""); //$NON-NLS-1$
+		// String info = new String(
+		//					"[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." + (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		//							+ "\"]\n" + "[White \"" + game.getPlayer(colors.white).getName() + "\"]\n[Black \"" + game.getPlayer(colors.black).getName() + "\"]\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		// str += info;
+		// str += moveHistory.getMovesInString();
+		// fileW.write(str);
+		//			JOptionPane.showMessageDialog(this, Language.getString("game_saved_properly")); //$NON-NLS-1$
+		// } catch (java.io.IOException exc) {
+		//			Logging.log(Language.getString("Game.0"), exc); //$NON-NLS-1$
+		//			JOptionPane.showMessageDialog(this, Language.getString("Game.1") + ": " + exc); //$NON-NLS-1$ //$NON-NLS-2$
+		// return;
+		// } finally {
+		// try {
+		// if (fileW != null) {
+		// fileW.flush();
+		// fileW.close();
+		// }
+		// } catch (IOException e) {
+		// Logging.log(e);
+		// }
+		// }
+
+		throw new UnsupportedOperationException("Saving of game not supported by now.");
 	}
 
 	public boolean undo() throws Exception {
@@ -258,44 +254,47 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 */
 
 	public static void loadGame(File file) throws Exception {
-		FileReader fileR = null;
-		try {
-			fileR = new FileReader(file);
-		} catch (java.io.IOException exc) {
-			Logging.log(Language.getString("Game.2"), exc); //$NON-NLS-1$
-			return;
-		}
-		BufferedReader br = new BufferedReader(fileR);
-		String tempStr = new String();
-		String blackName, whiteName;
-		try {
-			tempStr = getLineWithVar(br, new String("[White")); //$NON-NLS-1$
-			whiteName = getValue(tempStr);
-			tempStr = getLineWithVar(br, new String("[Black")); //$NON-NLS-1$
-			blackName = getValue(tempStr);
-			tempStr = getLineWithVar(br, new String("1.")); //$NON-NLS-1$
-		} catch (ReadGameError err) {
-			Logging.log(Language.getString("Game.19"), err); //$NON-NLS-1$
-			return;
-		}
-
-		GameTab newGUI = JChessView.getInstance().addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
-
-		Player playerWhite = new Player(Constants.EMPTY_STRING, Player.colors.white);
-		Player playerBlack = new Player(Constants.EMPTY_STRING, Player.colors.black);
-
-		playerBlack.setName(blackName);
-		playerWhite.setName(whiteName);
-
-		game.setPlayer(colors.white, playerWhite);
-		game.setPlayer(colors.black, playerBlack);
-
-		Settings.setBlackPlayersName(blackName);
-		Settings.setWhitePlayersName(whiteName);
-
-		newGUI.newGame();
-		moveHistory.setMoves(tempStr);
-		newGUI.chessboard.repaint();
+		// FileReader fileR = null;
+		// try {
+		// fileR = new FileReader(file);
+		// } catch (java.io.IOException exc) {
+		//			Logging.log(Language.getString("Game.2"), exc); //$NON-NLS-1$
+		// return;
+		// }
+		// BufferedReader br = new BufferedReader(fileR);
+		// String tempStr = new String();
+		// String blackName, whiteName;
+		// try {
+		//			tempStr = getLineWithVar(br, new String("[White")); //$NON-NLS-1$
+		// whiteName = getValue(tempStr);
+		//			tempStr = getLineWithVar(br, new String("[Black")); //$NON-NLS-1$
+		// blackName = getValue(tempStr);
+		//			tempStr = getLineWithVar(br, new String("1.")); //$NON-NLS-1$
+		// } catch (ReadGameError err) {
+		//			Logging.log(Language.getString("Game.19"), err); //$NON-NLS-1$
+		// return;
+		// }
+		//
+		//		GameTab newGUI = JChessView.getInstance().addNewTab(whiteName + " vs. " + blackName); //$NON-NLS-1$
+		//
+		// Player playerWhite = new Player(Constants.EMPTY_STRING,
+		// Player.colors.white);
+		// Player playerBlack = new Player(Constants.EMPTY_STRING,
+		// Player.colors.black);
+		//
+		// playerBlack.setName(blackName);
+		// playerWhite.setName(whiteName);
+		//
+		// game.setPlayer(colors.white, playerWhite);
+		// game.setPlayer(colors.black, playerBlack);
+		//
+		// Settings.setBlackPlayersName(blackName);
+		// Settings.setWhitePlayersName(whiteName);
+		//
+		// newGUI.newGame();
+		// moveHistory.setMoves(tempStr);
+		// newGUI.chessboard.repaint();
+		throw new UnsupportedOperationException("Load Game not implemented by now.");
 	}
 
 	/**
