@@ -8,6 +8,6 @@ public class StraightEdge extends DirectedGraphEdge {
 
 	@Override
 	public EdgeType getEdgeType() {
-		return EdgeType.straight;
+		return EdgeType.STRAIGHT;
 	}
 }

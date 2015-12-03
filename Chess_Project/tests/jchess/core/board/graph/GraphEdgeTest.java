@@ -39,9 +39,9 @@ public class GraphEdgeTest {
 	@Test
 	public void testGetEdgeType() throws Exception {
 		DiagonalEdge edge = new DiagonalEdge(new GraphNode("H2"), new GraphNode("F5"), EdgeDirection.LEFT);
-		Assert.assertEquals(GraphEdge.EdgeType.diagonal, edge.getEdgeType());
+		Assert.assertEquals(GraphEdge.EdgeType.DIAGONAL, edge.getEdgeType());
 
 		StraightEdge edqe1 = new StraightEdge(new GraphNode("H2"), new GraphNode("F5"), EdgeDirection.LEFT);
-		Assert.assertEquals(GraphEdge.EdgeType.straight, edqe1.getEdgeType());
+		Assert.assertEquals(GraphEdge.EdgeType.STRAIGHT, edqe1.getEdgeType());
 	}
 }

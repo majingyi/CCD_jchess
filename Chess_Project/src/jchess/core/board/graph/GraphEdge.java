@@ -7,7 +7,7 @@ public abstract class GraphEdge {
 	private GraphNode	m_Node2	= null;
 
 	public enum EdgeType {
-		diagonal, straight
+		DIAGONAL, STRAIGHT
 	}
 
 	public GraphEdge(GraphNode node1, GraphNode node2) {

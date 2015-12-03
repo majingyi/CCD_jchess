@@ -41,7 +41,7 @@ public abstract class ChessboardField extends GraphNode {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		List<GraphEdge> edges = getEdges();
 		for (GraphEdge edge : edges) {
-			if (edge.getEdgeType() == GraphEdge.EdgeType.diagonal) {
+			if (edge.getEdgeType() == GraphEdge.EdgeType.DIAGONAL) {
 				GraphNode node = edge.getOtherNode(this);
 				if (node instanceof ChessboardField) {
 					result.add((ChessboardField) node);
@@ -56,7 +56,7 @@ public abstract class ChessboardField extends GraphNode {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		List<GraphEdge> edges = getEdges();
 		for (GraphEdge edge : edges) {
-			if (edge.getEdgeType() == GraphEdge.EdgeType.straight) {
+			if (edge.getEdgeType() == GraphEdge.EdgeType.STRAIGHT) {
 				GraphNode node = edge.getOtherNode(this);
 				if (node instanceof ChessboardField) {
 					result.add((ChessboardField) node);

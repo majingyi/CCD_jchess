@@ -8,6 +8,6 @@ public class DiagonalEdge extends DirectedGraphEdge {
 
 	@Override
 	public EdgeType getEdgeType() {
-		return EdgeType.diagonal;
+		return EdgeType.DIAGONAL;
 	}
 }

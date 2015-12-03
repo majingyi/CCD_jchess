@@ -25,39 +25,39 @@ public class PawnMoveBehavior extends MoveBehavior {
 			case WHITE:
 				// ordinary moves
 				// left one move
-				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.straight);
+				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.STRAIGHT);
 				if (field.getPiece() == null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// left double move
-				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.straight).getPiece() == null
+				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.STRAIGHT).getPiece() == null
 						&& this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right one move
-				field = this.m_Field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.straight);
+				field = this.m_Field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.STRAIGHT);
 				if (field.getPiece() == null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right double move
-				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.straight).getPiece() == null
+				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.STRAIGHT).getPiece() == null
 						&& this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
-					allMoves.add(field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.straight));
+					allMoves.add(field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.STRAIGHT));
 				}
 
 				// capture moves
 				// left
-				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// middle
-				field = this.m_Field.getNextField(EdgeDirection.DOWN, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.DOWN, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right
-				field = this.m_Field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
@@ -67,39 +67,39 @@ public class PawnMoveBehavior extends MoveBehavior {
 			case BLACK:
 				// ordinary moves
 				// left one move
-				field = this.m_Field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.straight);
+				field = this.m_Field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.STRAIGHT);
 				if (field.getPiece() == null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// left double move
-				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.straight).getPiece() == null
+				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.STRAIGHT).getPiece() == null
 						&& this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
-					allMoves.add(field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.straight));
+					allMoves.add(field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.STRAIGHT));
 				}
 				// right one move
-				field = this.m_Field.getNextField(EdgeDirection.RIGHT, EdgeType.straight);
+				field = this.m_Field.getNextField(EdgeDirection.RIGHT, EdgeType.STRAIGHT);
 				if (field.getPiece() == null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right double move
-				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.RIGHT, EdgeType.straight).getPiece() == null
+				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.RIGHT, EdgeType.STRAIGHT).getPiece() == null
 						&& this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
-					allMoves.add(field.getNextField(EdgeDirection.RIGHT, EdgeType.straight));
+					allMoves.add(field.getNextField(EdgeDirection.RIGHT, EdgeType.STRAIGHT));
 				}
 
 				// capture moves
 				// left
-				field = this.m_Field.getNextField(EdgeDirection.UP, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.UP, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// middle
-				field = this.m_Field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right
-				field = this.m_Field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.RIGHT_DOWN, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
@@ -109,39 +109,39 @@ public class PawnMoveBehavior extends MoveBehavior {
 			case RED:
 				// ordinary moves
 				// left one move
-				field = this.m_Field.getNextField(EdgeDirection.LEFT, EdgeType.straight);
+				field = this.m_Field.getNextField(EdgeDirection.LEFT, EdgeType.STRAIGHT);
 				if (field.getPiece() == null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// left double move
-				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.LEFT, EdgeType.straight).getPiece() == null
+				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.LEFT, EdgeType.STRAIGHT).getPiece() == null
 						&& this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
-					allMoves.add(field.getNextField(EdgeDirection.LEFT, EdgeType.straight));
+					allMoves.add(field.getNextField(EdgeDirection.LEFT, EdgeType.STRAIGHT));
 				}
 				// right one move
-				field = this.m_Field.getNextField(EdgeDirection.LEFT_UP, EdgeType.straight);
+				field = this.m_Field.getNextField(EdgeDirection.LEFT_UP, EdgeType.STRAIGHT);
 				if (field.getPiece() == null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right double move
-				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.LEFT_UP, EdgeType.straight).getPiece() == null
+				if (this.isDoubleMoveAllowed() && field.getNextField(EdgeDirection.LEFT_UP, EdgeType.STRAIGHT).getPiece() == null
 						&& this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
-					allMoves.add(field.getNextField(EdgeDirection.LEFT_UP, EdgeType.straight));
+					allMoves.add(field.getNextField(EdgeDirection.LEFT_UP, EdgeType.STRAIGHT));
 				}
 
 				// capture moves
 				// left
-				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// middle
-				field = this.m_Field.getNextField(EdgeDirection.LEFT_UP, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.LEFT_UP, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
 				// right
-				field = this.m_Field.getNextField(EdgeDirection.UP, EdgeType.diagonal);
+				field = this.m_Field.getNextField(EdgeDirection.UP, EdgeType.DIAGONAL);
 				if (field.getPiece() != null && this.m_Chessboard.getKingForColor(color).willBeSafeWhenMoveOtherPiece(this.m_Field, field)) {
 					allMoves.add(field);
 				}
