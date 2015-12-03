@@ -50,14 +50,7 @@ public class HexagonChessFieldGraphInitializer {
 			}
 		}
 
-		/*
-		 * Add straight edges
-		 */
 		connectStraightEdges(fields);
-
-		/*
-		 * Add diagonal edges
-		 */
 		connectDiagonalEdges(fields);
 
 		/*
@@ -174,8 +167,8 @@ public class HexagonChessFieldGraphInitializer {
 				ChessboardField field = fields[i][j];
 				if (field != null) {
 					// left below
-					int newI = i;
-					int newJ = j + 1;
+					int newI = i + 1;
+					int newJ = j;
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
@@ -187,14 +180,14 @@ public class HexagonChessFieldGraphInitializer {
 					}
 
 					// left
-					newI = i + 1;
-					newJ = j;
+					newI = i;
+					newJ = j + 1;
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							StraightEdge edge = new StraightEdge(field, field2, direction.left);
+							StraightEdge edge = new StraightEdge(field, field2, direction.right);
 							field.addEdge(edge);
-							edge = new StraightEdge(field2, field, direction.right);
+							edge = new StraightEdge(field2, field, direction.left);
 							field2.addEdge(edge);
 						}
 					}
