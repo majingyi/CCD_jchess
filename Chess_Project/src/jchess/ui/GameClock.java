@@ -14,7 +14,7 @@ import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.IClockListener;
 import jchess.core.util.Player;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
@@ -43,7 +43,7 @@ public class GameClock extends JPanel implements IClockListener {
 	 */
 	public void start() throws Exception {
 		if (Settings.isTimeLimitSet()) {
-			game.getClockForPlayer(colors.white).start();
+			game.getClockForPlayer(PlayerColor.WHITE).start();
 		}
 	}
 
@@ -78,9 +78,9 @@ public class GameClock extends JPanel implements IClockListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		white_clock = game.getClockForPlayer(colors.white).toString();
+		white_clock = game.getClockForPlayer(PlayerColor.WHITE).toString();
 		// TODO add third clock (red)
-		black_clock = game.getClockForPlayer(colors.black).toString();
+		black_clock = game.getClockForPlayer(PlayerColor.BLACK).toString();
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(this.background, 0, 0, this);
@@ -115,10 +115,10 @@ public class GameClock extends JPanel implements IClockListener {
 	public void timeOver(Clock clock) {
 		String color = Constants.EMPTY_STRING;
 
-		if (clock == game.getClockForPlayer(colors.white)) {
-			color = Player.colors.white.toString();
-		} else if (clock == game.getClockForPlayer(colors.black)) {
-			color = Player.colors.black.toString();
+		if (clock == game.getClockForPlayer(PlayerColor.WHITE)) {
+			color = Player.PlayerColor.WHITE.toString();
+		} else if (clock == game.getClockForPlayer(PlayerColor.BLACK)) {
+			color = Player.PlayerColor.BLACK.toString();
 		}
 		// TODO add third player
 

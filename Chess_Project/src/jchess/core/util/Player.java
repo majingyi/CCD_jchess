@@ -11,14 +11,14 @@ public class Player implements Serializable {
 	private static final long	serialVersionUID	= 8990270306651014243L;
 
 	private String						name							= null;
-	private colors						color							= null;
+	private PlayerColor				color							= null;
 	private boolean						goDown						= false;
 
-	public enum colors {
-		white, black, red
+	public enum PlayerColor {
+		WHITE, BLACK, RED
 	}
 
-	public Player(String name, colors color) {
+	public Player(String name, PlayerColor color) {
 		this.name = name;
 		this.setColor(color);
 	}
@@ -42,11 +42,11 @@ public class Player implements Serializable {
 		return this.name;
 	}
 
-	public colors getColor() {
+	public PlayerColor getColor() {
 		return color;
 	}
 
-	public void setColor(colors color) {
+	public void setColor(PlayerColor color) {
 		this.color = color;
 	}
 

@@ -2,7 +2,7 @@ package jchess.core.pieces;
 
 import jchess.core.board.Chessboard;
 import jchess.core.util.Player;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -68,7 +68,7 @@ public class PawnTest {
 	}
 
 	private Pawn createPawn() throws Exception {
-		Player pl = new Player("hdwf", colors.red);
+		Player pl = new Player("hdwf", PlayerColor.RED);
 		Chessboard board = new Chessboard(null, null);
 		Pawn p = new Pawn(board, pl, null);
 		return p;

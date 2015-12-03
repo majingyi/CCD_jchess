@@ -20,29 +20,29 @@ public class ThemeTest {
 
 	@Test
 	public void testGetImageForPiece() throws Exception {
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Pawn.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Pawn.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Pawn.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.BLACK, Pawn.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.WHITE, Pawn.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.RED, Pawn.SYMBOL));
 
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Rook.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Rook.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Rook.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.BLACK, Rook.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.WHITE, Rook.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.RED, Rook.SYMBOL));
 
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Bishop.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Bishop.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Bishop.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.BLACK, Bishop.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.WHITE, Bishop.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.RED, Bishop.SYMBOL));
 
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Knight.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Knight.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Knight.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.BLACK, Knight.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.WHITE, Knight.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.RED, Knight.SYMBOL));
 
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, King.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, King.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, King.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.BLACK, King.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.WHITE, King.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.RED, King.SYMBOL));
 
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.black, Queen.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.white, Queen.SYMBOL));
-		Assert.assertNotNull(Theme.getImageForPiece(Player.colors.red, Queen.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.BLACK, Queen.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.WHITE, Queen.SYMBOL));
+		Assert.assertNotNull(Theme.getImageForPiece(Player.PlayerColor.RED, Queen.SYMBOL));
 	}
 
 	@Test

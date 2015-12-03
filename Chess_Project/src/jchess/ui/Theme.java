@@ -25,40 +25,19 @@ public class Theme {
 		themeList.add("hunter"); //$NON-NLS-1$
 		themeList.add("matlak"); //$NON-NLS-1$
 
-		themeImages = new String[] { "able_square.png",
-			"add-tab-icon.png",
-			"chessboard.png",
-			"clicked-add-tab-icon.png",
-			"Preview.png",
-			"sel_square.png",
-			"Bishop-B.png",
-			"Bishop-W.png",
-			"Bishop-R.png",
-			"King-B.png",
-			"King-W.png",
-			"King-R.png",
-			"Knight-B.png",
-			"Knight-W.png",
-			"Knight-R.png",
-			"Pawn-B.png",
-			"Pawn-W.png",
-			"Pawn-R.png",
-			"Queen-B.png",
-			"Queen-W.png",
-			"Queen-R.png",
-			"Rook-B.png",
-			"Rook-W.png",
-			"Rook-R.png" };
+		themeImages = new String[] { "able_square.png", "add-tab-icon.png", "chessboard.png", "clicked-add-tab-icon.png", "Preview.png", "sel_square.png",
+			"Bishop-B.png", "Bishop-W.png", "Bishop-R.png", "King-B.png", "King-W.png", "King-R.png", "Knight-B.png", "Knight-W.png", "Knight-R.png", "Pawn-B.png",
+			"Pawn-W.png", "Pawn-R.png", "Queen-B.png", "Queen-W.png", "Queen-R.png", "Rook-B.png", "Rook-W.png", "Rook-R.png" };
 	}
 
-	public static Image getImageForPiece(Player.colors color, String pieceSymbol) throws FileNotFoundException {
+	public static Image getImageForPiece(Player.PlayerColor color, String pieceSymbol) throws FileNotFoundException {
 		String imageName = pieceSymbol;
 
-		if (color == Player.colors.white) {
+		if (color == Player.PlayerColor.WHITE) {
 			imageName = imageName + "-W.png"; //$NON-NLS-1$
-		} else if (color == Player.colors.black) {
+		} else if (color == Player.PlayerColor.BLACK) {
 			imageName = imageName + "-B.png"; //$NON-NLS-1$
-		} else if (color == Player.colors.red) {
+		} else if (color == Player.PlayerColor.RED) {
 			imageName = imageName + "-R.png"; //$NON-NLS-1$
 		}
 		return getImage(imageName);

@@ -3,8 +3,8 @@ package jchess.core.board;
 import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
-import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.StraightEdge;
+import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -14,15 +14,15 @@ import jchess.core.pieces.Queen;
 import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Player;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 
 public class HexagonChessFieldGraphInitializer {
 
-	public static void initialise(Chessboard chessboard, Map<colors, Player> player) throws Exception {
+	public static void initialise(Chessboard chessboard, Map<PlayerColor, Player> player) throws Exception {
 
-		Player white = player.get(colors.white);
-		Player black = player.get(colors.black);
-		Player red = player.get(colors.red);
+		Player white = player.get(PlayerColor.WHITE);
+		Player black = player.get(PlayerColor.BLACK);
+		Player red = player.get(PlayerColor.RED);
 
 		ChessboardField[][] fields = new ChessboardField[13][13];
 

@@ -20,7 +20,7 @@ import jchess.core.util.Move;
 import jchess.core.util.MoveHistory;
 import jchess.core.util.MoveHistory.castling;
 import jchess.core.util.Player;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 import jchess.ui.GameTab;
 import jchess.ui.MoveHistoryUI;
 import jchess.ui.lang.Language;
@@ -32,11 +32,11 @@ import jchess.ui.lang.Language;
  */
 public class Chessboard extends HexagonChessboardFieldGraph {
 
-	private GameTab										m_GameUI				= null;
-	private ChessboardField						m_ActiveField		= null;
+	private GameTab												m_GameUI				= null;
+	private ChessboardField								m_ActiveField		= null;
 
-	private MoveHistoryUI							m_Moves_history	= null;
-	private Map<Player.colors, King>	m_KingsMap			= new HashMap<Player.colors, King>();
+	private MoveHistoryUI									m_Moves_history	= null;
+	private Map<Player.PlayerColor, King>	m_KingsMap			= new HashMap<Player.PlayerColor, King>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		m_GameUI = ui;
@@ -50,7 +50,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param player
 	 * @throws Exception
 	 */
-	public void initChessBoard(Map<colors, Player> player) throws Exception {
+	public void initChessBoard(Map<PlayerColor, Player> player) throws Exception {
 		HexagonChessFieldGraphInitializer.initialise(this, player);
 	}
 
@@ -214,7 +214,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @param color
 	 * @return the king of the given color.
 	 */
-	public King getKingForColor(Player.colors color) {
+	public King getKingForColor(Player.PlayerColor color) {
 		return m_KingsMap.get(color);
 	}
 
@@ -229,7 +229,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		if (m_KingsMap.containsKey(king.getPlayer().getColor()) == false) {
 			m_KingsMap.put(king.getPlayer().getColor(), king);
 		} else {
-			throw new Exception("King with color " + king.getPlayer().getColor() + " is already existing on this borad.");
+			throw new Exception("King with color " + king.getPlayer().getColor().toString().toLowerCase() + " is already existing on this borad.");
 		}
 	}
 
@@ -290,7 +290,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all straight fields which are not blocked. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getStraightFields(ChessboardField field, colors activePlayersColor) throws Exception {
+	public List<ChessboardField> getStraightFields(ChessboardField field, PlayerColor activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		List<GraphEdge> edges = field.getEdges();
@@ -323,7 +323,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		return result;
 	}
 
-	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, colors color) throws Exception {
+	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, PlayerColor color) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		ChessboardField next = field.getNextField(edge.getDirection(), edge.getEdgeType());
 
@@ -360,7 +360,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		return result;
 	}
 
-	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, int maxDepth, colors color) throws Exception {
+	private List<ChessboardField> getNodesInSpecificDirection(ChessboardField field, DirectedGraphEdge edge, int maxDepth, PlayerColor color) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		if (maxDepth > 0) {
@@ -411,7 +411,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all straight fields which are not blocked or out of range. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) throws Exception {
+	public List<ChessboardField> getStraightFields(ChessboardField field, int maxAllowedMoves, Player.PlayerColor activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		List<GraphEdge> edges = field.getEdges();
@@ -453,7 +453,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all diagonal fields which are not blocked. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getDiagonalFields(ChessboardField field, Player.colors activePlayersColor) throws Exception {
+	public List<ChessboardField> getDiagonalFields(ChessboardField field, Player.PlayerColor activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		List<GraphEdge> edges = field.getEdges();
@@ -500,7 +500,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all diagonal fields which are not blocked or out of range. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves, Player.colors activePlayersColor) throws Exception {
+	public List<ChessboardField> getDiagonalFields(ChessboardField field, int maxAllowedMoves, Player.PlayerColor activePlayersColor) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
 		List<GraphEdge> edges = field.getEdges();
@@ -611,7 +611,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all such fields. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, colors activePlayersColor, int straightOffset, int diagonalOffset)
+	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, PlayerColor activePlayersColor, int straightOffset, int diagonalOffset)
 			throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
@@ -660,7 +660,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		return result;
 	}
 
-	private List<ChessboardField> performSecondStep(colors color, int diagonalOffset, ChessboardField firstStep, EdgeDirection direction) throws Exception {
+	private List<ChessboardField> performSecondStep(PlayerColor color, int diagonalOffset, ChessboardField firstStep, EdgeDirection direction) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		List<ChessboardField> second = getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction), diagonalOffset);
 		if (second.size() == 1) {

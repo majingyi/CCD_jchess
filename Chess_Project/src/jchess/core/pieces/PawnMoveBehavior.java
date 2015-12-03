@@ -19,10 +19,10 @@ public class PawnMoveBehavior extends MoveBehavior {
 
 		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
 		ChessboardField field;
-		Player.colors color = this.m_Player.getColor();
+		Player.PlayerColor color = this.m_Player.getColor();
 		switch (color) {
-			// for white pawns
-			case white:
+		// for white pawns
+			case WHITE:
 				// ordinary moves
 				// left one move
 				field = this.m_Field.getNextField(EdgeDirection.LEFT_DOWN, EdgeType.straight);
@@ -64,7 +64,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				break;
 
 			// for black pawns
-			case black:
+			case BLACK:
 				// ordinary moves
 				// left one move
 				field = this.m_Field.getNextField(EdgeDirection.RIGHT_UP, EdgeType.straight);
@@ -106,7 +106,7 @@ public class PawnMoveBehavior extends MoveBehavior {
 				break;
 
 			// for red pawns
-			case red:
+			case RED:
 				// ordinary moves
 				// left one move
 				field = this.m_Field.getNextField(EdgeDirection.LEFT, EdgeType.straight);

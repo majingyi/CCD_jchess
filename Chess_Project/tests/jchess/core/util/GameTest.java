@@ -1,7 +1,7 @@
 package jchess.core.util;
 
 import jchess.core.board.Chessboard;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,13 +14,13 @@ public class GameTest {
 		Game game = new Game(board, null);
 		game.startNewGame();
 
-		Assert.assertEquals(colors.white, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.WHITE, game.getActivePlayer().getColor());
 		game.switchActive();
-		Assert.assertEquals(colors.red, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.RED, game.getActivePlayer().getColor());
 		game.switchActive();
-		Assert.assertEquals(colors.black, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.BLACK, game.getActivePlayer().getColor());
 		game.switchActive();
-		Assert.assertEquals(colors.white, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.WHITE, game.getActivePlayer().getColor());
 	}
 
 	@Test
@@ -29,13 +29,13 @@ public class GameTest {
 		Game game = new Game(board, null);
 		game.startNewGame();
 
-		Assert.assertEquals(colors.white, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.WHITE, game.getActivePlayer().getColor());
 		game.switchActive();
-		Assert.assertEquals(colors.red, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.RED, game.getActivePlayer().getColor());
 		game.switchActive();
-		Assert.assertEquals(colors.black, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.BLACK, game.getActivePlayer().getColor());
 		game.switchActive();
-		Assert.assertEquals(colors.white, game.getActivePlayer().getColor());
+		Assert.assertEquals(PlayerColor.WHITE, game.getActivePlayer().getColor());
 	}
 
 	@Test
@@ -48,23 +48,23 @@ public class GameTest {
 
 		// give clock chance to start
 		Thread.sleep(100);
-		Assert.assertEquals(true, game.getClockForPlayer(colors.white).isClockRunning());
-		Assert.assertEquals(false, game.getClockForPlayer(colors.red).isClockRunning());
-		Assert.assertEquals(false, game.getClockForPlayer(colors.black).isClockRunning());
+		Assert.assertEquals(true, game.getClockForPlayer(PlayerColor.WHITE).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.RED).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.BLACK).isClockRunning());
 		game.switchActive();
 		Thread.sleep(100);
-		Assert.assertEquals(false, game.getClockForPlayer(colors.white).isClockRunning());
-		Assert.assertEquals(true, game.getClockForPlayer(colors.red).isClockRunning());
-		Assert.assertEquals(false, game.getClockForPlayer(colors.black).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.WHITE).isClockRunning());
+		Assert.assertEquals(true, game.getClockForPlayer(PlayerColor.RED).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.BLACK).isClockRunning());
 		game.switchActive();
 		Thread.sleep(100);
-		Assert.assertEquals(false, game.getClockForPlayer(colors.white).isClockRunning());
-		Assert.assertEquals(false, game.getClockForPlayer(colors.red).isClockRunning());
-		Assert.assertEquals(true, game.getClockForPlayer(colors.black).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.WHITE).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.RED).isClockRunning());
+		Assert.assertEquals(true, game.getClockForPlayer(PlayerColor.BLACK).isClockRunning());
 		game.switchActive();
 		Thread.sleep(100);
-		Assert.assertEquals(true, game.getClockForPlayer(colors.white).isClockRunning());
-		Assert.assertEquals(false, game.getClockForPlayer(colors.red).isClockRunning());
-		Assert.assertEquals(false, game.getClockForPlayer(colors.black).isClockRunning());
+		Assert.assertEquals(true, game.getClockForPlayer(PlayerColor.WHITE).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.RED).isClockRunning());
+		Assert.assertEquals(false, game.getClockForPlayer(PlayerColor.BLACK).isClockRunning());
 	}
 }

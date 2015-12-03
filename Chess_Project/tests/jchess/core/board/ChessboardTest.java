@@ -6,7 +6,7 @@ import jchess.core.pieces.King;
 import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,17 +19,17 @@ public class ChessboardTest {
 		Game game = new Game(board, null);
 		game.startNewGame();
 
-		King red = board.getKingForColor(colors.red);
+		King red = board.getKingForColor(PlayerColor.RED);
 		Assert.assertNotNull(red);
-		Assert.assertEquals(colors.red, red.getPlayer().getColor());
+		Assert.assertEquals(PlayerColor.RED, red.getPlayer().getColor());
 
-		King black = board.getKingForColor(colors.black);
+		King black = board.getKingForColor(PlayerColor.BLACK);
 		Assert.assertNotNull(black);
-		Assert.assertEquals(colors.black, black.getPlayer().getColor());
+		Assert.assertEquals(PlayerColor.BLACK, black.getPlayer().getColor());
 
-		King white = board.getKingForColor(colors.white);
+		King white = board.getKingForColor(PlayerColor.WHITE);
 		Assert.assertNotNull(white);
-		Assert.assertEquals(colors.white, white.getPlayer().getColor());
+		Assert.assertEquals(PlayerColor.WHITE, white.getPlayer().getColor());
 
 		King nothing = board.getKingForColor(null);
 		Assert.assertNull(nothing);
@@ -39,18 +39,18 @@ public class ChessboardTest {
 	public void testAddKing() throws Exception {
 		Chessboard board = new Chessboard(null, null);
 
-		Player red = new Player("hdwf", colors.red);
+		Player red = new Player("hdwf", PlayerColor.RED);
 		board.addKing(new King(board, red, null));
 
-		Player black = new Player("hdwf", colors.black);
+		Player black = new Player("hdwf", PlayerColor.BLACK);
 		board.addKing(new King(board, black, null));
 
-		Player white = new Player("hdwf", colors.white);
+		Player white = new Player("hdwf", PlayerColor.WHITE);
 		board.addKing(new King(board, white, null));
 
 		boolean exception = false;
 		try {
-			red = new Player("hdwf", colors.red);
+			red = new Player("hdwf", PlayerColor.RED);
 			board.addKing(new King(board, red, null));
 		} catch (Exception e) {
 			Assert.assertEquals("King with color red is already existing on this borad.", e.getMessage());
@@ -91,14 +91,14 @@ public class ChessboardTest {
 		checkFieldsInList(fields, expectedFields, board);
 
 		g7 = board.getField("G7");
-		fields = board.getStraightFields(g7, colors.white);
+		fields = board.getStraightFields(g7, PlayerColor.WHITE);
 		expectedFields = new String[] { "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11", "L12", "G3", "G4", "G5",
 				"G6", "G8", "G9", "G10", "G11", "G12" };
 		Assert.assertEquals(26, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
 		m13 = board.getField("M13");
-		fields = board.getStraightFields(m13, colors.red);
+		fields = board.getStraightFields(m13, PlayerColor.RED);
 		expectedFields = new String[] {};
 		Assert.assertEquals(0, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
@@ -142,7 +142,7 @@ public class ChessboardTest {
 		checkFieldsInList(fields, expectedFields, board);
 
 		g7 = board.getField("G7");
-		fields = board.getDiagonalFields(g7, colors.white);
+		fields = board.getDiagonalFields(g7, PlayerColor.WHITE);
 		expectedFields = new String[] { "D1", "E3", "F5", "H9", "I11", "I5", "H6", "F8", "E9", "D10", "C5", "E6", "I8", "K9", "M10" };
 		Assert.assertEquals(15, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
@@ -167,13 +167,13 @@ public class ChessboardTest {
 		checkFieldsInList(fields, expectedFields, board);
 
 		g7 = board.getField("G7");
-		fields = board.getDiagonalFields(g7, 2, colors.white);
+		fields = board.getDiagonalFields(g7, 2, PlayerColor.WHITE);
 		expectedFields = new String[] { "E3", "F5", "H9", "I11", "I5", "H6", "F8", "E9", "C5", "E6", "I8", "K9" };
 		Assert.assertEquals(12, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
 		g7 = board.getField("G7");
-		fields = board.getDiagonalFields(g7, 1, colors.white);
+		fields = board.getDiagonalFields(g7, 1, PlayerColor.WHITE);
 		expectedFields = new String[] { "F5", "H9", "H6", "F8", "E6", "I8" };
 		Assert.assertEquals(6, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
@@ -230,13 +230,13 @@ public class ChessboardTest {
 		game.startNewGame();
 
 		ChessboardField g7 = board.getField("G7");
-		List<ChessboardField> fields = board.getJumpStraightPlusDiagonalFields(g7, colors.red, 1, 1);
+		List<ChessboardField> fields = board.getJumpStraightPlusDiagonalFields(g7, PlayerColor.RED, 1, 1);
 		String[] expectedFields = new String[] { "D5", "D6", "E4", "E8", "F4", "F9", "H5", "H10", "I6", "I10", "J8", "J9" };
 		Assert.assertEquals(12, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
 		ChessboardField g10 = board.getField("G10");
-		fields = board.getJumpStraightPlusDiagonalFields(g10, colors.red, 1, 1);
+		fields = board.getJumpStraightPlusDiagonalFields(g10, PlayerColor.RED, 1, 1);
 		expectedFields = new String[] { "D8", "D9", "E7", "E11", "F7", "H8", "I9", "J11" };
 		Assert.assertEquals(8, fields.size());
 		checkFieldsInList(fields, expectedFields, board);

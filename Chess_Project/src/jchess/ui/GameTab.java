@@ -20,7 +20,7 @@ import jchess.core.pieces.King;
 import jchess.core.util.Game;
 import jchess.core.util.Logging;
 import jchess.core.util.Player;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 import jchess.core.util.ReadGameError;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
@@ -127,10 +127,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 					// checkmate or stalemate
 					King king;
-					if (game.getActivePlayer().getColor() == colors.white) {
-						king = chessboard.getKingForColor(colors.white);
+					if (game.getActivePlayer().getColor() == PlayerColor.WHITE) {
+						king = chessboard.getKingForColor(PlayerColor.WHITE);
 					} else {
-						king = chessboard.getKingForColor(colors.black);
+						king = chessboard.getKingForColor(PlayerColor.BLACK);
 					}
 
 					switch (king.isCheckmatedOrStalemated()) {

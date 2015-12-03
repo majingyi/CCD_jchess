@@ -53,12 +53,12 @@ public class MoveHistory {
 		// wasEnPassant = true;
 		// }
 
-		if (((this.enterBlack == false) && gameTab.getChessboard().getKingForColor(Player.colors.black).isChecked())
-				|| (this.enterBlack && gameTab.getChessboard().getKingForColor(Player.colors.white).isChecked())) {// if
+		if (((this.enterBlack == false) && gameTab.getChessboard().getKingForColor(Player.PlayerColor.BLACK).isChecked())
+				|| (this.enterBlack && gameTab.getChessboard().getKingForColor(Player.PlayerColor.WHITE).isChecked())) {// if
 			// checked
 
-			if ((!this.enterBlack && gameTab.getChessboard().getKingForColor(Player.colors.black).isCheckmatedOrStalemated() == 1)
-					|| (this.enterBlack && gameTab.getChessboard().getKingForColor(Player.colors.white).isCheckmatedOrStalemated() == 1)) {// check
+			if ((!this.enterBlack && gameTab.getChessboard().getKingForColor(Player.PlayerColor.BLACK).isCheckmatedOrStalemated() == 1)
+					|| (this.enterBlack && gameTab.getChessboard().getKingForColor(Player.PlayerColor.WHITE).isCheckmatedOrStalemated() == 1)) {// check
 				// if
 				// checkmated
 				locMove += "#";// check mate //$NON-NLS-1$

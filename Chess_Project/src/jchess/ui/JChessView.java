@@ -236,7 +236,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		JChessApp.getApplication().show(aboutBox);
 	}
 
-	public String showPawnPromotionBox(Player.colors color) throws FileNotFoundException {
+	public String showPawnPromotionBox(Player.PlayerColor color) throws FileNotFoundException {
 		if (promotionBox == null) {
 			JFrame mainFrame = JChessApp.getApplication().getMainFrame();
 			promotionBox = new PawnPromotionWindow(mainFrame, color);

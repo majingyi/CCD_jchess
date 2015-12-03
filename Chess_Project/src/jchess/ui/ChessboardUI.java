@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.pieces.King;
-import jchess.core.util.Player.colors;
+import jchess.core.util.Player.PlayerColor;
 
 /**
  * Class to represent chessboard. Chessboard is made from squares. It is setting
@@ -319,7 +319,7 @@ public class ChessboardUI extends JPanel {
 		return board;
 	}
 
-	public King getKingForColor(colors color) {
+	public King getKingForColor(PlayerColor color) {
 		return board.getKingForColor(color);
 	}
 

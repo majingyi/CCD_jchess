@@ -26,7 +26,7 @@ public class PieceTest {
 	@Test
 	public void testSetGetSymbol() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
+		Piece p = new TestPiece(board, new Player("hans", Player.PlayerColor.WHITE), null);
 		Assert.assertEquals("T", p.getSymbolForMoveHistory());
 
 		p.setSymbol("K");
@@ -54,7 +54,7 @@ public class PieceTest {
 		Game game = new Game(board, null);
 		game.startNewGame();
 
-		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
+		Piece p = new TestPiece(board, new Player("hans", Player.PlayerColor.WHITE), null);
 
 		Assert.assertEquals(null, p.getField());
 
@@ -78,7 +78,7 @@ public class PieceTest {
 	@Test
 	public void testGetSymbolForMoveHistory() throws Exception {
 		Chessboard board = new Chessboard(null, null);
-		Piece p = new TestPiece(board, new Player("hans", Player.colors.white), null);
+		Piece p = new TestPiece(board, new Player("hans", Player.PlayerColor.WHITE), null);
 		Assert.assertEquals("T", p.getSymbolForMoveHistory());
 
 		p.setSymbol("K");
