@@ -1,11 +1,10 @@
-package jchess.core.board.graph;
+package jchess.core.board;
 
 import java.util.Map;
 
-import jchess.core.board.Chessboard;
-import jchess.core.board.ChessboardField;
-import jchess.core.board.Hexagon;
+import jchess.core.board.graph.DiagonalEdge;
 import jchess.core.board.graph.DirectedGraphEdge.direction;
+import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -54,12 +53,7 @@ public class HexagonChessFieldGraphInitializer {
 		/*
 		 * Add straight edges
 		 */
-		for (int i = 0; i < 13; i++) {
-			connectAllStraightHorizontal(fields[i]);
-			connectAllStraightVertical(i, fields);
-		}
-
-		connectDiagonalStraightNeighbors(fields);
+		connectStraightEdges(fields);
 
 		/*
 		 * Add diagonal edges
@@ -174,48 +168,49 @@ public class HexagonChessFieldGraphInitializer {
 		}
 	}
 
-	private static void connectDiagonalStraightNeighbors(ChessboardField[][] fields) {
+	private static void connectStraightEdges(ChessboardField[][] fields) {
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
 				ChessboardField field = fields[i][j];
-				if ((field != null) && ((i + 1) < 13) && ((j + 1) < 13)) {
-					ChessboardField field2 = fields[i + 1][j + 1];
-					if (field2 != null) {
-						StraightEdge edge = new StraightEdge(field, field2, direction.rightDown);
-						field.addEdge(edge);
-						edge = new StraightEdge(field2, field, direction.leftUp);
-						field2.addEdge(edge);
+				if (field != null) {
+					// left below
+					int newI = i;
+					int newJ = j + 1;
+					if ((newI < 13) && (newJ < 13)) {
+						ChessboardField field2 = fields[newI][newJ];
+						if (field2 != null) {
+							StraightEdge edge = new StraightEdge(field, field2, direction.leftDown);
+							field.addEdge(edge);
+							edge = new StraightEdge(field2, field, direction.rightUp);
+							field2.addEdge(edge);
+						}
 					}
-				}
-			}
-		}
-	}
 
-	private static void connectAllStraightHorizontal(ChessboardField[] fields) {
-		for (int i = 0; i < 13; i++) {
-			ChessboardField field = fields[i];
-			if ((field != null) && ((i + 1) < 13)) {
-				ChessboardField field2 = fields[i + 1];
-				if (field2 != null) {
-					StraightEdge edge = new StraightEdge(field, field2, direction.right);
-					field.addEdge(edge);
-					edge = new StraightEdge(field2, field, direction.left);
-					field2.addEdge(edge);
-				}
-			}
-		}
-	}
+					// left
+					newI = i + 1;
+					newJ = j;
+					if ((newI < 13) && (newJ < 13)) {
+						ChessboardField field2 = fields[newI][newJ];
+						if (field2 != null) {
+							StraightEdge edge = new StraightEdge(field, field2, direction.left);
+							field.addEdge(edge);
+							edge = new StraightEdge(field2, field, direction.right);
+							field2.addEdge(edge);
+						}
+					}
 
-	private static void connectAllStraightVertical(int column, ChessboardField[][] fields) {
-		for (int i = 0; i < 13; i++) {
-			ChessboardField field = fields[i][column];
-			if ((field != null) && ((i + 1) < 13)) {
-				ChessboardField field2 = fields[i + 1][column];
-				if (field2 != null) {
-					StraightEdge edge = new StraightEdge(field, field2, direction.down);
-					field.addEdge(edge);
-					edge = new StraightEdge(field2, field, direction.up);
-					field2.addEdge(edge);
+					// right below
+					newI = i + 1;
+					newJ = j + 1;
+					if ((newI < 13) && (newJ < 13)) {
+						ChessboardField field2 = fields[newI][newJ];
+						if (field2 != null) {
+							StraightEdge edge = new StraightEdge(field, field2, direction.rightDown);
+							field.addEdge(edge);
+							edge = new StraightEdge(field2, field, direction.leftUp);
+							field2.addEdge(edge);
+						}
+					}
 				}
 			}
 		}
