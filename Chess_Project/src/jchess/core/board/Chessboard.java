@@ -611,7 +611,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the list of all such fields. Never null.
 	 * @throws Exception 
 	 */
-	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, Player.colors activePlayersColor, int straightOffset, int diagonalOffset)
+	public List<ChessboardField> getJumpStraightPlusDiagonalFields(ChessboardField field, colors activePlayersColor, int straightOffset, int diagonalOffset)
 			throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 
@@ -625,28 +625,28 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 					switch (((StraightEdge) edge).getDirection()) {
 						case left:
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftDown), diagonalOffset));
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftUp), diagonalOffset));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftDown));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftUp));
 							break;
 						case leftDown:
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.down), diagonalOffset));
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftDown), diagonalOffset));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.down));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftDown));
 							break;
 						case leftUp:
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.up), diagonalOffset));
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.leftUp), diagonalOffset));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.up));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftUp));
 							break;
 						case right:
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightDown), diagonalOffset));
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightUp), diagonalOffset));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightDown));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightUp));
 							break;
 						case rightDown:
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.down), diagonalOffset));
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightDown), diagonalOffset));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.down));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightDown));
 							break;
 						case rightUp:
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.up), diagonalOffset));
-							result.addAll(getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction.rightUp), diagonalOffset));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.up));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightUp));
 							break;
 						default:
 							break;
@@ -654,6 +654,19 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				} else if (first.size() > 1) {
 					throw new Exception("We should get a maximum of one field here.");
 				}
+			}
+		}
+
+		return result;
+	}
+
+	private List<ChessboardField> performSecondStep(colors color, int diagonalOffset, ChessboardField firstStep, direction direction) throws Exception {
+		List<ChessboardField> result = new ArrayList<ChessboardField>();
+		List<ChessboardField> second = getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction), diagonalOffset);
+		if (second.size() == 1) {
+			ChessboardField secondStep = second.get(0);
+			if ((secondStep.getPiece() == null) || (secondStep.getPiece().getPlayer().getColor() != color)) {
+				result.add(secondStep);
 			}
 		}
 

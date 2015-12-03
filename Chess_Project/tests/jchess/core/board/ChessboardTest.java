@@ -231,8 +231,14 @@ public class ChessboardTest {
 
 		ChessboardField g7 = board.getField("G7");
 		List<ChessboardField> fields = board.getJumpStraightPlusDiagonalFields(g7, colors.red, 1, 1);
-		String[] expectedFields = new String[] { "D5", "D6", "E8", "E8", "F4", "F9", "H5", "H10", "I6", "I10", "J8", "J9" };
+		String[] expectedFields = new String[] { "D5", "D6", "E4", "E8", "F4", "F9", "H5", "H10", "I6", "I10", "J8", "J9" };
 		Assert.assertEquals(12, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+
+		ChessboardField g10 = board.getField("G10");
+		fields = board.getJumpStraightPlusDiagonalFields(g10, colors.red, 1, 1);
+		expectedFields = new String[] { "D8", "D9", "E7", "E11", "F7", "H8", "I9", "J11" };
+		Assert.assertEquals(8, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 	}
 }
