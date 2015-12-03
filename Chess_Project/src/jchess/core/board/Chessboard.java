@@ -25,20 +25,31 @@ import jchess.ui.GameTab;
 import jchess.ui.MoveHistoryUI;
 import jchess.ui.lang.Language;
 
+/**
+ * 
+ * Class representing a chess board for three player chess. This class manages the whole board data structure. 
+ * 
+ */
 public class Chessboard extends HexagonChessboardFieldGraph {
 
-	private GameTab										m_GameUI							= null;
-	private ChessboardField						m_ActiveField					= null;
-	private Pawn											m_TwoSquareMovedPawn	= null;
+	private GameTab										m_GameUI				= null;
+	private ChessboardField						m_ActiveField		= null;
 
-	private MoveHistoryUI							m_Moves_history				= null;
-	private Map<Player.colors, King>	m_KingsMap						= new HashMap<Player.colors, King>();
+	private MoveHistoryUI							m_Moves_history	= null;
+	private Map<Player.colors, King>	m_KingsMap			= new HashMap<Player.colors, King>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		m_GameUI = ui;
 		m_Moves_history = movesHistory;
 	}
 
+	/**
+	 * Initializes the chessboard. All fields are created and linked together. 
+	 * All necessary check pieces are placed on the chessboard.
+	 * 
+	 * @param player
+	 * @throws Exception
+	 */
 	public void initChessBoard(Map<colors, Player> player) throws Exception {
 		HexagonChessFieldGraphInitializer.initialise(this, player);
 	}
@@ -46,8 +57,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	/**
 	 * Method selecting piece in chessboard
 	 * 
-	 * @param sq
-	 *          square to select (when clicked))
+	 * @param field
+	 *          chess board field to select (when clicked))
 	 */
 	public void select(ChessboardField field) {
 		this.m_ActiveField = field;
@@ -55,7 +66,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
-	 * Method set variables active_x_square & active_y_square to 0 values.
+	 * Deselects the currently selected filed, if one is selected. 
 	 */
 	public void unselect() {
 		this.m_ActiveField = null;
@@ -64,6 +75,12 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		}
 	}
 
+	/**
+	 * Redo the last undone move.
+	 * 
+	 * @return true if redo worked, false otherwise.
+	 * @throws Exception
+	 */
 	public boolean redo() throws Exception {
 		boolean result = false;
 		Move first = this.m_Moves_history.redo();
@@ -90,16 +107,16 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
-	 * Method move piece from square to square
+	 * Performs a move from begin to end.
+	 * 
+	 *  If clearForwardHistory is true, the redo history is cleared. 
+	 *  Redo impossible afterwards until a undo is performed.
 	 * 
 	 * @param begin
-	 *          filed from which move piece
 	 * @param end
-	 *          field where we want to move piece *
-	 * @param refresh
-	 *          chessboard, default: true
+	 * @param clearForwardHistory
 	 * @throws Exception
-	 * */
+	 */
 	private void move(ChessboardField begin, ChessboardField end, boolean clearForwardHistory) throws Exception {
 		castling wasCastling = MoveHistory.castling.none;
 		Piece promotedPiece = null;
@@ -139,7 +156,14 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		}
 	}
 
+	/**
+	 * The last move done by a player is undone. 
+	 * 
+	 * @return true, if undo worked, false otherwise.
+	 * @throws Exception
+	 */
 	public synchronized boolean undo() throws Exception {
+		boolean result = false;
 		Move last = this.m_Moves_history.undo();
 
 		if (last != null && last.getFrom() != null) {
@@ -175,22 +199,32 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				m_GameUI.getChessboardUI().repaint();
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 				Logging.log(exc);
-				return false;
 			} catch (java.lang.NullPointerException exc) {
 				Logging.log(exc);
-				return false;
 			}
 
-			return true;
-		} else {
-			return false;
+			result = true;
 		}
+
+		return result;
 	}
 
+	/**
+	 * 
+	 * @param color
+	 * @return the king of the given color.
+	 */
 	public King getKingForColor(Player.colors color) {
 		return m_KingsMap.get(color);
 	}
 
+	/**
+	 * Adds a new King to the kings map. 
+	 * It is checked, if a king of the kings color is already existing.
+	 * 
+	 * @param king
+	 * @throws Exception if a king with the same color already exists
+	 */
 	public void addKing(King king) throws Exception {
 		if (m_KingsMap.containsKey(king.getPlayer().getColor()) == false) {
 			m_KingsMap.put(king.getPlayer().getColor(), king);
@@ -201,7 +235,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 	/**
 	 * 
-	 * This method tries to perform a move. If it passes, the move is executed. IF not this method does not fail, but return false.
+	 * This method tries to perform a move. If it passes, the move is executed. 
+	 * If not this method does not fail, but return false.
 	 * 
 	 * @param begin
 	 * @param end
@@ -211,34 +246,36 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @throws Exception
 	 */
 	public boolean tryMove(ChessboardField begin, ChessboardField end) throws Exception {
-		boolean result = true;
+		boolean result = false;
 
 		select(begin);
 		if (m_ActiveField.getPiece().allMoves().contains(end)) {
 			move(begin, end, true);
+			unselect();
+			m_GameUI.nextMove();
+			result = true;
 		} else {
 			Logging.log(Language.getString("Game.29"));
-			return false;
 		}
-		unselect();
-		m_GameUI.nextMove();
-		result = true;
 
 		return result;
 	}
 
+	/**
+	 * 
+	 * @return the active filed of this chess board
+	 */
 	public ChessboardField getActiveField() {
 		return m_ActiveField;
 	}
 
-	public Pawn getTwoSquareMovedPawn() {
-		return m_TwoSquareMovedPawn;
-	}
-
-	public void setTwoSquareMovedPawn(Pawn twoSquareMovedPawn) {
-		this.m_TwoSquareMovedPawn = twoSquareMovedPawn;
-	}
-
+	/**
+	 * Performs a move from begin to end.
+	 * 
+	 * @param begin
+	 * @param end
+	 * @throws Exception
+	 */
 	public void move(ChessboardField begin, ChessboardField end) throws Exception {
 		move(begin, end, true);
 	}
@@ -249,7 +286,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * This method is returning fields only, which can be reached by a check piece. 
 	 * If a field is blocked, calculation stops.
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @return the list of all straight fields which are not blocked. Never null.
 	 * @throws Exception 
 	 */
@@ -369,7 +406,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * This method is returning fields only, which can be reached by a check piece. 
 	 * If a field is blocked, calculation stops.
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
 	 * @return the list of all straight fields which are not blocked or out of range. Never null.
 	 * @throws Exception 
@@ -412,7 +449,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * This method is returning fields only, which can be reached by a check piece. 
 	 * If a field is blocked, calculation stops.
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @return the list of all diagonal fields which are not blocked. Never null.
 	 * @throws Exception 
 	 */
@@ -458,7 +495,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * This method is returning fields only, which can be reached by a check piece. 
 	 * If a field is blocked, calculation stops.
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @param maxAllowedMoves the maximum allowed number of moves.
 	 * @return the list of all diagonal fields which are not blocked or out of range. Never null.
 	 * @throws Exception 
@@ -504,7 +541,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * This method does not care about blocked fields.
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @param distance the distance, the wanted fields are away.
 	 * @return the list of all straight fields in exact distance. Never null.
 	 * @throws Exception 
@@ -544,7 +581,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * This method does not care about blocked fields
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @param distance the distance, the wanted fields are away.
 	 * @return the list of all diagonal fields in exact distance. Never null.
 	 * @throws Exception 
@@ -568,7 +605,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * This method implement "jumping", so it does not care about blocked fields on the way.
 	 * 
-	 * @param field a valid chessboard field, which is the starting point for this calculation.
+	 * @param field a valid chess board field, which is the starting point for this calculation.
 	 * @param straightOffset the offset in any straight direction. For classic knight - 1.
 	 * @param diagonalOffset the offset in one of two diagonal direction (forward). For classic knight - 1.
 	 * @return the list of all such fields. Never null.
@@ -635,10 +672,10 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
-	 * Return the chessboard field identified with the given identifier.
+	 * Return the chess board field identified with the given identifier.
 	 * 
 	 * @param identifier
-	 * @return the chessboard field identified with the given identifier or null;
+	 * @return the chess board field identified with the given identifier or null;
 	 */
 	public ChessboardField getField(String identifier) {
 		return (ChessboardField) getNode(identifier);
