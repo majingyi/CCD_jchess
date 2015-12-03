@@ -79,34 +79,8 @@ public class ChessboardTest {
 
 		ChessboardField g7 = board.getField("G7");
 		List<ChessboardField> fields = board.getStraightFields(g7, null);
-		String[] expectedFields = new String[] { "B7",
-				"C7",
-				"D7",
-				"E7",
-				"F7",
-				"H7",
-				"I7",
-				"J7",
-				"K7",
-				"B2",
-				"C3",
-				"D4",
-				"E5",
-				"F6",
-				"H8",
-				"I9",
-				"J10",
-				"K11",
-				"L12",
-				"G3",
-				"G4",
-				"G5",
-				"G6",
-				"G8",
-				"G9",
-				"G10",
-				"G11",
-				"G12" };
+		String[] expectedFields = new String[] { "B7", "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "B2", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11",
+				"L12", "G3", "G4", "G5", "G6", "G8", "G9", "G10", "G11", "G12" };
 		Assert.assertEquals(28, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
@@ -118,32 +92,8 @@ public class ChessboardTest {
 
 		g7 = board.getField("G7");
 		fields = board.getStraightFields(g7, colors.white);
-		expectedFields = new String[] { "C7",
-				"D7",
-				"E7",
-				"F7",
-				"H7",
-				"I7",
-				"J7",
-				"K7",
-				"C3",
-				"D4",
-				"E5",
-				"F6",
-				"H8",
-				"I9",
-				"J10",
-				"K11",
-				"L12",
-				"G3",
-				"G4",
-				"G5",
-				"G6",
-				"G8",
-				"G9",
-				"G10",
-				"G11",
-				"G12" };
+		expectedFields = new String[] { "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11", "L12", "G3", "G4", "G5",
+				"G6", "G8", "G9", "G10", "G11", "G12" };
 		Assert.assertEquals(26, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
