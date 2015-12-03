@@ -3,6 +3,7 @@ package jchess.core.board;
 import java.util.List;
 
 import jchess.core.pieces.King;
+import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
 import jchess.core.util.Player.colors;
@@ -78,8 +79,34 @@ public class ChessboardTest {
 
 		ChessboardField g7 = board.getField("G7");
 		List<ChessboardField> fields = board.getStraightFields(g7, null);
-		String[] expectedFields = new String[] { "B7", "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "B2", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11",
-				"L12", "G3", "G4", "G5", "G6", "G8", "G9", "G10", "G11", "G12" };
+		String[] expectedFields = new String[] { "B7",
+				"C7",
+				"D7",
+				"E7",
+				"F7",
+				"H7",
+				"I7",
+				"J7",
+				"K7",
+				"B2",
+				"C3",
+				"D4",
+				"E5",
+				"F6",
+				"H8",
+				"I9",
+				"J10",
+				"K11",
+				"L12",
+				"G3",
+				"G4",
+				"G5",
+				"G6",
+				"G8",
+				"G9",
+				"G10",
+				"G11",
+				"G12" };
 		Assert.assertEquals(28, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
@@ -91,8 +118,32 @@ public class ChessboardTest {
 
 		g7 = board.getField("G7");
 		fields = board.getStraightFields(g7, colors.white);
-		expectedFields = new String[] { "C7", "D7", "E7", "F7", "H7", "I7", "J7", "K7", "C3", "D4", "E5", "F6", "H8", "I9", "J10", "K11", "L12", "G3", "G4", "G5",
-				"G6", "G8", "G9", "G10", "G11", "G12" };
+		expectedFields = new String[] { "C7",
+				"D7",
+				"E7",
+				"F7",
+				"H7",
+				"I7",
+				"J7",
+				"K7",
+				"C3",
+				"D4",
+				"E5",
+				"F6",
+				"H8",
+				"I9",
+				"J10",
+				"K11",
+				"L12",
+				"G3",
+				"G4",
+				"G5",
+				"G6",
+				"G8",
+				"G9",
+				"G10",
+				"G11",
+				"G12" };
 		Assert.assertEquals(26, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 
@@ -182,8 +233,18 @@ public class ChessboardTest {
 		Assert.assertEquals(fields.size(), expectedFields.length);
 		for (String expectedField : expectedFields) {
 			ChessboardField field = board.getField(expectedField);
-			Assert.assertTrue(expectedField, fields.contains(field));
+			Assert.assertTrue("Expected: " + expectedField + ", but was: " + dumpExpectedFields(fields), fields.contains(field));
 		}
+	}
+
+	private String dumpExpectedFields(List<ChessboardField> fields) {
+		StringBuffer buffer = new StringBuffer();
+
+		for (ChessboardField exprected : fields) {
+			buffer.append(exprected.getIdentifier() + Constants.COMMA_STRING);
+		}
+
+		return buffer.toString();
 	}
 
 	@Test
@@ -209,6 +270,19 @@ public class ChessboardTest {
 		List<ChessboardField> fields = board.getDiagonalFieldsExact(g7, 3);
 		String[] expectedFields = new String[] { "D1", "M10", "D10", "A4", "J13" };
 		Assert.assertEquals(5, fields.size());
+		checkFieldsInList(fields, expectedFields, board);
+	}
+
+	@Test
+	public void testGetJumpStraightPlusDiagonalFields() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		ChessboardField g7 = board.getField("G7");
+		List<ChessboardField> fields = board.getJumpStraightPlusDiagonalFields(g7, colors.red, 1, 1);
+		String[] expectedFields = new String[] { "D5", "D6", "E8", "E8", "F4", "F9", "H5", "H10", "I6", "I10", "J8", "J9" };
+		Assert.assertEquals(12, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
 	}
 }
