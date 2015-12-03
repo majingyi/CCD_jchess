@@ -3,7 +3,7 @@ package jchess.core.board;
 import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
-import jchess.core.board.graph.DirectedGraphEdge.direction;
+import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
@@ -124,9 +124,9 @@ public class HexagonChessFieldGraphInitializer {
 					if ((newI < 13) && (newJ > -1)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							DiagonalEdge edge = new DiagonalEdge(field, field2, direction.leftDown);
+							DiagonalEdge edge = new DiagonalEdge(field, field2, EdgeDirection.leftDown);
 							field.addEdge(edge);
-							edge = new DiagonalEdge(field2, field, direction.rightUp);
+							edge = new DiagonalEdge(field2, field, EdgeDirection.rightUp);
 							field2.addEdge(edge);
 						}
 					}
@@ -137,9 +137,9 @@ public class HexagonChessFieldGraphInitializer {
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							DiagonalEdge edge = new DiagonalEdge(field, field2, direction.down);
+							DiagonalEdge edge = new DiagonalEdge(field, field2, EdgeDirection.down);
 							field.addEdge(edge);
-							edge = new DiagonalEdge(field2, field, direction.up);
+							edge = new DiagonalEdge(field2, field, EdgeDirection.up);
 							field2.addEdge(edge);
 						}
 					}
@@ -150,9 +150,9 @@ public class HexagonChessFieldGraphInitializer {
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							DiagonalEdge edge = new DiagonalEdge(field, field2, direction.rightDown);
+							DiagonalEdge edge = new DiagonalEdge(field, field2, EdgeDirection.rightDown);
 							field.addEdge(edge);
-							edge = new DiagonalEdge(field2, field, direction.leftUp);
+							edge = new DiagonalEdge(field2, field, EdgeDirection.leftUp);
 							field2.addEdge(edge);
 						}
 					}
@@ -172,9 +172,9 @@ public class HexagonChessFieldGraphInitializer {
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							StraightEdge edge = new StraightEdge(field, field2, direction.leftDown);
+							StraightEdge edge = new StraightEdge(field, field2, EdgeDirection.leftDown);
 							field.addEdge(edge);
-							edge = new StraightEdge(field2, field, direction.rightUp);
+							edge = new StraightEdge(field2, field, EdgeDirection.rightUp);
 							field2.addEdge(edge);
 						}
 					}
@@ -185,9 +185,9 @@ public class HexagonChessFieldGraphInitializer {
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							StraightEdge edge = new StraightEdge(field, field2, direction.right);
+							StraightEdge edge = new StraightEdge(field, field2, EdgeDirection.right);
 							field.addEdge(edge);
-							edge = new StraightEdge(field2, field, direction.left);
+							edge = new StraightEdge(field2, field, EdgeDirection.left);
 							field2.addEdge(edge);
 						}
 					}
@@ -198,9 +198,9 @@ public class HexagonChessFieldGraphInitializer {
 					if ((newI < 13) && (newJ < 13)) {
 						ChessboardField field2 = fields[newI][newJ];
 						if (field2 != null) {
-							StraightEdge edge = new StraightEdge(field, field2, direction.rightDown);
+							StraightEdge edge = new StraightEdge(field, field2, EdgeDirection.rightDown);
 							field.addEdge(edge);
-							edge = new StraightEdge(field2, field, direction.leftUp);
+							edge = new StraightEdge(field2, field, EdgeDirection.leftUp);
 							field2.addEdge(edge);
 						}
 					}

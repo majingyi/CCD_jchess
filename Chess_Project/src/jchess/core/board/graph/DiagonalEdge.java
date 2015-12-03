@@ -2,7 +2,7 @@ package jchess.core.board.graph;
 
 public class DiagonalEdge extends DirectedGraphEdge {
 
-	public DiagonalEdge(GraphNode node1, GraphNode node2, direction dir) {
+	public DiagonalEdge(GraphNode node1, GraphNode node2, EdgeDirection dir) {
 		super(node1, node2, dir);
 	}
 

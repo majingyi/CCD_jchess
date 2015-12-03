@@ -102,7 +102,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="12" language="java" name="jchess.core.board.graph.DirectedGraphEdge.direction" 
+  <enumeration id="12" language="java" name="jchess.core.board.graph.DirectedGraphEdge.EdgeDirection" 
     project="Chess_Project" file="/Chess_Project/src/jchess/core/board/graph/DirectedGraphEdge.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="243" width="123" x="147" y="1187"/>    

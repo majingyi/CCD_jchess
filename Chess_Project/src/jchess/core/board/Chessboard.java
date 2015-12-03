@@ -7,7 +7,7 @@ import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
 import jchess.core.board.graph.DirectedGraphEdge;
-import jchess.core.board.graph.DirectedGraphEdge.direction;
+import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.HexagonChessboardFieldGraph;
 import jchess.core.board.graph.StraightEdge;
@@ -625,28 +625,28 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 					switch (((StraightEdge) edge).getDirection()) {
 						case left:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftDown));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftUp));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftDown));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftUp));
 							break;
 						case leftDown:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.down));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftDown));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.down));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftDown));
 							break;
 						case leftUp:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.up));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.leftUp));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.up));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.leftUp));
 							break;
 						case right:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightDown));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightUp));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightDown));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightUp));
 							break;
 						case rightDown:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.down));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightDown));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.down));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightDown));
 							break;
 						case rightUp:
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.up));
-							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, direction.rightUp));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.up));
+							result.addAll(performSecondStep(activePlayersColor, diagonalOffset, firstStep, EdgeDirection.rightUp));
 							break;
 						default:
 							break;
@@ -660,7 +660,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		return result;
 	}
 
-	private List<ChessboardField> performSecondStep(colors color, int diagonalOffset, ChessboardField firstStep, direction direction) throws Exception {
+	private List<ChessboardField> performSecondStep(colors color, int diagonalOffset, ChessboardField firstStep, EdgeDirection direction) throws Exception {
 		List<ChessboardField> result = new ArrayList<ChessboardField>();
 		List<ChessboardField> second = getNodesInSpecificDirection(firstStep, new DiagonalEdge(null, null, direction), diagonalOffset);
 		if (second.size() == 1) {

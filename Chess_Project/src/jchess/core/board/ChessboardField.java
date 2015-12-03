@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jchess.core.board.graph.DirectedGraphEdge;
-import jchess.core.board.graph.DirectedGraphEdge.direction;
+import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.board.graph.GraphNode;
@@ -96,7 +96,7 @@ public abstract class ChessboardField extends GraphNode {
 	 * @return
 	 * @throws Exception
 	 */
-	public ChessboardField getNextField(direction direction, EdgeType edgeType) throws Exception {
+	public ChessboardField getNextField(EdgeDirection direction, EdgeType edgeType) throws Exception {
 		ChessboardField result = null;
 
 		for (GraphEdge edge : getEdges()) {
