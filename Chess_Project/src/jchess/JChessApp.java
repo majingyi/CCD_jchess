@@ -25,10 +25,6 @@ public class JChessApp extends SingleFrameApplication {
 		show(JChessView.getInstance());
 	}
 
-	@Override
-	protected void configureWindow(java.awt.Window root) {
-	}
-
 	/**
 	 * A convenient static getter for the application instance.
 	 * 
