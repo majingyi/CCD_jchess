@@ -3,8 +3,8 @@ package jchess.core.board;
 import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
-import jchess.core.board.graph.StraightEdge;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
+import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -110,6 +110,8 @@ public class HexagonChessFieldGraphInitializer {
 
 		if (piece instanceof King) {
 			chessboard.addKing((King) piece);
+		} else if (piece instanceof Rook) {
+			chessboard.addRook((Rook) piece);
 		}
 	}
 
