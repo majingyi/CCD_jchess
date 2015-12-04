@@ -738,4 +738,83 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	public ChessboardField getField(String identifier) {
 		return (ChessboardField) getNode(identifier);
 	}
+
+	/**
+	 * Return the direction from the player's point of view.
+	 * 
+	 * @param color player's color
+	 * @direction direction from player's POV
+	 * @return absolute direction of the chesboard;
+	 */
+	public EdgeDirection getDirectionFromPlayersPOV(Player.PlayerColor color, EdgeDirection direction) {
+		switch (color) {
+			case WHITE:
+				switch (direction) {
+					case LEFT:
+						return EdgeDirection.RIGHT;
+					case RIGHT:
+						return EdgeDirection.LEFT;
+					case UP:
+						return EdgeDirection.DOWN;
+					case DOWN:
+						return EdgeDirection.UP;
+					case LEFT_UP:
+						return EdgeDirection.RIGHT_DOWN;
+					case LEFT_DOWN:
+						return EdgeDirection.RIGHT_UP;
+					case RIGHT_UP:
+						return EdgeDirection.LEFT_DOWN;
+					case RIGHT_DOWN:
+						return EdgeDirection.LEFT_UP;
+					case UNDEFINED:
+						return EdgeDirection.UNDEFINED;
+				}
+				break;
+			case BLACK:
+				switch (direction) {
+					case LEFT:
+						return EdgeDirection.LEFT_UP;
+					case RIGHT:
+						return EdgeDirection.RIGHT_DOWN;
+					case UP:
+						return EdgeDirection.RIGHT_UP;
+					case DOWN:
+						return EdgeDirection.LEFT_DOWN;
+					case LEFT_UP:
+						return EdgeDirection.RIGHT_UP;
+					case LEFT_DOWN:
+						return EdgeDirection.LEFT;
+					case RIGHT_UP:
+						return EdgeDirection.RIGHT;
+					case RIGHT_DOWN:
+						return EdgeDirection.LEFT_DOWN;
+					case UNDEFINED:
+						return EdgeDirection.UNDEFINED;
+				}
+				break;
+			case RED:
+				switch (direction) {
+					case LEFT:
+						return EdgeDirection.LEFT_DOWN;
+					case RIGHT:
+						return EdgeDirection.RIGHT_UP;
+					case UP:
+						return EdgeDirection.LEFT_UP;
+					case DOWN:
+						return EdgeDirection.RIGHT_DOWN;
+					case LEFT_UP:
+						return EdgeDirection.LEFT;
+					case LEFT_DOWN:
+						return EdgeDirection.RIGHT_DOWN;
+					case RIGHT_UP:
+						return EdgeDirection.LEFT_UP;
+					case RIGHT_DOWN:
+						return EdgeDirection.RIGHT;
+					case UNDEFINED:
+						return EdgeDirection.UNDEFINED;
+				}
+				break;
+		}
+		return EdgeDirection.UNDEFINED;
+	}
 }
