@@ -37,6 +37,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 
 	private MoveHistoryUI									m_Moves_history	= null;
 	private Map<Player.PlayerColor, King>	m_KingsMap			= new HashMap<Player.PlayerColor, King>();
+	private Map<PlayerColor, List<Rook>>	m_RooksMap			= new HashMap<Player.PlayerColor, List<Rook>>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		m_GameUI = ui;
@@ -219,6 +220,15 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
+	 * 
+	 * @param color
+	 * @return the rooks for the given color.
+	 */
+	public List<Rook> getRooksForColor(Player.PlayerColor color) {
+		return m_RooksMap.get(color);
+	}
+
+	/**
 	 * Adds a new King to the kings map. 
 	 * It is checked, if a king of the kings color is already existing.
 	 * 
@@ -231,6 +241,21 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		} else {
 			throw new Exception("King with color " + king.getPlayer().getColor().toString().toLowerCase() + " is already existing on this borad.");
 		}
+	}
+
+	/**
+	 * Adds a new Rook to the rooks map. 
+	 * 
+	 * @param rook
+	 */
+	public void addRook(Rook rook) {
+		List<Rook> rooks = m_RooksMap.get(rook.getPlayer().getColor());
+		if (rooks == null) {
+			rooks = new ArrayList<Rook>();
+			m_RooksMap.put(rook.getPlayer().getColor(), rooks);
+		}
+
+		rooks.add(rook);
 	}
 
 	/**
