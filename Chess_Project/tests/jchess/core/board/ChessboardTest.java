@@ -2,7 +2,9 @@ package jchess.core.board;
 
 import java.util.List;
 
+import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.pieces.King;
+import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
@@ -33,6 +35,46 @@ public class ChessboardTest {
 
 		King nothing = board.getKingForColor(null);
 		Assert.assertNull(nothing);
+	}
+
+	@Test
+	public void testGetRooksForColor() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+		Game game = new Game(board, null);
+		game.startNewGame();
+
+		List<Rook> red = board.getRooksForColor(PlayerColor.RED);
+		Assert.assertNotNull(red);
+		Assert.assertEquals(2, red.size());
+
+		Rook first = red.get(0);
+		Assert.assertEquals("F13", first.getField().getIdentifier());
+		Assert.assertEquals(PlayerColor.RED, first.getPlayer().getColor());
+		Rook second = red.get(1);
+		Assert.assertEquals("M13", second.getField().getIdentifier());
+		Assert.assertEquals(PlayerColor.RED, second.getPlayer().getColor());
+
+		List<Rook> black = board.getRooksForColor(PlayerColor.BLACK);
+		Assert.assertNotNull(black);
+		Assert.assertEquals(2, black.size());
+
+		first = black.get(0);
+		Assert.assertEquals("F1", first.getField().getIdentifier());
+		Assert.assertEquals(PlayerColor.BLACK, first.getPlayer().getColor());
+		second = black.get(1);
+		Assert.assertEquals("M8", second.getField().getIdentifier());
+		Assert.assertEquals(PlayerColor.BLACK, second.getPlayer().getColor());
+
+		List<Rook> white = board.getRooksForColor(PlayerColor.WHITE);
+		Assert.assertNotNull(white);
+		Assert.assertEquals(2, white.size());
+
+		first = white.get(0);
+		Assert.assertEquals("A1", first.getField().getIdentifier());
+		Assert.assertEquals(PlayerColor.WHITE, first.getPlayer().getColor());
+		second = white.get(1);
+		Assert.assertEquals("A8", second.getField().getIdentifier());
+		Assert.assertEquals(PlayerColor.WHITE, second.getPlayer().getColor());
 	}
 
 	@Test
@@ -240,5 +282,38 @@ public class ChessboardTest {
 		expectedFields = new String[] { "D8", "D9", "E7", "E11", "F7", "H8", "I9", "J11" };
 		Assert.assertEquals(8, fields.size());
 		checkFieldsInList(fields, expectedFields, board);
+	}
+
+	@Test
+	public void testGetDirectionFromPlayersPOV() throws Exception {
+		Chessboard board = new Chessboard(null, null);
+
+		Assert.assertEquals(EdgeDirection.UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.DOWN));
+		Assert.assertEquals(EdgeDirection.DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.UP));
+		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_DOWN));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_UP));
+		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_DOWN));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_UP));
+
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.DOWN));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.UP));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_DOWN));
+		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_UP));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_DOWN));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_UP));
+
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.DOWN));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.UP));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT));
+		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_DOWN));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_UP));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_DOWN));
+		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_UP));
+
 	}
 }

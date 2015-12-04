@@ -795,7 +795,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 						return EdgeDirection.UNDEFINED;
 				}
 				break;
-			case BLACK:
+			case RED:
 				switch (direction) {
 					case LEFT:
 						return EdgeDirection.LEFT_UP;
@@ -817,7 +817,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 						return EdgeDirection.UNDEFINED;
 				}
 				break;
-			case RED:
+			case BLACK:
 				switch (direction) {
 					case LEFT:
 						return EdgeDirection.LEFT_DOWN;
