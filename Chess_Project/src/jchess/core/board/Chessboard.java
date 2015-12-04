@@ -1,6 +1,8 @@
 package jchess.core.board;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -225,7 +227,16 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @return the rooks for the given color.
 	 */
 	public List<Rook> getRooksForColor(Player.PlayerColor color) {
-		return m_RooksMap.get(color);
+		List<Rook> rooks = m_RooksMap.get(color);
+
+		// Ensure order of rooks, shall be in lexically order of their fields.
+		Collections.sort(rooks, new Comparator<Rook>() {
+			public int compare(Rook rook1, Rook rook2) {
+				return rook1.getField().getIdentifier().compareTo(rook2.getField().getIdentifier());
+			}
+		});
+
+		return rooks;
 	}
 
 	/**
