@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="jchess.ui.DrawLocalSettings" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/ui/DrawLocalSettings.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="jchess.ui.dialogs.LocalSettingsTab" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/ui/dialogs/LocalSettingsTab.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="333" width="194" x="755" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="jchess.ui.NewGameWindow" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/ui/NewGameWindow.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="jchess.ui.dialogs.NewGameWindow" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/ui/dialogs/NewGameWindow.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="163" x="1338" y="1477"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

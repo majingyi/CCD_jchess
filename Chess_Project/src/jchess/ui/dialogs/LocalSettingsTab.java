@@ -1,4 +1,4 @@
-package jchess.ui;
+package jchess.ui.dialogs;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -19,12 +19,14 @@ import javax.swing.text.BadLocationException;
 
 import jchess.core.util.Logging;
 import jchess.core.util.Settings;
+import jchess.ui.GameTab;
+import jchess.ui.JChessView;
 import jchess.ui.lang.Language;
 
 /**
  * Class responsible for drawing the fold with local game settings
  */
-public class DrawLocalSettings extends JPanel implements ActionListener {
+public class LocalSettingsTab extends JPanel implements ActionListener {
 
 	private static final long		serialVersionUID	= -3054704162643076714L;
 
@@ -112,7 +114,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	DrawLocalSettings(JDialog parent) {
+	LocalSettingsTab(JDialog parent) {
 		super();
 
 		this.parent = parent;
