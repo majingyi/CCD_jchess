@@ -11,6 +11,7 @@ import jchess.core.board.graph.DiagonalEdge;
 import jchess.core.board.graph.DirectedGraphEdge;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge;
+import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.board.graph.HexagonChessboardFieldGraph;
 import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.King;
@@ -782,72 +783,144 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @direction direction from player's POV
 	 * @return absolute direction of the chesboard;
 	 */
-	public EdgeDirection getDirectionFromPlayersPOV(Player.PlayerColor color, EdgeDirection direction) {
+	public EdgeDirection getDirectionFromPlayersPOV(Player.PlayerColor color, EdgeDirection direction, EdgeType edgeType) {
 		switch (color) {
 			case WHITE:
-				switch (direction) {
-					case LEFT:
-						return EdgeDirection.RIGHT;
-					case RIGHT:
-						return EdgeDirection.LEFT;
-					case UP:
-						return EdgeDirection.DOWN;
-					case DOWN:
-						return EdgeDirection.UP;
-					case LEFT_UP:
-						return EdgeDirection.RIGHT_DOWN;
-					case LEFT_DOWN:
-						return EdgeDirection.RIGHT_UP;
-					case RIGHT_UP:
-						return EdgeDirection.LEFT_DOWN;
-					case RIGHT_DOWN:
-						return EdgeDirection.LEFT_UP;
-					case UNDEFINED:
-						return EdgeDirection.UNDEFINED;
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.RIGHT;
+							case RIGHT:
+								return EdgeDirection.LEFT;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.DOWN;
+							case DOWN:
+								return EdgeDirection.UP;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
 				}
 				break;
 			case BLACK:
-				switch (direction) {
-					case LEFT:
-						return EdgeDirection.LEFT_UP;
-					case RIGHT:
-						return EdgeDirection.RIGHT_DOWN;
-					case UP:
-						return EdgeDirection.RIGHT_UP;
-					case DOWN:
-						return EdgeDirection.LEFT_DOWN;
-					case LEFT_UP:
-						return EdgeDirection.RIGHT_UP;
-					case LEFT_DOWN:
-						return EdgeDirection.LEFT;
-					case RIGHT_UP:
-						return EdgeDirection.RIGHT;
-					case RIGHT_DOWN:
-						return EdgeDirection.LEFT_DOWN;
-					case UNDEFINED:
-						return EdgeDirection.UNDEFINED;
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT:
+								return EdgeDirection.RIGHT_DOWN;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_UP;
+							case LEFT_DOWN:
+								return EdgeDirection.LEFT;
+							case RIGHT_UP:
+								return EdgeDirection.RIGHT;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_DOWN;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.RIGHT_UP;
+							case DOWN:
+								return EdgeDirection.LEFT_DOWN;
+							case LEFT_UP:
+								return EdgeDirection.UP;
+							case LEFT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.DOWN;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
 				}
 				break;
 			case RED:
-				switch (direction) {
-					case LEFT:
-						return EdgeDirection.LEFT_DOWN;
-					case RIGHT:
-						return EdgeDirection.RIGHT_UP;
-					case UP:
-						return EdgeDirection.LEFT_UP;
-					case DOWN:
-						return EdgeDirection.RIGHT_DOWN;
-					case LEFT_UP:
-						return EdgeDirection.LEFT;
-					case LEFT_DOWN:
-						return EdgeDirection.RIGHT_DOWN;
-					case RIGHT_UP:
-						return EdgeDirection.LEFT_UP;
-					case RIGHT_DOWN:
-						return EdgeDirection.RIGHT;
-					case UNDEFINED:
-						return EdgeDirection.UNDEFINED;
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT:
+								return EdgeDirection.RIGHT_UP;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.LEFT;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_DOWN;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT_DOWN:
+								return EdgeDirection.RIGHT;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.LEFT_UP;
+							case DOWN:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.DOWN;
+							case RIGHT_UP:
+								return EdgeDirection.UP;
+							case RIGHT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
 				}
 				break;
 		}
