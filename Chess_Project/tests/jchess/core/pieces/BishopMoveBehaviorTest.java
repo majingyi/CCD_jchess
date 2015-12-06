@@ -1,13 +1,12 @@
 package jchess.core.pieces;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import org.junit.Test;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
+import jchess.core.util.Game;
 import jchess.core.util.Player;
 import jchess.core.util.Player.PlayerColor;
 import junit.framework.Assert;
@@ -21,6 +20,9 @@ public class BishopMoveBehaviorTest {
 		Player playerl = new Player("player1", PlayerColor.WHITE);
 		Player player2 = new Player("player2", PlayerColor.RED);
 		Chessboard board = new Chessboard(null, null);
+
+		Game game = new Game(board, null);
+		game.startNewGame();
 
 		// adding the obstacles
 		// friend pawn on the way
@@ -48,21 +50,13 @@ public class BishopMoveBehaviorTest {
 			expectedFields.add(board.getField(expID));
 		}
 
-		// sorting of both array lists
-		Collections.sort(expectedFields, new Comparator<ChessboardField>() {
-			public int compare(ChessboardField field1, ChessboardField field2) {
-				return field1.getIdentifier().compareTo(field2.getIdentifier());
-			}
-		});
-		Collections.sort(bmb.allMoves(), new Comparator<ChessboardField>() {
-			public int compare(ChessboardField field1, ChessboardField field2) {
-				return field1.getIdentifier().compareTo(field2.getIdentifier());
-			}
-		});
-
 		// comparison
-		Assert.assertEquals(expectedFields, bmb.allMoves());
-		;
+		for (ChessboardField field : expectedFields) {
+			Assert.assertTrue(bmb.allMoves().contains(field));
+		}
+		for (ChessboardField field : bmb.allMoves()) {
+			Assert.assertTrue(expectedFields.contains(field));
+		}
 	}
 
 }
