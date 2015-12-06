@@ -1,9 +1,13 @@
 package jchess.ui.dialogs;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,31 +30,35 @@ public class NewGameWindow extends JDialog {
 
 	public NewGameWindow() {
 		initComponents();
+		setSize(400, 700);
 
 		setName("NewGameDialog"); //$NON-NLS-1$
 		setTitle(Language.getString("NewGameWindow.0")); //$NON-NLS-1$
-		setSize(400, 700);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setAlwaysOnTop(true);
-
+		// /setResizable(false);
 	}
 
 	private void initComponents() {
 
 		JPanel windowPanel = new JPanel();
 		windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.PAGE_AXIS));
+		windowPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		windowPanel.setAlignmentY(Component.TOP_ALIGNMENT);
 
 		JTabbedPane localSettingsTabbedPane = new javax.swing.JTabbedPane();
 		localSettingsTabbedPane.setName("localSettingsTab"); //$NON-NLS-1$
-		windowPanel.add(localSettingsTabbedPane);
 
 		localSettingsTab = new LocalSettingsTab(this);
+		localSettingsTab.setLayout(new BoxLayout(localSettingsTab, BoxLayout.LINE_AXIS));
 		localSettingsTabbedPane.addTab(Language.getString("local_game"), localSettingsTab); //$NON-NLS-1$
+
+		windowPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		windowPanel.add(localSettingsTabbedPane);
 
 		createButtonArea(windowPanel);
 
 		add(windowPanel);
-
 		pack();
 	}
 
@@ -58,6 +66,7 @@ public class NewGameWindow extends JDialog {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		buttonPanel.add(Box.createHorizontalGlue());
 
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
@@ -66,6 +75,7 @@ public class NewGameWindow extends JDialog {
 				okButtonPressed();
 			}
 		});
+		buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
 		buttonPanel.add(okButton);
 
 		JButton cancelButton = new JButton("Cancel");
@@ -78,8 +88,12 @@ public class NewGameWindow extends JDialog {
 			}
 		});
 
+		buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
 		buttonPanel.add(cancelButton);
-		windowPanel.add(buttonPanel);
+		buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+		windowPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		windowPanel.add(buttonPanel, BorderLayout.LINE_END);
+		windowPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 	}
 
 	private void okButtonPressed() {
@@ -93,8 +107,7 @@ public class NewGameWindow extends JDialog {
 			Settings.addPlayerName(localSettingsTab.getPlayerName(PlayerColor.BLACK), PlayerColor.BLACK);
 			Settings.addPlayerName(localSettingsTab.getPlayerName(PlayerColor.RED), PlayerColor.RED);
 
-			GameTab newGUI = null;
-			newGUI = JChessView.getInstance().addNewTab(
+			GameTab newGUI = JChessView.getInstance().addNewTab(
 					MessageFormat.format("{0} vs {1} vs {2}", localSettingsTab.getPlayerName(PlayerColor.WHITE), localSettingsTab.getPlayerName(PlayerColor.RED),
 							localSettingsTab.getPlayerName(PlayerColor.BLACK)));
 
