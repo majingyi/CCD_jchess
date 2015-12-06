@@ -57,7 +57,7 @@
   </enumeration>  
   <enumeration id="7" language="java" name="jchess.core.util.MoveHistory.castling" project="Chess_Project" 
     file="/Chess_Project/src/jchess/core/util/MoveHistory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="132" x="555" y="999"/>    
+    <position height="-1" width="-1" x="839" y="868"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -142,10 +142,10 @@
   <association id="18">    
     <end type="SOURCE" refId="11" navigable="false">      
       <attribute id="19" name="castlingMove">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="218" y="-198"/>      
       </attribute>      
       <multiplicity id="20" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="218" y="-198"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
@@ -200,7 +200,6 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <nesting id="33">    
-    <bendpoint x="564" y="608"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="7"/>  
   </nesting>  
