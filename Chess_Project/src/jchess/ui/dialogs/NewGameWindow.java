@@ -1,7 +1,6 @@
 package jchess.ui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,25 +35,31 @@ public class NewGameWindow extends JDialog {
 		setTitle(Language.getString("NewGameWindow.0")); //$NON-NLS-1$
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setAlwaysOnTop(true);
-		// /setResizable(false);
+		setResizable(false);
 	}
 
 	private void initComponents() {
 
 		JPanel windowPanel = new JPanel();
 		windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.PAGE_AXIS));
-		windowPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		windowPanel.setAlignmentY(Component.TOP_ALIGNMENT);
 
 		JTabbedPane localSettingsTabbedPane = new javax.swing.JTabbedPane();
 		localSettingsTabbedPane.setName("localSettingsTab"); //$NON-NLS-1$
 
-		localSettingsTab = new LocalSettingsTab(this);
-		localSettingsTab.setLayout(new BoxLayout(localSettingsTab, BoxLayout.LINE_AXIS));
-		localSettingsTabbedPane.addTab(Language.getString("local_game"), localSettingsTab); //$NON-NLS-1$
+		JPanel tabs = new JPanel();
+		tabs.setLayout(new BoxLayout(tabs, BoxLayout.LINE_AXIS));
 
 		windowPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-		windowPanel.add(localSettingsTabbedPane);
+		windowPanel.add(tabs);
+
+		tabs.add(Box.createRigidArea(new Dimension(5, 0)));
+		tabs.add(localSettingsTabbedPane);
+		tabs.add(Box.createRigidArea(new Dimension(5, 0)));
+
+		localSettingsTab = new LocalSettingsTab(this);
+		localSettingsTab.setLayout(new BoxLayout(localSettingsTab, BoxLayout.PAGE_AXIS));
+
+		localSettingsTabbedPane.addTab(Language.getString("local_game"), localSettingsTab); //$NON-NLS-1$
 
 		createButtonArea(windowPanel);
 

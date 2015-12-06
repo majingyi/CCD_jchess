@@ -1,5 +1,8 @@
 package jchess.ui.dialogs;
 
+import java.awt.Dimension;
+
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -17,6 +20,8 @@ import jchess.ui.lang.Language;
  */
 public class LocalSettingsTab extends JPanel {
 
+	private static final int			HORIZONTAL_INDENT	= 10;
+
 	private static final long			serialVersionUID	= -3054704162643076714L;
 
 	private static final Integer	TIMES[]						= { 1, 3, 5, 8, 10, 15, 20, 25, 30, 60, 120 };
@@ -31,33 +36,53 @@ public class LocalSettingsTab extends JPanel {
 		super();
 
 		JPanel windowPanel = new JPanel();
-		windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.PAGE_AXIS));
+		windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.LINE_AXIS));
+		add(windowPanel);
+
+		JPanel left = new JPanel();
+		left.setLayout(new BoxLayout(left, BoxLayout.PAGE_AXIS));
+
+		JPanel right = new JPanel();
+		right.setLayout(new BoxLayout(right, BoxLayout.PAGE_AXIS));
+
+		windowPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+		windowPanel.add(left);
+		windowPanel.add(right);
+		windowPanel.add(Box.createRigidArea(new Dimension(5, 0)));
 
 		JLabel firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-		windowPanel.add(firstNameLab);
+		left.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
+		left.add(firstNameLab);
 
-		firstName = new JTextField("Player1", 10);
-		windowPanel.add(firstName);
+		firstName = new JTextField("Player1", 20);
+		right.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
+		right.add(firstName);
 
 		JLabel secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-		windowPanel.add(secondNameLab);
+		left.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT + 5)));
+		left.add(secondNameLab);
 
-		secondName = new JTextField("Player2", 10);
-		windowPanel.add(secondName);
+		secondName = new JTextField("Player2");
+		right.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
+		right.add(secondName);
 
 		JLabel thirdNameLab = new JLabel(Language.getString("third_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-		windowPanel.add(thirdNameLab);
+		left.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT + 5)));
+		left.add(thirdNameLab);
 
-		thirdName = new JTextField("Player3", 10);
-		windowPanel.add(thirdName);
+		thirdName = new JTextField("Player3");
+		right.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
+		right.add(thirdName);
 
 		timeLimit = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
-		windowPanel.add(timeLimit);
+		left.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT + 5)));
+		left.add(timeLimit);
+		left.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
 
 		time4Game = new JComboBox<Integer>(TIMES);
-		windowPanel.add(time4Game);
-
-		add(windowPanel);
+		right.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
+		right.add(time4Game);
+		right.add(Box.createRigidArea(new Dimension(0, HORIZONTAL_INDENT)));
 	}
 
 	public String getPlayerName(PlayerColor color) {
