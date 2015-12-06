@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import jchess.core.util.Constants;
+import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
 /**
@@ -19,6 +21,12 @@ public class LocalSettingsTab extends JPanel {
 
 	private static final Integer	TIMES[]						= { 1, 3, 5, 8, 10, 15, 20, 25, 30, 60, 120 };
 
+	private JTextField						firstName					= null;
+	private JTextField						secondName				= null;
+	private JTextField						thirdName					= null;
+	private JCheckBox							timeLimit					= null;
+	private JComboBox<Integer>		time4Game					= null;
+
 	public LocalSettingsTab(JDialog parent) {
 		super();
 
@@ -28,21 +36,62 @@ public class LocalSettingsTab extends JPanel {
 		JLabel firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
 		windowPanel.add(firstNameLab);
 
-		JTextField firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
+		firstName = new JTextField("Player1", 10);
 		windowPanel.add(firstName);
 
 		JLabel secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
 		windowPanel.add(secondNameLab);
 
-		JTextField secondName = new JTextField(Language.getString("DrawLocalSettings.27"), 10); //$NON-NLS-1$
+		secondName = new JTextField("Player2", 10);
 		windowPanel.add(secondName);
 
-		JCheckBox timeGame = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
-		windowPanel.add(timeGame);
+		JLabel thirdNameLab = new JLabel(Language.getString("third_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
+		windowPanel.add(thirdNameLab);
 
-		JComboBox<Integer> time4Game = new JComboBox<Integer>(TIMES);
+		thirdName = new JTextField("Player3", 10);
+		windowPanel.add(thirdName);
+
+		timeLimit = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
+		windowPanel.add(timeLimit);
+
+		time4Game = new JComboBox<Integer>(TIMES);
 		windowPanel.add(time4Game);
 
 		add(windowPanel);
+	}
+
+	public String getPlayerName(PlayerColor color) {
+		String result = Constants.EMPTY_STRING;
+		switch (color) {
+			case BLACK:
+				result = thirdName.getText();
+				break;
+			case WHITE:
+				result = firstName.getText();
+				break;
+			case RED:
+				result = secondName.getText();
+				break;
+
+			default:
+				break;
+		}
+
+		return result;
+	}
+
+	public boolean isTimeLimitSet() {
+		return timeLimit.isSelected();
+	}
+
+	public int getSelectedTimeLimit() {
+		return (Integer) time4Game.getSelectedItem();
+	}
+
+	/**
+	 * @return true if all players have a name set
+	 */
+	public boolean areSettingsValid() {
+		return (firstName.getText().length() > 0) && (secondName.getText().length() > 0) && (thirdName.getText().length() > 0);
 	}
 }
