@@ -1,9 +1,6 @@
 package jchess.ui.dialogs;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -25,48 +22,27 @@ public class LocalSettingsTab extends JPanel {
 	public LocalSettingsTab(JDialog parent) {
 		super();
 
-		GridBagLayout gbl = new GridBagLayout();
-		setLayout(gbl);
-
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.insets = new Insets(3, 3, 3, 3);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
+		JPanel windowPanel = new JPanel();
+		windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.PAGE_AXIS));
 
 		JLabel firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-		gbl.setConstraints(firstNameLab, gbc);
-		add(firstNameLab);
+		windowPanel.add(firstNameLab);
 
-		gbc.gridx = 0;
-		gbc.gridy = 2;
 		JTextField firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
-		gbl.setConstraints(firstName, gbc);
-		add(firstName);
+		windowPanel.add(firstName);
 
-		gbc.gridx = 0;
-		gbc.gridy = 3;
 		JLabel secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-		gbl.setConstraints(secondNameLab, gbc);
-		add(secondNameLab);
+		windowPanel.add(secondNameLab);
 
-		gbc.gridy = 4;
 		JTextField secondName = new JTextField(Language.getString("DrawLocalSettings.27"), 10); //$NON-NLS-1$
-		gbl.setConstraints(secondName, gbc);
-		add(secondName);
+		windowPanel.add(secondName);
 
-		gbc.gridy = 8;
-		gbc.gridwidth = 1;
 		JCheckBox timeGame = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
-		gbl.setConstraints(timeGame, gbc);
-		add(timeGame);
+		windowPanel.add(timeGame);
 
-		gbc.gridx = 1;
-		gbc.gridy = 8;
-		gbc.gridwidth = 1;
 		JComboBox<Integer> time4Game = new JComboBox<Integer>(TIMES);
-		gbl.setConstraints(time4Game, gbc);
-		add(time4Game);
+		windowPanel.add(time4Game);
+
+		add(windowPanel);
 	}
 }

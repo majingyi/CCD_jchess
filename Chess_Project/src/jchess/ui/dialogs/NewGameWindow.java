@@ -1,10 +1,10 @@
 package jchess.ui.dialogs;
 
-import javax.swing.GroupLayout.ParallelGroup;
-import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import jchess.ui.lang.Language;
 
@@ -17,42 +17,28 @@ public class NewGameWindow extends JDialog {
 	public NewGameWindow() {
 		initComponents();
 
-		this.setTitle(Language.getString("NewGameWindow.0")); //$NON-NLS-1$
-		this.setSize(400, 700);
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setName("NewGameDialog"); //$NON-NLS-1$
+		setTitle(Language.getString("NewGameWindow.0")); //$NON-NLS-1$
+		setSize(400, 700);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setAlwaysOnTop(true);
+
 		this.localSettingsTabbedPane.addTab(Language.getString("local_game"), new LocalSettingsTab(this)); //$NON-NLS-1$
 	}
 
 	private void initComponents() {
+
+		JPanel windowPanel = new JPanel();
+		windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.PAGE_AXIS));
+
 		localSettingsTabbedPane = new javax.swing.JTabbedPane();
+		localSettingsTabbedPane.setName("localSettingsTab"); //$NON-NLS-1$
+		windowPanel.add(localSettingsTabbedPane);
+
 		JButton okButton = new JButton("OK");
+		windowPanel.add(okButton);
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setAlwaysOnTop(true);
-		setName("NewGameDialog"); //$NON-NLS-1$
-
-		localSettingsTabbedPane.setName("jTabbedPane1"); //$NON-NLS-1$
-
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-
-		ParallelGroup parallel = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-		SequentialGroup seq = layout.createSequentialGroup();
-		seq.addContainerGap();
-		seq.addComponent(localSettingsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE);
-		seq.addContainerGap();
-		parallel.addGroup(seq);
-		parallel.addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE);
-		layout.setHorizontalGroup(parallel);
-
-		parallel = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-		seq = layout.createSequentialGroup();
-		seq.addGap(20, 20, 20);
-		seq.addComponent(localSettingsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE);
-		seq.addContainerGap();
-		seq.addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE);
-		parallel.addGroup(seq);
-		layout.setVerticalGroup(parallel);
+		add(windowPanel);
 
 		pack();
 	}
