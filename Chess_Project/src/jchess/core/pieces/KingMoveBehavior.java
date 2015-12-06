@@ -55,23 +55,23 @@ public class KingMoveBehavior extends MoveBehavior {
 			List<Rook> rooks = this.m_Chessboard.getRooksForColor(color);
 			// fields between king and rook have to be free
 			// leftside castling (long)
-			for (ChessboardField field = this.m_Field; field == rooks.get(0).getField()
-					|| field == rooks.get(1).getField(); field = field.getNextField(toLeft, EdgeType.STRAIGHT)) {
+			for (ChessboardField field = this.m_Field;; field = field.getNextField(toLeft, EdgeType.STRAIGHT)) {
 				if (field.getPiece() != null) {
 					break;
 				}
 				if ((field == rooks.get(0).getField() && rooks.get(0).wasMotion == false) || (field == rooks.get(1).getField() && rooks.get(1).wasMotion == false)) {
 					allMoves.add(field);
+					break;
 				}
 			}
 			// rightside castling (short)
-			for (ChessboardField field = this.m_Field; field == rooks.get(0).getField()
-					|| field == rooks.get(1).getField(); field = field.getNextField(toRight, EdgeType.STRAIGHT)) {
+			for (ChessboardField field = this.m_Field;; field = field.getNextField(toRight, EdgeType.STRAIGHT)) {
 				if (field.getPiece() != null) {
 					break;
 				}
 				if ((field == rooks.get(0).getField() && rooks.get(0).wasMotion == false) || (field == rooks.get(1).getField() && rooks.get(1).wasMotion == false)) {
 					allMoves.add(field);
+					break;
 				}
 			}
 		}
