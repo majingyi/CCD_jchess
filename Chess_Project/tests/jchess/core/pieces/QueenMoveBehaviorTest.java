@@ -2,6 +2,7 @@ package jchess.core.pieces;
 
 import java.util.ArrayList;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import jchess.core.board.Chessboard;
@@ -9,7 +10,6 @@ import jchess.core.board.ChessboardField;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
 import jchess.core.util.Player.PlayerColor;
-import junit.framework.Assert;
 
 public class QueenMoveBehaviorTest {
 
@@ -50,8 +50,7 @@ public class QueenMoveBehaviorTest {
 		QueenMoveBehavior qmb = new QueenMoveBehavior(playerl, board, board.getField("F3"));
 
 		// creating array list of expected fields
-		String[] expectedIdentifiers = new String[] { "F2", "F1", "G3", "H3", "G4", "H5", "F4", "E3", "D3", "C3", "B3", "E2", "D1", "G2", "H4", "J5", "E4", "D5",
-				"C6", "B7", "D2", "E1" };
+		String[] expectedIdentifiers = new String[] { "G4", "H5", "F4", "E3", "D3", "C3", "B3", "E2", "D1", "E4", "D5", "C6", "B7", "D2" };
 		ArrayList<ChessboardField> expectedFields = new ArrayList<ChessboardField>();
 		for (String expID : expectedIdentifiers) {
 			expectedFields.add(board.getField(expID));
@@ -61,6 +60,7 @@ public class QueenMoveBehaviorTest {
 		for (ChessboardField field : expectedFields) {
 			Assert.assertTrue(qmb.allMoves().contains(field));
 		}
+
 		for (ChessboardField field : qmb.allMoves()) {
 			Assert.assertTrue(expectedFields.contains(field));
 		}
