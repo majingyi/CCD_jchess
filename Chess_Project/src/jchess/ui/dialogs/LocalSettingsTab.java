@@ -1,192 +1,72 @@
 package jchess.ui.dialogs;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.BadLocationException;
 
-import jchess.core.util.Logging;
-import jchess.core.util.Settings;
-import jchess.ui.GameTab;
-import jchess.ui.JChessView;
 import jchess.ui.lang.Language;
 
 /**
  * Class responsible for drawing the fold with local game settings
  */
-public class LocalSettingsTab extends JPanel implements ActionListener {
+public class LocalSettingsTab extends JPanel {
 
-	private static final long		serialVersionUID	= -3054704162643076714L;
+	private static final long			serialVersionUID	= -3054704162643076714L;
 
-	private JDialog							parent						= null;
-	private JTextField					firstName					= null;
-	private JTextField					secondName				= null;
-	private JLabel							firstNameLab			= null;
-	private JLabel							secondNameLab			= null;
+	private static final Integer	TIMES[]						= { 1, 3, 5, 8, 10, 15, 20, 25, 30, 60, 120 };
 
-	private GridBagLayout				gbl								= null;
-	private GridBagConstraints	gbc								= null;
-	private JButton							okButton					= null;
-	private JCheckBox						timeGame					= null;
-	private JComboBox<String>		time4Game					= null;
-	private String							times[]						= { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };	//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
-
-	/**
-	 * Method responsible for changing the options which can make a player when he
-	 * want to start new local game
-	 * 
-	 * @param e
-	 *          where is saving data of performed action
-	 */
-	public void actionPerformed(ActionEvent e) {
-		Object target = e.getSource();
-
-		if (target == this.okButton) // if clicked OK button (on finish)
-		{
-			if (this.firstName.getText().length() > 9) {// make names short to 10
-																									// digits
-				this.firstName.setText(this.trimString(firstName, 9));
-			}
-			if (this.secondName.getText().length() > 9) {// make names short to 10
-																										// digits
-				this.secondName.setText(this.trimString(secondName, 9));
-			}
-			if ((this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
-				JOptionPane.showMessageDialog(this, Language.getString("fill_names")); //$NON-NLS-1$
-				return;
-			}
-
-			try {
-				Settings.setWhitePlayersName(firstName.getText());
-				Settings.setBlackPlayersName(secondName.getText());
-			} catch (Exception exc) {
-				// TODO show to user
-				Logging.log(exc);
-			}
-
-			GameTab newGUI = null;
-			try {
-				newGUI = JChessView.getInstance().addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText());
-			} catch (Exception e2) {
-				Logging.log(e2);
-			}
-
-			if (this.timeGame.isSelected()) // if timeGame is checked
-			{
-				String value = this.times[this.time4Game.getSelectedIndex()];// set time
-																																			// for
-																																			// game
-				Integer val = new Integer(value);
-				Settings.setTimeLimetSet(true);
-				try {
-					Settings.setTimeForGame((int) val * 60);
-				} catch (Exception e1) {
-					Logging.log(e1);// Should never happen, because user can only chose
-													// between correct values. IGNORE Exception
-				}
-			}
-			Logging.log(this.time4Game.getActionCommand());
-			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-			Logging
-					.log(Language.getString("DrawLocalSettings.18") + Settings.getWhitePlayersName() + Language.getString("DrawLocalSettings.19") + Settings.getBlackPlayersName() + Language.getString("DrawLocalSettings.20") + Settings.getTimeForGame() + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-							+ Settings.getTimeForGame() + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
-			try {
-				newGUI.newGame();
-			} catch (Exception e1) {
-				Logging.log(e1);
-			}// start new Game
-			this.parent.setVisible(false);// hide parent
-			newGUI.getChessboardUI().repaint();
-			// newGUI.getChessboardUI().draw();
-		}
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	LocalSettingsTab(JDialog parent) {
+	public LocalSettingsTab(JDialog parent) {
 		super();
 
-		this.parent = parent;
-		this.gbl = new GridBagLayout();
-		this.gbc = new GridBagConstraints();
-		this.okButton = new JButton(Language.getString(Language.getString("DrawLocalSettings.24"))); //$NON-NLS-1$
+		GridBagLayout gbl = new GridBagLayout();
+		setLayout(gbl);
 
-		this.firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
-		this.firstName.setSize(new Dimension(200, 50));
-		this.secondName = new JTextField(Language.getString("DrawLocalSettings.27"), 10); //$NON-NLS-1$
-		this.secondName.setSize(new Dimension(200, 50));
-		this.firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-		this.secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(3, 3, 3, 3);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
 
-		this.timeGame = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
-		this.time4Game = new JComboBox(times);
+		JLabel firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
+		gbl.setConstraints(firstNameLab, gbc);
+		add(firstNameLab);
 
-		this.setLayout(gbl);
-		this.okButton.addActionListener(this);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		JTextField firstName = new JTextField(Language.getString("DrawLocalSettings.26"), 10); //$NON-NLS-1$
+		gbl.setConstraints(firstName, gbc);
+		add(firstName);
 
-		this.secondName.addActionListener(this);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		JLabel secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
+		gbl.setConstraints(secondNameLab, gbc);
+		add(secondNameLab);
 
-		this.gbc.gridx = 0;
-		this.gbc.gridy = 0;
-		this.gbc.insets = new Insets(3, 3, 3, 3);
-		this.gbc.gridx = 0;
-		this.gbc.gridy = 1;
-		this.gbl.setConstraints(firstNameLab, gbc);
-		this.add(firstNameLab);
-		this.gbc.gridx = 0;
-		this.gbc.gridy = 2;
-		this.gbl.setConstraints(firstName, gbc);
-		this.add(firstName);
-		this.gbc.gridx = 0;
-		this.gbc.gridy = 3;
-		this.gbl.setConstraints(secondNameLab, gbc);
-		this.add(secondNameLab);
-		this.gbc.gridy = 4;
-		this.gbl.setConstraints(secondName, gbc);
-		this.add(secondName);
-		this.gbc.gridy = 8;
-		this.gbc.gridwidth = 1;
-		this.gbl.setConstraints(timeGame, gbc);
-		this.add(timeGame);
-		this.gbc.gridx = 1;
-		this.gbc.gridy = 8;
-		this.gbc.gridwidth = 1;
-		this.gbl.setConstraints(time4Game, gbc);
-		this.add(time4Game);
-		this.gbc.gridx = 1;
-		this.gbc.gridy = 9;
-		this.gbc.gridwidth = 0;
-		this.gbl.setConstraints(okButton, gbc);
-		this.add(okButton);
-	}
+		gbc.gridy = 4;
+		JTextField secondName = new JTextField(Language.getString("DrawLocalSettings.27"), 10); //$NON-NLS-1$
+		gbl.setConstraints(secondName, gbc);
+		add(secondName);
 
-	/**
-	 * Method responsible for triming white symbols from strings
-	 * 
-	 * @param txt
-	 *          Where is capt value to equal
-	 * @param length
-	 *          How long is the string
-	 * @return result trimmed String
-	 */
-	public String trimString(JTextField txt, int length) {
-		String result = new String();
-		try {
-			result = txt.getText(0, length);
-		} catch (BadLocationException exc) {
-			Logging.log(Language.getString("DrawLocalSettings.36"), exc); //$NON-NLS-1$
-		}
-		return result;
+		gbc.gridy = 8;
+		gbc.gridwidth = 1;
+		JCheckBox timeGame = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
+		gbl.setConstraints(timeGame, gbc);
+		add(timeGame);
+
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		gbc.gridwidth = 1;
+		JComboBox<Integer> time4Game = new JComboBox<Integer>(TIMES);
+		gbl.setConstraints(time4Game, gbc);
+		add(time4Game);
 	}
 }
