@@ -11,32 +11,33 @@ import jchess.core.util.Game;
 import jchess.core.util.Player;
 import jchess.core.util.Player.PlayerColor;
 
-public class RookMoveBehaviorTest {
+public class KnightMoveBehaviorTest {
 
 	@Test
 	public void testAllMoves() throws Exception {
 
-		// Rook in the center - G5
-		Player playerl = new Player("player1", PlayerColor.RED);
-		Player player2 = new Player("player2", PlayerColor.BLACK);
+		// Rook in the center - D3
+		Player playerl = new Player("player1", PlayerColor.WHITE);
+		Player player2 = new Player("player2", PlayerColor.RED);
 		Chessboard board = new Chessboard(null, null);
 
 		Game game = new Game(board, null);
 		game.startNewGame();
 
 		// adding the obstacles
-		// friend pawn on the way
+		// checking the jump
 		Pawn p1 = new Pawn(board, playerl, null);
-		board.getField("G7").setPiece(p1);
-		// foe pawn on the way
+		board.getField("D5").setPiece(p1);
 		Pawn p2 = new Pawn(board, player2, null);
 		board.getField("E5").setPiece(p2);
+		Pawn p3 = new Pawn(board, player2, null);
+		board.getField("F5").setPiece(p3);
 
 		// calculating allowed moves
-		RookMoveBehavior rmb = new RookMoveBehavior(playerl, board, board.getField("G5"));
+		KnightMoveBehavior kmb = new KnightMoveBehavior(playerl, board, board.getField("D3"));
 
 		// creating array list of expected fields
-		String[] expectedIdentifiers = new String[] { "G4", "G3", "H5", "I5", "H6", "I7", "J8", "K9", "L10", "M11", "G6", "F5", "E5", "F4", "E3", "D2", "C1" };
+		String[] expectedIdentifiers = new String[] { "E1", "F2", "G4", "G5", "F6", "E6", "C5" };
 		ArrayList<ChessboardField> expectedFields = new ArrayList<ChessboardField>();
 		for (String expID : expectedIdentifiers) {
 			expectedFields.add(board.getField(expID));
@@ -44,10 +45,10 @@ public class RookMoveBehaviorTest {
 
 		// comparison
 		for (ChessboardField field : expectedFields) {
-			Assert.assertTrue(rmb.allMoves().contains(field));
+			Assert.assertTrue(kmb.allMoves().contains(field));
 		}
 
-		for (ChessboardField field : rmb.allMoves()) {
+		for (ChessboardField field : kmb.allMoves()) {
 			Assert.assertTrue(expectedFields.contains(field));
 		}
 
