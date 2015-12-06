@@ -781,7 +781,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * 
 	 * @param color player's color
 	 * @direction direction from player's POV
-	 * @return absolute direction of the chesboard;
+	 * @edgeType type of direction
+	 * @return absolute direction of the chessboard
 	 */
 	public EdgeDirection getDirectionFromPlayersPOV(Player.PlayerColor color, EdgeDirection direction, EdgeType edgeType) {
 		switch (color) {
