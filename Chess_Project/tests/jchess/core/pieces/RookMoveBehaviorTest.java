@@ -16,11 +16,13 @@ public class RookMoveBehaviorTest {
 
 	@Test
 	public void testAllMoves() throws Exception {
-		// Rook in the center
-		Player playerl = new Player("redPl", PlayerColor.RED);
-		Player player2 = new Player("blackPl", PlayerColor.BLACK);
+
+		// Rook in the center - G5
+		Player playerl = new Player("player1", PlayerColor.RED);
+		Player player2 = new Player("player2", PlayerColor.BLACK);
 		Chessboard board = new Chessboard(null, null);
 
+		// adding the obstacles
 		// friend pawn on the way
 		Pawn p1 = new Pawn(board, playerl, null);
 		board.getField("G7").setPiece(p1);
