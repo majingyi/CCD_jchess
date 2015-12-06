@@ -7,10 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
+import jchess.core.util.Player.PlayerColor;
 import jchess.ui.Theme;
 import jchess.ui.lang.Language;
 
@@ -21,21 +24,19 @@ import jchess.ui.lang.Language;
  */
 public class Settings implements Serializable {
 
-	private static final String	ACTIVE_THEME_KEY	= "active_theme";
+	private static final String											ACTIVE_THEME_KEY	= "active_theme";
 
-	private static final long		serialVersionUID	= -9058658425673782782L;
+	private static final long												serialVersionUID	= -9058658425673782782L;
 
-	private static Locale				locale						= Locale.US;
-	private static int					timeForGame				= 0;
+	private static Locale														locale						= Locale.US;
+	private static int															timeForGame				= 0;
 
-	private static boolean			timeLimitSet			= false;
+	private static boolean													timeLimitSet			= false;
 
-	private static String				whitePlayersName	= null;
-	private static String				blackPlayersName	= null;
+	private static Map<Player.PlayerColor, String>	playerNames				= new HashMap<Player.PlayerColor, String>();
 
-	private static Properties		properties				= null;
-
-	private static List<Locale>	supportedLocales	= null;
+	private static Properties												properties				= null;
+	private static List<Locale>											supportedLocales	= null;
 
 	// prevent from instantiation
 	private Settings() {
@@ -84,28 +85,65 @@ public class Settings implements Serializable {
 		return timeLimitSet;
 	}
 
+	/**
+	 * Sets the name for the player of given color.
+	 * 
+	 * @param name
+	 * @param color
+	 * @throws Exception
+	 */
+	public static void addPlayerName(String name, PlayerColor color) throws Exception {
+		if ((name != null) && (name.length() > 0)) {
+			playerNames.put(color, name);
+		} else {
+			throw new Exception("Players name is not allowed to be empty string.");
+		}
+	}
+
+	/**
+	 * Set name for the white player
+	 * 
+	 * @param color
+	 * @deprecated Use addPlayerName instead.
+	 */
+	@Deprecated
 	public static void setWhitePlayersName(String name) throws Exception {
-		if ((name != null) && (name.length() > 0)) {
-			whitePlayersName = name;
-		} else {
-			throw new Exception("Players name is not allowed to be empty string.");
-		}
+		addPlayerName(name, PlayerColor.WHITE);
 	}
 
+	/**
+	 * Set name for the black player
+	 * 
+	 * @param color
+	 * @deprecated Use addPlayerName instead.
+	 */
+	@Deprecated
 	public static void setBlackPlayersName(String name) throws Exception {
-		if ((name != null) && (name.length() > 0)) {
-			blackPlayersName = name;
-		} else {
-			throw new Exception("Players name is not allowed to be empty string.");
-		}
+		addPlayerName(name, PlayerColor.BLACK);
 	}
 
+	public static String getPlayerNameForColor(PlayerColor color) {
+		return playerNames.get(color);
+	}
+
+	/**
+	 * 
+	 * @return name of the black player
+	 * @deprecated Use getPlayerNameForColor instead.
+	 */
+	@Deprecated
 	public static String getBlackPlayersName() {
-		return blackPlayersName;
+		return getPlayerNameForColor(PlayerColor.BLACK);
 	}
 
+	/**
+	 * 
+	 * @return name of the white player
+	 * @deprecated Use getPlayerNameForColor instead.
+	 */
+	@Deprecated
 	public static String getWhitePlayersName() {
-		return whitePlayersName;
+		return getPlayerNameForColor(PlayerColor.WHITE);
 	}
 
 	private static void loadConfigFile() {
