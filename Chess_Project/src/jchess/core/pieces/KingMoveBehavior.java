@@ -45,6 +45,7 @@ public class KingMoveBehavior extends MoveBehavior {
 		}
 
 		// checking possibility for castling
+		// directions from player's point of view
 		EdgeDirection toLeft = this.m_Chessboard.getDirectionFromPlayersPOV(color, EdgeDirection.LEFT);
 		EdgeDirection toRight = this.m_Chessboard.getDirectionFromPlayersPOV(color, EdgeDirection.RIGHT);
 
@@ -52,6 +53,7 @@ public class KingMoveBehavior extends MoveBehavior {
 		if (this.king.wasMotion == false && this.king.isChecked() == false) {
 
 			List<Rook> rooks = this.m_Chessboard.getRooksForColor(color);
+			// fields between king and rook have to be free
 			// leftside castling (long)
 			for (ChessboardField field = this.m_Field; field == rooks.get(0).getField()
 					|| field == rooks.get(1).getField(); field = field.getNextField(toLeft, EdgeType.STRAIGHT)) {
@@ -62,6 +64,7 @@ public class KingMoveBehavior extends MoveBehavior {
 					allMoves.add(field);
 				}
 			}
+			// rightside castling (short)
 			for (ChessboardField field = this.m_Field; field == rooks.get(0).getField()
 					|| field == rooks.get(1).getField(); field = field.getNextField(toRight, EdgeType.STRAIGHT)) {
 				if (field.getPiece() != null) {
@@ -69,25 +72,6 @@ public class KingMoveBehavior extends MoveBehavior {
 				}
 				if ((field == rooks.get(0).getField() && rooks.get(0).wasMotion == false) || (field == rooks.get(1).getField() && rooks.get(1).wasMotion == false)) {
 					allMoves.add(field);
-				}
-			}
-			if (true) { // if that's the first move of left rook
-				// three fields to the left has to be without pieces
-				ChessboardField field1 = this.m_Field.getNextField(toLeft, EdgeType.STRAIGHT);
-				ChessboardField field2 = field1.getNextField(toLeft, EdgeType.STRAIGHT);
-				ChessboardField field3 = field2.getNextField(toLeft, EdgeType.STRAIGHT);
-				if (field1.getPiece() == null && field2.getPiece() == null && field3.getPiece() == null) {
-					allMoves.add(field2);
-				}
-			}
-
-			// rightside castling (short)
-			if (true) { // if that's the first move of right rook
-				// two fields to the right has to be without pieces
-				ChessboardField field1 = this.m_Field.getNextField(toRight, EdgeType.STRAIGHT);
-				ChessboardField field2 = field1.getNextField(toRight, EdgeType.STRAIGHT);
-				if (field1.getPiece() == null && field2.getPiece() == null) {
-					allMoves.add(field2);
 				}
 			}
 		}
