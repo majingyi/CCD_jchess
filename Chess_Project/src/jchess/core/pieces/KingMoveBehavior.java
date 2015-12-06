@@ -46,8 +46,8 @@ public class KingMoveBehavior extends MoveBehavior {
 
 		// checking possibility for castling
 		// directions from player's point of view
-		EdgeDirection toLeft = this.m_Chessboard.getDirectionFromPlayersPOV(color, EdgeDirection.LEFT);
-		EdgeDirection toRight = this.m_Chessboard.getDirectionFromPlayersPOV(color, EdgeDirection.RIGHT);
+		EdgeDirection toLeft = this.m_Chessboard.getDirectionFromPlayersPOV(color, EdgeDirection.LEFT, EdgeType.STRAIGHT);
+		EdgeDirection toRight = this.m_Chessboard.getDirectionFromPlayersPOV(color, EdgeDirection.RIGHT, EdgeType.STRAIGHT);
 
 		// if that's the first move of the king and it's not checked
 		if (this.king.wasMotion == false && this.king.isChecked() == false) {

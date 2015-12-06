@@ -2,16 +2,17 @@ package jchess.core.board;
 
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
+import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Rook;
 import jchess.core.util.Constants;
 import jchess.core.util.Game;
 import jchess.core.util.Player;
 import jchess.core.util.Player.PlayerColor;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 public class ChessboardTest {
 
@@ -288,32 +289,48 @@ public class ChessboardTest {
 	public void testGetDirectionFromPlayersPOV() throws Exception {
 		Chessboard board = new Chessboard(null, null);
 
-		Assert.assertEquals(EdgeDirection.UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.DOWN));
-		Assert.assertEquals(EdgeDirection.DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.UP));
-		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT));
-		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_DOWN));
-		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_UP));
-		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT));
-		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_DOWN));
-		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_UP));
+		// straight
+		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_DOWN, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_UP, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_DOWN, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_UP, EdgeType.STRAIGHT));
 
-		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.DOWN));
-		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.UP));
-		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT));
-		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_DOWN));
-		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_UP));
-		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT));
-		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_DOWN));
-		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_UP));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_DOWN, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_UP, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_DOWN, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_UP, EdgeType.STRAIGHT));
 
-		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.DOWN));
-		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.UP));
-		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT));
-		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_DOWN));
-		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_UP));
-		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT));
-		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_DOWN));
-		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_UP));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_DOWN, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_UP, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_DOWN, EdgeType.STRAIGHT));
+		Assert.assertEquals(EdgeDirection.RIGHT, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_UP, EdgeType.STRAIGHT));
 
+		// diagonal
+		Assert.assertEquals(EdgeDirection.UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.UP, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.LEFT_UP, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.WHITE, EdgeDirection.RIGHT_UP, EdgeType.DIAGONAL));
+
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.UP, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.LEFT_UP, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.UP, board.getDirectionFromPlayersPOV(PlayerColor.RED, EdgeDirection.RIGHT_UP, EdgeType.DIAGONAL));
+
+		Assert.assertEquals(EdgeDirection.LEFT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.RIGHT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.UP, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.LEFT_UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.UP, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.LEFT_UP, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_DOWN, EdgeType.DIAGONAL));
+		Assert.assertEquals(EdgeDirection.RIGHT_DOWN, board.getDirectionFromPlayersPOV(PlayerColor.BLACK, EdgeDirection.RIGHT_UP, EdgeType.DIAGONAL));
 	}
 }
