@@ -3,8 +3,8 @@ package jchess.core.board;
 import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
-import jchess.core.board.graph.StraightEdge;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
+import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.Bishop;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Knight;
@@ -209,7 +209,7 @@ public class HexagonChessFieldGraphInitializer {
 		}
 	}
 
-	private static String getIdentifierLetter(int pos) {
+	public static String getIdentifierLetter(int pos) {
 		String result = Constants.EMPTY_STRING;
 		switch (pos) {
 			case 1:
@@ -257,5 +257,58 @@ public class HexagonChessFieldGraphInitializer {
 		}
 
 		return result;
+	}
+
+	public static int[] getcoordinatesFromID(String id) {
+
+		int[] coordinates = { 0, 0 };
+
+		char letter = id.charAt(0);
+		switch (letter) {
+			case 'A':
+				coordinates[0] = 1;
+				break;
+			case 'B':
+				coordinates[0] = 2;
+				break;
+			case 'C':
+				coordinates[0] = 3;
+				break;
+			case 'D':
+				coordinates[0] = 4;
+				break;
+			case 'E':
+				coordinates[0] = 5;
+				break;
+			case 'F':
+				coordinates[0] = 6;
+				break;
+			case 'G':
+				coordinates[0] = 7;
+				break;
+			case 'H':
+				coordinates[0] = 8;
+				break;
+			case 'I':
+				coordinates[0] = 9;
+				break;
+			case 'J':
+				coordinates[0] = 10;
+				break;
+			case 'K':
+				coordinates[0] = 11;
+				break;
+			case 'L':
+				coordinates[0] = 12;
+				break;
+			case 'M':
+				coordinates[0] = 13;
+				break;
+			default:
+				break;
+		}
+
+		return coordinates;
+
 	}
 }
