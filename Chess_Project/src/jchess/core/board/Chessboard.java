@@ -809,6 +809,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 							case UNDEFINED:
 								return EdgeDirection.UNDEFINED;
 						}
+						break;
 					case DIAGONAL:
 						switch (direction) {
 							case LEFT:
@@ -855,6 +856,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 							case UNDEFINED:
 								return EdgeDirection.UNDEFINED;
 						}
+						break;
 					case DIAGONAL:
 						switch (direction) {
 							case LEFT:
@@ -901,6 +903,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 							case UNDEFINED:
 								return EdgeDirection.UNDEFINED;
 						}
+						break;
 					case DIAGONAL:
 						switch (direction) {
 							case LEFT:
