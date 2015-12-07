@@ -36,13 +36,13 @@ public class ChessboardUI extends JPanel {
 	// image of chessboard
 	private static Image								boardBackgroundImage	= null;
 	// image of highlighted square
-	private static Image								org_sel_square				= null;
+	private static Image								org_sel_hexagon				= null;
 	// image of highlighted square
-	private static Image								sel_square						= org_sel_square;
+	private static Image								sel_square						= org_sel_hexagon;
 	// image of square where piece can go
-	private static Image								org_able_square				= null;
+	private static Image								org_able_hexagon				= null;
 	// image of square where piece can go
-	private static Image								able_square						= org_able_square;
+	private static Image								able_square						= org_able_hexagon;
 
 	private Image												upDownLabel						= null;
 	private Image												LeftRightLabel				= null;
@@ -78,10 +78,10 @@ public class ChessboardUI extends JPanel {
 		this.setDoubleBuffered(true);
 //		this.drawLabels((int) this.hexagon_height);
 
-		org_sel_square = Theme.getImage("sel_square.png");
-		org_able_square = Theme.getImage("able_square.png"); //the image should be a hexagon ??
+		org_sel_hexagon = Theme.getImage("sel_square.png"); //change image
+		org_able_hexagon = Theme.getImage("able_hexagon.png"); //the image should be a hexagon ??
 
-		boardBackgroundImage = Theme.getImage("chessboard1.jpg");
+		boardBackgroundImage = Theme.getImage("chessboard.jpg");
 
 	}/*--endOf-Chessboard--*/
 
@@ -259,13 +259,13 @@ public class ChessboardUI extends JPanel {
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(org_able_square, 0, 0, (int) square_height, (int) square_height, null);
+		g.drawImage(org_able_hexagon, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
 		able_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 
 		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(org_sel_square, 0, 0, (int) square_height, (int) square_height, null);
+		g.drawImage(org_sel_hexagon, 0, 0, (int) square_height, (int) square_height, null);
 		g.dispose();
 		sel_square = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 		this.drawLabels();
