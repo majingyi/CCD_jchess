@@ -6,6 +6,12 @@ import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.util.Player;
 
+/**
+ * Class for creating a behavior of Rook.
+ * Calculates allowed fields for movement of this piece.
+ * 
+ * @author Serhii
+ */
 public class RookMoveBehavior extends MoveBehavior {
 
 	public RookMoveBehavior(Player player, Chessboard chessboard, ChessboardField field) {

@@ -8,6 +8,12 @@ import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.util.Player;
 
+/**
+ * Class for creating a behavior of Pawn.
+ * Calculates allowed fields for movement of this piece.
+ * 
+ * @author Serhii
+ */
 public class PawnMoveBehavior extends MoveBehavior {
 
 	public PawnMoveBehavior(Player player, Chessboard chessboard, ChessboardField field) {

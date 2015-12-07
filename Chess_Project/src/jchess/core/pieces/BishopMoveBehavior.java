@@ -6,6 +6,12 @@ import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.util.Player;
 
+/**
+ * Class for creating a behavior of Bishop.
+ * Calculates allowed fields for movement of this piece.
+ * 
+ * @author Serhii
+ */
 public class BishopMoveBehavior extends MoveBehavior {
 
 	public BishopMoveBehavior(Player player, Chessboard chessboard, ChessboardField field) {
@@ -14,8 +20,6 @@ public class BishopMoveBehavior extends MoveBehavior {
 
 	/**
 	 * This method calculates allowed fields for movement of the classic chess Bishop
-	 * 
-	 * @author Serhii
 	 * 
 	 * @param allMoves array list of allowed fields
 	 * @throws Exception 
