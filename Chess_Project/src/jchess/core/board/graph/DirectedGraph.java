@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class HexagonChessboardFieldGraph {
+public abstract class DirectedGraph {
 
 	private Map<String, GraphNode>	m_NodeMap	= new HashMap<String, GraphNode>();
 

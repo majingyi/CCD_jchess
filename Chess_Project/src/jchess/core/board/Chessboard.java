@@ -12,7 +12,7 @@ import jchess.core.board.graph.DirectedGraphEdge;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.GraphEdge.EdgeType;
-import jchess.core.board.graph.HexagonChessboardFieldGraph;
+import jchess.core.board.graph.DirectedGraph;
 import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Pawn;
@@ -33,7 +33,7 @@ import jchess.ui.lang.Language;
  * Class representing a chess board for three player chess. This class manages the whole board data structure. 
  * 
  */
-public class Chessboard extends HexagonChessboardFieldGraph {
+public class Chessboard extends DirectedGraph {
 
 	private GameTab												m_GameUI				= null;
 	private ChessboardField								m_ActiveField		= null;
