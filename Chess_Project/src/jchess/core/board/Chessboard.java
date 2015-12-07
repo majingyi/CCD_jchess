@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
+import jchess.core.board.graph.DirectedGraph;
 import jchess.core.board.graph.DirectedGraphEdge;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge;
 import jchess.core.board.graph.GraphEdge.EdgeType;
-import jchess.core.board.graph.DirectedGraph;
 import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Pawn;
@@ -61,6 +61,8 @@ public class Chessboard extends DirectedGraph {
 	/**
 	 * Method selecting piece in chessboard
 	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
+	 * 
 	 * @param field
 	 *          chess board field to select (when clicked))
 	 */
@@ -70,7 +72,9 @@ public class Chessboard extends DirectedGraph {
 	}
 
 	/**
-	 * Deselects the currently selected filed, if one is selected. 
+	 * Deselects the currently selected filed, if one is selected.
+	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
 	 */
 	public void unselect() {
 		this.m_ActiveField = null;
