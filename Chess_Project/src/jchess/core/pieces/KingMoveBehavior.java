@@ -18,6 +18,14 @@ public class KingMoveBehavior extends MoveBehavior {
 		this.king = king;
 	}
 
+	/**
+	 * This method calculates allowed fields for movement of the classic chess King
+	 * 
+	 * @author Serhii
+	 * 
+	 * @param allMoves array list of allowed fields
+	 * @throws Exception 
+	 */
 	@Override
 	public ArrayList<ChessboardField> allMoves() throws Exception {
 

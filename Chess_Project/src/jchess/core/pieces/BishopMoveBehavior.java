@@ -12,6 +12,15 @@ public class BishopMoveBehavior extends MoveBehavior {
 		super(player, chessboard, field);
 	}
 
+	/**
+	 * This method calculates allowed fields for movement of the classic chess Bishop
+	 * 
+	 * @author Serhii
+	 * 
+	 * @param allMoves array list of allowed fields
+	 * @throws Exception 
+	 */
+	@Override
 	public ArrayList<ChessboardField> allMoves() throws Exception {
 		ArrayList<ChessboardField> allMoves = new ArrayList<ChessboardField>();
 

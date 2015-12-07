@@ -783,6 +783,8 @@ public class Chessboard extends DirectedGraph {
 	/**
 	 * Return the direction from the player's point of view.
 	 * 
+	 * @author Serhii
+	 * 
 	 * @param color player's color
 	 * @direction direction from player's POV
 	 * @edgeType type of direction

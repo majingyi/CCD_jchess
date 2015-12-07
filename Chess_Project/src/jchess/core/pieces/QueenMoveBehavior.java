@@ -12,6 +12,14 @@ public class QueenMoveBehavior extends MoveBehavior {
 		super(player, m_Chessboard, field);
 	}
 
+	/**
+	 * This method calculates allowed fields for movement of the classic chess Queen
+	 * 
+	 * @author Serhii
+	 * 
+	 * @param allMoves array list of allowed fields
+	 * @throws Exception 
+	 */
 	@Override
 	public ArrayList<ChessboardField> allMoves() throws Exception {
 
