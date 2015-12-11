@@ -162,12 +162,7 @@ public class ChessboardUI extends JPanel {
 		// // chessboard
 		int numberofFields = 8;
 		int start = 1;
-		for (int identifierLetter = 1; identifierLetter <= 13; identifierLetter++) { // i
-																																									// is
-																																									// row,
-																																									// y
-																																									// is
-																																									// column
+		for (int identifierLetter = 1; identifierLetter <= 13; identifierLetter++) {
 			for (int identifierNum = start; identifierNum <= numberofFields + start; identifierNum++) {
 				String identifier = HexagonChessFieldGraphInitializer.getIdentifierLetter(identifierLetter) + (identifierNum);
 				if (board.getField(identifier).getPiece() != null) {
@@ -190,9 +185,11 @@ public class ChessboardUI extends JPanel {
 		}
 		if (board.getActiveField() != null) // if some square is active
 		{
-			g2d.drawImage(sel_hexagon, ((board.getActiveField() - 1) * (int) hexagon_width) + topLeft.x,
-					((board.getActive_y_square() - 1) * (int) hexagon_height) + topLeftPoint.y, null);// draw
-			// image of selected square
+			String id = board.getActiveField().getIdentifier();
+			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
+			g2d.drawImage(sel_hexagon, (coordinate[0] * (int) hexagon_height) + deviation_height + topLeft.x,
+					(coordinate[1] * (int) hexagon_width) + deviation_width + topLeft.y, null);
+			// draw image of selected square
 			ChessboardField tmpSquare = board.getFields()[(int) (board.getActiveField() - 1)][(int) (board.getActive_y_square() - 1)];
 			if (tmpSquare.getPiece() != null) {
 				try {
@@ -204,7 +201,7 @@ public class ChessboardUI extends JPanel {
 
 			for (Iterator<ChessboardField> it = moves.iterator(); moves != null && it.hasNext();) {
 				Hexagon hexa = (Hexagon) it.next();
-				g2d.drawImage(able_hexagon, (hexa.pozX * (int) hexagon_height) + topLeftPoint.x, (hexa.pozY * (int) hexagon_height) + topLeftPoint.y, null);
+				g2d.drawImage(able_hexagon, (hexa.pozX * (int) hexagon_height) + topLeft.x, (hexa.pozY * (int) hexagon_height) + topLeft.y, null);
 			}
 		}
 	}/*--endOf-paint--*/
@@ -215,7 +212,6 @@ public class ChessboardUI extends JPanel {
 	   Graphics2D g2d = (Graphics2D) g;
 	   g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 	   RenderingHints.VALUE_ANTIALIAS_ON);
-	   Point topLeft = getTopLeftPoint();
 	   int height = get_hexagon_height();
 	   ChessboardField sq = (ChessboardField) piece.getField();
 
@@ -254,13 +250,13 @@ public class ChessboardUI extends JPanel {
 
 		resized = new BufferedImage((int) hexagon_height, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(org_able_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
+		g.drawImage(able_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
 		g.dispose();
 		able_hexagon = resized.getScaledInstance((int) hexagon_height, (int) hexagon_height, 0);
 
 		resized = new BufferedImage((int) hexagon_height, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(org_sel_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
+		g.drawImage(sel_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
 		g.dispose();
 		sel_hexagon = resized.getScaledInstance((int) hexagon_height, (int) hexagon_height, 0);
 		this.drawLabels();
