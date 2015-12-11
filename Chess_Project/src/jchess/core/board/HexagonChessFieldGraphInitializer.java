@@ -307,7 +307,56 @@ public class HexagonChessFieldGraphInitializer {
 			default:
 				break;
 		}
+		char number = id.charAt(1);
+		switch (number) {
+			case '1':
+				coordinates[1] = 1;
+				break;
+			case '2':
+				coordinates[1] = 2;
+				break;
+			case '3':
+				coordinates[1] = 3;
+				break;
+			case '4':
+				coordinates[1] = 4;
+				break;
+			case '5':
+				coordinates[1] = 5;
+				break;
+			case '6':
+				coordinates[1] = 6;
+				break;
+			case '7':
+				coordinates[1] = 7;
+				break;
+			case '8':
+				coordinates[1] = 8;
+				break;
+			case '9':
+				coordinates[1] = 9;
+				break;
 
+			default:
+				break;
+		}
+		char number2 = id.charAt(2);
+		switch (number2) {
+			case '0':
+				coordinates[1] = 10;
+				break;
+			case '1':
+				coordinates[1] = 11;
+				break;
+			case '2':
+				coordinates[1] = 12;
+				break;
+			case '3':
+				coordinates[1] = 13;
+				break;
+			default:
+				break;
+		}
 		return coordinates;
 
 	}
