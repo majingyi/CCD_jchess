@@ -191,18 +191,11 @@ public class ChessboardUI extends JPanel {
 				start++;
 			}
 		}
-		if (board.getActiveField() != null) // if
-		// som
-		// square
-		// is
-		// active
+		if (board.getActiveField() != null) // if some square is active
 		{
-			g2d.drawImage(sel_hexagon, ((board.getActiveField() - 1) * (int) hexagon_width) + topLeftPoint.x,
+			g2d.drawImage(sel_hexagon, ((board.getActiveField() - 1) * (int) hexagon_width) + topLeft.x,
 					((board.getActive_y_square() - 1) * (int) hexagon_height) + topLeftPoint.y, null);// draw
-			// image
-			// of
-			// selected
-			// square
+			// image of selected square
 			ChessboardField tmpSquare = board.getFields()[(int) (board.getActiveField() - 1)][(int) (board.getActive_y_square() - 1)];
 			if (tmpSquare.getPiece() != null) {
 				try {
