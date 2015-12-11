@@ -39,14 +39,12 @@ public class ChessboardUI extends JPanel {
 
 	// image of chessboard
 	private static Image								boardBackgroundImage	= null;
-	// image of highlighted square
-	private static Image								org_sel_hexagon				= null;
-	// image of highlighted square
-	private static Image								sel_hexagon						= org_sel_hexagon;
+
+	// image of highlighted hexagon
+	private static Image								sel_hexagon						= null;
+
 	// image of square where piece can go
-	private static Image								org_able_hexagon			= null;
-	// image of square where piece can go
-	private static Image								able_hexagon					= org_able_hexagon;
+	private static Image								able_hexagon					= null;
 
 	private Image												upDownLabel						= null;
 	private Image												LeftRightLabel				= null;
@@ -83,10 +81,9 @@ public class ChessboardUI extends JPanel {
 		this.hexagon_width = (img_width - deviation_width) / 13;
 		this.setDoubleBuffered(true);
 		// this.drawLabels((int) this.hexagon_height);
-
-		org_sel_hexagon = Theme.getImage("sel_hexagon.png"); // change image
-		org_able_hexagon = Theme.getImage("able_hexagon.png"); // the image should
-																														// be a hexagon ??
+		sel_hexagon = Theme.getImage("sel_hexagon.jpg"); // change image
+		able_hexagon = Theme.getImage("able_hexagon.png"); // the image should
+																												// be a hexagon ??
 
 		boardBackgroundImage = Theme.getImage("chessboard.jpg");
 
