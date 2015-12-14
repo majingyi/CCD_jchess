@@ -23,6 +23,7 @@ import org.junit.Test;
  */
 public class HexagonChessFieldGraphInitializerTest {
 
+	// All existing and allowed nodes on the hexagon chessboard
 	private String[]	nodeIdentifier	= new String[] { "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9",
 			"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "E1", "E2", "E3", "E4",
 			"E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "G2", "G3", "G4",
@@ -30,8 +31,17 @@ public class HexagonChessFieldGraphInitializerTest {
 			"I8", "I9", "I10", "I11", "I12", "I13", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12", "J13", "K6", "K7", "K8", "K9", "K10", "K11", "K12", "K13",
 			"L7", "L8", "L9", "L10", "L11", "L12", "L13", "M8", "M9", "M10", "M11", "M12", "M13" };
 
+	/**
+	 * Checks the initial board layout of the hexagon chess board class.
+	 * 
+	 * Since this board is implemented as a graph, it is checked, that the board has the expected nodes, 
+	 * and that the nodes are connected to each other like expected. 
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testInitialise() throws Exception {
+		// create board and initialize it
 		Chessboard board = new Chessboard(null, null);
 		Game game = new Game(board, null);
 		game.startNewGame();
@@ -39,29 +49,60 @@ public class HexagonChessFieldGraphInitializerTest {
 		// check number of nodes
 		Assert.assertEquals(126, board.getAllNodes().size());
 
+		// check, that the correct nodes are created
 		for (String id : nodeIdentifier) {
+			// get the field with the current identifier
 			ChessboardField field = (ChessboardField) board.getNode(id);
 			Assert.assertNotNull(field);
+
+			// check the identifier is correct
 			Assert.assertEquals(id, field.getIdentifier());
+
+			/*
+			 * Check, that the filed has a maximum of 12 edges and a minimum of 5.
+			 * 
+			 * Everything in between occurs on the filed, but never more or less.
+			 */
 			Assert.assertTrue("Field " + field.getIdentifier() + " fails this test: " + field.getAllNeighbors().size(), field.getAllNeighbors().size() <= 12);
 			Assert.assertTrue("Field " + field.getIdentifier() + " fails this test: " + field.getAllNeighbors().size(), field.getAllNeighbors().size() >= 5);
 		}
 
+		/*
+		 * Check some middle fields, if they are correctly connected with neighbor
+		 * fields.
+		 */
 		checkField(board, "D5", new String[] { "D4", "D6", "C4", "C5", "E5", "E6" }, new String[] { "C3", "B4", "C6", "E4", "F6", "E7" });
 		checkField(board, "H3", new String[] { "G2", "G3", "H4", "I4" }, new String[] { "F2", "G4", "I5" });
 
+		// check lover bound
 		checkField(board, "M10", new String[] { "M9", "M11", "L9", "L10" }, new String[] { "L8", "K9", "L11" });
 
+		// check upper corners
 		checkField(board, "A1", new String[] { "A2", "B1", "B2" }, new String[] { "C2", "B3" });
 		checkField(board, "A8", new String[] { "A7", "B8", "B9" }, new String[] { "C9", "B7" });
 
+		// check left and right corner
 		checkField(board, "F1", new String[] { "E1", "F2", "G2" }, new String[] { "E2", "G3" });
 		checkField(board, "F13", new String[] { "G13", "F12", "E12" }, new String[] { "E11", "G12" });
 
+		// check lower corners
 		checkField(board, "M8", new String[] { "L7", "L8", "M9" }, new String[] { "K7", "L9" });
 		checkField(board, "M13", new String[] { "L13", "M12", "L12" }, new String[] { "L11", "K12" });
 	}
 
+	/**
+	 * Checks whether a field is correctly connected to the intended neighbor fields.
+	 * 
+	 * @param board
+	 * 						The current chessboard instance.
+	 * @param fieldID
+	 * 						The ID of the field, which is to be checked
+	 * @param straight 
+	 * 						expected fields connected with a straight edge
+	 * @param diagonal
+	 * 						expected fields connected with a diagonal edge
+	 * @throws Exception
+	 */
 	private void checkField(Chessboard board, String fieldID, String[] straight, String[] diagonal) throws Exception {
 		ChessboardField field = (ChessboardField) board.getNode(fieldID);
 		List<ChessboardField> neighbors = field.getAllNeighbors();
@@ -90,6 +131,11 @@ public class HexagonChessFieldGraphInitializerTest {
 		}
 	}
 
+	/**
+	 * Checks if all pieces are located in the correct fields after board initialization
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testInitialBoardSetup() throws Exception {
 		Chessboard board = new Chessboard(null, null);
@@ -158,6 +204,18 @@ public class HexagonChessFieldGraphInitializerTest {
 
 	}
 
+	/**
+	 * Checks, if the correct piece is located on the checked field. This includes checking for color of the piece.
+	 * 
+	 * @param board
+	 * 						The current chessboard instance.
+	 * @param identifier
+	 * 						The ID of the field, which is to be checked
+	 * @param color
+	 * 						Color of the player, who owns this piece
+	 * @param clazz
+	 * 						The class of the piece, which should be located on the field
+	 */
 	private void checkPiece(Chessboard board, String identifier, PlayerColor color, Class<? extends Piece> clazz) {
 		Piece piece = ((ChessboardField) board.getNode(identifier)).getPiece();
 		Assert.assertEquals(color, piece.getPlayer().getColor());
