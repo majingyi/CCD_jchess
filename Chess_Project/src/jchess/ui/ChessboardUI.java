@@ -1,7 +1,5 @@
 package jchess.ui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -16,12 +14,12 @@ import javax.swing.JPanel;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
+import jchess.core.board.HexagonChessFieldGraphInitializer;
 import jchess.core.pieces.King;
+import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
 import jchess.core.util.Player.PlayerColor;
-
-import jchess.core.board.HexagonChessFieldGraphInitializer;
-import jchess.core.pieces.Piece;
+import jchess.ui.lang.Language;
 
 /**
  * Class to represent chessboard. Chessboard is made from squares. It is setting
@@ -187,56 +185,53 @@ public class ChessboardUI extends JPanel {
 		{
 			String id = board.getActiveField().getIdentifier();
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
-			g2d.drawImage(sel_hexagon, (coordinate[0] * (int) hexagon_height) + deviation_height + topLeft.x,
-					(coordinate[1] * (int) hexagon_width) + deviation_width + topLeft.y, null);
-			// draw image of selected square
-			ChessboardField tmpSquare = board.getFields()[(int) (board.getActiveField() - 1)][(int) (board.getActive_y_square() - 1)];
-			if (tmpSquare.getPiece() != null) {
-				try {
-					this.moves = board.getFields()[(int) (board.getActiveField() - 1)][(int) (board.getActive_y_square() - 1)].getPiece().allMoves();
-				} catch (Exception e) {
-					Logging.log(e);
-				}
-			}
-
-			for (Iterator<ChessboardField> it = moves.iterator(); moves != null && it.hasNext();) {
-				Hexagon hexa = (Hexagon) it.next();
-				g2d.drawImage(able_hexagon, (hexa.pozX * (int) hexagon_height) + topLeft.x, (hexa.pozY * (int) hexagon_height) + topLeft.y, null);
-			}
+			g2d.drawImage(sel_hexagon, (int) (coordinate[0] * hexagon_height + deviation_height + topLeft.x),
+					(int) (coordinate[1] * hexagon_width + deviation_width + topLeft.y), null);
 		}
+		// draw image of selected square
+		/*
+		 * ChessboardField tmpSquare = board.getFields()[(int)
+		 * (board.getActiveField() - 1)][(int) (board.getActive_y_square() - 1)]; if
+		 * (tmpSquare.getPiece() != null) { try { this.moves =
+		 * board.getFields()[(int) (board.getActiveField() - 1)][(int)
+		 * (board.getActive_y_square() - 1)].getPiece().allMoves(); } catch
+		 * (Exception e) { Logging.log(e); } }
+		 * 
+		 * for (Iterator<ChessboardField> it = moves.iterator(); moves != null &&
+		 * it.hasNext();) { Hexagon hexa = (Hexagon) it.next();
+		 * g2d.drawImage(able_hexagon, (hexa.pozX * (int) hexagon_height) +
+		 * topLeft.x, (hexa.pozY * (int) hexagon_height) + topLeft.y, null); } }
+		 */
 	}/*--endOf-paint--*/
 
-	private void drawPieceImage(Graphics g, Piece piece) throws
-  FileNotFoundException {
-	try {
-	   Graphics2D g2d = (Graphics2D) g;
-	   g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-	   RenderingHints.VALUE_ANTIALIAS_ON);
-	   int height = get_hexagon_height();
-	   ChessboardField sq = (ChessboardField) piece.getField();
+	private void drawPieceImage(Graphics g, Piece piece) throws FileNotFoundException {
+		try {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			int hexagon_height = get_hexagon_height();
+			ChessboardField sq = (ChessboardField) piece.getField();
 
-	 int x = 1;
-	 int y = 1;
-	
- if (g != null) {
-	 Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(),
-	 piece.getSymbol());
-	 //BufferedImage resized = new BufferedImage(height, height,
-	 BufferedImage.TYPE_INT_ARGB_PRE);
-	Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-	 imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-	 RenderingHints.VALUE_ANTIALIAS_ON);
-	// imageGr.drawImage(tempImage, 0, 0, height, height, null);
-	// imageGr.dispose();
-	// Image img = resized.getScaledInstance(height, height, 0);
-	// g2d.drawImage(img, x, y, null);
-	// } else {
-	//				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
-	// }
-	// } catch (java.lang.NullPointerException exc) {
-	//			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
-	// }
-	// }
+			int x = 1;
+			int y = 1;
+
+			if (g != null) {
+				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
+				BufferedImage resized = new BufferedImage((int) hexagon_width, hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
+				// BufferedImage(int width, int height, int imageType, IndexColorModel
+				// cm)
+				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				imageGr.drawImage(tempImage, 0, 0, (int) hexagon_width, hexagon_height, null);
+				imageGr.dispose();
+				Image img = resized.getScaledInstance((int) hexagon_width, hexagon_height, 0);
+				g2d.drawImage(img, x, y, null);
+			} else {
+				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
+			}
+		} catch (java.lang.NullPointerException exc) {
+			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
+		}
+	}
 
 	public void resizeChessboard(int height) throws FileNotFoundException {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
@@ -259,14 +254,13 @@ public class ChessboardUI extends JPanel {
 		g.drawImage(sel_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
 		g.dispose();
 		sel_hexagon = resized.getScaledInstance((int) hexagon_height, (int) hexagon_height, 0);
-		this.drawLabels();
-	}
-
-	protected void drawLabels() {
-		this.drawLabels((int) this.hexagon_height);
+		// this.drawLabels();
 	}
 
 	/*
+	 * protected void drawLabels() { this.drawLabels((int) this.hexagon_height); }
+	 * 
+	 * 
 	 * protected final void drawLabels(int hexagon_height) { // BufferedImage uDL
 	 * = new BufferedImage(800, 800, // BufferedImage.TYPE_3BYTE_BGR); int
 	 * min_label_height = 20; int labelHeight = (int) Math.ceil(hexagon_height /
