@@ -7,6 +7,11 @@ import jchess.ui.lang.Language;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class SettingsTest {
 
 	@Test
@@ -65,15 +70,15 @@ public class SettingsTest {
 	}
 
 	@Test
-		public void testSetTimeLimitSet() throws Exception {
-			try {
-				Assert.assertEquals(false, Settings.isTimeLimitSet());
-				Settings.setTimeLimitSet(true);
-				Assert.assertEquals(true, Settings.isTimeLimitSet());
-			} finally {
-				Settings.setTimeLimitSet(false);
-			}
+	public void testSetTimeLimitSet() throws Exception {
+		try {
+			Assert.assertEquals(false, Settings.isTimeLimitSet());
+			Settings.setTimeLimitSet(true);
+			Assert.assertEquals(true, Settings.isTimeLimitSet());
+		} finally {
+			Settings.setTimeLimitSet(false);
 		}
+	}
 
 	@Test
 	public void testSetTimeForGame() throws Exception {

@@ -4,6 +4,11 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class ClockTest {
 
 	private int	listernerCalled	= 0;

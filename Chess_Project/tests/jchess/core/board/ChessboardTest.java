@@ -2,9 +2,6 @@ package jchess.core.board;
 
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.pieces.King;
@@ -14,6 +11,14 @@ import jchess.core.util.Game;
 import jchess.core.util.Player;
 import jchess.core.util.Player.PlayerColor;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class ChessboardTest {
 
 	@Test

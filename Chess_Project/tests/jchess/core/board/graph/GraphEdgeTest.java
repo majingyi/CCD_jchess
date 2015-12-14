@@ -5,6 +5,11 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class GraphEdgeTest {
 
 	@Test

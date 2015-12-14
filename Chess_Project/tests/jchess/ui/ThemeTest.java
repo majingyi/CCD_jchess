@@ -16,6 +16,11 @@ import jchess.core.util.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class ThemeTest {
 
 	@Test
