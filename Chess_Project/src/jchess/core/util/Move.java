@@ -4,6 +4,11 @@ import jchess.core.board.ChessboardField;
 import jchess.core.pieces.Piece;
 import jchess.core.util.MoveHistory.castling;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class Move {
 
 	private ChessboardField	from									= null;

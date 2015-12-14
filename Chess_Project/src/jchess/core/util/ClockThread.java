@@ -2,6 +2,11 @@ package jchess.core.util;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class ClockThread extends Thread {
 
 	private long									time			= 0;

@@ -10,6 +10,11 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class Logging {
 
 	private static Logger	logger	= Logger.getRootLogger();

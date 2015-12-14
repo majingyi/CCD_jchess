@@ -14,7 +14,7 @@ import jchess.ui.GameTab;
  * Class responsible for the starts of new games, loading games, saving it, and
  * for ending it. 
  * 
- * 
+ * @author Maurice
  */
 public class Game {
 
