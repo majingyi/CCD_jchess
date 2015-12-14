@@ -2,6 +2,7 @@ package jchess.core.util;
 
 import java.util.Locale;
 
+import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
 import org.junit.Assert;
@@ -116,18 +117,16 @@ public class SettingsTest {
 	}
 
 	@Test
-	public void testSetWhitePlayersName() throws Exception {
-		Assert.assertEquals(null, Settings.getWhitePlayersName());
+	public void testAddPlayersName() throws Exception {
+		Settings.addPlayerName("Hans Wurst", PlayerColor.WHITE);
+		Assert.assertEquals("Hans Wurst", Settings.getPlayerNameForColor(PlayerColor.WHITE));
 
-		Settings.setWhitePlayersName("Hans Wurst");
-		Assert.assertEquals("Hans Wurst", Settings.getWhitePlayersName());
-
-		Settings.setWhitePlayersName("trallala");
-		Assert.assertEquals("trallala", Settings.getWhitePlayersName());
+		Settings.addPlayerName("trallala", PlayerColor.WHITE);
+		Assert.assertEquals("trallala", Settings.getPlayerNameForColor(PlayerColor.WHITE));
 
 		boolean exception = false;
 		try {
-			Settings.setWhitePlayersName(null);
+			Settings.addPlayerName(null, PlayerColor.WHITE);
 		} catch (Exception e) {
 			exception = true;
 			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
@@ -136,7 +135,7 @@ public class SettingsTest {
 
 		exception = false;
 		try {
-			Settings.setWhitePlayersName("");
+			Settings.addPlayerName(Constants.EMPTY_STRING, PlayerColor.WHITE);
 		} catch (Exception e) {
 			exception = true;
 			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
@@ -145,31 +144,17 @@ public class SettingsTest {
 	}
 
 	@Test
-	public void testSetBlackPlayersName() throws Exception {
-		Assert.assertEquals(null, Settings.getBlackPlayersName());
+	public void testAddPlayersNameDifferentColors() throws Exception {
+		Assert.assertEquals(null, Settings.getPlayerNameForColor(PlayerColor.BLACK));
+		Assert.assertEquals(null, Settings.getPlayerNameForColor(PlayerColor.RED));
 
-		Settings.setBlackPlayersName("Hans Wurst");
-		Assert.assertEquals("Hans Wurst", Settings.getBlackPlayersName());
+		Settings.addPlayerName("Hans Wurst", PlayerColor.WHITE);
+		Assert.assertEquals("Hans Wurst", Settings.getPlayerNameForColor(PlayerColor.WHITE));
 
-		Settings.setBlackPlayersName("trallala");
-		Assert.assertEquals("trallala", Settings.getBlackPlayersName());
+		Settings.addPlayerName("HDWF", PlayerColor.BLACK);
+		Assert.assertEquals("HDWF", Settings.getPlayerNameForColor(PlayerColor.BLACK));
 
-		boolean exception = false;
-		try {
-			Settings.setBlackPlayersName(null);
-		} catch (Exception e) {
-			exception = true;
-			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
-		}
-		Assert.assertEquals(true, exception);
-
-		exception = false;
-		try {
-			Settings.setBlackPlayersName("");
-		} catch (Exception e) {
-			exception = true;
-			Assert.assertEquals("Players name is not allowed to be empty string.", e.getMessage());
-		}
-		Assert.assertEquals(true, exception);
+		Settings.addPlayerName("HGIDL", PlayerColor.RED);
+		Assert.assertEquals("HGIDL", Settings.getPlayerNameForColor(PlayerColor.RED));
 	}
 }

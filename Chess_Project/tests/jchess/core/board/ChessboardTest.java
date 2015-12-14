@@ -231,11 +231,11 @@ public class ChessboardTest {
 		Assert.assertEquals(fields.size(), expectedFields.length);
 		for (String expectedField : expectedFields) {
 			ChessboardField field = board.getField(expectedField);
-			Assert.assertTrue("Expected: " + expectedField + ", but was: " + dumpExpectedFields(fields), fields.contains(field));
+			Assert.assertTrue("Expected: " + expectedField + ", but was: " + dumpFields(fields), fields.contains(field));
 		}
 	}
 
-	private String dumpExpectedFields(List<ChessboardField> fields) {
+	private String dumpFields(List<ChessboardField> fields) {
 		StringBuffer buffer = new StringBuffer();
 
 		for (ChessboardField exprected : fields) {
