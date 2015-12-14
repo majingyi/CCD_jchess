@@ -1,5 +1,10 @@
 package jchess.core.board.graph;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class DiagonalEdge extends DirectedGraphEdge {
 
 	public DiagonalEdge(GraphNode node1, GraphNode node2, EdgeDirection dir) {

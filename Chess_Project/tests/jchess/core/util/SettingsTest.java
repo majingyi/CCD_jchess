@@ -65,15 +65,15 @@ public class SettingsTest {
 	}
 
 	@Test
-	public void testSetTimeLimetSet() throws Exception {
-		try {
-			Assert.assertEquals(false, Settings.isTimeLimitSet());
-			Settings.setTimeLimetSet(true);
-			Assert.assertEquals(true, Settings.isTimeLimitSet());
-		} finally {
-			Settings.setTimeLimetSet(false);
+		public void testSetTimeLimitSet() throws Exception {
+			try {
+				Assert.assertEquals(false, Settings.isTimeLimitSet());
+				Settings.setTimeLimitSet(true);
+				Assert.assertEquals(true, Settings.isTimeLimitSet());
+			} finally {
+				Settings.setTimeLimitSet(false);
+			}
 		}
-	}
 
 	@Test
 	public void testSetTimeForGame() throws Exception {
@@ -103,10 +103,10 @@ public class SettingsTest {
 	public void testIsTimeLimitSet() throws Exception {
 		try {
 			Assert.assertEquals(false, Settings.isTimeLimitSet());
-			Settings.setTimeLimetSet(true);
+			Settings.setTimeLimitSet(true);
 			Assert.assertEquals(true, Settings.isTimeLimitSet());
 		} finally {
-			Settings.setTimeLimetSet(false);
+			Settings.setTimeLimitSet(false);
 		}
 	}
 

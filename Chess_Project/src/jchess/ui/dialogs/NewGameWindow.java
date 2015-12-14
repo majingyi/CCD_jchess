@@ -118,7 +118,7 @@ public class NewGameWindow extends JDialog {
 
 			if (localSettingsTab.isTimeLimitSet()) // if timeGame is checked
 			{
-				Settings.setTimeLimetSet(true);
+				Settings.setTimeLimitSet(true);
 				try {
 					Settings.setTimeForGame((int) localSettingsTab.getSelectedTimeLimit() * 60);
 				} catch (Exception e) {

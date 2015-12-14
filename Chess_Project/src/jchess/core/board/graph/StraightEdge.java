@@ -1,5 +1,11 @@
 package jchess.core.board.graph;
 
+/**
+ * Implementation of a straight edge.
+ * 
+ * @author Maurice
+ *
+ */
 public class StraightEdge extends DirectedGraphEdge {
 
 	public StraightEdge(GraphNode node1, GraphNode node2, EdgeDirection dir) {

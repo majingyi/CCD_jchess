@@ -18,9 +18,10 @@ import jchess.ui.Theme;
 import jchess.ui.lang.Language;
 
 /**
+ * @author Maurice
+ * 
  * Class representing game settings available for the current player
  * 
- * TODO documentation
  */
 public class Settings implements Serializable {
 
@@ -57,6 +58,14 @@ public class Settings implements Serializable {
 		return timeForGame;
 	}
 
+	/**
+	 * Sets a localization.
+	 * 
+	 * Method checks, that the given localization is supported by the program, and throws an exception if not.
+	 * 
+	 * @param localization
+	 * @throws Exception
+	 */
 	public static void setLocale(Locale localization) throws Exception {
 		if (supportedLocales.contains(localization)) {
 			locale = localization;
@@ -65,11 +74,21 @@ public class Settings implements Serializable {
 		}
 	}
 
+	/**
+	 * Get currently selected locale.
+	 * 
+	 * @return
+	 */
 	public static Locale getLocale() {
 		return locale;
 	}
 
-	public static void setTimeLimetSet(boolean timeLimit) {
+	/**
+	 * Set, if a time limit was specified for the game.
+	 * 
+	 * @param timeLimit
+	 */
+	public static void setTimeLimitSet(boolean timeLimit) {
 		timeLimitSet = timeLimit;
 	}
 
@@ -159,6 +178,9 @@ public class Settings implements Serializable {
 		}
 	}
 
+	/**
+	 * Triggers the actual writing of the config file.
+	 */
 	public static void storeConfigFile() {
 		try {
 			File outFile = new File(Utils.getJarPath() + File.separator + "config.txt"); //$NON-NLS-1$
@@ -170,6 +192,13 @@ public class Settings implements Serializable {
 		}
 	}
 
+	/**
+	 * A freely defined property can be added here. 
+	 * This property will be saved in the properties file.
+	 * 
+	 * @param key
+	 * @param value
+	 */
 	public static void setProperty(String key, String value) {
 		if (properties == null) {
 			loadConfigFile();
@@ -177,12 +206,24 @@ public class Settings implements Serializable {
 		properties.put(key, value);
 	}
 
+	/**
+	 * 
+	 * @return The currently selected theme.
+	 */
 	public static String getActiveTheme() {
 		String theme = getProperty(ACTIVE_THEME_KEY);
 		return theme == null ? Theme.DEFAULT_THEME : theme;
 	}
 
-	private static String getProperty(String key) {
+	/**
+	 * Gets the property from the properties file, which is identified by the given key.
+	 * 
+	 * If this property does not exist, null is returned.
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static String getProperty(String key) {
 		if (properties == null) {
 			loadConfigFile();
 		}
