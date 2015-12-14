@@ -12,7 +12,7 @@ public class Move {
 	private Piece						takenPiece						= null;
 	private Piece						promotedTo						= null;
 	private boolean					wasEnPassant					= false;
-	private castling				castlingMove					= castling.none;
+	private castling				castlingMove					= castling.NONE;
 	private boolean					wasPawnTwoFieldsMove	= false;
 
 	public Move(ChessboardField from, ChessboardField to, Piece movedPiece, Piece takenPiece, castling castlingMove, boolean wasEnPassant, Piece promotedPiece) {

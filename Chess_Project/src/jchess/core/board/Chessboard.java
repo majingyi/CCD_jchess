@@ -126,7 +126,7 @@ public class Chessboard extends DirectedGraph {
 	 * @throws Exception
 	 */
 	private void move(ChessboardField begin, ChessboardField end, boolean clearForwardHistory) throws Exception {
-		castling wasCastling = MoveHistory.castling.none;
+		castling wasCastling = MoveHistory.castling.NONE;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
 		if (end.getPiece() != null) {
@@ -182,7 +182,7 @@ public class Chessboard extends DirectedGraph {
 				begin.setPiece(moved);
 				moved.setField(begin, this);
 				Piece taken = last.getTakenPiece();
-				if (last.getCastlingMove() != castling.none) {
+				if (last.getCastlingMove() != castling.NONE) {
 					Piece rook = null;
 					// TODO undo castling
 					((King) moved).wasMotion = false;

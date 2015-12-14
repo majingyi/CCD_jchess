@@ -24,7 +24,7 @@ public class MoveHistory {
 	protected Stack<Move>			moveForwardStack	= new Stack<Move>();
 
 	public enum castling {
-		none, shortCastling, longCastling
+		NONE, SHORT_CASTLING, LONG_CASTLING
 	}
 
 	public void addCastling(String move) {
