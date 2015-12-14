@@ -46,8 +46,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 		chessboard = new ChessboardUI(this, moveHistory);
 		chessboard.setVisible(true);
-		chessboard.setSize(ChessboardUI.img_height, ChessboardUI.
-();
+		chessboard.setSize(ChessboardUI.img_width, ChessboardUI.img_height);
 		chessboard.addMouseListener(this);
 		chessboard.setLocation(new Point(0, 0));
 		this.add(chessboard);
