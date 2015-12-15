@@ -77,6 +77,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		try {
 			int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();
 			int chess_height = (int) Math.round((height * 0.8) / 8) * 8;
+			// ???
 			this.chessboard.resizeChessboard((int) chess_height);
 			chess_height = this.chessboard.getHeight();
 			moveHistory.getScrollPane().setLocation(new Point(chess_height + 5, 100));
@@ -335,7 +336,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	}
 
 	/**
-	 * Method to get value from loaded txt line
+	 * Method to get value from loaded text line
 	 * 
 	 * @param line
 	 *          Line which is readed

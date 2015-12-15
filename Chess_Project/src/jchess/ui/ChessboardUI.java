@@ -216,14 +216,14 @@ public class ChessboardUI extends JPanel {
 
 			if (g != null) {
 				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
-				BufferedImage resized = new BufferedImage((int) hexagon_width, hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
+				BufferedImage resized = new BufferedImage(img_width, img_height, BufferedImage.TYPE_INT_ARGB_PRE);
 				// BufferedImage(int width, int height, int imageType, IndexColorModel
 				// cm)
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, (int) hexagon_width, hexagon_height, null);
+				imageGr.drawImage(tempImage, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 				imageGr.dispose();
-				Image img = resized.getScaledInstance((int) hexagon_width, hexagon_height, 0);
+				Image img = resized.getScaledInstance((int) hexagon_width, (int) hexagon_height, 0);
 				g2d.drawImage(img, x, y, null);
 			} else {
 				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
@@ -234,27 +234,25 @@ public class ChessboardUI extends JPanel {
 	}
 
 	public void resizeChessboard(int height) throws FileNotFoundException {
-		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
+		BufferedImage resized = new BufferedImage(img_width, img_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
-		g.drawImage(Theme.getImage("chessboard1.png"), 0, 0, height, height, null); //$NON-NLS-1$
+		g.drawImage(Theme.getImage("chessboard.jpg"), 0, 0, img_width, img_height, null); //$NON-NLS-1$
 		g.dispose();
-		boardBackgroundImage = resized.getScaledInstance(height, height, 0);
-		this.hexagon_height = (float) (height / 8);
-		height += 2 * (this.upDownLabel.getHeight(null));
-		this.setSize(height, height);
+		boardBackgroundImage = resized.getScaledInstance(img_width, img_height, 0);
+		this.setSize(img_width, img_height);
 
-		resized = new BufferedImage((int) hexagon_height, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
+		resized = new BufferedImage((int) img_width, (int) img_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(able_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
+		g.drawImage(able_hexagon, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 		g.dispose();
-		able_hexagon = resized.getScaledInstance((int) hexagon_height, (int) hexagon_height, 0);
+		able_hexagon = resized.getScaledInstance((int) hexagon_width, (int) hexagon_height, 0);
 
-		resized = new BufferedImage((int) hexagon_height, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
+		resized = new BufferedImage((int) img_width, (int) img_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
-		g.drawImage(sel_hexagon, 0, 0, (int) hexagon_height, (int) hexagon_height, null);
+		g.drawImage(sel_hexagon, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 		g.dispose();
-		sel_hexagon = resized.getScaledInstance((int) hexagon_height, (int) hexagon_height, 0);
-		// this.drawLabels();
+		sel_hexagon = resized.getScaledInstance((int) hexagon_width, (int) hexagon_height, 0);
+
 	}
 
 	/*

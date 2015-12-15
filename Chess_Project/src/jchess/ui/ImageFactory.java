@@ -83,6 +83,7 @@ public class ImageFactory {
 
 		File file = new File(path);
 		if (file.exists()) {
+
 			icon = iconCache.get(path);
 			if (icon == null) {
 				icon = new ImageIcon(path);
