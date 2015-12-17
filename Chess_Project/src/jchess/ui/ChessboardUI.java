@@ -106,8 +106,7 @@ public class ChessboardUI extends JPanel {
 	// }
 
 	public int get_hexagon_height() {
-		int result = (int) this.hexagon_height;
-		return result;
+		return (int) this.hexagon_height;
 	}
 
 	/**
@@ -124,7 +123,7 @@ public class ChessboardUI extends JPanel {
 	}/*--endOf-draw--*/
 
 	/**
-	 * Annotations to superclass Game updateing and painting the crossboard
+	 * Annotations to superclass Game updating and painting the crossboard
 	 */
 	@Override
 	public void update(Graphics g) {
@@ -170,7 +169,7 @@ public class ChessboardUI extends JPanel {
 																																			// there
 					} catch (FileNotFoundException e) {
 						Logging.log(e);
-						// // TODO tell user
+						// TODO tell user
 					}
 				}
 			}
@@ -181,6 +180,7 @@ public class ChessboardUI extends JPanel {
 				start++;
 			}
 		}
+
 		if (board.getActiveField() != null) // if some square is active
 		{
 			String id = board.getActiveField().getIdentifier();
@@ -208,23 +208,31 @@ public class ChessboardUI extends JPanel {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			int hexagon_height = get_hexagon_height();
-			ChessboardField sq = (ChessboardField) piece.getField();
+			// int hexagon_height = get_hexagon_height();
+			String id = piece.getField().getIdentifier();
 
 			int x = 1;
 			int y = 1;
+			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
+			x = (int) ((coordinate[0] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
+			y = coordinate[1];
+			if (x < 7) {
+				y = (int) ((6 - x) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
+			} else {
+				y = (int) ((x - 6) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
+			}
 
 			if (g != null) {
 				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
-				BufferedImage resized = new BufferedImage(img_width, img_height, BufferedImage.TYPE_INT_ARGB_PRE);
+				BufferedImage resized = new BufferedImage((int) hexagon_width, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
 				// BufferedImage(int width, int height, int imageType, IndexColorModel
 				// cm)
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				imageGr.drawImage(tempImage, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 				imageGr.dispose();
-				Image img = resized.getScaledInstance((int) hexagon_width, (int) hexagon_height, 0);
-				g2d.drawImage(img, x, y, null);
+				Image img = resized;
+				g2d.drawImage(img, x - img.getHeight(null), y - img.getWidth(null), null);
 			} else {
 				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
 			}
