@@ -15,15 +15,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import org.jdesktop.application.Application;
+import org.jdesktop.application.FrameView;
+import org.jdesktop.application.TaskMonitor;
+
 import jchess.JChessApp;
 import jchess.core.util.Constants;
 import jchess.core.util.Logging;
 import jchess.core.util.Player;
 import jchess.ui.lang.Language;
-
-import org.jdesktop.application.Application;
-import org.jdesktop.application.FrameView;
-import org.jdesktop.application.TaskMonitor;
 
 /**
  * The application's main view.
@@ -292,9 +292,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 		javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
 		mainPanel.setLayout(mainPanelLayout);
-		mainPanelLayout.setHorizontalGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				mainPanelLayout.createSequentialGroup().addContainerGap().addComponent(gamesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-						.addContainerGap()));
+		mainPanelLayout.setHorizontalGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(mainPanelLayout
+				.createSequentialGroup().addContainerGap().addComponent(gamesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE).addContainerGap()));
 		mainPanelLayout.setVerticalGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				mainPanelLayout.createSequentialGroup().addContainerGap().addComponent(gamesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)));
 
@@ -321,8 +320,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		fileMenu.add(saveGameItem);
 		saveGameItem.addActionListener(this);
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
-				.getActionMap(JChessView.class, this);
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext().getActionMap(JChessView.class,
+				this);
 		exitMenuItem.setAction(actionMap.get("quit")); //$NON-NLS-1$
 		exitMenuItem.setName("exitMenuItem"); //$NON-NLS-1$
 		fileMenu.add(exitMenuItem);
@@ -358,7 +357,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		moveForwardItem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
-					moveForwardItemActionPerformed(evt);
+
 				} catch (Exception e) {
 					// TODO Inform User
 					Logging.log(e);
@@ -367,8 +366,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		});
 		gameMenu.add(moveForwardItem);
 
-		rewindToBegin.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_MASK
-				| java.awt.event.InputEvent.CTRL_MASK));
+		rewindToBegin.setAccelerator(
+				javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
 		rewindToBegin.setText(Language.getString("rewindToBegin.text")); //$NON-NLS-1$
 		rewindToBegin.setName("rewindToBegin"); //$NON-NLS-1$
 		rewindToBegin.addActionListener(new java.awt.event.ActionListener() {
@@ -378,8 +377,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		});
 		gameMenu.add(rewindToBegin);
 
-		rewindToEnd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.SHIFT_MASK
-				| java.awt.event.InputEvent.CTRL_MASK));
+		rewindToEnd.setAccelerator(
+				javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
 		rewindToEnd.setText(Language.getString("rewindToEnd.text")); //$NON-NLS-1$
 		rewindToEnd.setName("rewindToEnd"); //$NON-NLS-1$
 		rewindToEnd.addActionListener(new java.awt.event.ActionListener() {
@@ -440,30 +439,22 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
 		statusPanel.setLayout(statusPanelLayout);
 		statusPanelLayout
-				.setHorizontalGroup(statusPanelLayout
-						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-						.addGroup(
-								statusPanelLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(statusMessageLabel)
+				.setHorizontalGroup(
+						statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+								.addGroup(statusPanelLayout.createSequentialGroup().addContainerGap().addComponent(statusMessageLabel)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 616, Short.MAX_VALUE)
 										.addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(statusAnimationLabel).addContainerGap()));
-		statusPanelLayout.setVerticalGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				statusPanelLayout
-						.createSequentialGroup()
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(statusAnimationLabel).addContainerGap()));
+		statusPanelLayout.setVerticalGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(statusPanelLayout.createSequentialGroup()
 						.addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(
-								statusPanelLayout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-										.addComponent(statusMessageLabel)
-										.addComponent(statusAnimationLabel)
-										.addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)).addGap(3, 3, 3)));
+						.addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(statusMessageLabel)
+								.addComponent(statusAnimationLabel).addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(3, 3, 3)));
 
 		setComponent(mainPanel);
 		setMenuBar(menuBar);
