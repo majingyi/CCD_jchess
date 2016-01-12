@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.HexagonChessFieldGraphInitializer;
+import jchess.core.board.graph.GraphNode;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
@@ -123,24 +124,17 @@ public class ChessboardUI extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(boardBackgroundImage, topLeft.x, topLeft.y, null);
 		// drawing image of chessboard
-		int numberofFields = 8;
-		int start = 1;
-		for (int identifierLetter = 1; identifierLetter <= 13; identifierLetter++) {
-			for (int identifierNum = start; identifierNum <= numberofFields + start; identifierNum++) {
-				String identifier = HexagonChessFieldGraphInitializer.getIdentifierLetter(identifierLetter) + (identifierNum);
-				if (board.getField(identifier).getPiece() != null) {
+
+		for (GraphNode field : board.getAllNodes()) {
+			if (field instanceof ChessboardField) {
+				ChessboardField bf = (ChessboardField) field;
+				if (bf.getPiece() != null) {
 					try {
-						drawPieceImage(g, board.getField(identifier).getPiece());
+						drawPieceImage(g, bf.getPiece());
 					} catch (FileNotFoundException e) {
 						Logging.log(e);
 					}
 				}
-			}
-			if (identifierLetter < 7) {
-				numberofFields++;
-			} else {
-				numberofFields--;
-				start++;
 			}
 		}
 
