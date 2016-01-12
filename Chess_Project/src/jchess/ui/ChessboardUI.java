@@ -154,16 +154,18 @@ public class ChessboardUI extends JPanel {
 
 			String id = piece.getField().getIdentifier();
 
-			int x = 1;
 			int y = 1;
+			int x = 1;
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
-			x = (int) ((coordinate[0] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
-			y = coordinate[1];
-			if (x < 7) {
-				y = (int) ((6 - x) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
+
+			x = coordinate[1];
+			y = coordinate[0];
+			if (y < 7) {
+				x = (int) ((6 - x) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
 			} else {
-				y = (int) ((x - 6) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
+				x = (int) ((x - 6) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
 			}
+			y = (int) ((coordinate[0] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
 
 			if (g != null) {
 				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
@@ -175,7 +177,7 @@ public class ChessboardUI extends JPanel {
 				imageGr.drawImage(tempImage, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 				imageGr.dispose();
 				Image img = resized;
-				g2d.drawImage(img, x - img.getHeight(null), y - img.getWidth(null), null);
+				g2d.drawImage(img, x, y, null);
 			} else {
 				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
 			}
