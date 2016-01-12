@@ -3,7 +3,9 @@ package jchess.core.util;
 import java.io.Serializable;
 
 /**
- * Class representing the player in the game
+ * Class representing one player in the game.
+ * 
+ * @author Maurice
  * 
  */
 public class Player implements Serializable {

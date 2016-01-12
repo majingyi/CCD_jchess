@@ -1,6 +1,10 @@
 package jchess.core.board.graph;
 
-
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public abstract class DirectedGraphEdge extends GraphEdge {
 
 	public enum EdgeDirection {
@@ -9,8 +13,8 @@ public abstract class DirectedGraphEdge extends GraphEdge {
 
 	private EdgeDirection	m_Direction	= EdgeDirection.UNDEFINED;
 
-	private GraphNode	m_StartNode	= null;
-	private GraphNode	m_EndNode		= null;
+	private GraphNode			m_StartNode	= null;
+	private GraphNode			m_EndNode		= null;
 
 	public DirectedGraphEdge(GraphNode start, GraphNode end, EdgeDirection dir) {
 		super(start, end);

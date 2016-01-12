@@ -23,6 +23,7 @@ import jchess.JChessApp;
 import jchess.core.util.Constants;
 import jchess.core.util.Logging;
 import jchess.core.util.Player;
+import jchess.ui.dialogs.NewGameWindow;
 import jchess.ui.lang.Language;
 
 /**

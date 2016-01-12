@@ -13,6 +13,8 @@ import jchess.ui.GameTab;
  * by player are correct. All moves which was taken by current player are saving
  * as List of Strings The history of moves is printing in a table
  * 
+ * @author Maurice
+ * 
  */
 public class MoveHistory {
 
@@ -22,7 +24,7 @@ public class MoveHistory {
 	protected Stack<Move>			moveForwardStack	= new Stack<Move>();
 
 	public enum castling {
-		none, shortCastling, longCastling
+		NONE, SHORT_CASTLING, LONG_CASTLING
 	}
 
 	public void addCastling(String move) {

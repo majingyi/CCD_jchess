@@ -37,7 +37,6 @@ public class Settings implements Serializable {
 	private static Map<Player.PlayerColor, String>	playerNames				= new HashMap<Player.PlayerColor, String>();
 
 	private static Properties												properties				= null;
-
 	private static List<Locale>											supportedLocales	= null;
 
 	// prevent from instantiation
@@ -84,7 +83,12 @@ public class Settings implements Serializable {
 		return locale;
 	}
 
-	public static void setTimeLimetSet(boolean timeLimit) {
+	/**
+	 * Set, if a time limit was specified for the game.
+	 * 
+	 * @param timeLimit
+	 */
+	public static void setTimeLimitSet(boolean timeLimit) {
 		timeLimitSet = timeLimit;
 	}
 

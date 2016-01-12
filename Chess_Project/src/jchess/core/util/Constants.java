@@ -1,5 +1,10 @@
 package jchess.core.util;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class Constants {
 
 	public static final String	EMPTY_STRING				= "";	//$NON-NLS-1$

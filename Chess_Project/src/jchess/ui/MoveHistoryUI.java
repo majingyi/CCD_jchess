@@ -166,9 +166,9 @@ public class MoveHistoryUI extends AbstractTableModel {
 			throws Exception {
 		String locMove = history.addMove(begin, end, registerInHistory, castlingMove, wasEnPassant, promotedPiece, gameTab);
 
-		if (castlingMove == castling.shortCastling) {
+		if (castlingMove == castling.SHORT_CASTLING) {
 			this.addCastling("0-0"); //$NON-NLS-1$
-		} else if (castlingMove == castling.longCastling) {
+		} else if (castlingMove == castling.LONG_CASTLING) {
 			this.addCastling("0-0-0"); //$NON-NLS-1$
 		} else {
 			history.addMove(locMove);

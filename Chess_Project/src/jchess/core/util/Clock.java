@@ -3,6 +3,11 @@ package jchess.core.util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class Clock {
 
 	private int										currentSeconds	= 0;

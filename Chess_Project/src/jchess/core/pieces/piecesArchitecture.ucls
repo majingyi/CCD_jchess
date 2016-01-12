@@ -1,399 +1,313 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
-  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="jchess.core.pieces.Queen" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/Queen.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="241" x="1293" y="814"/>    
+<class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="false" associations="false" dependencies="true" nesting-relationships="false" router="FAN">  
+  <class id="1" language="java" name="jchess.core.pieces.MoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/MoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2074" y="861"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="jchess.core.pieces.Knight" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/Knight.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="239" x="489" y="814"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="jchess.core.pieces.PawnMoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/PawnMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="306" x="1233" y="230"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="jchess.core.pieces.BishopMoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/BishopMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="311" x="858" y="989"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="jchess.core.pieces.King" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/King.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="399" x="858" y="1128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="jchess.core.pieces.Piece" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/Piece.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="387" width="341" x="810" y="387"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="7" language="java" name="jchess.core.pieces.IMoveBehavior" project="Chess_Project" 
+  <interface id="2" language="java" name="jchess.core.pieces.IMoveBehavior" project="Chess_Project" 
     file="/Chess_Project/src/jchess/core/pieces/IMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="234" x="818" y="1375"/>    
+    <position height="-1" width="-1" x="1601" y="162"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="jchess.core.pieces.Rook" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/Rook.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="233" x="174" y="814"/>    
+  <class id="3" language="java" name="jchess.core.pieces.Piece" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Piece.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="905" y="23"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="jchess.core.pieces.Bishop" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/Bishop.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="242" x="810" y="814"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="jchess.core.pieces.KingMoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/KingMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="323" x="1622" y="989"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="jchess.core.pieces.QueenMoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/QueenMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="310" x="1251" y="989"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="jchess.core.pieces.KnightMoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/KnightMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="308" x="489" y="989"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="jchess.core.pieces.RookMoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/RookMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="302" x="126" y="989"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="jchess.core.pieces.MoveBehavior" project="Chess_Project" 
-    file="/Chess_Project/src/jchess/core/pieces/MoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="278" x="1560" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="jchess.core.pieces.Pawn" project="Chess_Project" 
+  <class id="4" language="java" name="jchess.core.pieces.Pawn" project="Chess_Project" 
     file="/Chess_Project/src/jchess/core/pieces/Pawn.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="237" x="470" y="37"/>    
+    <position height="-1" width="-1" x="257" y="492"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="16">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="17" name="king">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="18" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="19">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="20">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <generalization id="21">    
+  <class id="5" language="java" name="jchess.core.pieces.PawnMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/PawnMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1490" y="546"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="jchess.core.pieces.Bishop" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Bishop.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="237" y="728"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="jchess.core.pieces.BishopMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/BishopMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1493" y="692"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="jchess.core.pieces.King" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/King.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="301" y="947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="jchess.core.pieces.KingMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/KingMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1500" y="854"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="jchess.core.pieces.Knight" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Knight.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="241" y="1157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="jchess.core.pieces.KnightMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/KnightMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1491" y="1023"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="jchess.core.pieces.Queen" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Queen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="221" y="1502"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="jchess.core.pieces.Rook" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/Rook.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="243" y="1345"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="jchess.core.pieces.RookMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/RookMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1502" y="1194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="jchess.core.pieces.QueenMoveBehavior" project="Chess_Project" 
+    file="/Chess_Project/src/jchess/core/pieces/QueenMoveBehavior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1513" y="1425"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="16">    
     <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="TARGET" refId="1"/>  
   </generalization>  
-  <dependency id="22">    
-    <bendpoint x="479" y="230"/>    
-    <bendpoint x="479" y="387"/>    
-    <end type="SOURCE" refId="15"/>    
+  <dependency id="17">    
+    <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <generalization id="23">    
-    <bendpoint x="1241" y="814"/>    
-    <bendpoint x="1405" y="387"/>    
-    <bendpoint x="1569" y="230"/>    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="14"/>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="3"/>  
   </generalization>  
-  <dependency id="24">    
-    <end type="SOURCE" refId="5"/>    
+  <dependency id="20">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <dependency id="25">    
-    <bendpoint x="331" y="230"/>    
-    <bendpoint x="331" y="387"/>    
-    <end type="SOURCE" refId="15"/>    
+  <generalization id="22">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
   <dependency id="26">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
   <dependency id="27">    
     <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="8"/>  
   </dependency>  
-  <association id="28">    
-    <bendpoint x="1220" y="814"/>    
-    <bendpoint x="1220" y="989"/>    
-    <bendpoint x="1287" y="1128"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="29" name="moveBehavior">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="30" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="31">    
-    <end type="SOURCE" refId="15"/>    
+  <dependency id="28">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="32">    
-    <bendpoint x="53" y="230"/>    
-    <bendpoint x="53" y="387"/>    
-    <bendpoint x="53" y="814"/>    
-    <bendpoint x="53" y="989"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="33">    
-    <bendpoint x="143" y="230"/>    
-    <bendpoint x="143" y="387"/>    
-    <bendpoint x="143" y="814"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="34">    
-    <bendpoint x="95" y="989"/>    
-    <bendpoint x="95" y="814"/>    
-    <bendpoint x="95" y="387"/>    
-    <bendpoint x="95" y="230"/>    
-    <end type="SOURCE" refId="5"/>    
+  </generalization>  
+  <dependency id="30">    
+    <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
   <generalization id="36">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
   </generalization>  
   <dependency id="37">    
-    <bendpoint x="737" y="230"/>    
-    <bendpoint x="737" y="387"/>    
-    <bendpoint x="779" y="814"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
   </dependency>  
   <dependency id="38">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="39">    
-    <end type="SOURCE" refId="2"/>    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
   <dependency id="40">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
   <dependency id="41">    
-    <bendpoint x="458" y="230"/>    
-    <bendpoint x="458" y="387"/>    
-    <bendpoint x="458" y="814"/>    
     <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="12"/>  
+    <end type="TARGET" refId="8"/>  
   </dependency>  
   <dependency id="42">    
-    <bendpoint x="1569" y="387"/>    
-    <bendpoint x="1591" y="814"/>    
-    <bendpoint x="1591" y="989"/>    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="43">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <generalization id="44">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <dependency id="45">    
-    <bendpoint x="827" y="989"/>    
-    <bendpoint x="827" y="1128"/>    
     <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="13"/>  
   </dependency>  
-  <generalization id="46">    
-    <bendpoint x="1570" y="814"/>    
-    <bendpoint x="1590" y="387"/>    
-    <bendpoint x="1590" y="230"/>    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="14"/>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
   </generalization>  
-  <dependency id="47">    
-    <bendpoint x="74" y="989"/>    
-    <bendpoint x="74" y="1128"/>    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <generalization id="48">    
-    <bendpoint x="1612" y="814"/>    
-    <bendpoint x="1612" y="387"/>    
-    <bendpoint x="1612" y="230"/>    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <generalization id="49">    
-    <bendpoint x="437" y="814"/>    
-    <bendpoint x="437" y="387"/>    
-    <bendpoint x="500" y="230"/>    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <dependency id="50">    
-    <bendpoint x="777" y="230"/>    
-    <bendpoint x="779" y="387"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <dependency id="51">    
-    <bendpoint x="1202" y="230"/>    
-    <bendpoint x="1202" y="387"/>    
+  <generalization id="44">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="46">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
   </dependency>  
-  <generalization id="52">    
-    <bendpoint x="1199" y="989"/>    
-    <bendpoint x="1199" y="814"/>    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="53">    
-    <bendpoint x="758" y="814"/>    
-    <bendpoint x="758" y="387"/>    
-    <bendpoint x="798" y="230"/>    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <generalization id="54">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <realization id="55">    
-    <bendpoint x="1996" y="230"/>    
-    <bendpoint x="1996" y="387"/>    
-    <bendpoint x="1996" y="814"/>    
-    <bendpoint x="1996" y="989"/>    
-    <bendpoint x="1996" y="1128"/>    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <dependency id="56">    
-    <bendpoint x="458" y="989"/>    
-    <bendpoint x="458" y="1128"/>    
-    <end type="SOURCE" refId="2"/>    
+  <dependency id="47">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="48">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="57">    
-    <end type="SOURCE" refId="1"/>    
+  <dependency id="51">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="52">    
+    <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="55">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="57">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
   <dependency id="58">    
-    <bendpoint x="32" y="230"/>    
-    <bendpoint x="32" y="387"/>    
-    <bendpoint x="32" y="814"/>    
-    <bendpoint x="32" y="989"/>    
-    <bendpoint x="32" y="1128"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="15"/>  
   </dependency>  
-  <dependency id="59">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <dependency id="60">    
-    <bendpoint x="1181" y="230"/>    
-    <bendpoint x="1181" y="387"/>    
-    <bendpoint x="1262" y="814"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <dependency id="61">    
-    <bendpoint x="1975" y="989"/>    
-    <bendpoint x="1975" y="1128"/>    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <generalization id="62">    
-    <bendpoint x="819" y="230"/>    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

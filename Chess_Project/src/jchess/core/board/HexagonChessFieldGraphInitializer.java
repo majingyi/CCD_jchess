@@ -24,37 +24,10 @@ public class HexagonChessFieldGraphInitializer {
 		Player black = player.get(PlayerColor.BLACK);
 		Player red = player.get(PlayerColor.RED);
 
-		ChessboardField[][] fields = new ChessboardField[13][13];
+		initalizeEmptyBoard(chessboard);
 
 		/*
-		 * First row has 8 fields, second 9,... until number of fields = 13. Next
-		 * field has 12 , 11, .. until end.
-		 * 
-		 * There are 13 rows.
-		 */
-		int numberofFields = 8;
-		int start = 0;
-		for (int row = 0; row < 13;) {
-			for (int column = start; column < numberofFields + start; column++) {
-				String identifier = getIdentifierLetter(row + 1) + (column + 1);
-				ChessboardField field = new Hexagon(identifier, chessboard);
-				chessboard.addNode(field);
-				fields[row][column] = field;
-			}
-			row++;
-			if (row < 6) {
-				numberofFields++;
-			} else {
-				numberofFields--;
-				start++;
-			}
-		}
-
-		connectStraightEdges(fields);
-		connectDiagonalEdges(fields);
-
-		/*
-		 * Add pieces for the player
+		 * Add pieces for the players
 		 */
 
 		// white on top
@@ -103,6 +76,37 @@ public class HexagonChessFieldGraphInitializer {
 		}
 	}
 
+	private static void initalizeEmptyBoard(Chessboard chessboard) {
+		ChessboardField[][] fields = new ChessboardField[13][13];
+
+		/*
+		 * First row has 8 fields, second 9,... until number of fields = 13. Next
+		 * field has 12 , 11, .. until end.
+		 * 
+		 * There are 13 rows.
+		 */
+		int numberofFields = 8;
+		int start = 0;
+		for (int row = 0; row < 13;) {
+			for (int column = start; column < numberofFields + start; column++) {
+				String identifier = getIdentifierLetter(row + 1) + (column + 1);
+				ChessboardField field = new Hexagon(identifier, chessboard);
+				chessboard.addNode(field);
+				fields[row][column] = field;
+			}
+			row++;
+			if (row < 6) {
+				numberofFields++;
+			} else {
+				numberofFields--;
+				start++;
+			}
+		}
+
+		connectStraightEdges(fields);
+		connectDiagonalEdges(fields);
+	}
+
 	private static void addPiece(Chessboard chessboard, Piece piece, String fieldIdentifier) throws Exception {
 		ChessboardField field = (ChessboardField) chessboard.getNode(fieldIdentifier);
 		piece.setField(field, chessboard);
@@ -110,6 +114,8 @@ public class HexagonChessFieldGraphInitializer {
 
 		if (piece instanceof King) {
 			chessboard.addKing((King) piece);
+		} else if (piece instanceof Rook) {
+			chessboard.addRook((Rook) piece);
 		}
 	}
 

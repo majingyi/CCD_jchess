@@ -1,6 +1,10 @@
 package jchess.core.board.graph;
 
-
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public abstract class GraphEdge {
 
 	private GraphNode	m_Node1	= null;

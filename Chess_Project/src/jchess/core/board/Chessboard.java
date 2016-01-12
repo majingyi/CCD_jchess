@@ -1,15 +1,18 @@
 package jchess.core.board;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import jchess.core.board.graph.DiagonalEdge;
+import jchess.core.board.graph.DirectedGraph;
 import jchess.core.board.graph.DirectedGraphEdge;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge;
-import jchess.core.board.graph.HexagonChessboardFieldGraph;
+import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.board.graph.StraightEdge;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Pawn;
@@ -30,13 +33,14 @@ import jchess.ui.lang.Language;
  * Class representing a chess board for three player chess. This class manages the whole board data structure. 
  * 
  */
-public class Chessboard extends HexagonChessboardFieldGraph {
+public class Chessboard extends DirectedGraph {
 
 	private GameTab												m_GameUI				= null;
 	private ChessboardField								m_ActiveField		= null;
 
 	private MoveHistoryUI									m_Moves_history	= null;
 	private Map<Player.PlayerColor, King>	m_KingsMap			= new HashMap<Player.PlayerColor, King>();
+	private Map<PlayerColor, List<Rook>>	m_RooksMap			= new HashMap<Player.PlayerColor, List<Rook>>();
 
 	public Chessboard(GameTab ui, MoveHistoryUI movesHistory) throws Exception {
 		m_GameUI = ui;
@@ -57,6 +61,8 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	/**
 	 * Method selecting piece in chessboard
 	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
+	 * 
 	 * @param field
 	 *          chess board field to select (when clicked))
 	 */
@@ -66,7 +72,9 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
-	 * Deselects the currently selected filed, if one is selected. 
+	 * Deselects the currently selected filed, if one is selected.
+	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
 	 */
 	public void unselect() {
 		this.m_ActiveField = null;
@@ -118,7 +126,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 * @throws Exception
 	 */
 	private void move(ChessboardField begin, ChessboardField end, boolean clearForwardHistory) throws Exception {
-		castling wasCastling = MoveHistory.castling.none;
+		castling wasCastling = MoveHistory.castling.NONE;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
 		if (end.getPiece() != null) {
@@ -174,7 +182,7 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 				begin.setPiece(moved);
 				moved.setField(begin, this);
 				Piece taken = last.getTakenPiece();
-				if (last.getCastlingMove() != castling.none) {
+				if (last.getCastlingMove() != castling.NONE) {
 					Piece rook = null;
 					// TODO undo castling
 					((King) moved).wasMotion = false;
@@ -219,6 +227,24 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	}
 
 	/**
+	 * 
+	 * @param color
+	 * @return the rooks for the given color.
+	 */
+	public List<Rook> getRooksForColor(Player.PlayerColor color) {
+		List<Rook> rooks = m_RooksMap.get(color);
+
+		// Ensure order of rooks, shall be in lexically order of their fields.
+		Collections.sort(rooks, new Comparator<Rook>() {
+			public int compare(Rook rook1, Rook rook2) {
+				return rook1.getField().getIdentifier().compareTo(rook2.getField().getIdentifier());
+			}
+		});
+
+		return rooks;
+	}
+
+	/**
 	 * Adds a new King to the kings map. 
 	 * It is checked, if a king of the kings color is already existing.
 	 * 
@@ -231,6 +257,21 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 		} else {
 			throw new Exception("King with color " + king.getPlayer().getColor().toString().toLowerCase() + " is already existing on this borad.");
 		}
+	}
+
+	/**
+	 * Adds a new Rook to the rooks map. 
+	 * 
+	 * @param rook
+	 */
+	public void addRook(Rook rook) {
+		List<Rook> rooks = m_RooksMap.get(rook.getPlayer().getColor());
+		if (rooks == null) {
+			rooks = new ArrayList<Rook>();
+			m_RooksMap.put(rook.getPlayer().getColor(), rooks);
+		}
+
+		rooks.add(rook);
 	}
 
 	/**
@@ -737,5 +778,162 @@ public class Chessboard extends HexagonChessboardFieldGraph {
 	 */
 	public ChessboardField getField(String identifier) {
 		return (ChessboardField) getNode(identifier);
+	}
+
+	/**
+	 * Return the direction from the player's point of view.
+	 * 
+	 * @author Serhii
+	 * 
+	 * @param color player's color
+	 * @direction direction from player's POV
+	 * @edgeType type of direction
+	 * @return absolute direction of the chessboard
+	 */
+	public EdgeDirection getDirectionFromPlayersPOV(Player.PlayerColor color, EdgeDirection direction, EdgeType edgeType) {
+		switch (color) {
+			case WHITE:
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.RIGHT;
+							case RIGHT:
+								return EdgeDirection.LEFT;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+						break;
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.DOWN;
+							case DOWN:
+								return EdgeDirection.UP;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+				}
+				break;
+			case BLACK:
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT:
+								return EdgeDirection.RIGHT_DOWN;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_UP;
+							case LEFT_DOWN:
+								return EdgeDirection.LEFT;
+							case RIGHT_UP:
+								return EdgeDirection.RIGHT;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_DOWN;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+						break;
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.RIGHT_UP;
+							case DOWN:
+								return EdgeDirection.LEFT_DOWN;
+							case LEFT_UP:
+								return EdgeDirection.UP;
+							case LEFT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.DOWN;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+				}
+				break;
+			case RED:
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT:
+								return EdgeDirection.RIGHT_UP;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.LEFT;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_DOWN;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT_DOWN:
+								return EdgeDirection.RIGHT;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+						break;
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.LEFT_UP;
+							case DOWN:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.DOWN;
+							case RIGHT_UP:
+								return EdgeDirection.UP;
+							case RIGHT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+				}
+				break;
+		}
+		return EdgeDirection.UNDEFINED;
 	}
 }

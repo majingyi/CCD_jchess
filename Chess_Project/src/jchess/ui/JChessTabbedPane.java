@@ -15,6 +15,7 @@ import javax.swing.JTabbedPane;
 
 import jchess.JChessApp;
 import jchess.core.util.Logging;
+import jchess.ui.dialogs.NewGameWindow;
 import jchess.ui.lang.Language;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {

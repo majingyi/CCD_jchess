@@ -3,6 +3,11 @@ package jchess.core.board.graph;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Maurice
+ *
+ */
 public class GraphNode {
 
 	private String					m_Identifier	= null;
