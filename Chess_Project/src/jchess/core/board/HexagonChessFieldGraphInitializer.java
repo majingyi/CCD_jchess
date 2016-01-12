@@ -215,6 +215,9 @@ public class HexagonChessFieldGraphInitializer {
 		}
 	}
 
+	/**
+	 * TODO move to util class
+	 */
 	public static String getIdentifierLetter(int pos) {
 		String result = Constants.EMPTY_STRING;
 		switch (pos) {
@@ -265,6 +268,9 @@ public class HexagonChessFieldGraphInitializer {
 		return result;
 	}
 
+	/**
+	 * TODO move to util class
+	 */
 	public static int[] getcoordinatesFromID(String id) {
 
 		int[] coordinates = { 0, 0 };
