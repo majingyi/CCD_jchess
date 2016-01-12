@@ -31,8 +31,10 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 	private JDialog							parent						= null;
 	private JTextField					firstName					= null;
 	private JTextField					secondName				= null;
+	private JTextField					thirdName					= null;
 	private JLabel							firstNameLab			= null;
 	private JLabel							secondNameLab			= null;
+	private JLabel							thirdNameLab			= null;
 
 	private GridBagLayout				gbl								= null;
 	private GridBagConstraints	gbc								= null;
@@ -61,7 +63,11 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 																										// digits
 				this.secondName.setText(this.trimString(secondName, 9));
 			}
-			if ((this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
+			if (this.thirdName.getText().length() > 9) {// make names short to 10
+																									// digits
+				this.thirdName.setText(this.trimString(thirdName, 9));
+			}
+			if ((this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0 || this.thirdName.getText().length() == 0)) {
 				JOptionPane.showMessageDialog(this, Language.getString("fill_names")); //$NON-NLS-1$
 				return;
 			}
@@ -69,6 +75,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 			try {
 				Settings.setWhitePlayersName(firstName.getText());
 				Settings.setBlackPlayersName(secondName.getText());
+				Settings.setThirdPlayersName(thirdName.getText());
 			} catch (Exception exc) {
 				// TODO show to user
 				Logging.log(exc);
@@ -76,7 +83,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 
 			GameTab newGUI = null;
 			try {
-				newGUI = JChessView.getInstance().addNewTab(this.firstName.getText() + Language.getString("DrawLocalSettings.16") + this.secondName.getText());
+				newGUI = JChessView.getInstance().addNewTab(this.firstName.getText() + this.secondName.getText()); // Language.getString("DrawLocalSettings.16")
 			} catch (Exception e2) {
 				Logging.log(e2);
 			}
@@ -97,14 +104,15 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 			}
 			Logging.log(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-			Logging
-					.log(Language.getString("DrawLocalSettings.18") + Settings.getWhitePlayersName() + Language.getString("DrawLocalSettings.19") + Settings.getBlackPlayersName() + Language.getString("DrawLocalSettings.20") + Settings.getTimeForGame() + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-							+ Settings.getTimeForGame() + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$ //$NON-NLS-2$
+			Logging.log(Language.getString("DrawLocalSettings.18") + Settings.getWhitePlayersName() + Language.getString("DrawLocalSettings.19") //$NON-NLS-1$ //$NON-NLS-2$
+					+ Settings.getBlackPlayersName() + Language.getString("DrawLocalSettings.20") + Settings.getTimeForGame() + Language.getString("DrawLocalSettings.21") //$NON-NLS-1$ //$NON-NLS-2$
+					+ Settings.getTimeForGame() + Language.getString("DrawLocalSettings.23"));// 4test //$NON-NLS-1$
+																																										// //$NON-NLS-2$
 			try {
 				newGUI.newGame();
 			} catch (Exception e1) {
 				Logging.log(e1);
-			}// start new Game
+			} // start new Game
 			this.parent.setVisible(false);// hide parent
 			newGUI.getChessboardUI().repaint();
 			// newGUI.getChessboardUI().draw();
@@ -124,8 +132,17 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 		this.firstName.setSize(new Dimension(200, 50));
 		this.secondName = new JTextField(Language.getString("DrawLocalSettings.27"), 10); //$NON-NLS-1$
 		this.secondName.setSize(new Dimension(200, 50));
+		this.thirdName = new JTextField(Language.getString("DrawLocalSettings.28"), 10); //$NON-NLS-1$ DrawLocalSetting
+																																											// repesent
+																																											// the
+																																											// content
+																																											// of
+																																											// the
+																																											// textfield
+		this.thirdName.setSize(new Dimension(200, 50));
 		this.firstNameLab = new JLabel(Language.getString("first_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
 		this.secondNameLab = new JLabel(Language.getString("second_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
+		this.thirdNameLab = new JLabel(Language.getString("third_player_name") + ": "); //$NON-NLS-1$ //$NON-NLS-2$
 
 		this.timeGame = new JCheckBox(Language.getString("time_game_min")); //$NON-NLS-1$
 		this.time4Game = new JComboBox(times);
@@ -150,27 +167,36 @@ public class DrawLocalSettings extends JPanel implements ActionListener {
 		this.gbc.gridy = 3;
 		this.gbl.setConstraints(secondNameLab, gbc);
 		this.add(secondNameLab);
+		this.gbc.gridx = 0;
 		this.gbc.gridy = 4;
 		this.gbl.setConstraints(secondName, gbc);
 		this.add(secondName);
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 5;
+		this.gbl.setConstraints(thirdNameLab, gbc);
+		this.add(thirdNameLab);
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 6;
+		this.gbl.setConstraints(thirdName, gbc);
+		this.add(thirdName);
 		this.gbc.gridy = 8;
 		this.gbc.gridwidth = 1;
 		this.gbl.setConstraints(timeGame, gbc);
 		this.add(timeGame);
-		this.gbc.gridx = 1;
-		this.gbc.gridy = 8;
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 10;
 		this.gbc.gridwidth = 1;
 		this.gbl.setConstraints(time4Game, gbc);
 		this.add(time4Game);
-		this.gbc.gridx = 1;
-		this.gbc.gridy = 9;
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 11;
 		this.gbc.gridwidth = 0;
 		this.gbl.setConstraints(okButton, gbc);
 		this.add(okButton);
 	}
 
 	/**
-	 * Method responsible for triming white symbols from strings
+	 * Method responsible for trimming white symbols from strings
 	 * 
 	 * @param txt
 	 *          Where is capt value to equal

@@ -102,21 +102,20 @@ public class ChessboardUI extends JPanel {
 	 */
 	public void draw() {
 		this.getGraphics().drawImage(boardBackgroundImage, this.topLeft.x, this.topLeft.y, null);// draw
-		// an
-		// Image
-		// of
-		// chessboard
-		// this.drawLabels();
+																																															// an
+																																															// image
+																																															// of
+																																															// chessboard
 		this.repaint();
 	}/*--endOf-draw--*/
 
 	/**
 	 * Annotations to superclass Game updating and painting the chessboard
 	 */
-	@Override
-	public void update(Graphics g) {
-		repaint();
-	}
+	// @Override
+	// public void update(Graphics g) {
+	// repaint();
+	// }
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -145,7 +144,7 @@ public class ChessboardUI extends JPanel {
 			}
 		}
 
-		if (board.getActiveField() != null) // if some square is active
+		if (board.getActiveField() != null) // if some hexagon is active
 		{
 			String id = board.getActiveField().getIdentifier();
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
