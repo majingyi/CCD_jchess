@@ -50,10 +50,10 @@ public class ChessboardUI extends JPanel {
 	private float												hexagon_height				= 0;
 	private float												hexagon_width					= 0;
 
-	public static final int							img_width							= 1024;
-	public static final int							img_height						= 768;
+	public static final int							img_width							= 800;
+	public static final int							img_height						= 600;
 	private float												deviation_height			= 14;
-	private float												deviation_width				= 6 + 22;
+	private float												deviation_width				= 21;
 
 	private ArrayList<ChessboardField>	moves									= null;
 
@@ -73,11 +73,12 @@ public class ChessboardUI extends JPanel {
 		this.hexagon_height = (img_height - deviation_height) / 13;// we need to
 																																// know the
 																																// rough height
-		// of field
+																																// of each small
+																																// field
 		this.hexagon_width = (img_width - deviation_width) / 13;
 		this.setDoubleBuffered(true);
-		// this.drawLabels((int) this.hexagon_height);
-		sel_hexagon = Theme.getImage("sel_hexagon.jpg"); // change image
+
+		sel_hexagon = Theme.getImage("sel_hexagon.png"); // change image
 		able_hexagon = Theme.getImage("able_hexagon.png"); // the image should
 																												// be a hexagon ??
 
@@ -158,14 +159,32 @@ public class ChessboardUI extends JPanel {
 			int x = 1;
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
 
+
 			x = coordinate[1];
 			y = coordinate[0];
 			if (y < 7) {
 				x = (int) ((6 - x) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
-			} else {
-				x = (int) ((x - 6) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
 			}
+			y = coordinate[1];
+			x = coordinate[0];
+			if (y < 7) {
+				int offset = (int) ((6 - y) * (hexagon_width / 2));
+				int fieldOffset = (int) ((coordinate[0] - 1) * hexagon_width);
+				x = (int) (offset + fieldOffset + deviation_width);
+
+			} else {
+
+				x = (int) ((x - 6) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
+
+				x = (int) (((y - 6) * hexagon_width / 2) + ((coordinate[0] - 1) * hexagon_width) + deviation_width);
+
+			}
+
 			y = (int) ((coordinate[0] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
+
+
+			y = (int) ((coordinate[1] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
+
 
 			if (g != null) {
 				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
@@ -181,7 +200,8 @@ public class ChessboardUI extends JPanel {
 			} else {
 				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
 			}
-		} catch (java.lang.NullPointerException exc) {
+		
+	    catch (java.lang.NullPointerException exc) {
 			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
 		}
 	}
