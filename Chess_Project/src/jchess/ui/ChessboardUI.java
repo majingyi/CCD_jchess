@@ -8,7 +8,6 @@ import java.awt.RenderingHints;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -29,33 +28,33 @@ import jchess.ui.lang.Language;
  */
 public class ChessboardUI extends JPanel {
 
-	private static final long						serialVersionUID			= -1717218347823342830L;
+	private static final long	serialVersionUID			= -1717218347823342830L;
 
-	public static final int							top										= 0;
-	public static final int							bottom								= 7;
+	public static final int		top										= 0;
+	public static final int		bottom								= 7;
 
-	private Chessboard									board									= null;
+	private Chessboard				board									= null;
 
 	// image of chessboard
-	private static Image								boardBackgroundImage	= null;
+	private static Image			boardBackgroundImage	= null;
 
 	// image of highlighted hexagon
-	private static Image								sel_hexagon						= null;
+	private static Image			sel_hexagon						= null;
 
 	// image of square where piece can go
-	private static Image								able_hexagon					= null;
+	private static Image			able_hexagon					= null;
 
-	private Point												topLeft								= new Point(0, 0);
+	private Point							topLeft								= new Point(0, 0);
 	// private float hexagon_height = 0;
-	private float												hexagon_height				= 0;
-	private float												hexagon_width					= 0;
+	private float							hexagon_height				= 0;
+	private float							hexagon_width					= 0;
 
-	public static final int							img_width							= 800;
-	public static final int							img_height						= 600;
-	private float												deviation_height			= 14;
-	private float												deviation_width				= 21;
+	public static final int		img_width							= 850;
+	public static final int		img_height						= 850;
+	private float							deviation_height			= 14;
+	private float							deviation_width				= 21;
 
-	private ArrayList<ChessboardField>	moves									= null;
+	// private ArrayList<ChessboardField> moves = null;
 
 	/**
 	 * Chessboard class constructor
@@ -70,12 +69,9 @@ public class ChessboardUI extends JPanel {
 		board = new Chessboard(gt, moves_history);
 		board.unselect();
 
-		this.hexagon_height = (img_height - deviation_height) / 13;// we need to
-																																// know the
-																																// rough height
-																																// of each small
-																																// field
+		this.hexagon_height = (img_height - deviation_height) / 10;
 		this.hexagon_width = (img_width - deviation_width) / 13;
+
 		this.setDoubleBuffered(true);
 
 		sel_hexagon = Theme.getImage("sel_hexagon.png"); // change image
@@ -103,21 +99,18 @@ public class ChessboardUI extends JPanel {
 	 * Method to draw Chessboard and their elements (pieces etc.)
 	 */
 	public void draw() {
-		this.getGraphics().drawImage(boardBackgroundImage, this.topLeft.x, this.topLeft.y, null);// draw
-																																															// an
-																																															// image
-																																															// of
-																																															// chessboard
+		// draw image of chessboard
+		this.getGraphics().drawImage(boardBackgroundImage, this.topLeft.x, this.topLeft.y, null);
 		this.repaint();
 	}/*--endOf-draw--*/
 
 	/**
 	 * Annotations to superclass Game updating and painting the chessboard
 	 */
-	// @Override
-	// public void update(Graphics g) {
-	// repaint();
-	// }
+	@Override
+	public void update(Graphics g) {
+		repaint();
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -159,49 +152,36 @@ public class ChessboardUI extends JPanel {
 			int x = 1;
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
 
-
 			x = coordinate[1];
 			y = coordinate[0];
 			if (y < 7) {
-				x = (int) ((6 - x) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
+				x = (int) ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
 			}
-			y = coordinate[1];
-			x = coordinate[0];
-			if (y < 7) {
-				int offset = (int) ((6 - y) * (hexagon_width / 2));
-				int fieldOffset = (int) ((coordinate[0] - 1) * hexagon_width);
-				x = (int) (offset + fieldOffset + deviation_width);
+			if (y >= 7) {
+				x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
+			}
 
+			if (y == 1) {
+				y = (int) (0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
 			} else {
-
-				x = (int) ((x - 6) * hexagon_width / 2 + (coordinate[1] - 1) * hexagon_width + hexagon_width / 2 + deviation_width);
-
-				x = (int) (((y - 6) * hexagon_width / 2) + ((coordinate[0] - 1) * hexagon_width) + deviation_width);
-
+				y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
 			}
-
-			y = (int) ((coordinate[0] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
-
-
-			y = (int) ((coordinate[1] - 1) * hexagon_height + 0.5 * hexagon_height + deviation_height);
-
 
 			if (g != null) {
 				Image tempImage = Theme.getImageForPiece(piece.getPlayer().getColor(), piece.getSymbol());
-				BufferedImage resized = new BufferedImage((int) hexagon_width, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
-				// BufferedImage(int width, int height, int imageType, IndexColorModel
-				// cm)
+				BufferedImage resized = new BufferedImage((int) (0.5 * hexagon_width), (int) (0.5 * hexagon_height), BufferedImage.TYPE_INT_ARGB_PRE);
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
+				imageGr.drawImage(tempImage, 0, 0, (int) (0.5 * hexagon_width), (int) (0.5 * hexagon_height), null);
 				imageGr.dispose();
 				Image img = resized;
 				g2d.drawImage(img, x, y, null);
 			} else {
 				Logging.logError(Language.getString("ChessboardUI.7")); //$NON-NLS-1$
 			}
-		
-	    catch (java.lang.NullPointerException exc) {
+		}
+
+		catch (java.lang.NullPointerException exc) {
 			Logging.log(Language.getString("ChessboardUI.8"), exc); //$NON-NLS-1$
 		}
 	}

@@ -278,43 +278,42 @@ public class HexagonChessFieldGraphInitializer {
 		char letter = id.charAt(0);
 		switch (letter) {
 			case 'A':
-				coordinates[1] = 1;
+				coordinates[0] = 1;
 				break;
 			case 'B':
-				coordinates[1] = 2;
+				coordinates[0] = 2;
 				break;
 			case 'C':
-				coordinates[1] = 3;
-				break;
+				coordinates[0] = 3;
 			case 'D':
-				coordinates[1] = 4;
+				coordinates[0] = 4;
 				break;
 			case 'E':
-				coordinates[1] = 5;
+				coordinates[0] = 5;
 				break;
 			case 'F':
-				coordinates[1] = 6;
+				coordinates[0] = 6;
 				break;
 			case 'G':
-				coordinates[1] = 7;
+				coordinates[0] = 7;
 				break;
 			case 'H':
-				coordinates[1] = 8;
+				coordinates[0] = 8;
 				break;
 			case 'I':
-				coordinates[1] = 9;
+				coordinates[0] = 9;
 				break;
 			case 'J':
-				coordinates[1] = 10;
+				coordinates[0] = 10;
 				break;
 			case 'K':
-				coordinates[1] = 11;
+				coordinates[0] = 11;
 				break;
 			case 'L':
-				coordinates[1] = 12;
+				coordinates[0] = 12;
 				break;
 			case 'M':
-				coordinates[1] = 13;
+				coordinates[0] = 13;
 				break;
 			default:
 				break;
@@ -322,31 +321,31 @@ public class HexagonChessFieldGraphInitializer {
 		char number = id.charAt(1);
 		switch (number) {
 			case '1':
-				coordinates[0] = 1;
+				coordinates[1] = 1;
 				break;
 			case '2':
-				coordinates[0] = 2;
+				coordinates[1] = 2;
 				break;
 			case '3':
-				coordinates[0] = 3;
+				coordinates[1] = 3;
 				break;
 			case '4':
-				coordinates[0] = 4;
+				coordinates[1] = 4;
 				break;
 			case '5':
-				coordinates[0] = 5;
+				coordinates[1] = 5;
 				break;
 			case '6':
-				coordinates[0] = 6;
+				coordinates[1] = 6;
 				break;
 			case '7':
-				coordinates[0] = 7;
+				coordinates[1] = 7;
 				break;
 			case '8':
-				coordinates[0] = 8;
+				coordinates[1] = 8;
 				break;
 			case '9':
-				coordinates[0] = 9;
+				coordinates[1] = 9;
 				break;
 
 			default:
@@ -356,16 +355,16 @@ public class HexagonChessFieldGraphInitializer {
 			char number2 = id.charAt(2);
 			switch (number2) {
 				case '0':
-					coordinates[0] = 10;
+					coordinates[1] = 11;
 					break;
 				case '1':
-					coordinates[0] = 11;
+					coordinates[1] = 11;
 					break;
 				case '2':
-					coordinates[0] = 12;
+					coordinates[1] = 12;
 					break;
 				case '3':
-					coordinates[0] = 13;
+					coordinates[1] = 13;
 					break;
 				default:
 					break;
