@@ -22,9 +22,11 @@ import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
 /**
- * Class to represent chessboard. Chessboard is made from squares. It is setting
+ *Class to represent chessboard. Chessboard is made from squares. It is setting
  * the squares of chessboard and sets the pieces(pawns) witch the owner is
  * current player on it.
+ * 
+ * @author Jingyi Ma
  */
 public class ChessboardUI extends JPanel {
 

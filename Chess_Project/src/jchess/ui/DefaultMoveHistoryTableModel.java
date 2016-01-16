@@ -2,9 +2,14 @@ package jchess.ui;
 
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * 
+ * @author Jingyi Ma
+ */
+
 public class DefaultMoveHistoryTableModel extends DefaultTableModel {
 
-	private static final long	serialVersionUID	= 7349152369577914941L;
+	private static final long serialVersionUID = 7349152369577914941L;
 
 	DefaultMoveHistoryTableModel() {
 		super();

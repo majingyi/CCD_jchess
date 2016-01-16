@@ -4,6 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Jingyi Ma
+ */
+
 public class frame1 {
 
 	private JFrame frame;
@@ -36,7 +40,7 @@ public class frame1 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(300, 300, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
@@ -29,6 +28,8 @@ import jchess.ui.lang.Language;
  * Class representing the game interface which is seen by a player and where are
  * located available for player options, current games and where can he start a
  * new game (load it or save it)
+ * 
+ * @author Jingyi Ma
  */
 public class GameTab extends JPanel implements MouseListener, ComponentListener {
 
@@ -58,10 +59,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		gameClock.setLocation(new Point(500, 0));
 		this.add(gameClock);
 
-		JScrollPane movesHistory = moveHistory.getScrollPane();
-		movesHistory.setSize(new Dimension(180, 350));
-		movesHistory.setLocation(new Point(500, 121));
-		this.add(movesHistory);
+		// JScrollPane movesHistory = moveHistory.getScrollPane();
+		// movesHistory.setSize(new Dimension(180, 350));
+		// movesHistory.setLocation(new Point(500, 121));
+		// this.add(movesHistory);
 
 		this.setLayout(null);
 		this.addComponentListener(this);
@@ -76,12 +77,13 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	public void componentResized(ComponentEvent e) {
 		try {
 			int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();
-			int chess_height = (int) Math.round((height * 0.8) / 8) * 8;
-			// ???
+			int chess_height = (int) (height * 0.8) / 10;
 			this.chessboard.resizeChessboard((int) chess_height);
 			chess_height = this.chessboard.getHeight();
-			moveHistory.getScrollPane().setLocation(new Point(chess_height + 5, 100));
-			moveHistory.getScrollPane().setSize(moveHistory.getScrollPane().getWidth(), chess_height - 100);
+			// moveHistory.getScrollPane().setLocation(new Point(chess_height + 5,
+			// 100));
+			// moveHistory.getScrollPane().setSize(moveHistory.getScrollPane().getWidth(),
+			// chess_height - 100);
 			this.gameClock.setLocation(new Point(chess_height + 5, 0));
 		} catch (FileNotFoundException e1) {
 			Logging.log(e1);
