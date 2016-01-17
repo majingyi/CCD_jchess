@@ -64,24 +64,24 @@ public class GameClock extends JPanel implements IClockListener {
 
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(5, 30, 60, 30);
-		g2d.setFont(font);
+		g2d.setColor(Color.RED);
+		g2d.fillRect(65, 30, 60, 30);
+		g2d.setColor(Color.BLACK);
+		g2d.fillRect(125, 30, 60, 30);
 
 		g2d.setColor(Color.BLACK);
-		g2d.fillRect(65, 30, 60, 30);
 		g2d.drawRect(5, 30, 180, 30);
 		g2d.drawRect(5, 60, 180, 30);
 		g2d.drawLine(65, 30, 65, 90);
 		g2d.drawLine(125, 30, 125, 90);
-		font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
-		g2d.drawString(Settings.getBlackPlayersName(), 10, 50);
-		g2d.setColor(Color.WHITE);
-		g2d.drawString(Settings.getWhitePlayersName(), 70, 50);
 
-		g2d.setColor(Color.RED);
-		g2d.fillRect(125, 30, 60, 30);
 		font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
-		// TODO get the name of red Player
-		// g2d.drawString(Settings.getRedPlayersName(), 130, 50);
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(Settings.getPlayerNameForColor(PlayerColor.WHITE), 10, 50);
+		g2d.drawString(Settings.getPlayerNameForColor(PlayerColor.RED), 70, 50);
+		g2d.setColor(Color.WHITE);
+		g2d.drawString(Settings.getPlayerNameForColor(PlayerColor.BLACK), 130, 50);
+
 	}
 
 	@Override

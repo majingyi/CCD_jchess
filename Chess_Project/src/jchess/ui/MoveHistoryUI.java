@@ -16,6 +16,10 @@ import jchess.core.util.MoveHistory;
 import jchess.core.util.MoveHistory.castling;
 import jchess.ui.lang.Language;
 
+/**
+ *
+ * @author Jingyi Ma
+ */
 public class MoveHistoryUI extends AbstractTableModel {
 
 	private static final long							serialVersionUID	= 4971786700324730473L;
@@ -24,7 +28,8 @@ public class MoveHistoryUI extends AbstractTableModel {
 	private JScrollPane										scrollPane				= null;
 	private JTable												table							= null;
 	private DefaultMoveHistoryTableModel	tableModel				= null;
-	private String[]											names							= new String[] { Language.getString("white"), Language.getString("black") };	//$NON-NLS-1$ //$NON-NLS-2$
+	private String[]											names							= new String[] { Language.getString("white"), Language.getString("black"),	//$NON-NLS-1$ //$NON-NLS-2$
+			Language.getString("red") };
 	private GameTab												gameTab						= null;
 	private int														rowsNum						= 0;
 	private MoveHistory										history						= null;
