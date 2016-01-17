@@ -60,7 +60,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		this.add(gameClock);
 
 		// JScrollPane movesHistory = moveHistory.getScrollPane();
-		// movesHistory.setSize(new Dimension(180, 350));
+		// movesHistory.setSize(new Dimension(190, 350));
 		// movesHistory.setLocation(new Point(500, 121));
 		// this.add(movesHistory);
 

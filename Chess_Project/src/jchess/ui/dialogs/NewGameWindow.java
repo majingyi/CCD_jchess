@@ -112,9 +112,8 @@ public class NewGameWindow extends JDialog {
 			Settings.addPlayerName(localSettingsTab.getPlayerName(PlayerColor.BLACK), PlayerColor.BLACK);
 			Settings.addPlayerName(localSettingsTab.getPlayerName(PlayerColor.RED), PlayerColor.RED);
 
-			GameTab newGUI = JChessView.getInstance().addNewTab(
-					MessageFormat.format("{0} vs {1} vs {2}", localSettingsTab.getPlayerName(PlayerColor.WHITE), localSettingsTab.getPlayerName(PlayerColor.RED),
-							localSettingsTab.getPlayerName(PlayerColor.BLACK)));
+			GameTab newGUI = JChessView.getInstance().addNewTab(MessageFormat.format("{0} vs {1} vs {2}", localSettingsTab.getPlayerName(PlayerColor.WHITE),
+					localSettingsTab.getPlayerName(PlayerColor.RED), localSettingsTab.getPlayerName(PlayerColor.BLACK)));
 
 			if (localSettingsTab.isTimeLimitSet()) // if timeGame is checked
 			{

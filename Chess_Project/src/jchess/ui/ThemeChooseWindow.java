@@ -1,3 +1,4 @@
+
 package jchess.ui;
 
 import java.awt.Dimension;
@@ -37,7 +38,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 
 		String[] themes = Theme.getAvailableThemes();
 		this.setTitle(Language.getString("choose_theme_window_title")); //$NON-NLS-1$
-		Dimension winDim = new Dimension(550, 230);
+		Dimension winDim = new Dimension(550, 550);
 		this.setMinimumSize(winDim);
 		this.setMaximumSize(winDim);
 		this.setSize(winDim);
