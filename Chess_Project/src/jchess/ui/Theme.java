@@ -25,7 +25,7 @@ public class Theme {
 		themeList.add("hunter"); //$NON-NLS-1$
 		themeList.add("matlak"); //$NON-NLS-1$
 
-		themeImages = new String[] { "able_hexagon。png", "add-tab-icon.png", "chessboard.jpg", "clicked-add-tab-icon.png", "preview.png", "sel_hexagon.png",
+		themeImages = new String[] { "able_hexagon.png", "add-tab-icon.png", "chessboard.jpg", "clicked-add-tab-icon.png", "preview.png", "sel_hexagon.png",
 				"Bishop-B.png", "Bishop-W.png", "Bishop-R.png", "King-B.png", "King-W.png", "King-R.png", "Knight-B.png", "Knight-W.png", "Knight-R.png", "Pawn-B.png",
 				"Pawn-W.png", "Pawn-R.png", "Queen-B.png", "Queen-W.png", "Queen-R.png", "Rook-B.png", "Rook-W.png", "Rook-R.png" };
 	}
@@ -52,7 +52,7 @@ public class Theme {
 		boolean result = (name != null && name.length() > 0);
 
 		if (result) {
-			String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
+			String basePath = Utils.getJarPath() + "jchess" + Constants.SLASH_STRING;
 			String themePath = "resources/theme/" + name + Constants.SLASH_STRING;
 			File folder = new File(basePath + themePath);
 			result &= folder.exists();

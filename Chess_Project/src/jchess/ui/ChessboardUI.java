@@ -141,6 +141,7 @@ public class ChessboardUI extends JPanel {
 			g2d.drawImage(sel_hexagon, (int) (coordinate[0] * hexagon_height + deviation_height + topLeft.x),
 					(int) (coordinate[1] * hexagon_width + deviation_width + topLeft.y), null);
 		}
+		this.repaint();
 	}
 
 	private void drawPieceImage(Graphics g, Piece piece) throws FileNotFoundException {
