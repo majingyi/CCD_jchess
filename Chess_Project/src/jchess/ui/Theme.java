@@ -49,12 +49,12 @@ public class Theme {
 	}
 
 	public static boolean themeIsValid(String name) {
-		boolean result = name != null && name.length() > 0;
+		boolean result = (name != null && name.length() > 0);
 
 		if (result) {
 			String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
 			String themePath = "resources/theme/" + name + Constants.SLASH_STRING;
-			File folder = new File(basePath + Constants.SLASH_STRING + themePath);
+			File folder = new File(basePath + themePath);
 			result &= folder.exists();
 
 			for (String themeImage : themeImages) {

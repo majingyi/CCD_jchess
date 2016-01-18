@@ -3,8 +3,6 @@ package jchess.ui;
 
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,22 +21,22 @@ import jchess.ui.lang.Language;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 
-	private static final long		serialVersionUID		= 4833195962704657449L;
+	private static final long	serialVersionUID		= 4833195962704657449L;
 
 	// TODO check ,if we need member here
-	private JList<String>				themesList					= null;
-	private ImageIcon						themePreview				= null;
-	private GridBagLayout				gbl									= null;
-	private GridBagConstraints	gbc									= null;
-	private JButton							themePreviewButton	= null;
-	private JButton							okButton						= null;
+	private JList<String>			themesList					= null;
+	private ImageIcon					themePreview				= null;
+	// private GridBagLayout gbl = null;
+	// private GridBagConstraints gbc = null;
+	private JButton						themePreviewButton	= null;
+	private JButton						okButton						= null;
 
 	public ThemeChooseWindow(Frame parent) throws Exception {
 		super(parent);
 
-		String[] themes = Theme.getAvailableThemes();
+		// String[] themes = Theme.getAvailableThemes();
 		this.setTitle(Language.getString("choose_theme_window_title")); //$NON-NLS-1$
-		Dimension winDim = new Dimension(550, 550);
+		Dimension winDim = new Dimension(420, 420);
 		this.setMinimumSize(winDim);
 		this.setMaximumSize(winDim);
 		this.setSize(winDim);
@@ -46,15 +44,15 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 		this.setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		this.themesList = new JList<String>(themes);
+		this.themesList = new JList<String>(Theme.getAvailableThemes());
 		this.themesList.setLocation(new Point(10, 10));
-		this.themesList.setSize(new Dimension(100, 120));
+		this.themesList.setSize(new Dimension(100, 420));
 		this.add(this.themesList);
 		this.themesList.setSelectionMode(0);
 		this.themesList.addListSelectionListener(this);
 
-		this.gbl = new GridBagLayout();
-		this.gbc = new GridBagConstraints();
+		// this.gbl = new GridBagLayout();
+		// this.gbc = new GridBagConstraints();
 		try {
 			this.themePreview = new ImageIcon(Theme.getImage("Preview.png")); //$NON-NLS-1$
 		} catch (java.lang.NullPointerException exc) {
@@ -65,10 +63,10 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 
 		this.themePreviewButton = new JButton(this.themePreview);
 		this.themePreviewButton.setLocation(new Point(110, 10));
-		this.themePreviewButton.setSize(new Dimension(420, 120));
+		this.themePreviewButton.setSize(new Dimension(280, 280));
 		this.add(this.themePreviewButton);
 		this.okButton = new JButton(Language.getString("ThemeChooseWindow.3")); //$NON-NLS-1$
-		this.okButton.setLocation(new Point(175, 140));
+		this.okButton.setLocation(new Point(150, 300));
 		this.okButton.setSize(new Dimension(200, 50));
 		this.add(this.okButton);
 		this.okButton.addActionListener(this);
@@ -95,11 +93,13 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 				try {
 					Theme.setActiveTheme(theme);
 					JOptionPane.showMessageDialog(this, Language.getString("changes_visible_after_restart")); //$NON-NLS-1$
-					this.setVisible(false);
+					this.setVisible(true);
 				} catch (Exception e) {
 					Logging.log(e);
-					// TODO show error message to user
 				}
+			} else {
+				JOptionPane.showMessageDialog(this, Language.getString("invalid_Theme")); //$NON-NLS-1$
+				this.setVisible(true);
 			}
 		}
 	}
