@@ -54,9 +54,9 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	private float							hexagon_width					= 0;
 
 	public static final int		img_width							= 850;
-	public static final int		img_height						= 850;
+	public static final int		img_height						= 728;
 	private float							deviation_height			= 14;
-	private float							deviation_width				= 21;
+	private float							deviation_width				= 14;
 
 	// private ArrayList<ChessboardField> moves = null;
 
