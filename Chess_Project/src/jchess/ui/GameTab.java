@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
@@ -59,10 +60,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		gameClock.setLocation(new Point(500, 0));
 		this.add(gameClock);
 
-		// JScrollPane movesHistory = moveHistory.getScrollPane();
-		// movesHistory.setSize(new Dimension(190, 350));
-		// movesHistory.setLocation(new Point(500, 121));
-		// this.add(movesHistory);
+		JScrollPane movesHistory = moveHistory.getScrollPane();
+		movesHistory.setSize(new Dimension(190, 350));
+		movesHistory.setLocation(new Point(500, 121));
+		this.add(movesHistory);
 
 		this.setLayout(null);
 		this.addComponentListener(this);
@@ -77,11 +78,11 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	public void componentResized(ComponentEvent e) {
 		try {
 			int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();
-			int chess_height = (int) (height * 0.8) / 10;
+			int chess_height = (int) (height * 0.8 / 10);
 			this.chessboard.resizeChessboard((int) chess_height);
 			int chess_width = this.chessboard.getWidth();
-			moveHistory.getScrollPane().setLocation(new Point(chess_width + 5, 100));
-			moveHistory.getScrollPane().setSize(moveHistory.getScrollPane().getWidth(), chess_width - 100);
+			moveHistory.getScrollPane().setLocation(new Point(chess_width + 10, 100));
+			moveHistory.getScrollPane().setSize(moveHistory.getScrollPane().getWidth(), chess_height * 9);
 			this.gameClock.setLocation(new Point(chess_width + 5, 0));
 		} catch (FileNotFoundException e1) {
 			Logging.log(e1);
@@ -131,8 +132,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 					King king;
 					if (game.getActivePlayer().getColor() == PlayerColor.WHITE) {
 						king = chessboard.getKingForColor(PlayerColor.WHITE);
-					} else {
+					} else if (game.getActivePlayer().getColor() == PlayerColor.BLACK) {
 						king = chessboard.getKingForColor(PlayerColor.BLACK);
+					} else {
+						king = chessboard.getKingForColor(PlayerColor.RED);
 					}
 
 					switch (king.isCheckmatedOrStalemated()) {

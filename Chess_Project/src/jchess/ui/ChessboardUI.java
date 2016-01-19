@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -24,41 +25,43 @@ import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
 /**
- *Class to represent chessboard. Chessboard is made from squares. It is setting
- * the squares of chessboard and sets the pieces(pawns) witch the owner is
+ *Class to represent chessboard. It sets the pieces wi
+ *tch the owner is
  * current player on it.
  * 
  * @author Jingyi Ma
  */
 public class ChessboardUI extends JPanel implements MouseListener {
 
-	private static final long	serialVersionUID			= -1717218347823342830L;
+	private static final long						serialVersionUID			= -1717218347823342830L;
 
-	public static final int		top										= 0;
-	public static final int		bottom								= 7;
+	public static final int							top										= 0;
+	public static final int							bottom								= 7;
 
-	private Chessboard				board									= null;
+	private Chessboard									board									= null;
 
 	// image of chessboard
-	private static Image			boardBackgroundImage	= null;
+	private static Image								boardBackgroundImage	= null;
 
 	// image of highlighted hexagon
-	private static Image			sel_hexagon						= null;
+	private static Image								sel_hexagon						= null;
 
 	// image of square where piece can go
-	private static Image			able_hexagon					= null;
+	private static Image								able_hexagon					= null;
 
-	private Point							topLeft								= new Point(0, 0);
+	private Point												topLeft								= new Point(0, 0);
 	// private float hexagon_height = 0;
-	private float							hexagon_height				= 0;
-	private float							hexagon_width					= 0;
+	private float												hexagon_height				= 0;
+	private float												hexagon_width					= 0;
 
-	public static final int		img_width							= 850;
-	public static final int		img_height						= 728;
-	private float							deviation_height			= 14;
-	private float							deviation_width				= 14;
+	public static final int							img_width							= 850;
+	public static final int							img_height						= 728;
+	private float												deviation_height			= 14;
+	private float												deviation_width				= 14;
 
-	// private ArrayList<ChessboardField> moves = null;
+	private ArrayList<ChessboardField>	moves									= null;
+
+	private ChessboardField							m_ActiveField;
 
 	/**
 	 * Chessboard class constructor
@@ -138,13 +141,33 @@ public class ChessboardUI extends JPanel implements MouseListener {
 				}
 			}
 		}
-
+		// TODO add perform for mouse listener
+		/**if some hexagon has been entered(clicked) by mouse, this hexagon gonna be active,
+		 * draw this active hexagon red and give 
+		 */
 		if (board.getActiveField() != null) // if some hexagon is active
 		{
 			String id = board.getActiveField().getIdentifier();
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
-			g2d.drawImage(sel_hexagon, (int) (coordinate[0] * hexagon_height + deviation_height + topLeft.x),
-					(int) (coordinate[1] * hexagon_width + deviation_width + topLeft.y), null);
+			int y = 1;
+			int x = 1;
+			x = coordinate[1];
+			y = coordinate[0];
+			if (y < 7) {
+				x = (int) ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
+			}
+			if (y >= 7) {
+				x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
+			}
+
+			if (y == 1) {
+				y = (int) (0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
+			} else {
+				y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
+			}
+
+			g2d.drawImage(sel_hexagon, x, y, null);
+
 		}
 		this.repaint();
 	}
@@ -195,6 +218,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	}
 
 	public void resizeChessboard(int height) throws FileNotFoundException {
+
 		BufferedImage resized = new BufferedImage(img_width, img_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		Graphics g = resized.createGraphics();
 		g.drawImage(Theme.getImage("chessboard.jpg"), 0, 0, img_width, img_height, null); //$NON-NLS-1$
@@ -202,13 +226,13 @@ public class ChessboardUI extends JPanel implements MouseListener {
 		boardBackgroundImage = resized.getScaledInstance(img_width, img_height, 0);
 		this.setSize(img_width, img_height);
 
-		resized = new BufferedImage((int) img_width, (int) img_height, BufferedImage.TYPE_INT_ARGB_PRE);
+		resized = new BufferedImage((int) hexagon_width, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
 		g.drawImage(able_hexagon, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 		g.dispose();
 		able_hexagon = resized.getScaledInstance((int) hexagon_width, (int) hexagon_height, 0);
 
-		resized = new BufferedImage((int) img_width, (int) img_height, BufferedImage.TYPE_INT_ARGB_PRE);
+		resized = new BufferedImage((int) hexagon_width, (int) hexagon_height, BufferedImage.TYPE_INT_ARGB_PRE);
 		g = resized.createGraphics();
 		g.drawImage(sel_hexagon, 0, 0, (int) hexagon_width, (int) hexagon_height, null);
 		g.dispose();
@@ -265,5 +289,33 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// Do nothing
+	}
+
+	/**
+	 * Method selecting piece in chessboard
+	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
+	 * 
+	 * @param field
+	 *          chess board field to select (when clicked))
+	 */
+
+	private GameTab m_GameUI = null;
+
+	public void select(ChessboardField field) {
+		this.m_ActiveField = field;
+		m_GameUI.getChessboardUI().repaint();
+	}
+
+	/**
+	 * Deselects the currently selected filed, if one is selected.
+	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
+	 */
+	public void unselect() {
+		this.m_ActiveField = null;
+		if (m_GameUI.getChessboardUI() != null) {
+			m_GameUI.getChessboardUI().repaint();
+		}
 	}
 }
