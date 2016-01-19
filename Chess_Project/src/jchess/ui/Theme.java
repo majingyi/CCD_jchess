@@ -15,7 +15,7 @@ import jchess.core.util.Utils;
 
 public class Theme {
 
-	public final static String	DEFAULT_THEME	= "default";								//$NON-NLS-1$
+	public final static String	DEFAULT_THEME	= "default";							//$NON-NLS-1$
 
 	private static List<String>	themeList			= new ArrayList<String>();
 	private static String[]			themeImages		= null;
@@ -25,9 +25,9 @@ public class Theme {
 		themeList.add("hunter"); //$NON-NLS-1$
 		themeList.add("matlak"); //$NON-NLS-1$
 
-		themeImages = new String[] { "able_square.png", "add-tab-icon.png", "chessboard.png", "clicked-add-tab-icon.png", "Preview.png", "sel_square.png",
-			"Bishop-B.png", "Bishop-W.png", "Bishop-R.png", "King-B.png", "King-W.png", "King-R.png", "Knight-B.png", "Knight-W.png", "Knight-R.png", "Pawn-B.png",
-			"Pawn-W.png", "Pawn-R.png", "Queen-B.png", "Queen-W.png", "Queen-R.png", "Rook-B.png", "Rook-W.png", "Rook-R.png" };
+		themeImages = new String[] { "able_hexagon。png", "add-tab-icon.png", "chessboard.jpg", "clicked-add-tab-icon.png", "preview.png", "sel_hexagon.png",
+				"Bishop-B.png", "Bishop-W.png", "Bishop-R.png", "King-B.png", "King-W.png", "King-R.png", "Knight-B.png", "Knight-W.png", "Knight-R.png", "Pawn-B.png",
+				"Pawn-W.png", "Pawn-R.png", "Queen-B.png", "Queen-W.png", "Queen-R.png", "Rook-B.png", "Rook-W.png", "Rook-R.png" };
 	}
 
 	public static Image getImageForPiece(Player.PlayerColor color, String pieceSymbol) throws FileNotFoundException {
@@ -49,12 +49,12 @@ public class Theme {
 	}
 
 	public static boolean themeIsValid(String name) {
-		boolean result = name != null && name.length() > 0;
+		boolean result = (name != null && name.length() > 0);
 
 		if (result) {
 			String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess" + Constants.SLASH_STRING;
 			String themePath = "resources/theme/" + name + Constants.SLASH_STRING;
-			File folder = new File(basePath + Constants.SLASH_STRING + themePath);
+			File folder = new File(basePath + themePath);
 			result &= folder.exists();
 
 			for (String themeImage : themeImages) {

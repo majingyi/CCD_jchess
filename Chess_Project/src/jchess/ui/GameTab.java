@@ -60,7 +60,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 		this.add(gameClock);
 
 		// JScrollPane movesHistory = moveHistory.getScrollPane();
-		// movesHistory.setSize(new Dimension(180, 350));
+		// movesHistory.setSize(new Dimension(190, 350));
 		// movesHistory.setLocation(new Point(500, 121));
 		// this.add(movesHistory);
 
@@ -79,12 +79,10 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 			int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();
 			int chess_height = (int) (height * 0.8) / 10;
 			this.chessboard.resizeChessboard((int) chess_height);
-			chess_height = this.chessboard.getHeight();
-			// moveHistory.getScrollPane().setLocation(new Point(chess_height + 5,
-			// 100));
-			// moveHistory.getScrollPane().setSize(moveHistory.getScrollPane().getWidth(),
-			// chess_height - 100);
-			this.gameClock.setLocation(new Point(chess_height + 5, 0));
+			int chess_width = this.chessboard.getWidth();
+			moveHistory.getScrollPane().setLocation(new Point(chess_width + 5, 100));
+			moveHistory.getScrollPane().setSize(moveHistory.getScrollPane().getWidth(), chess_width - 100);
+			this.gameClock.setLocation(new Point(chess_width + 5, 0));
 		} catch (FileNotFoundException e1) {
 			Logging.log(e1);
 		}

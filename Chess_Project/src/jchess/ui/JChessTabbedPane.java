@@ -18,6 +18,9 @@ import jchess.core.util.Logging;
 import jchess.ui.dialogs.NewGameWindow;
 import jchess.ui.lang.Language;
 
+/** 
+ * @author Jingyi Ma
+ */
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver {
 
 	private static final long	serialVersionUID	= -3358955157754197669L;

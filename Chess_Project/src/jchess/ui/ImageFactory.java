@@ -29,6 +29,8 @@ public class ImageFactory {
 	 * @param key
 	 * @return
 	 * @throws FileNotFoundException
+	 * 
+	 * @author Jingyi Ma
 	 */
 	public static Icon getIcon(String key) throws FileNotFoundException {
 		String basePath = Utils.getJarPath() + Constants.SLASH_STRING + "jchess";

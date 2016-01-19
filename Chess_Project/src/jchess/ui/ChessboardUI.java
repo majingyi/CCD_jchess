@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
@@ -28,7 +30,7 @@ import jchess.ui.lang.Language;
  * 
  * @author Jingyi Ma
  */
-public class ChessboardUI extends JPanel {
+public class ChessboardUI extends JPanel implements MouseListener {
 
 	private static final long	serialVersionUID			= -1717218347823342830L;
 
@@ -52,9 +54,9 @@ public class ChessboardUI extends JPanel {
 	private float							hexagon_width					= 0;
 
 	public static final int		img_width							= 850;
-	public static final int		img_height						= 850;
+	public static final int		img_height						= 728;
 	private float							deviation_height			= 14;
-	private float							deviation_width				= 21;
+	private float							deviation_width				= 14;
 
 	// private ArrayList<ChessboardField> moves = null;
 
@@ -81,6 +83,9 @@ public class ChessboardUI extends JPanel {
 																												// be a hexagon ??
 
 		boardBackgroundImage = Theme.getImage("chessboard.jpg");
+
+		// activate Mouse listener
+		addMouseListener(this);
 
 	}/*--endOf-Chessboard--*/
 
@@ -233,5 +238,31 @@ public class ChessboardUI extends JPanel {
 	public ChessboardField getField(int x, int y) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("Click on x: " + e.getX() + " Y: " + e.getY());
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// Do nothing
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// Do nothing
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// Do nothing
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// Do nothing
 	}
 }
