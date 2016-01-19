@@ -141,13 +141,39 @@ public class ChessboardUI extends JPanel implements MouseListener {
 				}
 			}
 		}
+		drawActiveField(g, board);
 		// TODO add perform for mouse listener
 		/**if some hexagon has been entered(clicked) by mouse, this hexagon gonna be active,
 		 * draw this active hexagon red and give 
 		 */
-		if (board.getActiveField() != null) // if some hexagon is active
+		/*
+		 * if (board.getActiveField() != null) // if some hexagon is active { String
+		 * id = board.getActiveField().getIdentifier(); int[] coordinate =
+		 * HexagonChessFieldGraphInitializer.getcoordinatesFromID(id); int y = 1;
+		 * int x = 1; x = coordinate[1]; y = coordinate[0]; if (y < 7) { x = (int)
+		 * ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width
+		 * - 0.25 * hexagon_width); } if (y >= 7) { x = (int) ((y - 5) *
+		 * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width -
+		 * 0.25 * hexagon_width); }
+		 * 
+		 * if (y == 1) { y = (int) (0.5 * hexagon_height + deviation_height - 0.25 *
+		 * hexagon_height); } else { y = (int) ((y - 1) * 0.75 * hexagon_height +
+		 * 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height); }
+		 * 
+		 * g2d.drawImage(sel_hexagon, x, y, null);
+		 * 
+		 * }
+		 **/
+		this.repaint();
+	}
+
+	private void drawActiveField(Graphics g, Chessboard b) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		if (b.getActiveField() != null) // if some hexagon is active
 		{
-			String id = board.getActiveField().getIdentifier();
+			String id = b.getActiveField().getIdentifier();
 			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
 			int y = 1;
 			int x = 1;
@@ -158,18 +184,71 @@ public class ChessboardUI extends JPanel implements MouseListener {
 			}
 			if (y >= 7) {
 				x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
+
 			}
 
-			if (y == 1) {
-				y = (int) (0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
-			} else {
-				y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
-			}
+			y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
 
 			g2d.drawImage(sel_hexagon, x, y, null);
 
 		}
-		this.repaint();
+
+	}
+
+	private String pixelPosition2id(int x, int y) {
+
+		int[] coordinate = { 1, 2 };
+		coordinate[0] = (int) ((y + 0.25 * hexagon_height - deviation_height - 0.5 * hexagon_height) / (0.75 * hexagon_height)) + 1;
+		if (coordinate[0] < 7) {
+			coordinate[1] = (int) ((x + 0.25 * hexagon_width - deviation_width - (7 - coordinate[0]) * hexagon_width / 2) / hexagon_width) + 1;
+		} else {
+			coordinate[1] = (int) ((x + 0.25 * hexagon_width - deviation_width - (coordinate[0] - 5) * hexagon_width / 2) / hexagon_width) + 1;
+		}
+		char letter = 'A';
+		switch (coordinate[0]) {
+			case 1:
+				letter = 'A';
+				break;
+			case 2:
+				letter = 'B';
+				break;
+			case 3:
+				letter = 'C';
+			case 4:
+				letter = 'D';
+				break;
+			case 5:
+				letter = 'E';
+				break;
+			case 6:
+				letter = 'F';
+				break;
+			case 7:
+				letter = 'G';
+				break;
+			case 8:
+				letter = 'H';
+				break;
+			case 9:
+				letter = 'I';
+				break;
+			case 10:
+				letter = 'J';
+				break;
+			case 11:
+				letter = 'K';
+				break;
+			case 12:
+				letter = 'L';
+				break;
+			case 13:
+				letter = 'M';
+				break;
+			default:
+				break;
+		}
+		String id = letter + String.valueOf(coordinate[1]);
+		return id;
 	}
 
 	private void drawPieceImage(Graphics g, Piece piece) throws FileNotFoundException {
@@ -272,18 +351,31 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent e) {
+
+		this.setToolTipText("Please Click!");
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
 		// Do nothing
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		// Do nothing
-	}
+		int x;
+		int y;
+		x = e.getX();
+		y = e.getY();
+		pixelPosition2id(x, y);
 
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// Do nothing
+		// Graphics2D g;
+		// Graphics2D g2d = (Graphics2D) g;
+		// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+		// RenderingHints.VALUE_ANTIALIAS_ON);
+		// drawPieceImage();
+
 	}
 
 	@Override
