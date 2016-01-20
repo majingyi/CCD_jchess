@@ -1,5 +1,6 @@
 package jchess.ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -58,7 +59,6 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	public static final int							img_height						= 728;
 	private float												deviation_height			= 14;
 	private float												deviation_width				= 14;
-
 	private ArrayList<ChessboardField>	moves									= null;
 
 	private ChessboardField							m_ActiveField;
@@ -81,7 +81,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 		this.setDoubleBuffered(true);
 
-		sel_hexagon = Theme.getImage("sel_hexagon.png"); // change image
+		sel_hexagon = Theme.getImage("sel_hexagon1.png"); // change image
 		able_hexagon = Theme.getImage("able_hexagon.png"); // the image should
 																												// be a hexagon ??
 
@@ -124,6 +124,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		System.out.println("paint component");
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(boardBackgroundImage, topLeft.x, topLeft.y, null);
@@ -141,7 +142,10 @@ public class ChessboardUI extends JPanel implements MouseListener {
 				}
 			}
 		}
-		drawActiveField(g, board);
+		if (board.getActiveField() != null) // if some hexagon is active
+		{
+			drawActiveField(g, board.getActiveField().getIdentifier());
+		}
 		// TODO add perform for mouse listener
 		/**if some hexagon has been entered(clicked) by mouse, this hexagon gonna be active,
 		 * draw this active hexagon red and give 
@@ -164,35 +168,42 @@ public class ChessboardUI extends JPanel implements MouseListener {
 		 * 
 		 * }
 		 **/
-		this.repaint();
+		// this.repaint();
 	}
 
-	private void drawActiveField(Graphics g, Chessboard b) {
+	private void drawActiveField(Graphics g, String id) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		if (b.getActiveField() != null) // if some hexagon is active
-		{
-			String id = b.getActiveField().getIdentifier();
-			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
-			int y = 1;
-			int x = 1;
-			x = coordinate[1];
-			y = coordinate[0];
-			if (y < 7) {
-				x = (int) ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
-			}
-			if (y >= 7) {
-				x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - 0.25 * hexagon_width);
-
-			}
-
-			y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height);
-
-			g2d.drawImage(sel_hexagon, x, y, null);
+		// id = board.getActiveField().getIdentifier();
+		int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
+		int x = coordinate[1];
+		int y = coordinate[0];
+		if (y < 7) {
+			x = (int) ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width - hexagon_height);
+		}
+		if (y >= 7) {
+			x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - hexagon_height);
 
 		}
 
+		y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - hexagon_height);
+
+		// BufferedImage resized = new BufferedImage((int) (0.5 * hexagon_width),
+		// (int) (0.5 * hexagon_height), BufferedImage.TYPE_INT_ARGB_PRE);
+		// Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+		// imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+		// RenderingHints.VALUE_ANTIALIAS_ON);
+		// imageGr.drawImage(sel_hexagon, 0, 0, (int) (0.5 * hexagon_width), (int)
+		// (0.5 * hexagon_height), null);
+		// imageGr.dispose();
+		// Image img = resized;
+		g2d.setColor(Color.red);
+		g2d.drawOval(x, y, 40, 40);
+		// g2d.drawOval(x, y, 50, 50);
+		// g2d.drawRect(x, y, 100, 100);
+		// g2d.drawImage(sel_hexagon, x, y, 20, 20, null);
+		// g2d.drawImage(sel_hexagon, x, y, null);
 	}
 
 	private String pixelPosition2id(int x, int y) {
@@ -202,7 +213,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 		if (coordinate[0] < 7) {
 			coordinate[1] = (int) ((x + 0.25 * hexagon_width - deviation_width - (7 - coordinate[0]) * hexagon_width / 2) / hexagon_width) + 1;
 		} else {
-			coordinate[1] = (int) ((x + 0.25 * hexagon_width - deviation_width - (coordinate[0] - 5) * hexagon_width / 2) / hexagon_width) + 1;
+			coordinate[1] = (int) ((x + 0.25 * hexagon_width - deviation_width - (coordinate[0] - 5) * hexagon_width / 2) / hexagon_width) + 1 + coordinate[0] - 6;
 		}
 		char letter = 'A';
 		switch (coordinate[0]) {
@@ -214,6 +225,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 				break;
 			case 3:
 				letter = 'C';
+				break;
 			case 4:
 				letter = 'D';
 				break;
@@ -347,7 +359,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Click on x: " + e.getX() + " Y: " + e.getY());
+
 	}
 
 	@Override
@@ -363,18 +375,16 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// Do nothing
+
 		int x;
 		int y;
 		x = e.getX();
 		y = e.getY();
-		pixelPosition2id(x, y);
-
-		// Graphics2D g;
-		// Graphics2D g2d = (Graphics2D) g;
-		// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-		// RenderingHints.VALUE_ANTIALIAS_ON);
-		// drawPieceImage();
+		String id = pixelPosition2id(x, y);
+		System.out.println(id);
+		drawActiveField(this.getGraphics(), id);
+		// repaint();
+		System.out.println("Click on x: " + e.getX() + " Y: " + e.getY());
 
 	}
 
