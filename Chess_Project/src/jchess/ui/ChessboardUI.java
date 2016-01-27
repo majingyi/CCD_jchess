@@ -18,10 +18,13 @@ import javax.swing.JPanel;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
 import jchess.core.board.HexagonChessFieldGraphInitializer;
+import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
+import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.board.graph.GraphNode;
 import jchess.core.pieces.King;
 import jchess.core.pieces.Piece;
 import jchess.core.util.Logging;
+import jchess.core.util.Player;
 import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
@@ -142,71 +145,40 @@ public class ChessboardUI extends JPanel implements MouseListener {
 				}
 			}
 		}
+
+		// drawActiveField(g, board.getActiveField().getIdentifier());
+
+	}
+
+	public void drawActiveField(Graphics g, String id) {
 		if (board.getActiveField() != null) // if some hexagon is active
 		{
-			drawActiveField(g, board.getActiveField().getIdentifier());
+
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
+			int x = coordinate[1];
+			int y = coordinate[0];
+			if (y < 7) {
+				x = (int) ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width - 0.255 * hexagon_height);
+			}
+			if (y >= 7) {
+				x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - 0.255 * hexagon_height);
+
+			}
+
+			y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.255 * hexagon_height);
+
+			g2d.setColor(Color.red);
+			g2d.drawOval(x, y, 40, 40);
+			// g2d.drawOval(x, y, 50, 50);
+			// g2d.drawRect(x, y, 100, 100);
+
 		}
-		// TODO add perform for mouse listener
-		/**if some hexagon has been entered(clicked) by mouse, this hexagon gonna be active,
-		 * draw this active hexagon red and give 
-		 */
-		/*
-		 * if (board.getActiveField() != null) // if some hexagon is active { String
-		 * id = board.getActiveField().getIdentifier(); int[] coordinate =
-		 * HexagonChessFieldGraphInitializer.getcoordinatesFromID(id); int y = 1;
-		 * int x = 1; x = coordinate[1]; y = coordinate[0]; if (y < 7) { x = (int)
-		 * ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width
-		 * - 0.25 * hexagon_width); } if (y >= 7) { x = (int) ((y - 5) *
-		 * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width -
-		 * 0.25 * hexagon_width); }
-		 * 
-		 * if (y == 1) { y = (int) (0.5 * hexagon_height + deviation_height - 0.25 *
-		 * hexagon_height); } else { y = (int) ((y - 1) * 0.75 * hexagon_height +
-		 * 0.5 * hexagon_height + deviation_height - 0.25 * hexagon_height); }
-		 * 
-		 * g2d.drawImage(sel_hexagon, x, y, null);
-		 * 
-		 * }
-		 **/
-		// this.repaint();
 	}
 
-	private void drawActiveField(Graphics g, String id) {
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		// id = board.getActiveField().getIdentifier();
-		int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
-		int x = coordinate[1];
-		int y = coordinate[0];
-		if (y < 7) {
-			x = (int) ((7 - y) * hexagon_width / 2 + (x - 1) * hexagon_width + deviation_width - hexagon_height);
-		}
-		if (y >= 7) {
-			x = (int) ((y - 5) * hexagon_width / 2 + (x - (y - 6) - 1) * hexagon_width + deviation_width - hexagon_height);
-
-		}
-
-		y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - hexagon_height);
-
-		// BufferedImage resized = new BufferedImage((int) (0.5 * hexagon_width),
-		// (int) (0.5 * hexagon_height), BufferedImage.TYPE_INT_ARGB_PRE);
-		// Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-		// imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-		// RenderingHints.VALUE_ANTIALIAS_ON);
-		// imageGr.drawImage(sel_hexagon, 0, 0, (int) (0.5 * hexagon_width), (int)
-		// (0.5 * hexagon_height), null);
-		// imageGr.dispose();
-		// Image img = resized;
-		g2d.setColor(Color.red);
-		g2d.drawOval(x, y, 40, 40);
-		// g2d.drawOval(x, y, 50, 50);
-		// g2d.drawRect(x, y, 100, 100);
-		// g2d.drawImage(sel_hexagon, x, y, 20, 20, null);
-		// g2d.drawImage(sel_hexagon, x, y, null);
-	}
-
-	private String pixelPosition2id(int x, int y) {
+	public String pixelPosition2id(int x, int y) {
 
 		int[] coordinate = { 1, 2 };
 		coordinate[0] = (int) ((y + 0.25 * hexagon_height - deviation_height - 0.5 * hexagon_height) / (0.75 * hexagon_height)) + 1;
@@ -351,9 +323,169 @@ public class ChessboardUI extends JPanel implements MouseListener {
 		return board.getKingForColor(color);
 	}
 
-	public ChessboardField getField(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
+	// public ChessboardField getField(int x, int y) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	public ChessboardField getField(String identifier) {
+		return (ChessboardField) board.getNode(identifier);
+	}
+
+	/**
+	 * Return the direction from the player's point of view.
+	 * 
+	 * @author Serhii
+	 * 
+	 * @param color player's color
+	 * @direction direction from player's POV
+	 * @edgeType type of direction
+	 * @return absolute direction of the chessboard
+	 */
+	public EdgeDirection getDirectionFromPlayersPOV(Player.PlayerColor color, EdgeDirection direction, EdgeType edgeType) {
+		switch (color) {
+			case WHITE:
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.RIGHT;
+							case RIGHT:
+								return EdgeDirection.LEFT;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+						break;
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.DOWN;
+							case DOWN:
+								return EdgeDirection.UP;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+				}
+				break;
+			case BLACK:
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT:
+								return EdgeDirection.RIGHT_DOWN;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.RIGHT_UP;
+							case LEFT_DOWN:
+								return EdgeDirection.LEFT;
+							case RIGHT_UP:
+								return EdgeDirection.RIGHT;
+							case RIGHT_DOWN:
+								return EdgeDirection.LEFT_DOWN;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+						break;
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.RIGHT_UP;
+							case DOWN:
+								return EdgeDirection.LEFT_DOWN;
+							case LEFT_UP:
+								return EdgeDirection.UP;
+							case LEFT_DOWN:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT_UP:
+								return EdgeDirection.RIGHT_DOWN;
+							case RIGHT_DOWN:
+								return EdgeDirection.DOWN;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+				}
+				break;
+			case RED:
+				switch (edgeType) {
+					case STRAIGHT:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.LEFT_DOWN;
+							case RIGHT:
+								return EdgeDirection.RIGHT_UP;
+							case UP:
+								return EdgeDirection.UNDEFINED;
+							case DOWN:
+								return EdgeDirection.UNDEFINED;
+							case LEFT_UP:
+								return EdgeDirection.LEFT;
+							case LEFT_DOWN:
+								return EdgeDirection.RIGHT_DOWN;
+							case RIGHT_UP:
+								return EdgeDirection.LEFT_UP;
+							case RIGHT_DOWN:
+								return EdgeDirection.RIGHT;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+						break;
+					case DIAGONAL:
+						switch (direction) {
+							case LEFT:
+								return EdgeDirection.UNDEFINED;
+							case RIGHT:
+								return EdgeDirection.UNDEFINED;
+							case UP:
+								return EdgeDirection.LEFT_UP;
+							case DOWN:
+								return EdgeDirection.RIGHT_DOWN;
+							case LEFT_UP:
+								return EdgeDirection.LEFT_DOWN;
+							case LEFT_DOWN:
+								return EdgeDirection.DOWN;
+							case RIGHT_UP:
+								return EdgeDirection.UP;
+							case RIGHT_DOWN:
+								return EdgeDirection.RIGHT_UP;
+							case UNDEFINED:
+								return EdgeDirection.UNDEFINED;
+						}
+				}
+				break;
+		}
+		return EdgeDirection.UNDEFINED;
 	}
 
 	@Override
@@ -382,42 +514,14 @@ public class ChessboardUI extends JPanel implements MouseListener {
 		y = e.getY();
 		String id = pixelPosition2id(x, y);
 		System.out.println(id);
-		drawActiveField(this.getGraphics(), id);
-		// repaint();
 		System.out.println("Click on x: " + e.getX() + " Y: " + e.getY());
 
+		// drawActiveField(this.getGraphics(), id);
+		// repaint();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// Do nothing
-	}
-
-	/**
-	 * Method selecting piece in chessboard
-	 * 
-	 *  TODO move to ChessboardUI after ui implementation finished
-	 * 
-	 * @param field
-	 *          chess board field to select (when clicked))
-	 */
-
-	private GameTab m_GameUI = null;
-
-	public void select(ChessboardField field) {
-		this.m_ActiveField = field;
-		m_GameUI.getChessboardUI().repaint();
-	}
-
-	/**
-	 * Deselects the currently selected filed, if one is selected.
-	 * 
-	 *  TODO move to ChessboardUI after ui implementation finished
-	 */
-	public void unselect() {
-		this.m_ActiveField = null;
-		if (m_GameUI.getChessboardUI() != null) {
-			m_GameUI.getChessboardUI().repaint();
-		}
 	}
 }

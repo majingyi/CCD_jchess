@@ -53,6 +53,8 @@ public class MoveHistoryUI extends AbstractTableModel {
 	}
 
 	@Override
+
+	// why get move from one int position
 	public String getValueAt(int x, int y) {
 		return history.getMoveAt((y * 2) - 1 + (x - 1));
 	}
@@ -68,7 +70,7 @@ public class MoveHistoryUI extends AbstractTableModel {
 	}
 
 	protected void addRow() {
-		this.tableModel.addRow(new String[2]);
+		this.tableModel.addRow(new String[3]);
 	}
 
 	@Override

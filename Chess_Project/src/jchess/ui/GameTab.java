@@ -106,7 +106,9 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 				int x = event.getX();// get X position of mouse
 				int y = event.getY();// get Y position of mouse
 
-				ChessboardField field = chessboard.getField(x, y);
+				String id = chessboard.pixelPosition2id(x, y);
+
+				ChessboardField field = chessboard.getField(id);
 				if ((field == null || field.getPiece() == null && chessboard.getChessboard().getActiveField() == null)
 						|| (this.chessboard.getChessboard().getActiveField() == null && field.getPiece() != null
 								&& field.getPiece().getPlayer() != game.getActivePlayer())) {
@@ -116,14 +118,22 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 				if (field.getPiece() != null && field.getPiece().getPlayer() == game.getActivePlayer() && field != chessboard.getChessboard().getActiveField()) {
 					chessboard.getChessboard().unselect();
 					chessboard.getChessboard().select(field);
+					System.out.println("test");
+
+					chessboard.drawActiveField(this.getGraphics(), id);
+
 				} else if (chessboard.getChessboard().getActiveField() == field) // unselect
 				{
 					chessboard.getChessboard().unselect();
+					chessboard.drawActiveField(this.getGraphics(), id);
+					chessboard.repaint();
 				} else if (chessboard.getChessboard().getActiveField() != null && chessboard.getChessboard().getActiveField().getPiece() != null
 						&& chessboard.getChessboard().getActiveField().getPiece().allMoves().indexOf(field) != -1) // move
 				{
 					chessboard.getChessboard().move(chessboard.getChessboard().getActiveField(), field);
 					chessboard.getChessboard().unselect();
+					chessboard.drawActiveField(this.getGraphics(), id);
+					chessboard.repaint();
 
 					// switch player
 					nextMove();
@@ -145,6 +155,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 						case 2:
 							game.endGame(Language.getString("Game.35")); //$NON-NLS-1$
 							break;
+
 					}
 				}
 			}
@@ -158,6 +169,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 	// MouseListener:
 	public void mouseClicked(MouseEvent arg0) {
+
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
@@ -176,39 +188,6 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 *          address of place where game will be saved
 	 */
 	public void saveGame(File path) {
-		// File file = path;
-		// FileWriter fileW = null;
-		// try {
-		// fileW = new FileWriter(file);
-		// Calendar cal = Calendar.getInstance();
-		// String str = new String(""); //$NON-NLS-1$
-		// String info = new String(
-		// "[Event \"Game\"]\n[Date \"" + cal.get(Calendar.YEAR) + "." +
-		// (cal.get(Calendar.MONTH) + 1) + "." + cal.get(Calendar.DAY_OF_MONTH)
-		// //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		// + "\"]\n" + "[White \"" + game.getPlayer(colors.white).getName() +
-		// "\"]\n[Black \"" + game.getPlayer(colors.black).getName() + "\"]\n\n");
-		// //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		// str += info;
-		// str += moveHistory.getMovesInString();
-		// fileW.write(str);
-		// JOptionPane.showMessageDialog(this,
-		// Language.getString("game_saved_properly")); //$NON-NLS-1$
-		// } catch (java.io.IOException exc) {
-		// Logging.log(Language.getString("Game.0"), exc); //$NON-NLS-1$
-		// JOptionPane.showMessageDialog(this, Language.getString("Game.1") + ": " +
-		// exc); //$NON-NLS-1$ //$NON-NLS-2$
-		// return;
-		// } finally {
-		// try {
-		// if (fileW != null) {
-		// fileW.flush();
-		// fileW.close();
-		// }
-		// } catch (IOException e) {
-		// Logging.log(e);
-		// }
-		// }
 
 		throw new UnsupportedOperationException("Saving of game not supported by now.");
 	}
@@ -265,47 +244,7 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 	 */
 
 	public static void loadGame(File file) throws Exception {
-		// FileReader fileR = null;
-		// try {
-		// fileR = new FileReader(file);
-		// } catch (java.io.IOException exc) {
-		// Logging.log(Language.getString("Game.2"), exc); //$NON-NLS-1$
-		// return;
-		// }
-		// BufferedReader br = new BufferedReader(fileR);
-		// String tempStr = new String();
-		// String blackName, whiteName;
-		// try {
-		// tempStr = getLineWithVar(br, new String("[White")); //$NON-NLS-1$
-		// whiteName = getValue(tempStr);
-		// tempStr = getLineWithVar(br, new String("[Black")); //$NON-NLS-1$
-		// blackName = getValue(tempStr);
-		// tempStr = getLineWithVar(br, new String("1.")); //$NON-NLS-1$
-		// } catch (ReadGameError err) {
-		// Logging.log(Language.getString("Game.19"), err); //$NON-NLS-1$
-		// return;
-		// }
-		//
-		// GameTab newGUI = JChessView.getInstance().addNewTab(whiteName + " vs. " +
-		// blackName); //$NON-NLS-1$
-		//
-		// Player playerWhite = new Player(Constants.EMPTY_STRING,
-		// Player.colors.white);
-		// Player playerBlack = new Player(Constants.EMPTY_STRING,
-		// Player.colors.black);
-		//
-		// playerBlack.setName(blackName);
-		// playerWhite.setName(whiteName);
-		//
-		// game.setPlayer(colors.white, playerWhite);
-		// game.setPlayer(colors.black, playerBlack);
-		//
-		// Settings.setBlackPlayersName(blackName);
-		// Settings.setWhitePlayersName(whiteName);
-		//
-		// newGUI.newGame();
-		// moveHistory.setMoves(tempStr);
-		// newGUI.chessboard.repaint();
+
 		throw new UnsupportedOperationException("Load Game not implemented by now.");
 	}
 
@@ -411,5 +350,17 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 
 	public Component getChessboardUI() {
 		return chessboard;
+	}
+
+	/**
+	 * Method selecting piece in chessboard
+	 * 
+	 *  TODO move to ChessboardUI after ui implementation finished
+	 * 
+	 * @param field
+	 *          chess board field to select (when clicked))
+	 */
+	public Game getActiveGame() {
+		return this.game;
 	}
 }

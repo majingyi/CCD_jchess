@@ -2,10 +2,14 @@ package jchess.ui;
 
 import java.io.FileNotFoundException;
 
-import jchess.ui.lang.Language;
-
 import org.jdesktop.application.Action;
 
+import jchess.ui.lang.Language;
+
+/**
+ *  
+ * @author Jingyi Ma
+ */
 public class JChessAboutBox extends javax.swing.JDialog {
 
 	private javax.swing.JButton	closeButton				= null;
@@ -46,8 +50,8 @@ public class JChessAboutBox extends javax.swing.JDialog {
 		setName("aboutBox"); // NOI18N //$NON-NLS-1$
 		setResizable(false);
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext()
-				.getActionMap(JChessAboutBox.class, this);
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext().getActionMap(JChessAboutBox.class,
+				this);
 		closeButton.setAction(actionMap.get("closeAboutBox")); // NOI18N //$NON-NLS-1$
 		closeButton.setName("closeButton"); // NOI18N //$NON-NLS-1$
 
@@ -96,79 +100,48 @@ public class JChessAboutBox extends javax.swing.JDialog {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout
-						.createSequentialGroup()
-						.addComponent(imageLabel)
-						.addGap(18, 18, 18)
-						.addGroup(
-								layout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(appTitleLabel, javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(appDescLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
-										.addGroup(
-												javax.swing.GroupLayout.Alignment.LEADING,
-												layout
-														.createSequentialGroup()
-														.addGroup(
-																layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(versionLabel).addComponent(homepageLabel)
-																		.addComponent(vendorLabel1).addComponent(vendorLabel2))
-														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-														.addGroup(
-																layout
-																		.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																		.addGroup(
-																				layout
-																						.createSequentialGroup()
-																						.addGroup(
-																								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(appHomepageLabel1)
-																										.addComponent(appHomepageLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
-																						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(closeButton))
-																		.addComponent(appVersionLabel)
-																		.addGroup(
-																				layout
-																						.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-																						.addComponent(appVendorLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																						.addComponent(appHomepageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																						.addComponent(appHomepageLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))))).addContainerGap()));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, Short.MAX_VALUE)
-				.addGroup(
-						layout
-								.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(appTitleLabel)
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup()
+				.addComponent(imageLabel).addGap(18, 18, 18)
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(appTitleLabel, javax.swing.GroupLayout.Alignment.LEADING)
+						.addComponent(appDescLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
+						.addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(versionLabel).addComponent(homepageLabel)
+										.addComponent(vendorLabel1).addComponent(vendorLabel2))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(appDescLabel)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(versionLabel).addComponent(appVersionLabel))
-								.addGap(27, 27, 27)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(homepageLabel).addComponent(appHomepageLabel))
-								.addGroup(
-										layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(layout.createSequentialGroup()
+												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(appHomepageLabel1)
+														.addComponent(appHomepageLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(closeButton))
+										.addComponent(appVersionLabel)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+												.addComponent(appVendorLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(appHomepageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(appHomepageLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+				.addContainerGap()));
+		layout
+				.setVerticalGroup(
+						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, Short.MAX_VALUE).addGroup(
+										layout.createSequentialGroup().addContainerGap().addComponent(appTitleLabel)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(appDescLabel)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 												.addGroup(
-														layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-																.addComponent(closeButton).addContainerGap())
-												.addGroup(
-														layout
-																.createSequentialGroup()
-																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(vendorLabel1)
-																				.addComponent(appVendorLabel1).addComponent(appHomepageLabel2))
-																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		layout
-																				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(appHomepageLabel1)
-																				.addGroup(
-																						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(vendorLabel2)
-																								.addComponent(appHomepageLabel3))).addGap(36, 36, 36)))));
+														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(versionLabel).addComponent(appVersionLabel))
+						.addGap(27, 27, 27)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(homepageLabel).addComponent(appHomepageLabel))
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+										.addComponent(closeButton).addContainerGap())
+								.addGroup(layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(vendorLabel1).addComponent(appVendorLabel1)
+												.addComponent(appHomepageLabel2))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(appHomepageLabel1).addGroup(
+												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(vendorLabel2).addComponent(appHomepageLabel3)))
+										.addGap(36, 36, 36)))));
 
 		pack();
 	}

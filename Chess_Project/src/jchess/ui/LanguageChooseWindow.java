@@ -31,6 +31,10 @@ import jchess.core.util.Logging;
 import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
+/**
+ * 
+ * @author Jingyi Ma
+ */
 public class LanguageChooseWindow extends JDialog implements ActionListener {
 
 	private static final long	serialVersionUID	= 1167231690870626220L;
