@@ -285,6 +285,7 @@ public class HexagonChessFieldGraphInitializer {
 				break;
 			case 'C':
 				coordinates[0] = 3;
+				break;
 			case 'D':
 				coordinates[0] = 4;
 				break;
@@ -355,7 +356,7 @@ public class HexagonChessFieldGraphInitializer {
 			char number2 = id.charAt(2);
 			switch (number2) {
 				case '0':
-					coordinates[1] = 11;
+					coordinates[1] = 10;
 					break;
 				case '1':
 					coordinates[1] = 11;

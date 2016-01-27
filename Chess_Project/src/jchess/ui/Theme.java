@@ -13,9 +13,13 @@ import jchess.core.util.Player;
 import jchess.core.util.Settings;
 import jchess.core.util.Utils;
 
+/**
+ *  
+ * @author Jingyi Ma
+ */
 public class Theme {
 
-	public final static String	DEFAULT_THEME	= "default";								//$NON-NLS-1$
+	public final static String	DEFAULT_THEME	= "default";							//$NON-NLS-1$
 
 	private static List<String>	themeList			= new ArrayList<String>();
 	private static String[]			themeImages		= null;

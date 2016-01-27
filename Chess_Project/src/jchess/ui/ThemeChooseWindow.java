@@ -19,6 +19,10 @@ import javax.swing.event.ListSelectionListener;
 import jchess.core.util.Logging;
 import jchess.ui.lang.Language;
 
+/**
+ * 
+ * @author Jingyi Ma
+ */
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener {
 
 	private static final long	serialVersionUID		= 4833195962704657449L;

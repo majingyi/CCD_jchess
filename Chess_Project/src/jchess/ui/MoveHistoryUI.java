@@ -25,13 +25,13 @@ public class MoveHistoryUI extends AbstractTableModel {
 	private static final long							serialVersionUID	= 4971786700324730473L;
 
 	private int														columnsNum				= 3;
+	private int														rowsNum						= 0;
 	private JScrollPane										scrollPane				= null;
 	private JTable												table							= null;
 	private DefaultMoveHistoryTableModel	tableModel				= null;
-	private String[]											names							= new String[] { Language.getString("white"), Language.getString("black"),	//$NON-NLS-1$ //$NON-NLS-2$
+	private String[]											names							= new String[] { Language.getString("white"), Language.getString("black"),
 			Language.getString("red") };
 	private GameTab												gameTab						= null;
-	private int														rowsNum						= 0;
 	private MoveHistory										history						= null;
 
 	public MoveHistoryUI(GameTab gameTab) {
@@ -46,12 +46,15 @@ public class MoveHistoryUI extends AbstractTableModel {
 
 		this.tableModel.addColumn(this.names[0]);
 		this.tableModel.addColumn(this.names[1]);
+		this.tableModel.addColumn(this.names[2]);
 		this.addTableModelListener(null);
 		this.tableModel.addTableModelListener(null);
 		this.scrollPane.setAutoscrolls(true);
 	}
 
 	@Override
+
+	// why get move from one int position
 	public String getValueAt(int x, int y) {
 		return history.getMoveAt((y * 2) - 1 + (x - 1));
 	}
@@ -67,7 +70,7 @@ public class MoveHistoryUI extends AbstractTableModel {
 	}
 
 	protected void addRow() {
-		this.tableModel.addRow(new String[2]);
+		this.tableModel.addRow(new String[3]);
 	}
 
 	@Override

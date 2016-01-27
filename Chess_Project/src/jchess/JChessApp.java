@@ -1,14 +1,15 @@
 package jchess;
 
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
+
 import jchess.core.util.Logging;
 import jchess.core.util.Settings;
 import jchess.ui.JChessView;
 
-import org.jdesktop.application.Application;
-import org.jdesktop.application.SingleFrameApplication;
-
 /**
  * The main class of the application.
+ * @author Jingyi Ma
  */
 public class JChessApp extends SingleFrameApplication {
 
