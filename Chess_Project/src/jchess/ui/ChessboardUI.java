@@ -11,13 +11,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import jchess.core.board.ChessBoardUtils;
 import jchess.core.board.Chessboard;
 import jchess.core.board.ChessboardField;
-import jchess.core.board.HexagonChessFieldGraphInitializer;
 import jchess.core.board.graph.DirectedGraphEdge.EdgeDirection;
 import jchess.core.board.graph.GraphEdge.EdgeType;
 import jchess.core.board.graph.GraphNode;
@@ -29,42 +28,38 @@ import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
 /**
- *Class to represent chessboard. It sets the pieces wi
- *tch the owner is
+ * Class to represent chessboard. It sets the pieces with the owner is
  * current player on it.
  * 
  * @author Jingyi Ma
  */
 public class ChessboardUI extends JPanel implements MouseListener {
 
-	private static final long						serialVersionUID			= -1717218347823342830L;
+	private static final long	serialVersionUID			= -1717218347823342830L;
 
-	public static final int							top										= 0;
-	public static final int							bottom								= 7;
+	public static final int		top										= 0;
+	public static final int		bottom								= 7;
 
-	private Chessboard									board									= null;
+	private Chessboard				board									= null;
 
 	// image of chessboard
-	private static Image								boardBackgroundImage	= null;
+	private static Image			boardBackgroundImage	= null;
 
 	// image of highlighted hexagon
-	private static Image								sel_hexagon						= null;
+	private static Image			sel_hexagon						= null;
 
 	// image of square where piece can go
-	private static Image								able_hexagon					= null;
+	private static Image			able_hexagon					= null;
 
-	private Point												topLeft								= new Point(0, 0);
+	private Point							topLeft								= new Point(0, 0);
 	// private float hexagon_height = 0;
-	private float												hexagon_height				= 0;
-	private float												hexagon_width					= 0;
+	private float							hexagon_height				= 0;
+	private float							hexagon_width					= 0;
 
-	public static final int							img_width							= 850;
-	public static final int							img_height						= 728;
-	private float												deviation_height			= 14;
-	private float												deviation_width				= 14;
-	private ArrayList<ChessboardField>	moves									= null;
-
-	private ChessboardField							m_ActiveField;
+	public static final int		img_width							= 850;
+	public static final int		img_height						= 728;
+	private float							deviation_height			= 14;
+	private float							deviation_width				= 14;
 
 	/**
 	 * Chessboard class constructor
@@ -157,7 +152,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
+			int[] coordinate = ChessBoardUtils.getCoordinatesFromID(id);
 			int x = coordinate[1];
 			int y = coordinate[0];
 			if (y < 7) {
@@ -244,7 +239,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 			int y = 1;
 			int x = 1;
-			int[] coordinate = HexagonChessFieldGraphInitializer.getcoordinatesFromID(id);
+			int[] coordinate = ChessBoardUtils.getCoordinatesFromID(id);
 
 			x = coordinate[1];
 			y = coordinate[0];
@@ -323,10 +318,6 @@ public class ChessboardUI extends JPanel implements MouseListener {
 		return board.getKingForColor(color);
 	}
 
-	// public ChessboardField getField(int x, int y) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
 	public ChessboardField getField(String identifier) {
 		return (ChessboardField) board.getNode(identifier);
 	}
@@ -490,8 +481,7 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		// do nothing
 	}
 
 	@Override
