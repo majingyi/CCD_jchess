@@ -26,9 +26,8 @@ import jchess.core.util.Settings;
 import jchess.ui.lang.Language;
 
 /**
- * Class representing the game interface which is seen by a player and where are
- * located available for player options, current games and where can he start a
- * new game (load it or save it)
+ * Class represent the game interface which is seen by a player and where are
+ * located available for player options, current games
  * 
  * @author Jingyi Ma
  */
@@ -118,22 +117,21 @@ public class GameTab extends JPanel implements MouseListener, ComponentListener 
 				if (field.getPiece() != null && field.getPiece().getPlayer() == game.getActivePlayer() && field != chessboard.getChessboard().getActiveField()) {
 					chessboard.getChessboard().unselect();
 					chessboard.getChessboard().select(field);
-					System.out.println("test");
 
+					System.out.println("test");
 					chessboard.drawActiveField(this.getGraphics(), id);
 
 				} else if (chessboard.getChessboard().getActiveField() == field) // unselect
 				{
 					chessboard.getChessboard().unselect();
 					chessboard.drawActiveField(this.getGraphics(), id);
-					chessboard.repaint();
+
 				} else if (chessboard.getChessboard().getActiveField() != null && chessboard.getChessboard().getActiveField().getPiece() != null
 						&& chessboard.getChessboard().getActiveField().getPiece().allMoves().indexOf(field) != -1) // move
 				{
 					chessboard.getChessboard().move(chessboard.getChessboard().getActiveField(), field);
 					chessboard.getChessboard().unselect();
 					chessboard.drawActiveField(this.getGraphics(), id);
-					chessboard.repaint();
 
 					// switch player
 					nextMove();
