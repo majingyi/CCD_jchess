@@ -28,7 +28,7 @@ import jchess.core.util.Player.PlayerColor;
 import jchess.ui.lang.Language;
 
 /**
- * Class to represent chessboard. It sets the pieces with the owner is
+ *Class to represent chessboard. It sets the pieces which the owner is
  * current player on it.
  * 
  * @author Jingyi Ma
@@ -79,9 +79,9 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 		this.setDoubleBuffered(true);
 
-		sel_hexagon = Theme.getImage("sel_hexagon1.png"); // change image
-		able_hexagon = Theme.getImage("able_hexagon.png"); // the image should
-																												// be a hexagon ??
+		// change image of selected hexagon and where the piece can move
+		sel_hexagon = Theme.getImage("sel_hexagon1.png");
+		able_hexagon = Theme.getImage("able_hexagon.png");
 
 		boardBackgroundImage = Theme.getImage("chessboard.jpg");
 
@@ -165,14 +165,17 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 			y = (int) ((y - 1) * 0.75 * hexagon_height + 0.5 * hexagon_height + deviation_height - 0.255 * hexagon_height);
 
+			// until now we can not set the selected and able hexagon to the exact
+			// position
+			// for this reason draw oval at the approximate position
+
 			g2d.setColor(Color.red);
 			g2d.drawOval(x, y, 40, 40);
-			// g2d.drawOval(x, y, 50, 50);
-			// g2d.drawRect(x, y, 100, 100);
 
 		}
 	}
 
+	// map the exact position to identifier of each hexagon
 	public String pixelPosition2id(int x, int y) {
 
 		int[] coordinate = { 1, 2 };
@@ -481,7 +484,17 @@ public class ChessboardUI extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// do nothing
+
+		int x;
+		int y;
+		x = e.getX();
+		y = e.getY();
+		String id = pixelPosition2id(x, y);
+
+		// for test
+		System.out.println(id);
+		System.out.println("Click on x: " + e.getX() + " Y: " + e.getY());
+
 	}
 
 	@Override
@@ -491,23 +504,13 @@ public class ChessboardUI extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent arg0) {
 		// Do nothing
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent arg0) {
 
-		int x;
-		int y;
-		x = e.getX();
-		y = e.getY();
-		String id = pixelPosition2id(x, y);
-		System.out.println(id);
-		System.out.println("Click on x: " + e.getX() + " Y: " + e.getY());
-
-		// drawActiveField(this.getGraphics(), id);
-		// repaint();
 	}
 
 	@Override

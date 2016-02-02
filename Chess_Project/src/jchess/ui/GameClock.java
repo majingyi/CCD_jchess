@@ -98,18 +98,6 @@ public class GameClock extends JPanel implements IClockListener {
 
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		/*
-		 * Font font = new Font("Serif", Font.ITALIC, 14); //$NON-NLS-1$
-		 * g2d.drawImage(this.background, 0, 0, this); g2d.setColor(Color.WHITE);
-		 * g2d.fillRect(5, 30, 60, 30); g2d.setFont(font);
-		 * 
-		 * g2d.setColor(Color.BLACK); g2d.fillRect(65, 30, 60, 30); g2d.drawRect(5,
-		 * 30, 180, 30); g2d.drawRect(5, 60, 180, 30); g2d.drawLine(65, 30, 65, 90);
-		 * g2d.drawLine(125, 30, 125, 90); font = new Font("Serif", Font.ITALIC,
-		 * 14); //$NON-NLS-1$ g2d.drawImage(this.background, 0, 0, this);
-		 * g2d.setFont(font);
-		 **/
-
 		g.setColor(Color.BLACK);
 		g2d.drawString(white_clock, 10, 80);
 		g2d.drawString(black_clock, 70, 80);
