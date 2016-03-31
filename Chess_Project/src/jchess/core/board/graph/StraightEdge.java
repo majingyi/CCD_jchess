@@ -14,6 +14,6 @@ public class StraightEdge extends DirectedGraphEdge {
 
 	@Override
 	public EdgeType getEdgeType() {
-		return EdgeType.STRAIGHT;
+		return EdgeType.STRAIGHT;	//allows straight move!
 	}
 }
